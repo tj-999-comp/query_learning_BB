@@ -11,11 +11,20 @@
 - 生成元の `project_id` を `query_learning_BB` として扱う契約を整理した。
 - `Request publish` Workflowのproject ID placeholderを実値へ置き換えた。
 - Markdownとmetadataを対にした最初の作業記録を追加した。
+- 公開側A-03受入で不要となる空ディレクトリplaceholderを削除した。
 
 ## 確認結果
 
-- `python3 scripts/dev/validate_work_records.py` を実行し、Markdownとmetadataの対応、番号、日付、metadata必須項目を確認する。
-- 公開側source registry登録、GitHub AppのActions Secret/Variable、disabled dry-run、固定SHAによる手動E2Eは後続タスクで実施する。
+- `python3 scripts/dev/validate_work_records.py` は `Validated 1 work record(s).` となった。
+- 生成元mainの `Validate source` runは成功した。
+- 公開側のA所有受入ロジックを一時fixtureで再現し、`acceptance_files`、`metadata`、`renderer` の各validatorが成功した。`enabled: false` のためapplyは行っていない。
+- 公開側source registryのPRとテスト修正を作成し、公開側CIの全109テスト、index、既存77件の作業記録検証が成功した。
+- GitHub AppのKeychain診断は `valid_pem`。生成元Actions Variable `PUBLISH_APP_ID` とSecret `PUBLISH_APP_PRIVATE_KEY` は値を表示せず登録済み。
+
+## 未完了
+
+- 公開側registry PRのmerge、実GitHub上でのdisabled dry-run、初期provenance生成、固定SHAによる手動E2E、registryの `enabled: true` 化は未実施。
+- PEM秘密鍵・tokenはリポジトリ、作業記録、Issue、ログへ保存していない。
 
 ## 関連Issue
 
