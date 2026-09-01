@@ -2,18 +2,18 @@
 
 ## CSVの配置
 
-`csv/` に次の8ファイルを配置します。
+`csv/` に次の8ファイルを配置します。現在のエクスポート名である `Supabase_` プレフィックス付きにも対応しています。
 
-- `game_team_stats.csv`
-- `games.csv`
-- `player_affiliations.csv`
-- `player_game_stats.csv`
-- `player_name_history.csv`
-- `players.csv`
-- `team_name_history.csv`
-- `teams.csv`
+- `Supabase_game_team_stats.csv`
+- `Supabase_games.csv`
+- `Supabase_player_affiliations.csv`
+- `Supabase_player_game_stats.csv`
+- `Supabase_player_name_history.csv`
+- `Supabase_players.csv`
+- `Supabase_team_name_history.csv`
+- `Supabase_teams.csv`
 
-CSVはUTF-8、ヘッダー付きで保存してください。ビュー（`v_player_transfer_events`、`v_players_current`、`v_teams_current`）は取り込みません。
+CSVはUTF-8、ヘッダー付きで保存してください。文字列 `null` と空欄はNULLとして取り込みます。ビュー（`v_player_transfer_events`、`v_players_current`、`v_teams_current`）は取り込みません。
 
 ## SQLiteの生成
 

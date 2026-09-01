@@ -23,6 +23,12 @@ BASE_TABLES = (
     "teams",
 )
 
+# The live players export contains this column, while the checked-in Markdown
+# snapshot predates it. Keep the export usable without silently dropping data.
+EXTRA_COLUMNS = {
+    "players": [("entity_type", "TEXT")],
+}
+
 POSTGRES_TO_SQLITE = {
     "bigint": "INTEGER",
     "integer": "INTEGER",
@@ -65,11 +71,13 @@ def parse_schema(path: Path) -> dict[str, list[tuple[str, str]]]:
     missing = [table for table in BASE_TABLES if not schema.get(table)]
     if missing:
         raise ValueError(f"Schema definition is missing tables: {', '.join(missing)}")
+    for table, columns in EXTRA_COLUMNS.items():
+        schema[table].extend(column for column in columns if column[0] not in {name for name, _ in schema[table]})
     return schema
 
 
 def convert_value(raw: str | None, sqlite_type: str, table: str, column: str, row_number: int):
-    if raw is None or raw == "":
+    if raw is None or raw == "" or raw.strip().lower() in {"null", "none"}:
         return None
     if sqlite_type == "INTEGER":
         lowered = raw.strip().lower()
@@ -124,7 +132,15 @@ def import_table(connection: sqlite3.Connection, csv_path: Path, table: str, col
 
 def build_database(input_dir: Path, schema_path: Path, output_path: Path) -> None:
     schema = parse_schema(schema_path)
-    missing_files = [table for table in BASE_TABLES if not (input_dir / f"{table}.csv").is_file()]
+    csv_paths: dict[str, Path] = {}
+    for table in BASE_TABLES:
+        candidates = [input_dir / f"{table}.csv", input_dir / f"Supabase_{table}.csv"]
+        present = [path for path in candidates if path.is_file()]
+        if len(present) > 1:
+            raise FileExistsError(f"Multiple CSV files found for {table}: {', '.join(str(p) for p in present)}")
+        if present:
+            csv_paths[table] = present[0]
+    missing_files = [table for table in BASE_TABLES if table not in csv_paths]
     if missing_files:
         raise FileNotFoundError(
             "CSV files are missing: " + ", ".join(f"{table}.csv" for table in missing_files)
@@ -138,8 +154,8 @@ def build_database(input_dir: Path, schema_path: Path, output_path: Path) -> Non
         connection = sqlite3.connect(temporary_path)
         with connection:
             for table in BASE_TABLES:
-                count = import_table(connection, input_dir / f"{table}.csv", table, schema[table])
-                print(f"{table}: {count} rows")
+                count = import_table(connection, csv_paths[table], table, schema[table])
+                print(f"{table}: {count} rows ({csv_paths[table].name})")
             connection.execute("PRAGMA foreign_keys = OFF")
             connection.execute("PRAGMA journal_mode = DELETE")
         connection.close()
