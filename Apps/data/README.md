@@ -24,3 +24,5 @@ python3 Apps/scripts/import_csv_to_sqlite.py
 ```
 
 生成先は `Apps/data/bleague.sqlite` です。元CSVが未配置の場合は、スクリプトが不足ファイルを一覧表示して終了します。
+
+生成に成功すると `db-manifest.json` も更新され、WebアプリがSQLiteを読み込める状態になります。

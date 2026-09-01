@@ -269,7 +269,11 @@ async function loadData() {
     renderProgress();
     renderProblemList();
 
-    const databaseResponse = await fetch(`${DATA_ROOT}/bleague.sqlite`);
+    const manifestResponse = await fetch(`${DATA_ROOT}/db-manifest.json`);
+    if (!manifestResponse.ok) throw new Error("データベースのマニフェストを読み込めませんでした。");
+    const manifest = await manifestResponse.json();
+    if (!manifest.available) throw new Error("SQLite未生成");
+    const databaseResponse = await fetch(`${DATA_ROOT}/${manifest.path}`);
     if (!databaseResponse.ok) throw new Error("SQLite未生成");
     const bytes = new Uint8Array(await databaseResponse.arrayBuffer());
     const SQL = await initSqlJs({ locateFile: (file) => `${CDN_BASE}${file}` });

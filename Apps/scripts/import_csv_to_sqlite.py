@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 import re
 import sqlite3
 import sys
@@ -143,6 +144,11 @@ def build_database(input_dir: Path, schema_path: Path, output_path: Path) -> Non
             connection.execute("PRAGMA journal_mode = DELETE")
         connection.close()
         temporary_path.replace(output_path)
+        manifest_path = output_path.parent / "db-manifest.json"
+        manifest_path.write_text(
+            json.dumps({"available": True, "path": output_path.name}, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
     except Exception:
         if temporary_path.exists():
             temporary_path.unlink()
