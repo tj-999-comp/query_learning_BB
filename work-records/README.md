@@ -15,7 +15,7 @@
 取得と親子関係確認の例:
 
 ```bash
-gh issue list --repo tj-999-comp/query_learning_BB --state open --json number,title,state,stateReason,url --limit 100
+gh issue list --repo tj-999-comp/query_learning_BB --state open --json number,title,state,stateReason,url --limit 1000
 gh api repos/tj-999-comp/query_learning_BB/issues/<番号>/sub_issues
 ```
 
@@ -23,7 +23,7 @@ gh api repos/tj-999-comp/query_learning_BB/issues/<番号>/sub_issues
 
 ## 共通HTMLデザイン
 
-公開HTMLの正本は、公開リポジトリの [`work-records/design.md`](https://github.com/tj-999-comp/sandbox-pages/blob/main/work-records/design.md) とA側の `a_rendered` renderer/CSSです。生成元ではHTML・CSS・designを管理せず、全生成元で `record-page`、`shell`、`topbar`、`record-header`、`record-meta`、番号付き`record-section`、共通footerを使う同一の詳細ページ形式を利用します。新規・更新時は1280pxと320pxで横overflow、console/page error、failed requestがなく、生成元間の主要構造・スタイルが一致することを確認します。不一致が残る場合は公開導入を完了扱いにしません。
+公開HTMLの正本は、公開リポジトリの [`work-records/design.md`](https://github.com/tj-999-comp/sandbox-pages/blob/main/work-records/design.md) とA側の `a_rendered` renderer/CSSです。生成元ではHTML・CSS・designを管理せず、全生成元で `record-page`、`shell`、`topbar`、`record-header`、`record-meta`、番号付き`record-section`、共通footerを使う同一の詳細ページ形式を利用します。新規・更新時は1280px、900px、640px、320pxで横overflow、console/page error、failed requestがなく、生成元間の主要構造・スタイルが一致することを確認します。不一致が残る場合は公開導入を完了扱いにしません。
 
 ## 検証と公開要求
 
