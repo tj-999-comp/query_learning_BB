@@ -1,0 +1,56 @@
+name: Request publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_basename:
+        description: Numbered basename, for example work_record_001
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  request:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout fixed source commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Validate source
+        run: python3 scripts/dev/validate_work_records.py
+      - name: Check target basename
+        env:
+          TARGET_BASENAME: ${{ inputs.target_basename }}
+        run: |
+          set -euo pipefail
+          [[ "$TARGET_BASENAME" =~ ^work_record_[0-9]{3}$ ]]
+          test -f "work-records/md/$TARGET_BASENAME.md"
+          test -f "work-records/metadata/$TARGET_BASENAME.yml"
+      - name: Create GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.PUBLISH_APP_ID }}
+          private-key: ${{ secrets.PUBLISH_APP_PRIVATE_KEY }}
+          owner: tj-999-comp
+          repositories: sandbox-pages
+          permission-actions: write
+      - name: Dispatch Repository A acceptance
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          PROJECT_ID: REPLACE_WITH_PROJECT_ID
+          SOURCE_COMMIT_SHA: ${{ github.sha }}
+          TARGET_BASENAME: ${{ inputs.target_basename }}
+        run: |
+          set -euo pipefail
+          test "$PROJECT_ID" != "REPLACE_WITH_PROJECT_ID"
+          gh workflow run accept-source.yml \
+            --repo tj-999-comp/sandbox-pages \
+            --ref main \
+            -f project_id="$PROJECT_ID" \
+            -f source_commit_sha="$SOURCE_COMMIT_SHA" \
+            -f target_basename="$TARGET_BASENAME"
