@@ -1,0 +1,112 @@
+[
+  {
+    "id": "mvp-001",
+    "title": "チーム一覧を表示する",
+    "prompt": "teamsテーブルから、チームIDと日本語のチーム名を一覧表示してください。チーム名の昇順で並べます。",
+    "difficulty": 1,
+    "category": "基本検索",
+    "sourceTables": ["teams"],
+    "referenceSql": "SELECT team_id, team_name_j FROM teams ORDER BY team_name_j, team_id;",
+    "comparison": {"rowOrder": "sensitive"},
+    "explanation": "まずは1つのテーブルから必要な列を選び、ORDER BYで並び順を指定する問題です。"
+  },
+  {
+    "id": "mvp-002",
+    "title": "シーズンごとの試合数を数える",
+    "prompt": "gamesテーブルを使って、シーズンごとの試合数を数えてください。シーズンの昇順で表示します。",
+    "difficulty": 1,
+    "category": "集計",
+    "sourceTables": ["games"],
+    "referenceSql": "SELECT season, COUNT(*) AS game_count FROM games GROUP BY season ORDER BY season;",
+    "comparison": {"rowOrder": "sensitive"},
+    "explanation": "GROUP BYでシーズン単位にグループ化し、COUNTで行数を集計します。"
+  },
+  {
+    "id": "mvp-003",
+    "title": "観客数の多い試合を探す",
+    "prompt": "gamesテーブルから、観客数が記録されている試合を観客数の多い順に10件表示してください。試合日、会場名、観客数を表示します。",
+    "difficulty": 1,
+    "category": "基本検索",
+    "sourceTables": ["games"],
+    "referenceSql": "SELECT game_date, stadium_name_j, attendance FROM games WHERE attendance IS NOT NULL ORDER BY attendance DESC, game_date DESC LIMIT 10;",
+    "comparison": {"rowOrder": "sensitive"},
+    "explanation": "NULLではない行をWHEREで絞り込み、ORDER BYとLIMITで上位の行を取得します。"
+  },
+  {
+    "id": "mvp-004",
+    "title": "100得点以上のチームスタッツ",
+    "prompt": "game_team_statsテーブルから、得点が100点以上だったチームの試合ID、チームID、得点を表示してください。得点の高い順に並べます。",
+    "difficulty": 1,
+    "category": "基本検索",
+    "sourceTables": ["game_team_stats"],
+    "referenceSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE points >= 100 ORDER BY points DESC, schedule_key, team_id;",
+    "comparison": {"rowOrder": "sensitive"},
+    "explanation": "数値条件をWHEREで指定し、複数の列を使って安定した並び順にします。"
+  },
+  {
+    "id": "mvp-005",
+    "title": "ホームゲームの得点を見る",
+    "prompt": "ホームゲームについて、試合日、チーム名、得点を10件表示してください。新しい試合日を先にし、同じ日なら得点の高い順にします。",
+    "difficulty": 2,
+    "category": "テーブル結合",
+    "sourceTables": ["game_team_stats", "games", "teams"],
+    "referenceSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_home = 1 ORDER BY g.game_date DESC, s.points DESC LIMIT 10;",
+    "comparison": {"rowOrder": "sensitive"},
+    "explanation": "試合、チーム、チーム別スタッツをJOINし、ホームフラグで対象を絞り込みます。"
+  },
+  {
+    "id": "mvp-006",
+    "title": "チームごとの平均得点",
+    "prompt": "チームごとの平均得点を計算してください。チーム名と平均得点を表示し、平均得点の高い順に並べます。",
+    "difficulty": 2,
+    "category": "集計",
+    "sourceTables": ["game_team_stats", "teams"],
+    "referenceSql": "SELECT t.team_name_j, ROUND(AVG(s.points), 2) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY average_points DESC, t.team_id;",
+    "comparison": {"rowOrder": "sensitive"},
+    "explanation": "JOINしたデータをチーム単位でGROUP BYし、AVGで平均を求めます。"
+  },
+  {
+    "id": "mvp-007",
+    "title": "選手ごとの通算得点",
+    "prompt": "選手ごとの通算得点を計算し、選手名と通算得点を表示してください。通算得点の高い順に10人表示します。",
+    "difficulty": 2,
+    "category": "集計",
+    "sourceTables": ["player_game_stats", "players"],
+    "referenceSql": "SELECT p.player_name_j, SUM(s.points) AS total_points FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.points IS NOT NULL GROUP BY p.player_id, p.player_name_j ORDER BY total_points DESC, p.player_id LIMIT 10;",
+    "comparison": {"rowOrder": "sensitive"},
+    "explanation": "選手マスタと試合別スタッツを結合し、選手単位でSUMします。"
+  },
+  {
+    "id": "mvp-008",
+    "title": "出場試合数の多い選手",
+    "prompt": "選手ごとの出場試合数を数えてください。選手名と試合数を表示し、試合数の多い順に10人表示します。",
+    "difficulty": 2,
+    "category": "集計",
+    "sourceTables": ["player_game_stats", "players"],
+    "referenceSql": "SELECT p.player_name_j, COUNT(*) AS game_count FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 GROUP BY p.player_id, p.player_name_j ORDER BY game_count DESC, p.player_id LIMIT 10;",
+    "comparison": {"rowOrder": "sensitive"},
+    "explanation": "出場フラグで絞り込んだ後、選手単位でCOUNTします。"
+  },
+  {
+    "id": "mvp-009",
+    "title": "ホームとアウェーの平均得点を比べる",
+    "prompt": "ホームとアウェーそれぞれの平均得点を計算してください。ホームかアウェーか、平均得点を表示します。",
+    "difficulty": 2,
+    "category": "条件分岐・サブクエリ",
+    "sourceTables": ["game_team_stats"],
+    "referenceSql": "SELECT CASE WHEN is_home = 1 THEN 'ホーム' ELSE 'アウェー' END AS venue, ROUND(AVG(points), 2) AS average_points FROM game_team_stats WHERE points IS NOT NULL GROUP BY is_home ORDER BY is_home DESC;",
+    "comparison": {"rowOrder": "sensitive"},
+    "explanation": "CASE式でフラグを表示用のラベルに変換し、条件ごとに平均を集計します。"
+  },
+  {
+    "id": "mvp-010",
+    "title": "20得点以上を記録した先発選手",
+    "prompt": "先発出場して20得点以上を記録した選手について、選手名、得点、試合IDを表示してください。得点の高い順に並べます。",
+    "difficulty": 2,
+    "category": "テーブル結合",
+    "sourceTables": ["player_game_stats", "players"],
+    "referenceSql": "SELECT p.player_name_j, s.points, s.schedule_key FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_starter = 1 AND s.points >= 20 ORDER BY s.points DESC, s.schedule_key, p.player_id;",
+    "comparison": {"rowOrder": "sensitive"},
+    "explanation": "先発フラグと得点の2つの条件で絞り込み、選手名をJOINで取得します。"
+  }
+]
