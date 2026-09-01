@@ -1,0 +1,6 @@
+schema_version: 1
+title: '公開側リポジトリへの作業記録連携導入準備'
+date: "2026-09-01"
+project_id: query_learning_BB
+tags: [codex, github-actions, work-records]
+publish: true

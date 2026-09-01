@@ -1,15 +1,17 @@
-# Work Record Source Template
+# SQL学習Webサイト Work Record Source
 
-作業記録を生成・管理するリポジトリ用のテンプレートです。
+SQL学習Webサイトの実装と、Codexなどによる変更履歴を作業記録として管理する生成元リポジトリです。
 
-このリポジトリは、公開サイト `tj-999-comp/sandbox-pages` の生成元として使うことを想定しています。新しいプロジェクトはGitHubの「Use this template」から作成してください。
+このリポジトリは、公開サイト `tj-999-comp/sandbox-pages` の生成元です。公開側では `project_id: query_learning_BB` として登録します。
 
-## 最初に変更するもの
+## プロジェクト設定
 
-1. このREADMEのプロジェクト名と説明
-2. `work-records/metadata/` の `project_id`
-3. 必要なら `app/` などにプロジェクト本体
-4. `request-publish.yml` の `PROJECT_ID`
+- `project_id`: `query_learning_BB`
+- 生成元リポジトリ: `tj-999-comp/query_learning_BB`
+- 公開方式: `a_rendered`（Markdownとmetadataを公開側でHTML化）
+- 公開先: `projects/query_learning_BB/`
+
+作業記録のmetadataには必ず `project_id: query_learning_BB` を指定してください。公開先パスと受入可否の正本は公開リポジトリ側のsource registryです。
 
 `project_id`、公開先ディレクトリ、容量制限、受入可否の正本は公開リポジトリ側のsource registryです。生成元側で公開先パスを自由に指定しないでください。
 
@@ -45,7 +47,7 @@ metadataの最小形式は次のとおりです。
 schema_version: 1
 title: '内容'
 date: "2026-09-01"
-project_id: my_project
+project_id: query_learning_BB
 tags: []
 publish: true
 ```

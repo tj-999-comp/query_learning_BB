@@ -42,12 +42,12 @@ jobs:
       - name: Dispatch Repository A acceptance
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
-          PROJECT_ID: REPLACE_WITH_PROJECT_ID
+          PROJECT_ID: query_learning_BB
           SOURCE_COMMIT_SHA: ${{ github.sha }}
           TARGET_BASENAME: ${{ inputs.target_basename }}
         run: |
           set -euo pipefail
-          test "$PROJECT_ID" != "REPLACE_WITH_PROJECT_ID"
+          test "$PROJECT_ID" = "query_learning_BB"
           gh workflow run accept-source.yml \
             --repo tj-999-comp/sandbox-pages \
             --ref main \
