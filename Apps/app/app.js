@@ -1,0 +1,305 @@
+const DATA_ROOT = "../data";
+const STORAGE_KEY = "bleague-sql-learning-progress-v1";
+const CDN_BASE = "https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/";
+
+const state = {
+  db: null,
+  problems: [],
+  selectedId: null,
+  progress: loadProgress(),
+};
+
+const elements = {
+  dataStatus: document.querySelector("#data-status"),
+  problemList: document.querySelector("#problem-list"),
+  progressFilter: document.querySelector("#progress-filter"),
+  categoryFilter: document.querySelector("#category-filter"),
+  correctCount: document.querySelector("#correct-count"),
+  problemCount: document.querySelector("#problem-count"),
+  completionRate: document.querySelector("#completion-rate"),
+  favoriteCount: document.querySelector("#favorite-count"),
+  emptyState: document.querySelector("#empty-state"),
+  questionView: document.querySelector("#question-view"),
+  questionCategory: document.querySelector("#question-category"),
+  questionTitle: document.querySelector("#question-title"),
+  questionDifficulty: document.querySelector("#question-difficulty"),
+  questionTables: document.querySelector("#question-tables"),
+  questionPrompt: document.querySelector("#question-prompt"),
+  favoriteButton: document.querySelector("#favorite-button"),
+  sqlEditor: document.querySelector("#sql-editor"),
+  runButton: document.querySelector("#run-button"),
+  submitButton: document.querySelector("#submit-button"),
+  feedback: document.querySelector("#feedback"),
+  resultSummary: document.querySelector("#result-summary"),
+  resultOutput: document.querySelector("#result-output"),
+  answerSection: document.querySelector("#answer-section"),
+  referenceSql: document.querySelector("#reference-sql"),
+  questionExplanation: document.querySelector("#question-explanation"),
+};
+
+function loadProgress() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+    return {
+      completed: parsed.completed && typeof parsed.completed === "object" ? parsed.completed : {},
+      favorites: parsed.favorites && typeof parsed.favorites === "object" ? parsed.favorites : {},
+    };
+  } catch {
+    return { completed: {}, favorites: {} };
+  }
+}
+
+function saveProgress() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state.progress));
+  renderProgress();
+  renderProblemList();
+}
+
+function selectedProblem() {
+  return state.problems.find((problem) => problem.id === state.selectedId) || null;
+}
+
+function renderProgress() {
+  const completedCount = Object.values(state.progress.completed).filter(Boolean).length;
+  const favoriteCount = Object.values(state.progress.favorites).filter(Boolean).length;
+  const total = state.problems.length;
+  elements.correctCount.textContent = completedCount;
+  elements.problemCount.textContent = total;
+  elements.favoriteCount.textContent = favoriteCount;
+  elements.completionRate.textContent = total ? `${Math.round((completedCount / total) * 100)}%` : "0%";
+}
+
+function difficultyStars(level) {
+  return `${"★".repeat(level)}${"☆".repeat(5 - level)}`;
+}
+
+function renderProblemList() {
+  const progressFilter = elements.progressFilter.value;
+  const categoryFilter = elements.categoryFilter.value;
+  const filtered = state.problems.filter((problem) => {
+    const completed = Boolean(state.progress.completed[problem.id]);
+    const favorite = Boolean(state.progress.favorites[problem.id]);
+    const progressMatches = progressFilter === "all"
+      || (progressFilter === "completed" && completed)
+      || (progressFilter === "incomplete" && !completed)
+      || (progressFilter === "favorites" && favorite);
+    return progressMatches && (categoryFilter === "all" || problem.category === categoryFilter);
+  });
+
+  elements.problemList.innerHTML = "";
+  if (!filtered.length) {
+    elements.problemList.innerHTML = '<p class="muted">該当する問題はありません。</p>';
+    return;
+  }
+  filtered.forEach((problem, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `problem-card${problem.id === state.selectedId ? " selected" : ""}`;
+    button.setAttribute("aria-label", `${problem.title}を開く`);
+    button.innerHTML = `
+      <div class="problem-card-top"><span class="problem-number">Q${String(state.problems.indexOf(problem) + 1).padStart(2, "0")}</span>
+        <span class="${state.progress.completed[problem.id] ? "check" : ""}">${state.progress.completed[problem.id] ? "✓ 達成" : "未達成"}</span></div>
+      <h3>${escapeHtml(problem.title)}</h3>
+      <div class="problem-card-meta"><span class="star">${difficultyStars(problem.difficulty)}</span><span class="tag">${escapeHtml(problem.category)}</span>${state.progress.favorites[problem.id] ? '<span class="star">お気に入り</span>' : ""}</div>`;
+    button.addEventListener("click", () => selectProblem(problem.id));
+    elements.problemList.appendChild(button);
+  });
+}
+
+function populateCategoryFilter() {
+  const categories = [...new Set(state.problems.map((problem) => problem.category))];
+  categories.forEach((category) => {
+    const option = document.createElement("option");
+    option.value = category;
+    option.textContent = category;
+    elements.categoryFilter.appendChild(option);
+  });
+}
+
+function selectProblem(problemId) {
+  const problem = state.problems.find((item) => item.id === problemId);
+  if (!problem) return;
+  state.selectedId = problemId;
+  elements.emptyState.classList.add("hidden");
+  elements.questionView.classList.remove("hidden");
+  elements.questionCategory.textContent = problem.category;
+  elements.questionTitle.textContent = problem.title;
+  elements.questionDifficulty.textContent = `難易度 ${difficultyStars(problem.difficulty)}`;
+  elements.questionTables.textContent = `使用テーブル: ${problem.sourceTables.join(", ")}`;
+  elements.questionPrompt.textContent = problem.prompt;
+  elements.sqlEditor.value = "";
+  elements.feedback.className = "feedback";
+  elements.feedback.textContent = "";
+  elements.resultSummary.textContent = "";
+  elements.resultOutput.innerHTML = '<p class="muted">SQLを実行すると結果が表示されます。</p>';
+  elements.answerSection.classList.add("hidden");
+  elements.referenceSql.textContent = problem.referenceSql;
+  elements.questionExplanation.textContent = problem.explanation;
+  updateFavoriteButton();
+  renderProblemList();
+  elements.sqlEditor.focus();
+}
+
+function updateFavoriteButton() {
+  const isFavorite = Boolean(state.progress.favorites[state.selectedId]);
+  elements.favoriteButton.classList.toggle("active", isFavorite);
+  elements.favoriteButton.setAttribute("aria-pressed", String(isFavorite));
+  elements.favoriteButton.textContent = isFavorite ? "★ お気に入り済み" : "☆ お気に入り";
+}
+
+function stripSqlComments(sql) {
+  return sql.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/--[^\n\r]*/g, " ");
+}
+
+function prepareReadOnlySql(sql) {
+  const cleaned = stripSqlComments(sql).trim();
+  if (!cleaned) throw new Error("SQLを入力してください。");
+  if (!/^(SELECT|WITH)\b/i.test(cleaned)) throw new Error("MVPではSELECTまたはWITHから始まる読み取りSQLのみ実行できます。");
+  const withoutTrailingSemicolon = cleaned.replace(/;\s*$/, "");
+  if (withoutTrailingSemicolon.includes(";")) throw new Error("複数のSQLを一度に実行することはできません。");
+  if (/\b(INSERT|UPDATE|DELETE|DROP|ALTER|CREATE|REPLACE|ATTACH|DETACH|PRAGMA|VACUUM|REINDEX|BEGIN|COMMIT|ROLLBACK)\b/i.test(withoutTrailingSemicolon)) {
+    throw new Error("データを変更するSQLや管理用SQLは実行できません。");
+  }
+  return withoutTrailingSemicolon;
+}
+
+function execute(sql) {
+  if (!state.db) throw new Error("SQLiteデータベースが読み込まれていません。CSVからSQLiteを生成してください。");
+  const result = state.db.exec(prepareReadOnlySql(sql));
+  if (!result.length) return { columns: [], values: [] };
+  return { columns: result[0].columns, values: result[0].values };
+}
+
+function normalizedValue(value) {
+  if (value === null || value === undefined) return "null:";
+  if (typeof value === "number") return `number:${Math.round(value * 1e9) / 1e9}`;
+  return `text:${String(value)}`;
+}
+
+function resultsMatch(actual, expected, comparison) {
+  if (actual.columns.length !== expected.columns.length || actual.values.length !== expected.values.length) return false;
+  const rows = (result) => result.values.map((row) => row.map(normalizedValue));
+  const actualRows = rows(actual);
+  const expectedRows = rows(expected);
+  if (comparison.rowOrder !== "sensitive") {
+    actualRows.sort((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b)));
+    expectedRows.sort((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b)));
+  }
+  return JSON.stringify(actualRows) === JSON.stringify(expectedRows);
+}
+
+function renderResult(result) {
+  elements.resultSummary.textContent = `${result.values.length}行 · ${result.columns.length}列`;
+  if (!result.columns.length) {
+    elements.resultOutput.innerHTML = '<p class="muted">結果がありません。</p>';
+    return;
+  }
+  const table = document.createElement("table");
+  const header = document.createElement("tr");
+  result.columns.forEach((column) => {
+    const cell = document.createElement("th");
+    cell.scope = "col";
+    cell.textContent = column;
+    header.appendChild(cell);
+  });
+  const thead = document.createElement("thead");
+  thead.appendChild(header);
+  table.appendChild(thead);
+  const tbody = document.createElement("tbody");
+  result.values.slice(0, 1000).forEach((row) => {
+    const tr = document.createElement("tr");
+    row.forEach((value) => {
+      const cell = document.createElement("td");
+      cell.textContent = value === null ? "NULL" : String(value);
+      tr.appendChild(cell);
+    });
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+  elements.resultOutput.innerHTML = "";
+  elements.resultOutput.appendChild(table);
+  if (result.values.length > 1000) {
+    elements.resultOutput.insertAdjacentHTML("afterend", '<p class="muted">表示は先頭1000行までです。</p>');
+  }
+}
+
+function showError(message) {
+  elements.feedback.className = "feedback error";
+  elements.feedback.textContent = message;
+}
+
+function runCurrentQuery(submit) {
+  const problem = selectedProblem();
+  if (!problem) return;
+  try {
+    const actual = execute(elements.sqlEditor.value);
+    renderResult(actual);
+    if (!submit) {
+      elements.feedback.className = "feedback";
+      elements.feedback.textContent = "実行結果を確認してください。問題への回答を確定する場合は「正誤判定」を押します。";
+      return;
+    }
+    const expected = execute(problem.referenceSql);
+    if (resultsMatch(actual, expected, problem.comparison)) {
+      const wasCompleted = Boolean(state.progress.completed[problem.id]);
+      state.progress.completed[problem.id] = true;
+      saveProgress();
+      elements.feedback.className = "feedback success";
+      elements.feedback.textContent = wasCompleted ? "正解です。達成済みの問題です。" : "正解です。達成状況と正解数を更新しました。";
+      elements.answerSection.classList.remove("hidden");
+    } else {
+      elements.feedback.className = "feedback error";
+      elements.feedback.textContent = "不正解です。正解数には加算されません。SQLを修正して再挑戦できます。";
+    }
+  } catch (error) {
+    showError(error instanceof Error ? error.message : "SQLの実行に失敗しました。");
+  }
+}
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>'"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" }[character]));
+}
+
+async function loadData() {
+  try {
+    const problemsResponse = await fetch(`${DATA_ROOT}/problems.json`);
+    if (!problemsResponse.ok) throw new Error("問題定義を読み込めませんでした。");
+    state.problems = await problemsResponse.json();
+    populateCategoryFilter();
+    renderProgress();
+    renderProblemList();
+
+    const manifestResponse = await fetch(`${DATA_ROOT}/db-manifest.json`);
+    if (!manifestResponse.ok) throw new Error("データベースのマニフェストを読み込めませんでした。");
+    const manifest = await manifestResponse.json();
+    if (!manifest.available) throw new Error("SQLite未生成");
+    const databaseResponse = await fetch(`${DATA_ROOT}/${manifest.path}`);
+    if (!databaseResponse.ok) throw new Error("SQLite未生成");
+    const bytes = new Uint8Array(await databaseResponse.arrayBuffer());
+    const SQL = await initSqlJs({ locateFile: (file) => `${CDN_BASE}${file}` });
+    state.db = new SQL.Database(bytes);
+    elements.dataStatus.textContent = "SQLite準備完了";
+    elements.dataStatus.classList.add("ready");
+    elements.runButton.disabled = false;
+    elements.submitButton.disabled = false;
+  } catch (error) {
+    elements.dataStatus.textContent = "CSV取り込み後にSQLiteを生成してください";
+    elements.dataStatus.classList.add("error");
+    elements.runButton.disabled = true;
+    elements.submitButton.disabled = true;
+    console.info("Database is not available yet:", error);
+  }
+}
+
+elements.progressFilter.addEventListener("change", renderProblemList);
+elements.categoryFilter.addEventListener("change", renderProblemList);
+elements.favoriteButton.addEventListener("click", () => {
+  if (!state.selectedId) return;
+  state.progress.favorites[state.selectedId] = !state.progress.favorites[state.selectedId];
+  saveProgress();
+  updateFavoriteButton();
+});
+elements.runButton.addEventListener("click", () => runCurrentQuery(false));
+elements.submitButton.addEventListener("click", () => runCurrentQuery(true));
+
+loadData();

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="BリーグのスタッツでSQLを練習する個人向け学習サイト">
+    <title>SQL練習帳 | Bリーグスタッツ</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <div>
+          <p class="eyebrow">SQL PRACTICE NOTEBOOK</p>
+          <h1>SQL練習帳</h1>
+          <p class="subtitle">Bリーグのスタッツで、書いて・試して・振り返る。</p>
+        </div>
+        <div id="data-status" class="status-chip" role="status">データベースを読み込み中…</div>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="dashboard" aria-labelledby="dashboard-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">YOUR PROGRESS</p>
+            <h2 id="dashboard-title">学習情報</h2>
+          </div>
+          <p class="muted">進捗とお気に入りは、このブラウザに保存されます。</p>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card"><span>正解数</span><strong id="correct-count">0</strong><small>/ <span id="problem-count">0</span> 問</small></div>
+          <div class="stat-card"><span>達成率</span><strong id="completion-rate">0%</strong><small>問題単位</small></div>
+          <div class="stat-card"><span>お気に入り</span><strong id="favorite-count">0</strong><small>問</small></div>
+        </div>
+      </section>
+
+      <div class="content-grid">
+        <aside class="problem-panel" aria-labelledby="problem-list-title">
+          <div class="section-heading compact">
+            <div>
+              <p class="eyebrow">10 QUESTIONS</p>
+              <h2 id="problem-list-title">問題一覧</h2>
+            </div>
+          </div>
+          <div class="filters">
+            <label>表示
+              <select id="progress-filter">
+                <option value="all">すべて</option>
+                <option value="incomplete">未達成</option>
+                <option value="completed">達成済み</option>
+                <option value="favorites">お気に入り</option>
+              </select>
+            </label>
+            <label>カテゴリ
+              <select id="category-filter"><option value="all">すべて</option></select>
+            </label>
+          </div>
+          <div id="problem-list" class="problem-list" aria-live="polite"></div>
+        </aside>
+
+        <section class="workspace" aria-labelledby="workspace-title">
+          <div id="empty-state" class="empty-state">
+            <p class="eyebrow">START HERE</p>
+            <h2 id="workspace-title">問題を選んで始める</h2>
+            <p>左の一覧から問題を選択すると、SQLを書いて実行できます。</p>
+          </div>
+
+          <article id="question-view" class="question-view hidden">
+            <div class="question-topline">
+              <div>
+                <p id="question-category" class="eyebrow"></p>
+                <h2 id="question-title"></h2>
+              </div>
+              <button id="favorite-button" class="favorite-button" type="button" aria-pressed="false">☆ お気に入り</button>
+            </div>
+            <div class="question-meta"><span id="question-difficulty"></span><span id="question-tables"></span></div>
+            <div class="prompt-box"><h3>問題</h3><p id="question-prompt"></p></div>
+            <div class="editor-section">
+              <label for="sql-editor">SQL</label>
+              <textarea id="sql-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="SELECT ..."></textarea>
+              <div class="editor-actions">
+                <button id="run-button" class="secondary-button" type="button">実行する</button>
+                <button id="submit-button" class="primary-button" type="button">正誤判定</button>
+              </div>
+            </div>
+            <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+            <section class="result-section" aria-labelledby="result-title">
+              <div class="result-heading"><h3 id="result-title">実行結果</h3><span id="result-summary" class="muted"></span></div>
+              <div id="result-output" class="result-output"><p class="muted">SQLを実行すると結果が表示されます。</p></div>
+            </section>
+            <section id="answer-section" class="answer-section hidden" aria-labelledby="answer-title">
+              <h3 id="answer-title">参考SQLと解説</h3>
+              <pre id="reference-sql"></pre>
+              <p id="question-explanation"></p>
+            </section>
+          </article>
+        </section>
+      </div>
+    </main>
+    <footer class="site-footer">個人学習用のMVP · Bリーグスタッツ</footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
