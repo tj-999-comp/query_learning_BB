@@ -1,0 +1,6 @@
+schema_version: 1
+title: '#10 CSVデータ監査とSQLiteデータセット確定'
+date: "2026-09-03"
+project_id: query_learning_BB
+tags: [codex, data-audit, sqlite, mvp]
+publish: false
