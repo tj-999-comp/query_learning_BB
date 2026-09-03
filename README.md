@@ -70,3 +70,7 @@ GitHub Appには、公開リポジトリ `tj-999-comp/sandbox-pages` のActions 
 - HTML renderer、公開先、受入validator、provenance、index: `sandbox-pages`
 - 共通運用: [`docs/PORTFOLIO_STANDARD.md`](https://github.com/tj-999-comp/sandbox-pages/blob/main/docs/PORTFOLIO_STANDARD.md)
 - 公開契約: [`projects/README.md`](https://github.com/tj-999-comp/sandbox-pages/blob/main/projects/README.md)
+
+## アプリ公開
+
+Cloudflare Pages Freeへの公開方針、Basic認証、公開成果物の作成方法は [`Apps/docs/HOSTING_CLOUDFLARE.md`](Apps/docs/HOSTING_CLOUDFLARE.md) を参照してください。
