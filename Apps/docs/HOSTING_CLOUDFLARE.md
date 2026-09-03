@@ -7,6 +7,7 @@
 - PagesのRoot directory: `Apps`
 - Build command: `bash scripts/build-pages.sh`
 - Build output directory: `public`
+- Pages configuration: `Apps/wrangler.toml`にも出力先を固定
 - 認証: Pages Functionsの全体middlewareによるHTTP Basic認証
 - 公開URL: 初期はCloudflare提供の`*.pages.dev`。カスタムドメインは後続で検討する
 
@@ -39,7 +40,7 @@ CSV、CSV取り込みスクリプト、テーブル定義、要件書などは�
 
 1. Cloudflare DashboardでPagesプロジェクトを作成する。
 2. GitHubリポジトリ`tj-999-comp/query_learning_BB`を接続する。
-3. 上記のRoot directory、Build command、Output directoryを設定する。
+3. 上記のRoot directoryとBuild commandを設定する。Build output directoryが表示される場合は`public`を入力する（表示されない場合も`Apps/wrangler.toml`で固定される）。
 4. Production環境へ2つのSecretを登録する。
 5. `main`からデプロイする。
 6. 認証なしで401、正しい認証情報で200になることを確認する。
