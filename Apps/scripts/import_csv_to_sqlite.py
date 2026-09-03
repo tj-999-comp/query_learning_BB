@@ -23,6 +23,37 @@ BASE_TABLES = (
     "teams",
 )
 
+PRIMARY_KEYS = {
+    "game_team_stats": ("schedule_key", "team_id"),
+    "games": ("schedule_key",),
+    "player_affiliations": ("affiliation_id",),
+    "player_game_stats": ("schedule_key", "player_id"),
+    "player_name_history": ("history_id",),
+    "players": ("player_id",),
+    "team_name_history": ("history_id",),
+    "teams": ("team_id",),
+}
+
+FOREIGN_KEYS = (
+    ("game_team_stats", "schedule_key", "games", "schedule_key"),
+    ("game_team_stats", "team_id", "teams", "team_id"),
+    ("game_team_stats", "opponent_team_id", "teams", "team_id"),
+    ("games", "home_team_id", "teams", "team_id"),
+    ("games", "away_team_id", "teams", "team_id"),
+    ("player_affiliations", "player_id", "players", "player_id"),
+    ("player_affiliations", "team_id", "teams", "team_id"),
+    ("player_affiliations", "first_schedule_key", "games", "schedule_key"),
+    ("player_affiliations", "last_schedule_key", "games", "schedule_key"),
+    ("player_game_stats", "schedule_key", "games", "schedule_key"),
+    ("player_game_stats", "player_id", "players", "player_id"),
+    ("player_game_stats", "team_id", "teams", "team_id"),
+    ("player_name_history", "player_id", "players", "player_id"),
+    ("team_name_history", "team_id", "teams", "team_id"),
+)
+
+# The source audit identified five completed games without team-level stats.
+EXPECTED_GAMES_WITHOUT_TEAM_STATS = 5
+
 # The live players export contains this column, while the checked-in Markdown
 # snapshot predates it. Keep the export usable without silently dropping data.
 EXTRA_COLUMNS = {
@@ -42,6 +73,80 @@ POSTGRES_TO_SQLITE = {
 
 def quote_identifier(value: str) -> str:
     return '"' + value.replace('"', '""') + '"'
+
+
+def validate_database(connection: sqlite3.Connection) -> None:
+    """Reject a database assembled from CSVs with broken relational integrity."""
+    errors: list[str] = []
+
+    for table, columns in PRIMARY_KEYS.items():
+        quoted_table = quote_identifier(table)
+        null_count = connection.execute(
+            f"SELECT COUNT(*) FROM {quoted_table} WHERE "
+            + " OR ".join(f"{quote_identifier(column)} IS NULL" for column in columns)
+        ).fetchone()[0]
+        if null_count:
+            errors.append(f"{table}: {null_count} row(s) have NULL primary-key values")
+        grouped_columns = ", ".join(quote_identifier(column) for column in columns)
+        duplicate_count = connection.execute(
+            f"SELECT COUNT(*) FROM (SELECT {grouped_columns} FROM {quoted_table} "
+            f"GROUP BY {grouped_columns} HAVING COUNT(*) > 1)"
+        ).fetchone()[0]
+        if duplicate_count:
+            errors.append(f"{table}: {duplicate_count} duplicated primary-key group(s)")
+
+    for child_table, child_column, parent_table, parent_column in FOREIGN_KEYS:
+        child = quote_identifier(child_table)
+        child_col = quote_identifier(child_column)
+        parent = quote_identifier(parent_table)
+        parent_col = quote_identifier(parent_column)
+        orphan_count = connection.execute(
+            f"SELECT COUNT(*) FROM {child} AS child "
+            f"WHERE child.{child_col} IS NOT NULL "
+            f"AND NOT EXISTS (SELECT 1 FROM {parent} AS parent "
+            f"WHERE parent.{parent_col} = child.{child_col})"
+        ).fetchone()[0]
+        if orphan_count:
+            errors.append(
+                f"{child_table}.{child_column}: {orphan_count} orphan row(s) "
+                f"referencing {parent_table}.{parent_column}"
+            )
+
+    games_without_team_stats = connection.execute(
+        "SELECT COUNT(*) FROM games AS games WHERE NOT EXISTS "
+        "(SELECT 1 FROM game_team_stats AS stats WHERE stats.schedule_key = games.schedule_key)"
+    ).fetchone()[0]
+    if games_without_team_stats != EXPECTED_GAMES_WITHOUT_TEAM_STATS:
+        errors.append(
+            "games without game_team_stats: "
+            f"{games_without_team_stats} (expected {EXPECTED_GAMES_WITHOUT_TEAM_STATS})"
+        )
+
+    non_two_team_stat_games = connection.execute(
+        "SELECT COUNT(*) FROM (SELECT schedule_key FROM game_team_stats "
+        "GROUP BY schedule_key HAVING COUNT(*) != 2)"
+    ).fetchone()[0]
+    if non_two_team_stat_games:
+        errors.append(
+            "game_team_stats: "
+            f"{non_two_team_stat_games} game(s) do not have exactly two team rows"
+        )
+
+    all_null_columns = []
+    for table_info in connection.execute("PRAGMA table_info(game_team_stats)").fetchall():
+        column = table_info[1]
+        non_null_count = connection.execute(
+            f"SELECT COUNT(*) FROM game_team_stats WHERE {quote_identifier(column)} IS NOT NULL"
+        ).fetchone()[0]
+        if non_null_count == 0:
+            all_null_columns.append(column)
+    print(
+        "game_team_stats all-NULL columns: "
+        f"{len(all_null_columns)} ({', '.join(all_null_columns) or 'none'})"
+    )
+
+    if errors:
+        raise ValueError("data validation failed: " + "; ".join(errors))
 
 
 def parse_schema(path: Path) -> dict[str, list[tuple[str, str]]]:
@@ -122,6 +227,8 @@ def import_table(connection: sqlite3.Connection, csv_path: Path, table: str, col
         insert_sql = f"INSERT INTO {quote_identifier(table)} ({insert_columns}) VALUES ({placeholders})"
         count = 0
         for count, row in enumerate(reader, start=1):
+            if None in row or any(row.get(column) is None for column in expected_headers):
+                raise ValueError(f"{csv_path}: row {count} has a column-count mismatch")
             values = [
                 convert_value(row.get(column), sqlite_type, table, column, count)
                 for column, sqlite_type in columns
@@ -156,6 +263,7 @@ def build_database(input_dir: Path, schema_path: Path, output_path: Path) -> Non
             for table in BASE_TABLES:
                 count = import_table(connection, csv_paths[table], table, schema[table])
                 print(f"{table}: {count} rows ({csv_paths[table].name})")
+            validate_database(connection)
             connection.execute("PRAGMA foreign_keys = OFF")
             connection.execute("PRAGMA journal_mode = DELETE")
         connection.close()

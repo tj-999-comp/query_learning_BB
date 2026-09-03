@@ -26,3 +26,7 @@ python3 Apps/scripts/import_csv_to_sqlite.py
 生成先は `Apps/data/bleague.sqlite` です。元CSVが未配置の場合は、スクリプトが不足ファイルを一覧表示して終了します。
 
 生成に成功すると `db-manifest.json` も更新され、WebアプリがSQLiteを読み込める状態になります。
+
+## データ監査
+
+CSVを正式確定する前に、取り込み処理が主キー・外部キー・試合とスタッツの対応を検証します。監査結果は [`DATA_AUDIT.md`](DATA_AUDIT.md) に記録しています。整合性エラーがある場合はSQLiteを生成せず、既存の利用可能フラグも変更しません。
