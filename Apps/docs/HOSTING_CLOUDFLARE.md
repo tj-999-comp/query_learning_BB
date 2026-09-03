@@ -27,11 +27,13 @@ Secretが未設定の場合は認証を通さず、500で停止する。認証�
 - `app.js`
 - `styles.css`
 - `data/problems.json`
-- `data/bleague.sqlite`
+- `data/bleague.sqlite` またはPagesの上限に合わせたSQLiteチャンク
 - `data/db-manifest.json`
 - `_headers`
 
 CSV、CSV取り込みスクリプト、テーブル定義、要件書などは公開成果物に含めない。SQLiteが用意されていない場合は、8つのCSVからビルド時に生成する。
+
+確定SQLiteが25MiBを超える場合、ビルドスクリプトは20MiB以下のチャンクへ分割し、ブラウザ側で結合してからsql.jsへ渡す。これによりR2などの追加サービスを使わず、Pages Freeの1ファイル上限内で配信する。
 
 ## 初回設定
 
