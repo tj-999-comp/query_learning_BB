@@ -1,0 +1,6 @@
+schema_version: 1
+title: 'Issue #34 SQL問題バンクを100問へ拡充'
+date: "2026-09-04"
+project_id: query_learning_BB
+tags: [codex, v0.5.0, issue-34, sql-problems, problem-bank, work-record]
+publish: false
