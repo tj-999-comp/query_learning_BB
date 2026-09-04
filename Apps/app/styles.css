@@ -94,8 +94,9 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 8px; backgro
 .workspace-panes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
 .query-pane, .result-pane { min-width: 0; border: 1px solid var(--line); border-radius: 10px; padding: 13px; background: #fcfdfc; }
 .editor-section > label { display: block; margin-bottom: 5px; font-weight: 800; }
-#sql-editor, .CodeMirror { width: 100%; min-height: 280px; resize: vertical; border: 1px solid #cbd3da; border-radius: 10px; background: #17202a; color: #e8f0f7; font: .9rem/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; tab-size: 2; }
-#sql-editor { padding: 12px; }
+#sql-editor, .CodeMirror { width: 100%; height: 300px; min-height: 280px; max-height: min(60vh, 420px); border: 1px solid #cbd3da; border-radius: 10px; background: #17202a; color: #e8f0f7; font: .9rem/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; tab-size: 2; }
+#sql-editor { padding: 12px; overflow: auto; resize: none; }
+#sql-editor::placeholder, .CodeMirror-placeholder { color: #8493a1; }
 #sql-editor:focus, .CodeMirror-focused { outline: 3px solid rgba(229,93,61,.2); border-color: var(--accent); }
 .CodeMirror-gutters { border-right: 1px solid #36414c; background: #202b36; }
 .CodeMirror-linenumber { color: #8493a1; }

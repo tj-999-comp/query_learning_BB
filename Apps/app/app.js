@@ -266,6 +266,7 @@ function selectProblem(problemId) {
   state.selectedId = problemId;
   elements.emptyState.classList.add("hidden");
   elements.questionView.classList.remove("hidden");
+  initializeSqlEditor();
   if (state.editor) state.editor.refresh();
   elements.questionCategory.textContent = problem.category;
   elements.questionTitle.textContent = `${problemNumber(problem)} ${problem.title}`;
@@ -321,6 +322,7 @@ function createSqlEditor() {
   state.editor = window.CodeMirror.fromTextArea(elements.sqlEditor, {
     mode: "text/x-sql",
     theme: "default",
+    inputStyle: "contenteditable",
     lineNumbers: true,
     lineWrapping: true,
     matchBrackets: true,
@@ -337,6 +339,13 @@ function createSqlEditor() {
     },
   });
   state.editor.setOption("placeholder", elements.sqlEditor.getAttribute("placeholder") || "SELECT ...");
+}
+
+function initializeSqlEditor() {
+  if (state.editor || elements.sqlEditor.dataset.editorInitialized === "true") return;
+  createSqlEditor();
+  if (!state.editor) elements.sqlEditor.addEventListener("keydown", handleFallbackEditorKeydown);
+  elements.sqlEditor.dataset.editorInitialized = "true";
 }
 
 function getEditorValue() {
@@ -588,8 +597,5 @@ elements.favoriteButton.addEventListener("click", () => {
 elements.runButton.addEventListener("click", () => runCurrentQuery(false));
 elements.submitButton.addEventListener("click", () => runCurrentQuery(true));
 elements.answerButton.addEventListener("click", toggleAnswer);
-
-createSqlEditor();
-if (!state.editor) elements.sqlEditor.addEventListener("keydown", handleFallbackEditorKeydown);
 
 loadData();
