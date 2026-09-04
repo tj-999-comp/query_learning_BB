@@ -110,6 +110,9 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 8px; backgro
 .CodeMirror .cm-variable, .CodeMirror .cm-variable-2, .CodeMirror .cm-variable-3, .CodeMirror .cm-property, .CodeMirror .cm-operator, .CodeMirror .cm-punctuation { color: var(--ink) !important; }
 .CodeMirror .cm-builtin, .CodeMirror .cm-qualifier, .CodeMirror .cm-type { color: #16745a !important; }
 .CodeMirror .cm-bracket { color: #8d5b11 !important; }
+.CodeMirror-hints { z-index: 60; max-height: 280px; border: 1px solid #cbd3da; border-radius: 8px; box-shadow: 0 8px 24px rgba(23,32,42,.18); font: .82rem ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.CodeMirror-hint { padding: 5px 10px; color: var(--ink); }
+.CodeMirror-hint-active { background: var(--navy); color: #fff; }
 .editor-help { margin: 5px 0 0; color: var(--muted); font-size: .72rem; }
 kbd { display: inline-block; min-width: 1.35em; padding: 0 4px; border: 1px solid #cbd3da; border-bottom-width: 2px; border-radius: 4px; background: #fff; color: var(--navy); font: .68rem ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; text-align: center; }
 .editor-actions { display: flex; justify-content: flex-end; gap: 9px; margin: 7px 0 11px; }
