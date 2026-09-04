@@ -1,6 +1,7 @@
 const DATA_ROOT = "../data";
 const STORAGE_KEY = "bleague-sql-learning-progress-v1";
 const CDN_BASE = "https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/";
+let storageAvailable = true;
 
 const state = {
   db: null,
@@ -21,6 +22,7 @@ const elements = {
   problemCount: document.querySelector("#problem-count"),
   completionRate: document.querySelector("#completion-rate"),
   favoriteCount: document.querySelector("#favorite-count"),
+  storageStatus: document.querySelector("#storage-status"),
   emptyState: document.querySelector("#empty-state"),
   questionView: document.querySelector("#question-view"),
   questionCategory: document.querySelector("#question-category"),
@@ -48,14 +50,20 @@ function loadProgress() {
       favorites: parsed.favorites && typeof parsed.favorites === "object" ? parsed.favorites : {},
     };
   } catch {
+    storageAvailable = false;
     return { completed: {}, favorites: {} };
   }
 }
 
 function saveProgress() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state.progress));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state.progress));
+  } catch {
+    storageAvailable = false;
+  }
   renderProgress();
   renderProblemList();
+  return storageAvailable;
 }
 
 function selectedProblem() {
@@ -88,6 +96,10 @@ function renderProgress() {
   elements.problemCount.textContent = total;
   elements.favoriteCount.textContent = favoriteCount;
   elements.completionRate.textContent = total ? `${Math.round((completedCount / total) * 100)}%` : "0%";
+  elements.storageStatus.textContent = storageAvailable
+    ? "進捗とお気に入りは、このブラウザに保存されます。"
+    : "このブラウザでは保存できません。ページを閉じると進捗とお気に入りは失われます。";
+  elements.storageStatus.classList.toggle("storage-warning", !storageAvailable);
 }
 
 function difficultyStars(level) {
@@ -310,9 +322,13 @@ function runCurrentQuery(submit) {
     if (resultsMatch(actual, expected, problem.comparison)) {
       const wasCompleted = Boolean(state.progress.completed[problem.id]);
       state.progress.completed[problem.id] = true;
-      saveProgress();
+      const persisted = saveProgress();
       elements.feedback.className = "feedback success";
-      elements.feedback.textContent = wasCompleted ? "正解です。達成済みの問題です。" : "正解です。達成状況と正解数を更新しました。";
+      elements.feedback.textContent = wasCompleted
+        ? "正解です。達成済みの問題です。"
+        : persisted
+          ? "正解です。達成状況と正解数を更新しました。"
+          : "正解です。ただし、このブラウザでは達成状況を保存できません。";
       elements.answerSection.classList.remove("hidden");
     } else {
       elements.feedback.className = "feedback error";
