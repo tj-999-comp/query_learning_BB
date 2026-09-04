@@ -1,0 +1,6 @@
+schema_version: 1
+title: 'バージョン方針の策定と次期改善Issue #26〜#34の起票'
+date: "2026-09-04"
+project_id: query_learning_BB
+tags: [codex, versioning, github-issues, post-mvp, planning]
+publish: false
