@@ -176,16 +176,39 @@ function normalizedValue(value) {
   return `text:${String(value)}`;
 }
 
+function valuesMatch(actual, expected, numericTolerance) {
+  if (typeof actual === "number" && typeof expected === "number") {
+    return Math.abs(actual - expected) <= numericTolerance;
+  }
+  return normalizedValue(actual) === normalizedValue(expected);
+}
+
+function rowsMatch(actual, expected, numericTolerance) {
+  return actual.length === expected.length
+    && actual.every((value, index) => valuesMatch(value, expected[index], numericTolerance));
+}
+
 function resultsMatch(actual, expected, comparison) {
   if (actual.columns.length !== expected.columns.length || actual.values.length !== expected.values.length) return false;
-  const rows = (result) => result.values.map((row) => row.map(normalizedValue));
-  const actualRows = rows(actual);
-  const expectedRows = rows(expected);
+  const numericTolerance = Number.isFinite(comparison?.numericTolerance) ? comparison.numericTolerance : 0;
+  const actualRows = actual.values;
+  const expectedRows = expected.values;
   if (comparison.rowOrder !== "sensitive") {
-    actualRows.sort((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b)));
-    expectedRows.sort((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b)));
+    if (numericTolerance === 0) {
+      const normalizeRows = (rows) => rows.map((row) => row.map(normalizedValue).join("\u0001")).sort();
+      return JSON.stringify(normalizeRows(actualRows)) === JSON.stringify(normalizeRows(expectedRows));
+    }
+    const matched = new Set();
+    return actualRows.every((actualRow) => {
+      const expectedIndex = expectedRows.findIndex((expectedRow, index) => (
+        !matched.has(index) && rowsMatch(actualRow, expectedRow, numericTolerance)
+      ));
+      if (expectedIndex < 0) return false;
+      matched.add(expectedIndex);
+      return true;
+    });
   }
-  return JSON.stringify(actualRows) === JSON.stringify(expectedRows);
+  return actualRows.every((actualRow, index) => rowsMatch(actualRow, expectedRows[index], numericTolerance));
 }
 
 function renderResult(result) {
