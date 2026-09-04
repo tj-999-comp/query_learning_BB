@@ -1,0 +1,6 @@
+schema_version: 1
+title: '#6 MVPホスティング先とBasic認証方式の決定・受入確認'
+date: "2026-09-04"
+project_id: query_learning_BB
+tags: [codex, hosting, cloudflare-pages, basic-auth, mvp]
+publish: false
