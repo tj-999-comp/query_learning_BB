@@ -1,0 +1,6 @@
+schema_version: 1
+title: 'Issue #32 SQLエディタの高機能化と公開反映'
+date: "2026-09-04"
+project_id: query_learning_BB
+tags: [codex, v0.3.0, issue-32, sql-editor, codemirror, csp, work-record]
+publish: false
