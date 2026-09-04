@@ -76,9 +76,9 @@
                   <label id="sql-editor-label" for="sql-editor">SQL</label>
                   <textarea id="sql-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="SELECT ..."></textarea>
                   <div class="editor-actions">
+                    <button id="answer-button" class="secondary-button" type="button" aria-controls="answer-section" aria-expanded="false" aria-label="解答例を表示">解答例を表示</button>
                     <button id="run-button" class="secondary-button" type="button">実行する</button>
                     <button id="submit-button" class="primary-button" type="button">正誤判定</button>
-                    <button id="answer-button" class="secondary-button" type="button" aria-controls="answer-section" aria-expanded="false">解答例</button>
                   </div>
                 </div>
               </section>
@@ -91,7 +91,7 @@
                 <section id="answer-section" class="answer-section hidden" aria-labelledby="answer-title">
                   <h3 id="answer-title">解答例と解説</h3>
                   <pre id="reference-sql"></pre>
-                  <p id="question-explanation"></p>
+                  <p id="question-explanation" class="answer-explanation"></p>
                 </section>
               </section>
             </div>

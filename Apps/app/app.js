@@ -82,6 +82,60 @@ function problemNumber(problem) {
   return `Q${String(index + 1).padStart(2, "0")}`;
 }
 
+function splitSqlList(value) {
+  const items = [];
+  let start = 0;
+  let depth = 0;
+  let quote = null;
+  for (let index = 0; index < value.length; index += 1) {
+    const character = value[index];
+    if (quote) {
+      if (character === quote) {
+        if (value[index + 1] === quote) index += 1;
+        else quote = null;
+      }
+      continue;
+    }
+    if (character === "'" || character === '"' || character === "`") {
+      quote = character;
+    } else if (character === "(") {
+      depth += 1;
+    } else if (character === ")") {
+      depth = Math.max(0, depth - 1);
+    } else if (character === "," && depth === 0) {
+      items.push(value.slice(start, index).trim());
+      start = index + 1;
+    }
+  }
+  items.push(value.slice(start).trim());
+  return items.filter(Boolean);
+}
+
+function formatReferenceSql(sql) {
+  const normalized = sql.replace(/\s+/g, " ").trim();
+  const clauseBreaks = /\s+(UNION ALL|LEFT OUTER JOIN|RIGHT OUTER JOIN|FULL OUTER JOIN|INNER JOIN|LEFT JOIN|RIGHT JOIN|FULL JOIN|JOIN|FROM|WHERE|GROUP BY|HAVING|ORDER BY|LIMIT|ON)(?=\s)/gi;
+  const lines = normalized.replace(clauseBreaks, "\n$1 ").split("\n");
+  const formatted = [];
+
+  lines.forEach((line) => {
+    const trimmed = line.trim();
+    const listClause = trimmed.match(/^(SELECT|GROUP BY|ORDER BY)\s+(.+)$/i);
+    if (listClause) {
+      const items = splitSqlList(listClause[2]);
+      formatted.push(`${listClause[1].toUpperCase()}\n  ${items.join(",\n  ")}`);
+      return;
+    }
+    const conditionClause = trimmed.match(/^(WHERE|HAVING)\s+(.+)$/i);
+    if (conditionClause) {
+      const conditions = conditionClause[2].split(/\s+AND\s+/i);
+      formatted.push(`${conditionClause[1].toUpperCase()}\n  ${conditions.join("\n  AND ")}`);
+      return;
+    }
+    formatted.push(trimmed);
+  });
+  return formatted.join("\n");
+}
+
 let previousFocus = null;
 let previousDrawerFocus = null;
 
@@ -221,9 +275,8 @@ function selectProblem(problemId) {
   elements.feedback.textContent = "";
   elements.resultSummary.textContent = "";
   elements.resultOutput.innerHTML = '<p class="muted">SQLを実行すると結果が表示されます。</p>';
-  elements.answerSection.classList.add("hidden");
-  elements.answerButton.setAttribute("aria-expanded", "false");
-  elements.referenceSql.textContent = problem.referenceSql;
+  setAnswerVisibility(false);
+  elements.referenceSql.textContent = formatReferenceSql(problem.referenceSql);
   elements.questionExplanation.textContent = problem.explanation;
   updateFavoriteButton();
   renderProblemList();
@@ -248,10 +301,17 @@ function updateFavoriteButton() {
   elements.favoriteButton.textContent = isFavorite ? "★" : "☆";
 }
 
-function showAnswer() {
+function setAnswerVisibility(visible) {
+  elements.answerSection.classList.toggle("hidden", !visible);
+  const label = visible ? "解答例を隠す" : "解答例を表示";
+  elements.answerButton.setAttribute("aria-expanded", String(visible));
+  elements.answerButton.setAttribute("aria-label", label);
+  elements.answerButton.textContent = label;
+}
+
+function toggleAnswer() {
   if (!selectedProblem()) return;
-  elements.answerSection.classList.remove("hidden");
-  elements.answerButton.setAttribute("aria-expanded", "true");
+  setAnswerVisibility(elements.answerSection.classList.contains("hidden"));
 }
 
 function stripSqlComments(sql) {
@@ -403,7 +463,7 @@ function runCurrentQuery(submit) {
         : persisted
           ? "正解です。達成状況と正解数を更新しました。"
           : "正解です。ただし、このブラウザでは達成状況を保存できません。";
-      elements.answerSection.classList.remove("hidden");
+      setAnswerVisibility(true);
     } else {
       elements.feedback.className = "feedback error";
       elements.feedback.textContent = "不正解です。正解数には加算されません。SQLを修正して再挑戦できます。";
@@ -474,6 +534,6 @@ elements.favoriteButton.addEventListener("click", () => {
 });
 elements.runButton.addEventListener("click", () => runCurrentQuery(false));
 elements.submitButton.addEventListener("click", () => runCurrentQuery(true));
-elements.answerButton.addEventListener("click", showAnswer);
+elements.answerButton.addEventListener("click", toggleAnswer);
 
 loadData();

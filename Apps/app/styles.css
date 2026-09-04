@@ -114,8 +114,8 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 8px; backgro
 .result-output th, .result-output td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
 .result-output th { background: #f4f6f5; color: var(--navy); }
 .result-output tr:last-child td { border-bottom: 0; }
-.answer-section pre { overflow-x: auto; border-radius: 8px; background: #17202a; color: #e8f0f7; padding: 14px; font-size: .82rem; }
-.answer-section p { margin-bottom: 0; }
+.answer-section pre { margin: 8px 0 12px; overflow-x: auto; border-radius: 8px; background: #17202a; color: #e8f0f7; padding: 14px; font-size: .82rem; line-height: 1.6; white-space: pre-wrap; }
+.answer-explanation { margin-bottom: 0; color: var(--muted); font-size: .78rem; line-height: 1.55; }
 .hidden { display: none !important; }
 .modal-open { overflow: hidden; }
 .drawer-open { overflow: hidden; }
