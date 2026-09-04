@@ -57,6 +57,11 @@
               <button id="favorite-button" class="favorite-button" type="button" aria-pressed="false">☆ お気に入り</button>
             </div>
             <div class="question-meta"><span id="question-category"></span><span id="question-difficulty"></span><span id="question-tables"></span></div>
+            <div class="problem-navigation" aria-label="問題間移動">
+              <button id="previous-problem-button" class="secondary-button" type="button">← 前の問題</button>
+              <span id="problem-position" class="muted" aria-live="polite"></span>
+              <button id="next-problem-button" class="secondary-button" type="button">次の問題 →</button>
+            </div>
             <div class="prompt-box"><h3>問題</h3><p id="question-prompt"></p></div>
             <div class="editor-section">
               <label for="sql-editor">SQL</label>
