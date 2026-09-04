@@ -1,0 +1,6 @@
+schema_version: 1
+title: '#9 SQL正誤判定・読み取り専用制限の受入確認と基準確定'
+date: "2026-09-04"
+project_id: query_learning_BB
+tags: [codex, sql-judgement, acceptance-test, mvp]
+publish: false
