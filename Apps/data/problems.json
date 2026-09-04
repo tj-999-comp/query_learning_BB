@@ -40,7 +40,7 @@
     "category": "基本検索",
     "sourceTables": ["game_team_stats"],
     "referenceSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE points >= 100 ORDER BY points DESC, schedule_key, team_id;",
-    "comparison": {"rowOrder": "sensitive"},
+    "comparison": {"rowOrder": "insensitive"},
     "explanation": "数値条件をWHEREで指定し、複数の列を使って安定した並び順にします。"
   },
   {
