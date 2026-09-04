@@ -1,0 +1,6 @@
+schema_version: 1
+title: '#10 データセット確定と利用条件確認'
+date: "2026-09-04"
+project_id: query_learning_BB
+tags: [codex, data-audit, sqlite, mvp]
+publish: false
