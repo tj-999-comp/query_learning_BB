@@ -1,6 +1,14 @@
 const DATA_ROOT = "../data";
 const STORAGE_KEY = "bleague-sql-learning-progress-v1";
 const CDN_BASE = "https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/";
+const SQL_KEYWORDS = [
+  "SELECT", "FROM", "WHERE", "GROUP BY", "HAVING", "ORDER BY", "LIMIT", "OFFSET",
+  "JOIN", "LEFT JOIN", "LEFT OUTER JOIN", "RIGHT JOIN", "INNER JOIN", "CROSS JOIN", "ON",
+  "AS", "DISTINCT", "ALL", "AND", "OR", "NOT", "NULL", "IS NULL", "IS NOT NULL",
+  "IN", "EXISTS", "BETWEEN", "LIKE", "GLOB", "CASE", "WHEN", "THEN", "ELSE", "END",
+  "ASC", "DESC", "UNION", "UNION ALL", "WITH", "COUNT", "SUM", "AVG", "MIN", "MAX",
+  "ROUND", "CAST", "COALESCE", "STRFTIME",
+];
 let storageAvailable = true;
 
 const state = {
@@ -8,6 +16,7 @@ const state = {
   problems: [],
   selectedId: null,
   editor: null,
+  schema: { tables: [], columnsByTable: {} },
   progress: loadProgress(),
 };
 
@@ -312,6 +321,142 @@ function setAnswerVisibility(visible) {
   elements.answerButton.textContent = label;
 }
 
+function quoteSqlIdentifier(identifier) {
+  return `"${String(identifier).replace(/"/g, '""')}"`;
+}
+
+function loadSqlSchema(database) {
+  const schema = { tables: [], columnsByTable: {} };
+  const tableResult = database.exec(
+    "SELECT name, type FROM sqlite_master "
+      + "WHERE type IN ('table', 'view') AND name NOT LIKE 'sqlite_%' "
+      + "ORDER BY name COLLATE NOCASE",
+  )[0];
+  if (!tableResult) return schema;
+
+  tableResult.values.forEach(([name, type]) => {
+    const tableName = String(name);
+    const columnsResult = database.exec(`PRAGMA table_info(${quoteSqlIdentifier(tableName)})`)[0];
+    const columns = columnsResult
+      ? columnsResult.values.map((row) => String(row[1]))
+      : [];
+    schema.tables.push({ name: tableName, type: String(type) });
+    schema.columnsByTable[tableName] = columns;
+  });
+  return schema;
+}
+
+function textBeforeEditorCursor(editor, cursor) {
+  return editor.getRange({ line: 0, ch: 0 }, cursor);
+}
+
+function sqlIdentifierFragment(editor, cursor) {
+  const lineBeforeCursor = editor.getLine(cursor.line).slice(0, cursor.ch);
+  const match = lineBeforeCursor.match(/[A-Za-z_][\w$]*(?:\.[A-Za-z_][\w$]*)?\.?$/);
+  const fragment = match ? match[0] : "";
+  const lastDot = fragment.lastIndexOf(".");
+  return {
+    fragment,
+    qualifier: lastDot >= 0 ? fragment.slice(0, lastDot) : "",
+    prefix: lastDot >= 0 ? fragment.slice(lastDot + 1) : fragment,
+    from: { line: cursor.line, ch: cursor.ch - fragment.length },
+    to: cursor,
+  };
+}
+
+function sqlTableAliases(sql) {
+  const aliases = {};
+  const tableNames = new Set();
+  const tablePattern = /\b(?:FROM|JOIN)\s+([A-Za-z_][\w$]*)(?:\s+(?:AS\s+)?([A-Za-z_][\w$]*))?/gi;
+  let match;
+  while ((match = tablePattern.exec(sql))) {
+    const tableName = match[1];
+    const alias = match[2];
+    tableNames.add(tableName.toLowerCase());
+    if (alias && !SQL_KEYWORDS.includes(alias.toUpperCase())) aliases[alias.toLowerCase()] = tableName;
+  }
+  return { aliases, tableNames };
+}
+
+function schemaTable(schema, name) {
+  return schema.tables.find((table) => table.name.toLowerCase() === String(name).toLowerCase()) || null;
+}
+
+function completionItem(text, kind) {
+  return { text, displayText: `${text} · ${kind}`, className: `sql-hint-${kind}` };
+}
+
+function uniqueCompletionItems(items) {
+  const seen = new Set();
+  return items.filter((item) => {
+    const key = item.text.toLowerCase();
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function sqlHint(editor) {
+  if (!state.schema.tables.length) return { list: [], from: editor.getCursor(), to: editor.getCursor() };
+  const cursor = editor.getCursor();
+  const context = sqlIdentifierFragment(editor, cursor);
+  const beforeCursor = textBeforeEditorCursor(editor, cursor);
+  const token = editor.getTokenAt(cursor);
+  if (token.type && /(comment|string)/i.test(token.type)) return { list: [], from: context.from, to: context.to };
+
+  const { aliases, tableNames } = sqlTableAliases(beforeCursor);
+  const qualifiedTable = schemaTable(state.schema, context.qualifier);
+  const aliasTable = aliases[context.qualifier.toLowerCase()];
+  const relatedTable = qualifiedTable || schemaTable(state.schema, aliasTable);
+  const inTableContext = /(?:\b(?:FROM|JOIN)\s+|,\s*)[A-Za-z_\w$]*$/i.test(beforeCursor);
+  let items = [];
+
+  if (inTableContext && !context.qualifier) {
+    items = state.schema.tables.map((table) => completionItem(table.name, table.type === "view" ? "view" : "table"));
+  } else if (relatedTable) {
+    const columns = state.schema.columnsByTable[relatedTable.name] || [];
+    items = columns.map((column) => completionItem(
+      context.qualifier ? `${context.qualifier}.${column}` : column,
+      "column",
+    ));
+  } else {
+    const scopedTables = [...tableNames]
+      .map((name) => schemaTable(state.schema, name))
+      .filter(Boolean);
+    const tables = scopedTables.length ? scopedTables : state.schema.tables;
+    items = tables.flatMap((table) => (state.schema.columnsByTable[table.name] || [])
+      .map((column) => completionItem(column, "column")));
+    Object.entries(aliases).forEach(([alias, tableName]) => {
+      (state.schema.columnsByTable[tableName] || []).forEach((column) => {
+        items.push(completionItem(`${alias}.${column}`, "column"));
+      });
+    });
+  }
+
+  items = uniqueCompletionItems([
+    ...items,
+    ...SQL_KEYWORDS.map((keyword) => completionItem(keyword, "keyword")),
+  ]).filter((item) => {
+    const candidate = context.qualifier ? item.text.split(".").pop() : item.text;
+    return !context.prefix || candidate.toLowerCase().startsWith(context.prefix.toLowerCase());
+  });
+  items.sort((left, right) => {
+    const leftExact = left.text.toLowerCase() === context.fragment.toLowerCase() ? 0 : 1;
+    const rightExact = right.text.toLowerCase() === context.fragment.toLowerCase() ? 0 : 1;
+    return leftExact - rightExact || left.text.localeCompare(right.text);
+  });
+  return { list: items, from: context.from, to: context.to };
+}
+
+function showSqlHints(editor) {
+  if (!window.CodeMirror?.showHint) return;
+  window.CodeMirror.showHint(editor, sqlHint, {
+    completeSingle: false,
+    closeOnUnfocus: false,
+    alignWithWord: true,
+  });
+}
+
 function toggleAnswer() {
   if (!selectedProblem()) return;
   setAnswerVisibility(elements.answerSection.classList.contains("hidden"));
@@ -334,11 +479,18 @@ function createSqlEditor() {
     extraKeys: {
       Tab: "indentMore",
       "Shift-Tab": "indentLess",
+      "Ctrl-Space": showSqlHints,
+      "Cmd-Space": showSqlHints,
       "Ctrl-Enter": () => runCurrentQuery(false),
       "Cmd-Enter": () => runCurrentQuery(false),
     },
   });
   state.editor.setOption("placeholder", elements.sqlEditor.getAttribute("placeholder") || "SELECT ...");
+  state.editor.on("inputRead", (editor, change) => {
+    if (change.origin === "setValue" || change.origin === "complete") return;
+    const input = change.text.join("");
+    if (/[A-Za-z0-9_\.\s]$/.test(input)) showSqlHints(editor);
+  });
 }
 
 function initializeSqlEditor() {
@@ -555,6 +707,7 @@ async function loadData() {
     const bytes = await loadDatabaseBytes(manifest);
     const SQL = await initSqlJs({ locateFile: (file) => `${CDN_BASE}${file}` });
     state.db = new SQL.Database(bytes);
+    state.schema = loadSqlSchema(state.db);
     elements.dataStatus.textContent = "SQLite準備完了";
     elements.dataStatus.classList.add("ready");
     elements.runButton.disabled = false;
