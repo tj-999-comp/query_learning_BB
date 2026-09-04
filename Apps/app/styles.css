@@ -69,6 +69,8 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 8px; backgro
 .favorite-button.active { border-color: #e5b15f; background: #fff8e8; color: #8d5b11; }
 .question-meta { display: flex; gap: 8px; margin: 8px 0 14px; color: var(--muted); font-size: .76rem; }
 .question-meta span { border-radius: 99px; background: #eef1f4; padding: 2px 8px; }
+.problem-navigation { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin: -4px 0 14px; }
+.problem-navigation button:disabled { cursor: not-allowed; opacity: .48; }
 .prompt-box { border-left: 4px solid var(--accent); background: #fff8f5; padding: 11px 14px; margin-bottom: 14px; }
 .prompt-box h3 { color: var(--accent-dark); }
 .prompt-box p { margin-bottom: 0; }

@@ -29,6 +29,9 @@ const elements = {
   questionTitle: document.querySelector("#question-title"),
   questionDifficulty: document.querySelector("#question-difficulty"),
   questionTables: document.querySelector("#question-tables"),
+  previousProblemButton: document.querySelector("#previous-problem-button"),
+  nextProblemButton: document.querySelector("#next-problem-button"),
+  problemPosition: document.querySelector("#problem-position"),
   questionPrompt: document.querySelector("#question-prompt"),
   favoriteButton: document.querySelector("#favorite-button"),
   sqlEditor: document.querySelector("#sql-editor"),
@@ -106,10 +109,10 @@ function difficultyStars(level) {
   return `${"★".repeat(level)}${"☆".repeat(5 - level)}`;
 }
 
-function renderProblemList() {
+function visibleProblems() {
   const progressFilter = elements.progressFilter.value;
   const categoryFilter = elements.categoryFilter.value;
-  const filtered = state.problems.filter((problem) => {
+  return state.problems.filter((problem) => {
     const completed = Boolean(state.progress.completed[problem.id]);
     const favorite = Boolean(state.progress.favorites[problem.id]);
     const progressMatches = progressFilter === "all"
@@ -118,10 +121,24 @@ function renderProblemList() {
       || (progressFilter === "favorites" && favorite);
     return progressMatches && (categoryFilter === "all" || problem.category === categoryFilter);
   });
+}
+
+function updateProblemNavigation() {
+  const visible = visibleProblems();
+  const currentIndex = visible.findIndex((problem) => problem.id === state.selectedId);
+  const hasCurrentProblem = currentIndex >= 0;
+  elements.previousProblemButton.disabled = !hasCurrentProblem || currentIndex === 0;
+  elements.nextProblemButton.disabled = !hasCurrentProblem || currentIndex === visible.length - 1;
+  elements.problemPosition.textContent = hasCurrentProblem ? `${currentIndex + 1} / ${visible.length}` : "";
+}
+
+function renderProblemList() {
+  const filtered = visibleProblems();
 
   elements.problemList.innerHTML = "";
   if (!filtered.length) {
     elements.problemList.innerHTML = '<p class="muted">該当する問題はありません。</p>';
+    updateProblemNavigation();
     return;
   }
   filtered.forEach((problem, index) => {
@@ -138,6 +155,7 @@ function renderProblemList() {
     button.addEventListener("click", () => selectProblem(problem.id));
     elements.problemList.appendChild(button);
   });
+  updateProblemNavigation();
 }
 
 function populateCategoryFilter() {
@@ -172,6 +190,13 @@ function selectProblem(problemId) {
   updateFavoriteButton();
   renderProblemList();
   elements.sqlEditor.focus();
+}
+
+function moveToRelativeProblem(offset) {
+  const visible = visibleProblems();
+  const currentIndex = visible.findIndex((problem) => problem.id === state.selectedId);
+  const target = visible[currentIndex + offset];
+  if (target) selectProblem(target.id);
 }
 
 function updateFavoriteButton() {
@@ -375,6 +400,8 @@ async function loadData() {
 
 elements.progressFilter.addEventListener("change", renderProblemList);
 elements.categoryFilter.addEventListener("change", renderProblemList);
+elements.previousProblemButton.addEventListener("click", () => moveToRelativeProblem(-1));
+elements.nextProblemButton.addEventListener("click", () => moveToRelativeProblem(1));
 elements.progressDetailButton.addEventListener("click", openProgressModal);
 elements.progressModalClose.addEventListener("click", closeProgressModal);
 elements.progressModal.addEventListener("click", (event) => {
