@@ -20,6 +20,9 @@ button { cursor: pointer; }
 .site-header { background: var(--navy); color: #fff; padding: 14px 24px 16px; }
 .header-inner, .page-shell { max-width: 1240px; margin: 0 auto; }
 .header-inner { display: flex; justify-content: space-between; gap: 24px; align-items: flex-end; }
+.header-brand { display: flex; align-items: center; gap: 12px; }
+.menu-button { display: inline-grid; width: 38px; height: 38px; place-items: center; border: 1px solid rgba(255,255,255,.5); border-radius: 8px; background: transparent; color: #fff; font-size: 1.3rem; line-height: 1; }
+.menu-button:hover, .menu-button:focus-visible { border-color: #fff; background: rgba(255,255,255,.12); }
 h1, h2, h3, p { margin-top: 0; }
 h1 { margin-bottom: 0; font-size: clamp(1.5rem, 2.5vw, 2.1rem); letter-spacing: .02em; }
 h2 { margin-bottom: 0; font-size: 1.45rem; }
@@ -41,8 +44,16 @@ h3 { font-size: 1rem; margin-bottom: 8px; }
 .stat-card span, .stat-card small { display: inline; color: var(--muted); font-size: .74rem; }
 .stat-card strong { display: inline-block; margin: 0 5px 0 0; color: var(--navy); font-size: 1.45rem; line-height: 1.15; }
 .stat-card small { white-space: nowrap; }
-.content-grid { display: grid; grid-template-columns: minmax(260px, 320px) minmax(0, 1fr); gap: 16px; align-items: start; }
-.problem-panel { padding: 15px; position: sticky; top: 12px; }
+.content-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; align-items: start; }
+.problem-drawer { position: fixed; inset: 0 auto 0 0; z-index: 30; width: min(88vw, 360px); padding: 18px 15px; overflow-y: auto; border-right: 1px solid var(--line); background: var(--card); box-shadow: 18px 0 45px rgba(23,32,42,.2); transform: translateX(-105%); transition: transform .2s ease; }
+.problem-drawer.open { transform: translateX(0); }
+.drawer-overlay { position: fixed; inset: 0; z-index: 20; background: rgba(23,32,42,.48); opacity: 0; pointer-events: none; transition: opacity .2s ease; }
+.drawer-overlay.open { opacity: 1; pointer-events: auto; }
+.drawer-heading { display: flex; justify-content: space-between; align-items: start; gap: 16px; margin-bottom: 12px; }
+.drawer-heading h2 { font-size: 1.25rem; }
+.drawer-actions { display: flex; align-items: center; gap: 8px; }
+.drawer-close { width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 50%; background: #fff; color: var(--ink); font-size: 1.4rem; line-height: 1; }
+.problem-drawer .problem-list { max-height: calc(100vh - 190px); }
 .filters { display: grid; gap: 7px; margin-bottom: 10px; }
 .filters label { display: grid; gap: 4px; color: var(--muted); font-size: .78rem; font-weight: 700; }
 select { width: 100%; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink); padding: 6px 8px; }
@@ -97,6 +108,7 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 8px; backgro
 .answer-section p { margin-bottom: 0; }
 .hidden { display: none !important; }
 .modal-open { overflow: hidden; }
+.drawer-open { overflow: hidden; }
 .modal { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center; padding: 20px; }
 .modal-backdrop { position: absolute; inset: 0; background: rgba(23,32,42,.48); }
 .modal-panel { position: relative; width: min(100%, 560px); padding: 20px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); box-shadow: 0 18px 50px rgba(23,32,42,.22); }
@@ -109,16 +121,16 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 8px; backgro
   .workspace { padding-top: 10px; }
 }
 @media (max-width: 720px) {
-  .content-grid { grid-template-columns: 1fr; }
-  .problem-panel { position: static; }
+  .problem-drawer { width: min(90vw, 360px); }
   .problem-list { max-height: 320px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 600px) {
   .site-header { padding: 12px 18px 14px; }
   .header-inner, .section-heading, .question-topline { align-items: flex-start; flex-direction: column; }
+  .header-brand { width: 100%; }
   .status-chip { align-self: stretch; text-align: center; }
   .page-shell { padding: 14px 12px 30px; }
-  .problem-panel, .workspace { border-radius: 12px; padding: 16px; }
+  .workspace { border-radius: 12px; padding: 16px; }
   .stats-grid { gap: 7px; }
   .stat-card { display: flex; flex-wrap: wrap; align-content: center; column-gap: 3px; padding: 12px 10px; }
   .stat-card small { white-space: normal; }

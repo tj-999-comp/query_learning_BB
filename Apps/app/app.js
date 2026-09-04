@@ -11,6 +11,10 @@ const state = {
 };
 
 const elements = {
+  menuButton: document.querySelector("#menu-button"),
+  drawerOverlay: document.querySelector("#drawer-overlay"),
+  problemDrawer: document.querySelector("#problem-drawer"),
+  problemDrawerClose: document.querySelector("#problem-drawer-close"),
   dataStatus: document.querySelector("#data-status"),
   problemList: document.querySelector("#problem-list"),
   progressFilter: document.querySelector("#progress-filter"),
@@ -74,6 +78,31 @@ function selectedProblem() {
 }
 
 let previousFocus = null;
+let previousDrawerFocus = null;
+
+function openProblemDrawer() {
+  previousDrawerFocus = document.activeElement;
+  elements.problemDrawer.classList.add("open");
+  elements.drawerOverlay.classList.add("open");
+  elements.problemDrawer.setAttribute("aria-hidden", "false");
+  elements.drawerOverlay.setAttribute("aria-hidden", "false");
+  elements.menuButton.setAttribute("aria-expanded", "true");
+  elements.menuButton.setAttribute("aria-label", "問題一覧を閉じる");
+  document.body.classList.add("drawer-open");
+  elements.problemDrawerClose.focus();
+}
+
+function closeProblemDrawer({ restoreFocus = true } = {}) {
+  elements.problemDrawer.classList.remove("open");
+  elements.drawerOverlay.classList.remove("open");
+  elements.problemDrawer.setAttribute("aria-hidden", "true");
+  elements.drawerOverlay.setAttribute("aria-hidden", "true");
+  elements.menuButton.setAttribute("aria-expanded", "false");
+  elements.menuButton.setAttribute("aria-label", "問題一覧を開く");
+  document.body.classList.remove("drawer-open");
+  if (restoreFocus && previousDrawerFocus instanceof HTMLElement) previousDrawerFocus.focus();
+  previousDrawerFocus = null;
+}
 
 function openProgressModal() {
   previousFocus = document.activeElement;
@@ -189,6 +218,7 @@ function selectProblem(problemId) {
   elements.questionExplanation.textContent = problem.explanation;
   updateFavoriteButton();
   renderProblemList();
+  closeProblemDrawer({ restoreFocus: false });
   elements.sqlEditor.focus();
 }
 
@@ -402,13 +432,21 @@ elements.progressFilter.addEventListener("change", renderProblemList);
 elements.categoryFilter.addEventListener("change", renderProblemList);
 elements.previousProblemButton.addEventListener("click", () => moveToRelativeProblem(-1));
 elements.nextProblemButton.addEventListener("click", () => moveToRelativeProblem(1));
+elements.menuButton.addEventListener("click", () => {
+  if (elements.problemDrawer.classList.contains("open")) closeProblemDrawer();
+  else openProblemDrawer();
+});
+elements.problemDrawerClose.addEventListener("click", () => closeProblemDrawer());
+elements.drawerOverlay.addEventListener("click", closeProblemDrawer);
 elements.progressDetailButton.addEventListener("click", openProgressModal);
 elements.progressModalClose.addEventListener("click", closeProgressModal);
 elements.progressModal.addEventListener("click", (event) => {
   if (event.target.matches("[data-modal-close]")) closeProgressModal();
 });
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && !elements.progressModal.classList.contains("hidden")) closeProgressModal();
+  if (event.key !== "Escape") return;
+  if (!elements.progressModal.classList.contains("hidden")) closeProgressModal();
+  if (elements.problemDrawer.classList.contains("open")) closeProblemDrawer();
 });
 elements.favoriteButton.addEventListener("click", () => {
   if (!state.selectedId) return;
