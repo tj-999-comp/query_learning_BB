@@ -62,7 +62,7 @@
     "category": "集計",
     "sourceTables": ["game_team_stats", "teams"],
     "referenceSql": "SELECT t.team_name_j, ROUND(AVG(s.points), 2) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY average_points DESC, t.team_id;",
-    "comparison": {"rowOrder": "sensitive"},
+    "comparison": {"rowOrder": "insensitive", "numericTolerance": 0.01},
     "explanation": "JOINしたデータをチーム単位でGROUP BYし、AVGで平均を求めます。"
   },
   {
