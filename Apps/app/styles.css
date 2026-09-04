@@ -85,6 +85,8 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 8px; backgro
 .prompt-box { border-left: 4px solid var(--accent); background: #fff8f5; padding: 11px 14px; margin-bottom: 14px; }
 .prompt-box h3 { color: var(--accent-dark); }
 .prompt-box p { margin-bottom: 0; }
+.workspace-panes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.query-pane, .result-pane { min-width: 0; border: 1px solid var(--line); border-radius: 10px; padding: 13px; background: #fcfdfc; }
 .editor-section > label { display: block; margin-bottom: 5px; font-weight: 800; }
 #sql-editor { width: 100%; min-height: 128px; resize: vertical; border: 1px solid #cbd3da; border-radius: 10px; background: #17202a; color: #e8f0f7; padding: 12px; font: .9rem/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; tab-size: 2; }
 #sql-editor:focus { outline: 3px solid rgba(229,93,61,.2); border-color: var(--accent); }
@@ -99,6 +101,8 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 8px; backgro
 .feedback.error { color: #a33d2a; background: #fff0ec !important; }
 .result-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
 .result-section, .answer-section { border-top: 1px solid var(--line); padding-top: 13px; margin-top: 13px; }
+.result-pane .result-section { border-top: 0; padding-top: 0; margin-top: 0; }
+.result-pane .feedback { margin-bottom: 12px; }
 .result-output { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
 .result-output table { width: 100%; border-collapse: collapse; font-size: .83rem; }
 .result-output th, .result-output td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
@@ -119,6 +123,9 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 8px; backgro
 .site-footer { border-top: 1px solid var(--line); padding: 20px 24px 30px; text-align: center; color: var(--muted); font-size: .78rem; }
 @media (min-width: 721px) and (max-width: 1100px) {
   .workspace { padding-top: 10px; }
+}
+@media (max-width: 860px) {
+  .workspace-panes { grid-template-columns: 1fr; }
 }
 @media (max-width: 720px) {
   .problem-drawer { width: min(90vw, 360px); }

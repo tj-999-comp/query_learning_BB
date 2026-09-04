@@ -1,0 +1,6 @@
+schema_version: 1
+title: 'Issue #30 エディタと実行結果の2ペイン化'
+date: "2026-09-04"
+project_id: query_learning_BB
+tags: [codex, v0.2.0, ui, layout, responsive]
+publish: false
