@@ -73,7 +73,7 @@
     "category": "集計",
     "sourceTables": ["player_game_stats", "players"],
     "referenceSql": "SELECT p.player_name_j, SUM(s.points) AS total_points FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.points IS NOT NULL GROUP BY p.player_id, p.player_name_j ORDER BY total_points DESC, p.player_id LIMIT 10;",
-    "comparison": {"rowOrder": "sensitive"},
+    "comparison": {"rowOrder": "insensitive"},
     "explanation": "選手マスタと試合別スタッツを結合し、選手単位でSUMします。"
   },
   {
@@ -84,7 +84,7 @@
     "category": "集計",
     "sourceTables": ["player_game_stats", "players"],
     "referenceSql": "SELECT p.player_name_j, COUNT(*) AS game_count FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 GROUP BY p.player_id, p.player_name_j ORDER BY game_count DESC, p.player_id LIMIT 10;",
-    "comparison": {"rowOrder": "sensitive"},
+    "comparison": {"rowOrder": "insensitive"},
     "explanation": "出場フラグで絞り込んだ後、選手単位でCOUNTします。"
   },
   {
@@ -106,7 +106,7 @@
     "category": "テーブル結合",
     "sourceTables": ["player_game_stats", "players"],
     "referenceSql": "SELECT p.player_name_j, s.points, s.schedule_key FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_starter = 1 AND s.points >= 20 ORDER BY s.points DESC, s.schedule_key, p.player_id;",
-    "comparison": {"rowOrder": "sensitive"},
+    "comparison": {"rowOrder": "insensitive"},
     "explanation": "先発フラグと得点の2つの条件で絞り込み、選手名をJOINで取得します。"
   }
 ]
