@@ -1,0 +1,6 @@
+schema_version: 1
+title: '#11 Basic認証付き公開環境の最終スモークテスト'
+date: "2026-09-04"
+project_id: query_learning_BB
+tags: [codex, mvp, hosting, cloudflare-pages, basic-auth, smoke-test]
+publish: false
