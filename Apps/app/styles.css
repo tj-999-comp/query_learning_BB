@@ -88,7 +88,7 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 8px; backgro
 .workspace-panes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
 .query-pane, .result-pane { min-width: 0; border: 1px solid var(--line); border-radius: 10px; padding: 13px; background: #fcfdfc; }
 .editor-section > label { display: block; margin-bottom: 5px; font-weight: 800; }
-#sql-editor { width: 100%; min-height: 128px; resize: vertical; border: 1px solid #cbd3da; border-radius: 10px; background: #17202a; color: #e8f0f7; padding: 12px; font: .9rem/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; tab-size: 2; }
+#sql-editor { width: 100%; min-height: 280px; resize: vertical; border: 1px solid #cbd3da; border-radius: 10px; background: #17202a; color: #e8f0f7; padding: 12px; font: .9rem/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; tab-size: 2; }
 #sql-editor:focus { outline: 3px solid rgba(229,93,61,.2); border-color: var(--accent); }
 .editor-actions { display: flex; justify-content: flex-end; gap: 9px; margin: 7px 0 11px; }
 .primary-button, .secondary-button { border-radius: 8px; padding: 8px 14px; font-weight: 800; }
@@ -103,7 +103,7 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 8px; backgro
 .result-section, .answer-section { border-top: 1px solid var(--line); padding-top: 13px; margin-top: 13px; }
 .result-pane .result-section { border-top: 0; padding-top: 0; margin-top: 0; }
 .result-pane .feedback { margin-bottom: 12px; }
-.result-output { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
+.result-output { max-height: min(42vh, 420px); overflow: auto; border: 1px solid var(--line); border-radius: 8px; }
 .result-output table { width: 100%; border-collapse: collapse; font-size: .83rem; }
 .result-output th, .result-output td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
 .result-output th { background: #f4f6f5; color: var(--navy); }

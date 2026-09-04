@@ -371,7 +371,7 @@ function runCurrentQuery(submit) {
     renderResult(actual);
     if (!submit) {
       elements.feedback.className = "feedback";
-      elements.feedback.textContent = "実行結果を確認してください。問題への回答を確定する場合は「正誤判定」を押します。";
+      elements.feedback.textContent = "";
       return;
     }
     const expected = execute(problem.referenceSql);
