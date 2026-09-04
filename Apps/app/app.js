@@ -14,6 +14,9 @@ const elements = {
   problemList: document.querySelector("#problem-list"),
   progressFilter: document.querySelector("#progress-filter"),
   categoryFilter: document.querySelector("#category-filter"),
+  progressDetailButton: document.querySelector("#progress-detail-button"),
+  progressModal: document.querySelector("#progress-modal"),
+  progressModalClose: document.querySelector("#progress-modal-close"),
   correctCount: document.querySelector("#correct-count"),
   problemCount: document.querySelector("#problem-count"),
   completionRate: document.querySelector("#completion-rate"),
@@ -57,6 +60,24 @@ function saveProgress() {
 
 function selectedProblem() {
   return state.problems.find((problem) => problem.id === state.selectedId) || null;
+}
+
+let previousFocus = null;
+
+function openProgressModal() {
+  previousFocus = document.activeElement;
+  elements.progressModal.classList.remove("hidden");
+  elements.progressModal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
+  elements.progressModalClose.focus();
+}
+
+function closeProgressModal() {
+  elements.progressModal.classList.add("hidden");
+  elements.progressModal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("modal-open");
+  if (previousFocus instanceof HTMLElement) previousFocus.focus();
+  previousFocus = null;
 }
 
 function renderProgress() {
@@ -337,6 +358,14 @@ async function loadData() {
 
 elements.progressFilter.addEventListener("change", renderProblemList);
 elements.categoryFilter.addEventListener("change", renderProblemList);
+elements.progressDetailButton.addEventListener("click", openProgressModal);
+elements.progressModalClose.addEventListener("click", closeProgressModal);
+elements.progressModal.addEventListener("click", (event) => {
+  if (event.target.matches("[data-modal-close]")) closeProgressModal();
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !elements.progressModal.classList.contains("hidden")) closeProgressModal();
+});
 elements.favoriteButton.addEventListener("click", () => {
   if (!state.selectedId) return;
   state.progress.favorites[state.selectedId] = !state.progress.favorites[state.selectedId];

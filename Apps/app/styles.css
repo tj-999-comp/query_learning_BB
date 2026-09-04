@@ -17,11 +17,11 @@
 body { margin: 0; background: var(--paper); color: var(--ink); line-height: 1.65; }
 button, select, textarea { font: inherit; }
 button { cursor: pointer; }
-.site-header { background: var(--navy); color: #fff; padding: 18px 24px 20px; }
+.site-header { background: var(--navy); color: #fff; padding: 14px 24px 16px; }
 .header-inner, .page-shell { max-width: 1240px; margin: 0 auto; }
 .header-inner { display: flex; justify-content: space-between; gap: 24px; align-items: flex-end; }
 h1, h2, h3, p { margin-top: 0; }
-h1 { margin-bottom: 2px; font-size: clamp(1.7rem, 3vw, 2.5rem); letter-spacing: .02em; }
+h1 { margin-bottom: 0; font-size: clamp(1.5rem, 2.5vw, 2.1rem); letter-spacing: .02em; }
 h2 { margin-bottom: 0; font-size: 1.45rem; }
 h3 { font-size: 1rem; margin-bottom: 8px; }
 .subtitle { margin-bottom: 0; color: #dbe4ed; font-size: .9rem; }
@@ -30,10 +30,8 @@ h3 { font-size: 1rem; margin-bottom: 8px; }
 .status-chip { border: 1px solid rgba(255,255,255,.35); border-radius: 99px; padding: 5px 11px; color: #e6eef5; font-size: .74rem; white-space: nowrap; }
 .status-chip.ready { border-color: #75d2ad; color: #b8f2d9; }
 .status-chip.error { border-color: #ffad9a; color: #ffd1c8; }
-.page-shell { padding: 16px 24px 40px; }
+.page-shell { padding: 18px 24px 40px; }
 .dashboard, .problem-panel, .workspace { background: var(--card); border: 1px solid var(--line); border-radius: 14px; }
-.dashboard { padding: 13px 18px; margin-bottom: 16px; }
-.dashboard h2 { font-size: 1.15rem; }
 .section-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 10px; }
 .section-heading.compact { margin-bottom: 10px; }
 .muted { color: var(--muted); font-size: .8rem; }
@@ -63,6 +61,7 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 8px; backgro
 .empty-state h2 { color: var(--ink); margin-bottom: 10px; }
 .question-topline { display: flex; justify-content: space-between; align-items: start; gap: 20px; }
 .question-topline h2 { max-width: 680px; }
+.detail-button { padding: 6px 12px; white-space: nowrap; }
 .favorite-button { border: 1px solid var(--line); border-radius: 99px; background: #fff; color: var(--ink); padding: 7px 12px; white-space: nowrap; }
 .favorite-button.active { border-color: #e5b15f; background: #fff8e8; color: #8d5b11; }
 .question-meta { display: flex; gap: 8px; margin: 8px 0 14px; color: var(--muted); font-size: .76rem; }
@@ -92,6 +91,14 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 8px; backgro
 .answer-section pre { overflow-x: auto; border-radius: 8px; background: #17202a; color: #e8f0f7; padding: 14px; font-size: .82rem; }
 .answer-section p { margin-bottom: 0; }
 .hidden { display: none !important; }
+.modal-open { overflow: hidden; }
+.modal { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center; padding: 20px; }
+.modal-backdrop { position: absolute; inset: 0; background: rgba(23,32,42,.48); }
+.modal-panel { position: relative; width: min(100%, 560px); padding: 20px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); box-shadow: 0 18px 50px rgba(23,32,42,.22); }
+.modal-heading { display: flex; justify-content: space-between; align-items: start; gap: 16px; margin-bottom: 8px; }
+.modal-heading h2 { font-size: 1.2rem; }
+.modal-close { width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 50%; background: #fff; color: var(--ink); font-size: 1.4rem; line-height: 1; }
+.modal-panel > .muted { margin-bottom: 14px; }
 .site-footer { border-top: 1px solid var(--line); padding: 20px 24px 30px; text-align: center; color: var(--muted); font-size: .78rem; }
 @media (min-width: 721px) and (max-width: 1100px) {
   .workspace { padding-top: 10px; }
@@ -102,11 +109,11 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 8px; backgro
   .problem-list { max-height: 320px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 600px) {
-  .site-header { padding: 16px 18px 18px; }
+  .site-header { padding: 12px 18px 14px; }
   .header-inner, .section-heading, .question-topline { align-items: flex-start; flex-direction: column; }
   .status-chip { align-self: stretch; text-align: center; }
   .page-shell { padding: 14px 12px 30px; }
-  .dashboard, .problem-panel, .workspace { border-radius: 12px; padding: 16px; }
+  .problem-panel, .workspace { border-radius: 12px; padding: 16px; }
   .stats-grid { gap: 7px; }
   .stat-card { display: flex; flex-wrap: wrap; align-content: center; column-gap: 3px; padding: 12px 10px; }
   .stat-card small { white-space: normal; }
@@ -116,4 +123,7 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 8px; backgro
   .empty-state { min-height: 420px; }
   .editor-actions { flex-direction: column-reverse; }
   .primary-button, .secondary-button { width: 100%; }
+  .detail-button { width: auto; }
+  .modal { padding: 12px; }
+  .modal-panel { padding: 16px; }
 }
