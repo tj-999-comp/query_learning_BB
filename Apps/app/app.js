@@ -1,6 +1,7 @@
 const DATA_ROOT = "../data";
-// The 100-question bank starts with a fresh progress set.
+// The 100-question bank starts with a fresh answer history.
 const STORAGE_KEY = "bleague-sql-learning-progress-v2";
+const LEGACY_STORAGE_KEY = "bleague-sql-learning-progress-v1";
 const CDN_BASE = "https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/";
 const SQL_KEYWORDS = [
   "SELECT", "FROM", "WHERE", "GROUP BY", "HAVING", "ORDER BY", "LIMIT", "OFFSET",
@@ -62,10 +63,14 @@ const elements = {
 
 function loadProgress() {
   try {
-    const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+    const currentRaw = localStorage.getItem(STORAGE_KEY);
+    const parsed = JSON.parse(currentRaw || "{}");
+    const legacy = currentRaw ? {} : JSON.parse(localStorage.getItem(LEGACY_STORAGE_KEY) || "{}");
     return {
-      completed: parsed.completed && typeof parsed.completed === "object" ? parsed.completed : {},
-      favorites: parsed.favorites && typeof parsed.favorites === "object" ? parsed.favorites : {},
+      completed: currentRaw && parsed.completed && typeof parsed.completed === "object" ? parsed.completed : {},
+      favorites: parsed.favorites && typeof parsed.favorites === "object"
+        ? parsed.favorites
+        : legacy.favorites && typeof legacy.favorites === "object" ? legacy.favorites : {},
     };
   } catch {
     storageAvailable = false;
