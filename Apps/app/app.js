@@ -266,6 +266,7 @@ function selectProblem(problemId) {
   state.selectedId = problemId;
   elements.emptyState.classList.add("hidden");
   elements.questionView.classList.remove("hidden");
+  if (state.editor) state.editor.refresh();
   elements.questionCategory.textContent = problem.category;
   elements.questionTitle.textContent = `${problemNumber(problem)} ${problem.title}`;
   elements.questionDifficulty.textContent = `難易度 ${difficultyStars(problem.difficulty)}`;
