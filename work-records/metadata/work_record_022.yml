@@ -1,0 +1,6 @@
+schema_version: 1
+title: 'Issue #43 解答例表示のトグル化と整形'
+date: "2026-09-04"
+project_id: query_learning_BB
+tags: [codex, v0.2.2, issue-43, ui, answer-example, work-record]
+publish: false
