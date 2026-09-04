@@ -322,7 +322,7 @@ function createSqlEditor() {
   state.editor = window.CodeMirror.fromTextArea(elements.sqlEditor, {
     mode: "text/x-sql",
     theme: "default",
-    inputStyle: "contenteditable",
+    inputStyle: "textarea",
     lineNumbers: true,
     lineWrapping: true,
     matchBrackets: true,
