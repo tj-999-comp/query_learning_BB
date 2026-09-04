@@ -69,24 +69,30 @@
               <button id="next-problem-button" class="secondary-button" type="button">次の問題 →</button>
             </div>
             <div class="prompt-box"><h3>問題</h3><p id="question-prompt"></p></div>
-            <div class="editor-section">
-              <label for="sql-editor">SQL</label>
-              <textarea id="sql-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="SELECT ..."></textarea>
-              <div class="editor-actions">
-                <button id="run-button" class="secondary-button" type="button">実行する</button>
-                <button id="submit-button" class="primary-button" type="button">正誤判定</button>
-              </div>
+            <div class="workspace-panes">
+              <section class="query-pane" aria-labelledby="sql-editor-label">
+                <div class="editor-section">
+                  <label id="sql-editor-label" for="sql-editor">SQL</label>
+                  <textarea id="sql-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="SELECT ..."></textarea>
+                  <div class="editor-actions">
+                    <button id="run-button" class="secondary-button" type="button">実行する</button>
+                    <button id="submit-button" class="primary-button" type="button">正誤判定</button>
+                  </div>
+                </div>
+              </section>
+              <section class="result-pane" aria-labelledby="result-title">
+                <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+                <section class="result-section" aria-labelledby="result-title">
+                  <div class="result-heading"><h3 id="result-title">実行結果</h3><span id="result-summary" class="muted"></span></div>
+                  <div id="result-output" class="result-output"><p class="muted">SQLを実行すると結果が表示されます。</p></div>
+                </section>
+                <section id="answer-section" class="answer-section hidden" aria-labelledby="answer-title">
+                  <h3 id="answer-title">参考SQLと解説</h3>
+                  <pre id="reference-sql"></pre>
+                  <p id="question-explanation"></p>
+                </section>
+              </section>
             </div>
-            <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
-            <section class="result-section" aria-labelledby="result-title">
-              <div class="result-heading"><h3 id="result-title">実行結果</h3><span id="result-summary" class="muted"></span></div>
-              <div id="result-output" class="result-output"><p class="muted">SQLを実行すると結果が表示されます。</p></div>
-            </section>
-            <section id="answer-section" class="answer-section hidden" aria-labelledby="answer-title">
-              <h3 id="answer-title">参考SQLと解説</h3>
-              <pre id="reference-sql"></pre>
-              <p id="question-explanation"></p>
-            </section>
           </article>
         </section>
       </div>
