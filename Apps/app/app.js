@@ -35,7 +35,6 @@ const elements = {
   questionTables: document.querySelector("#question-tables"),
   previousProblemButton: document.querySelector("#previous-problem-button"),
   nextProblemButton: document.querySelector("#next-problem-button"),
-  problemPosition: document.querySelector("#problem-position"),
   questionPrompt: document.querySelector("#question-prompt"),
   favoriteButton: document.querySelector("#favorite-button"),
   sqlEditor: document.querySelector("#sql-editor"),
@@ -75,6 +74,11 @@ function saveProgress() {
 
 function selectedProblem() {
   return state.problems.find((problem) => problem.id === state.selectedId) || null;
+}
+
+function problemNumber(problem) {
+  const index = state.problems.findIndex((item) => item.id === problem.id);
+  return `Q${String(index + 1).padStart(2, "0")}`;
 }
 
 let previousFocus = null;
@@ -158,7 +162,6 @@ function updateProblemNavigation() {
   const hasCurrentProblem = currentIndex >= 0;
   elements.previousProblemButton.disabled = !hasCurrentProblem || currentIndex === 0;
   elements.nextProblemButton.disabled = !hasCurrentProblem || currentIndex === visible.length - 1;
-  elements.problemPosition.textContent = hasCurrentProblem ? `${currentIndex + 1} / ${visible.length}` : "";
 }
 
 function renderProblemList() {
@@ -170,17 +173,21 @@ function renderProblemList() {
     updateProblemNavigation();
     return;
   }
-  filtered.forEach((problem, index) => {
+  filtered.forEach((problem) => {
     const completed = Boolean(state.progress.completed[problem.id]);
+    const favorite = Boolean(state.progress.favorites[problem.id]);
     const button = document.createElement("button");
     button.type = "button";
     button.className = `problem-card${problem.id === state.selectedId ? " selected" : ""}`;
-    button.setAttribute("aria-label", `${problem.title}を開く`);
+    button.setAttribute("aria-label", `${problemNumber(problem)} ${problem.title}を開く`);
     button.innerHTML = `
-      <div class="problem-card-top"><span class="problem-number">Q${String(state.problems.indexOf(problem) + 1).padStart(2, "0")}</span>
-        <span class="completion-icon ${completed ? "completed" : "incomplete"}" role="img" aria-label="${completed ? "達成済み" : "未達成"}" title="${completed ? "達成済み" : "未達成"}">✓</span></div>
+      <div class="problem-card-top"><span class="problem-number">${problemNumber(problem)}</span>
+        <span class="problem-card-status">
+          <span class="completion-icon ${completed ? "completed" : "incomplete"}" role="img" aria-label="${completed ? "達成済み" : "未達成"}" title="${completed ? "達成済み" : "未達成"}">✓</span>
+          <span class="drawer-favorite ${favorite ? "active" : "inactive"}" role="img" aria-label="${favorite ? "お気に入り" : "お気に入りではありません"}" title="${favorite ? "お気に入り" : "お気に入りではありません"}">${favorite ? "★" : "☆"}</span>
+        </span></div>
       <h3>${escapeHtml(problem.title)}</h3>
-      <div class="problem-card-meta"><span class="star">${difficultyStars(problem.difficulty)}</span><span class="tag">${escapeHtml(problem.category)}</span>${state.progress.favorites[problem.id] ? '<span class="star">お気に入り</span>' : ""}</div>`;
+      <div class="problem-card-meta"><span class="star">${difficultyStars(problem.difficulty)}</span><span class="tag">${escapeHtml(problem.category)}</span></div>`;
     button.addEventListener("click", () => selectProblem(problem.id));
     elements.problemList.appendChild(button);
   });
@@ -204,7 +211,7 @@ function selectProblem(problemId) {
   elements.emptyState.classList.add("hidden");
   elements.questionView.classList.remove("hidden");
   elements.questionCategory.textContent = problem.category;
-  elements.questionTitle.textContent = problem.title;
+  elements.questionTitle.textContent = `${problemNumber(problem)} ${problem.title}`;
   elements.questionDifficulty.textContent = `難易度 ${difficultyStars(problem.difficulty)}`;
   elements.questionTables.textContent = `使用テーブル: ${problem.sourceTables.join(", ")}`;
   elements.questionPrompt.textContent = problem.prompt;
@@ -233,7 +240,10 @@ function updateFavoriteButton() {
   const isFavorite = Boolean(state.progress.favorites[state.selectedId]);
   elements.favoriteButton.classList.toggle("active", isFavorite);
   elements.favoriteButton.setAttribute("aria-pressed", String(isFavorite));
-  elements.favoriteButton.textContent = isFavorite ? "★ お気に入り済み" : "☆ お気に入り";
+  const label = isFavorite ? "お気に入りを解除" : "お気に入りに追加";
+  elements.favoriteButton.setAttribute("aria-label", label);
+  elements.favoriteButton.setAttribute("title", label);
+  elements.favoriteButton.textContent = isFavorite ? "★" : "☆";
 }
 
 function stripSqlComments(sql) {

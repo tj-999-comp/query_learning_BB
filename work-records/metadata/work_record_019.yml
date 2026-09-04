@@ -1,0 +1,6 @@
+schema_version: 1
+title: 'Issue #41 問題画面の情報配置と操作性改善'
+date: "2026-09-04"
+project_id: query_learning_BB
+tags: [codex, v0.2.1, ui, favorite, responsive, work-record]
+publish: false
