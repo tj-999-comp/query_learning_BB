@@ -1,5 +1,6 @@
 const DATA_ROOT = "../data";
-const STORAGE_KEY = "bleague-sql-learning-progress-v1";
+// The 100-question bank starts with a fresh progress set.
+const STORAGE_KEY = "bleague-sql-learning-progress-v2";
 const CDN_BASE = "https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/";
 const SQL_KEYWORDS = [
   "SELECT", "FROM", "WHERE", "GROUP BY", "HAVING", "ORDER BY", "LIMIT", "OFFSET",
