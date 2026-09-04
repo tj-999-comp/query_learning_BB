@@ -125,13 +125,14 @@ function renderProblemList() {
     return;
   }
   filtered.forEach((problem, index) => {
+    const completed = Boolean(state.progress.completed[problem.id]);
     const button = document.createElement("button");
     button.type = "button";
     button.className = `problem-card${problem.id === state.selectedId ? " selected" : ""}`;
     button.setAttribute("aria-label", `${problem.title}を開く`);
     button.innerHTML = `
       <div class="problem-card-top"><span class="problem-number">Q${String(state.problems.indexOf(problem) + 1).padStart(2, "0")}</span>
-        <span class="${state.progress.completed[problem.id] ? "check" : ""}">${state.progress.completed[problem.id] ? "✓ 達成" : "未達成"}</span></div>
+        <span class="completion-icon ${completed ? "completed" : "incomplete"}" role="img" aria-label="${completed ? "達成済み" : "未達成"}" title="${completed ? "達成済み" : "未達成"}">✓</span></div>
       <h3>${escapeHtml(problem.title)}</h3>
       <div class="problem-card-meta"><span class="star">${difficultyStars(problem.difficulty)}</span><span class="tag">${escapeHtml(problem.category)}</span>${state.progress.favorites[problem.id] ? '<span class="star">お気に入り</span>' : ""}</div>`;
     button.addEventListener("click", () => selectProblem(problem.id));

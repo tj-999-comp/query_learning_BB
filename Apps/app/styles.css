@@ -55,7 +55,9 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 8px; backgro
 .problem-card h3 { margin: 2px 0 4px; font-size: .9rem; }
 .problem-card-meta { display: flex; gap: 7px; flex-wrap: wrap; color: var(--muted); font-size: .75rem; }
 .tag { border-radius: 99px; background: #eef1f4; padding: 1px 7px; }
-.check { color: var(--success); font-weight: 800; }
+.completion-icon { display: inline-grid; flex: 0 0 1.35rem; width: 1.35rem; height: 1.35rem; place-items: center; border-radius: 50%; color: #fff; font-size: .8rem; font-weight: 900; line-height: 1; }
+.completion-icon.incomplete { background: #aeb7c0; }
+.completion-icon.completed { background: var(--success); }
 .star { color: var(--warning); letter-spacing: .06em; }
 .workspace { min-height: 560px; padding: clamp(14px, 2vw, 20px); }
 .empty-state { min-height: 580px; display: grid; place-content: center; text-align: center; color: var(--muted); }
