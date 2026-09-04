@@ -11,37 +11,20 @@
     <header class="site-header">
       <div class="header-inner">
         <div>
-          <p class="eyebrow">SQL PRACTICE NOTEBOOK</p>
           <h1>SQL練習帳</h1>
-          <p class="subtitle">Bリーグのスタッツで、書いて・試して・振り返る。</p>
         </div>
         <div id="data-status" class="status-chip" role="status">データベースを読み込み中…</div>
       </div>
     </header>
 
     <main class="page-shell">
-      <section class="dashboard" aria-labelledby="dashboard-title">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">YOUR PROGRESS</p>
-            <h2 id="dashboard-title">学習情報</h2>
-          </div>
-          <p class="muted">進捗とお気に入りは、このブラウザに保存されます。</p>
-        </div>
-        <div class="stats-grid">
-          <div class="stat-card"><span>正解数</span><strong id="correct-count">0</strong><small>/ <span id="problem-count">0</span> 問</small></div>
-          <div class="stat-card"><span>達成率</span><strong id="completion-rate">0%</strong><small>問題単位</small></div>
-          <div class="stat-card"><span>お気に入り</span><strong id="favorite-count">0</strong><small>問</small></div>
-        </div>
-      </section>
-
       <div class="content-grid">
         <aside class="problem-panel" aria-labelledby="problem-list-title">
           <div class="section-heading compact">
             <div>
-              <p class="eyebrow">10 QUESTIONS</p>
               <h2 id="problem-list-title">問題一覧</h2>
             </div>
+            <button id="progress-detail-button" class="secondary-button detail-button" type="button">詳細</button>
           </div>
           <div class="filters">
             <label>表示
@@ -69,12 +52,11 @@
           <article id="question-view" class="question-view hidden">
             <div class="question-topline">
               <div>
-                <p id="question-category" class="eyebrow"></p>
                 <h2 id="question-title"></h2>
               </div>
               <button id="favorite-button" class="favorite-button" type="button" aria-pressed="false">☆ お気に入り</button>
             </div>
-            <div class="question-meta"><span id="question-difficulty"></span><span id="question-tables"></span></div>
+            <div class="question-meta"><span id="question-category"></span><span id="question-difficulty"></span><span id="question-tables"></span></div>
             <div class="prompt-box"><h3>問題</h3><p id="question-prompt"></p></div>
             <div class="editor-section">
               <label for="sql-editor">SQL</label>
@@ -99,6 +81,25 @@
       </div>
     </main>
     <footer class="site-footer">個人学習用のMVP · Bリーグスタッツ</footer>
+
+    <div id="progress-modal" class="modal hidden" aria-hidden="true">
+      <div class="modal-backdrop" data-modal-close></div>
+      <section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="progress-modal-title">
+        <div class="modal-heading">
+          <div>
+            <p class="eyebrow">PROGRESS</p>
+            <h2 id="progress-modal-title">学習情報</h2>
+          </div>
+          <button id="progress-modal-close" class="modal-close" type="button" aria-label="学習情報を閉じる">×</button>
+        </div>
+        <p class="muted">進捗とお気に入りは、このブラウザに保存されます。</p>
+        <div class="stats-grid">
+          <div class="stat-card"><span>正解数</span><strong id="correct-count">0</strong><small>/ <span id="problem-count">0</span> 問</small></div>
+          <div class="stat-card"><span>達成率</span><strong id="completion-rate">0%</strong><small>問題単位</small></div>
+          <div class="stat-card"><span>お気に入り</span><strong id="favorite-count">0</strong><small>問</small></div>
+        </div>
+      </section>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
     <script src="./app.js"></script>
