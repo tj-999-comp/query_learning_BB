@@ -94,8 +94,16 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 8px; backgro
 .workspace-panes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
 .query-pane, .result-pane { min-width: 0; border: 1px solid var(--line); border-radius: 10px; padding: 13px; background: #fcfdfc; }
 .editor-section > label { display: block; margin-bottom: 5px; font-weight: 800; }
-#sql-editor { width: 100%; min-height: 280px; resize: vertical; border: 1px solid #cbd3da; border-radius: 10px; background: #17202a; color: #e8f0f7; padding: 12px; font: .9rem/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; tab-size: 2; }
-#sql-editor:focus { outline: 3px solid rgba(229,93,61,.2); border-color: var(--accent); }
+#sql-editor, .CodeMirror { width: 100%; min-height: 280px; resize: vertical; border: 1px solid #cbd3da; border-radius: 10px; background: #17202a; color: #e8f0f7; font: .9rem/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; tab-size: 2; }
+#sql-editor { padding: 12px; }
+#sql-editor:focus, .CodeMirror-focused { outline: 3px solid rgba(229,93,61,.2); border-color: var(--accent); }
+.CodeMirror-gutters { border-right: 1px solid #36414c; background: #202b36; }
+.CodeMirror-linenumber { color: #8493a1; }
+.CodeMirror-cursor { border-left-color: #fff; }
+.CodeMirror-selected { background: rgba(112, 170, 218, .3) !important; }
+.CodeMirror pre.CodeMirror-line, .CodeMirror pre.CodeMirror-line-like { padding-left: 8px; }
+.editor-help { margin: 5px 0 0; color: var(--muted); font-size: .72rem; }
+kbd { display: inline-block; min-width: 1.35em; padding: 0 4px; border: 1px solid #cbd3da; border-bottom-width: 2px; border-radius: 4px; background: #fff; color: var(--navy); font: .68rem ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; text-align: center; }
 .editor-actions { display: flex; justify-content: flex-end; gap: 9px; margin: 7px 0 11px; }
 .primary-button, .secondary-button { border-radius: 8px; padding: 8px 14px; font-weight: 800; }
 .primary-button { border: 1px solid var(--accent); background: var(--accent); color: #fff; }

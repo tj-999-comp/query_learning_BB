@@ -7,6 +7,7 @@ const state = {
   db: null,
   problems: [],
   selectedId: null,
+  editor: null,
   progress: loadProgress(),
 };
 
@@ -270,7 +271,7 @@ function selectProblem(problemId) {
   elements.questionDifficulty.textContent = `難易度 ${difficultyStars(problem.difficulty)}`;
   elements.questionTables.textContent = `使用テーブル: ${problem.sourceTables.join(", ")}`;
   elements.questionPrompt.textContent = problem.prompt;
-  elements.sqlEditor.value = "";
+  setEditorValue("");
   elements.feedback.className = "feedback";
   elements.feedback.textContent = "";
   elements.resultSummary.textContent = "";
@@ -281,7 +282,7 @@ function selectProblem(problemId) {
   updateFavoriteButton();
   renderProblemList();
   closeProblemDrawer({ restoreFocus: false });
-  elements.sqlEditor.focus();
+  focusEditor();
 }
 
 function moveToRelativeProblem(offset) {
@@ -312,6 +313,57 @@ function setAnswerVisibility(visible) {
 function toggleAnswer() {
   if (!selectedProblem()) return;
   setAnswerVisibility(elements.answerSection.classList.contains("hidden"));
+}
+
+function createSqlEditor() {
+  if (!window.CodeMirror) return;
+  state.editor = window.CodeMirror.fromTextArea(elements.sqlEditor, {
+    mode: "text/x-sql",
+    theme: "default",
+    lineNumbers: true,
+    lineWrapping: true,
+    matchBrackets: true,
+    indentUnit: 2,
+    tabSize: 2,
+    indentWithTabs: false,
+    smartIndent: true,
+    autofocus: false,
+    extraKeys: {
+      Tab: "indentMore",
+      "Shift-Tab": "indentLess",
+      "Ctrl-Enter": () => runCurrentQuery(false),
+      "Cmd-Enter": () => runCurrentQuery(false),
+    },
+  });
+  state.editor.setOption("placeholder", elements.sqlEditor.getAttribute("placeholder") || "SELECT ...");
+}
+
+function getEditorValue() {
+  return state.editor ? state.editor.getValue() : elements.sqlEditor.value;
+}
+
+function setEditorValue(value) {
+  if (state.editor) state.editor.setValue(value);
+  else elements.sqlEditor.value = value;
+}
+
+function focusEditor() {
+  if (state.editor) state.editor.focus();
+  else elements.sqlEditor.focus();
+}
+
+function handleFallbackEditorKeydown(event) {
+  if (event.key === "Tab") {
+    event.preventDefault();
+    const start = elements.sqlEditor.selectionStart;
+    const end = elements.sqlEditor.selectionEnd;
+    elements.sqlEditor.setRangeText("  ", start, end, "end");
+    return;
+  }
+  if (event.key === "Enter" && (event.metaKey || event.ctrlKey)) {
+    event.preventDefault();
+    runCurrentQuery(false);
+  }
 }
 
 function stripSqlComments(sql) {
@@ -445,7 +497,7 @@ function runCurrentQuery(submit) {
   const problem = selectedProblem();
   if (!problem) return;
   try {
-    const actual = execute(elements.sqlEditor.value);
+    const actual = execute(getEditorValue());
     renderResult(actual);
     if (!submit) {
       elements.feedback.className = "feedback";
@@ -535,5 +587,8 @@ elements.favoriteButton.addEventListener("click", () => {
 elements.runButton.addEventListener("click", () => runCurrentQuery(false));
 elements.submitButton.addEventListener("click", () => runCurrentQuery(true));
 elements.answerButton.addEventListener("click", toggleAnswer);
+
+createSqlEditor();
+if (!state.editor) elements.sqlEditor.addEventListener("keydown", handleFallbackEditorKeydown);
 
 loadData();

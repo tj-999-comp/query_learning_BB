@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="BリーグのスタッツでSQLを練習する個人向け学習サイト">
     <title>SQL練習帳 | Bリーグスタッツ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
     <link rel="stylesheet" href="./styles.css">
   </head>
   <body>
@@ -75,6 +76,7 @@
                 <div class="editor-section">
                   <label id="sql-editor-label" for="sql-editor">SQL</label>
                   <textarea id="sql-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="SELECT ..."></textarea>
+                  <p class="editor-help">Tabでインデント · <kbd>⌘</kbd>/<kbd>Ctrl</kbd> + <kbd>Enter</kbd>で実行</p>
                   <div class="editor-actions">
                     <button id="answer-button" class="secondary-button" type="button" aria-controls="answer-section" aria-expanded="false" aria-label="解答例を表示">解答例を表示</button>
                     <button id="run-button" class="secondary-button" type="button">実行する</button>
@@ -121,6 +123,8 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/sql/sql.min.js"></script>
     <script src="./app.js"></script>
   </body>
 </html>
