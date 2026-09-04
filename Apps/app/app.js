@@ -334,6 +334,7 @@ function updateFavoriteButton() {
 
 function setAnswerVisibility(visible) {
   elements.answerSection.classList.toggle("hidden", !visible);
+  elements.answerButton.classList.toggle("is-visible", visible);
   const label = visible ? "解答例を隠す" : "解答例を表示";
   elements.answerButton.setAttribute("aria-expanded", String(visible));
   elements.answerButton.setAttribute("aria-label", label);
@@ -342,7 +343,9 @@ function setAnswerVisibility(visible) {
 
 function setHintVisibility(visible) {
   elements.hintSection.classList.toggle("hidden", !visible);
+  elements.hintButton.classList.toggle("is-visible", visible);
   elements.hintButton.setAttribute("aria-expanded", String(visible));
+  elements.hintButton.textContent = visible ? "ヒントを隠す" : "ヒントを表示";
 }
 
 function toggleHint() {

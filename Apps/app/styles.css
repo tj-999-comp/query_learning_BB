@@ -14,7 +14,7 @@
 }
 
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--paper); color: var(--ink); line-height: 1.65; }
+body { min-height: calc(100vh + 1px); margin: 0; overflow-y: scroll; background: var(--paper); color: var(--ink); line-height: 1.65; }
 button, select, textarea { font: inherit; }
 button { cursor: pointer; }
 .site-header { background: var(--navy); color: #fff; padding: 8px 20px 10px; }
@@ -78,9 +78,9 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 8px; backgro
 .empty-state h2 { color: var(--ink); margin-bottom: 10px; }
 .question-topline { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 .question-heading { min-width: 0; flex: 1; }
-.question-topline h2 { display: flex; align-items: center; gap: 7px; max-width: none; }
-.question-topline h2 .completion-icon { flex: 0 0 1.15rem; width: 1.15rem; height: 1.15rem; font-size: .68rem; }
+.question-topline h2 { max-width: none; }
 .question-header-info { display: flex; align-items: center; justify-content: flex-end; gap: 10px; min-width: 0; margin-left: auto; }
+.question-header-info > .completion-icon { flex: 0 0 40px; width: 40px; height: 40px; font-size: 1.1rem; }
 .detail-button { padding: 6px 12px; white-space: nowrap; }
 .favorite-button { display: inline-grid; width: 40px; height: 40px; flex: 0 0 40px; place-items: center; border: 1px solid var(--line); border-radius: 99px; background: #fff; color: var(--ink); padding: 0; font-size: 1.45rem; line-height: 1; }
 .favorite-button.active { border-color: #e5b15f; background: #fff8e8; color: #8d5b11; }
@@ -114,8 +114,6 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 8px; backgro
 .CodeMirror-hints { z-index: 60; max-height: 280px; border: 1px solid #cbd3da; border-radius: 8px; box-shadow: 0 8px 24px rgba(23,32,42,.18); font: .82rem ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 .CodeMirror-hint { padding: 5px 10px; color: var(--ink); }
 .CodeMirror-hint-active { background: var(--navy); color: #fff; }
-.editor-help { margin: 3px 0 0; color: var(--muted); font-size: .68rem; }
-kbd { display: inline-block; min-width: 1.35em; padding: 0 4px; border: 1px solid #cbd3da; border-bottom-width: 2px; border-radius: 4px; background: #fff; color: var(--navy); font: .68rem ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; text-align: center; }
 .editor-actions { display: flex; justify-content: flex-end; gap: 7px; margin: 5px 0 0; }
 .primary-button, .secondary-button { border-radius: 8px; padding: 8px 14px; font-weight: 800; }
 .primary-button { border: 1px solid var(--accent); background: var(--accent); color: #fff; }
@@ -127,7 +125,8 @@ kbd { display: inline-block; min-width: 1.35em; padding: 0 4px; border: 1px soli
 .feedback.error { color: #a33d2a; background: #fff0ec !important; }
 .result-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
 .reveal-controls { display: flex; justify-content: flex-start; gap: 7px; margin-bottom: 7px; }
-.reveal-controls .secondary-button { padding: 5px 9px; font-size: .78rem; }
+.reveal-controls .secondary-button { border-color: var(--success); background: var(--success); color: #fff; padding: 5px 9px; font-size: .78rem; }
+.reveal-controls .secondary-button.is-visible { border-color: var(--line); background: #fff; color: var(--muted); }
 .hint-section, .result-section, .answer-section { border-top: 1px solid var(--line); padding-top: 8px; margin-top: 8px; }
 .hint-section p { margin-bottom: 0; color: var(--muted); font-size: .78rem; line-height: 1.45; }
 .result-pane .result-section { border-top: 0; padding-top: 0; margin-top: 0; }
@@ -150,6 +149,7 @@ kbd { display: inline-block; min-width: 1.35em; padding: 0 4px; border: 1px soli
 .modal-close { width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 50%; background: #fff; color: var(--ink); font-size: 1.4rem; line-height: 1; }
 .modal-panel > .muted { margin-bottom: 14px; }
 .site-footer { border-top: 1px solid var(--line); padding: 20px 24px 30px; text-align: center; color: var(--muted); font-size: .78rem; }
+.scroll-stabilizer { height: 24px; }
 @media (min-width: 721px) and (max-width: 1100px) {
   .workspace { padding-top: 10px; }
 }
