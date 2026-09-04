@@ -42,7 +42,8 @@ const elements = {
   emptyState: document.querySelector("#empty-state"),
   questionView: document.querySelector("#question-view"),
   questionCategory: document.querySelector("#question-category"),
-  questionTitle: document.querySelector("#question-title"),
+  questionTitleText: document.querySelector("#question-title-text"),
+  questionCompletion: document.querySelector("#question-completion"),
   questionDifficulty: document.querySelector("#question-difficulty"),
   questionTables: document.querySelector("#question-tables"),
   previousProblemButton: document.querySelector("#previous-problem-button"),
@@ -53,6 +54,9 @@ const elements = {
   runButton: document.querySelector("#run-button"),
   submitButton: document.querySelector("#submit-button"),
   answerButton: document.querySelector("#answer-button"),
+  hintButton: document.querySelector("#hint-button"),
+  hintSection: document.querySelector("#hint-section"),
+  questionHint: document.querySelector("#question-hint"),
   feedback: document.querySelector("#feedback"),
   resultSummary: document.querySelector("#result-summary"),
   resultOutput: document.querySelector("#result-output"),
@@ -86,6 +90,7 @@ function saveProgress() {
   }
   renderProgress();
   renderProblemList();
+  updateQuestionCompletion();
   return storageAvailable;
 }
 
@@ -279,12 +284,13 @@ function selectProblem(problemId) {
   const problem = state.problems.find((item) => item.id === problemId);
   if (!problem) return;
   state.selectedId = problemId;
+  updateQuestionCompletion();
   elements.emptyState.classList.add("hidden");
   elements.questionView.classList.remove("hidden");
   initializeSqlEditor();
   if (state.editor) state.editor.refresh();
   elements.questionCategory.textContent = problem.category;
-  elements.questionTitle.textContent = `${problemNumber(problem)} ${problem.title}`;
+  elements.questionTitleText.textContent = `${problemNumber(problem)} ${problem.title}`;
   elements.questionDifficulty.textContent = `難易度 ${difficultyStars(problem.difficulty)}`;
   elements.questionTables.textContent = `使用テーブル: ${problem.sourceTables.join(", ")}`;
   elements.questionPrompt.textContent = problem.prompt;
@@ -293,6 +299,8 @@ function selectProblem(problemId) {
   elements.feedback.textContent = "";
   elements.resultSummary.textContent = "";
   elements.resultOutput.innerHTML = '<p class="muted">SQLを実行すると結果が表示されます。</p>';
+  elements.questionHint.textContent = createProblemHint(problem);
+  setHintVisibility(false);
   setAnswerVisibility(false);
   elements.referenceSql.textContent = formatReferenceSql(problem.referenceSql);
   elements.questionExplanation.textContent = problem.explanation;
@@ -300,6 +308,11 @@ function selectProblem(problemId) {
   renderProblemList();
   closeProblemDrawer({ restoreFocus: false });
   focusEditor();
+}
+
+function updateQuestionCompletion() {
+  const completed = Boolean(state.selectedId && state.progress.completed[state.selectedId]);
+  elements.questionCompletion.classList.toggle("hidden", !completed);
 }
 
 function moveToRelativeProblem(offset) {
@@ -325,6 +338,23 @@ function setAnswerVisibility(visible) {
   elements.answerButton.setAttribute("aria-expanded", String(visible));
   elements.answerButton.setAttribute("aria-label", label);
   elements.answerButton.textContent = label;
+}
+
+function setHintVisibility(visible) {
+  elements.hintSection.classList.toggle("hidden", !visible);
+  elements.hintButton.setAttribute("aria-expanded", String(visible));
+}
+
+function toggleHint() {
+  if (!selectedProblem()) return;
+  setHintVisibility(elements.hintSection.classList.contains("hidden"));
+}
+
+function createProblemHint(problem) {
+  if (Array.isArray(problem.requiredSqlTerms) && problem.requiredSqlTerms.length) {
+    return `使うとよい要素: ${problem.requiredSqlTerms.join("、")}`;
+  }
+  return `使用テーブル: ${problem.sourceTables.join("、")}`;
 }
 
 function quoteSqlIdentifier(identifier) {
@@ -463,6 +493,63 @@ function showSqlHints(editor) {
   });
 }
 
+function selectedLineRange(editor) {
+  const selection = editor.listSelections()[0];
+  return {
+    from: Math.min(selection.anchor.line, selection.head.line),
+    to: Math.max(selection.anchor.line, selection.head.line),
+  };
+}
+
+function toggleCommentLines(editor) {
+  const { from, to } = selectedLineRange(editor);
+  const lines = [];
+  for (let line = from; line <= to; line += 1) lines.push(editor.getLine(line));
+  const nonEmpty = lines.filter((line) => line.trim());
+  const shouldUncomment = nonEmpty.length > 0 && nonEmpty.every((line) => /^\s*--(?:\s|$)/.test(line));
+  editor.operation(() => {
+    for (let line = from; line <= to; line += 1) {
+      const content = editor.getLine(line);
+      if (!content.trim()) continue;
+      const indent = content.search(/\S|$/);
+      if (shouldUncomment) {
+        const commentLength = content.slice(indent).startsWith("-- ") ? 3 : 2;
+        editor.replaceRange("", { line, ch: indent }, { line, ch: indent + commentLength }, "toggleComment");
+      } else {
+        editor.replaceRange("-- ", { line, ch: indent }, { line, ch: indent }, "toggleComment");
+      }
+    }
+  });
+}
+
+function moveEditorLines(editor, direction) {
+  const { from, to } = selectedLineRange(editor);
+  const neighbor = direction < 0 ? from - 1 : to + 1;
+  if (neighbor < 0 || neighbor >= editor.lineCount()) return;
+  const lines = editor.getValue().split("\n");
+  const count = to - from + 1;
+  const block = lines.splice(from, count);
+  lines.splice(direction < 0 ? from - 1 : from + 1, 0, ...block);
+  const mapLine = (line) => {
+    if (direction < 0) {
+      if (line >= from && line <= to) return line - 1;
+      if (line === from - 1) return to;
+    } else {
+      if (line >= from && line <= to) return line + 1;
+      if (line === to + 1) return from;
+    }
+    return line;
+  };
+  const selections = editor.listSelections().map((selection) => ({
+    anchor: { line: mapLine(selection.anchor.line), ch: selection.anchor.ch },
+    head: { line: mapLine(selection.head.line), ch: selection.head.ch },
+  }));
+  editor.operation(() => {
+    editor.setValue(lines.join("\n"), "moveLine");
+    editor.setSelections(selections);
+  });
+}
+
 function toggleAnswer() {
   if (!selectedProblem()) return;
   setAnswerVisibility(elements.answerSection.classList.contains("hidden"));
@@ -481,6 +568,7 @@ function createSqlEditor() {
     tabSize: 2,
     indentWithTabs: false,
     smartIndent: true,
+    autoCloseBrackets: "()[]{}''\"\"",
     autofocus: false,
     extraKeys: {
       Tab: "indentMore",
@@ -489,13 +577,23 @@ function createSqlEditor() {
       "Cmd-Space": showSqlHints,
       "Ctrl-Enter": () => runCurrentQuery(false),
       "Cmd-Enter": () => runCurrentQuery(false),
+      "Ctrl-/": toggleCommentLines,
+      "Cmd-/": toggleCommentLines,
+      "Alt-Up": (editor) => moveEditorLines(editor, -1),
+      "Alt-Down": (editor) => moveEditorLines(editor, 1),
     },
   });
   state.editor.setOption("placeholder", elements.sqlEditor.getAttribute("placeholder") || "SELECT ...");
   state.editor.on("inputRead", (editor, change) => {
-    if (change.origin === "setValue" || change.origin === "complete") return;
+    if (change.origin === "setValue" || change.origin === "complete" || change.origin === "complete-space") return;
     const input = change.text.join("");
     if (/[A-Za-z0-9_\.\s]$/.test(input)) showSqlHints(editor);
+  });
+  state.editor.on("change", (editor, change) => {
+    if (change.origin !== "complete") return;
+    const cursor = editor.getCursor();
+    const nextCharacter = editor.getRange(cursor, { line: cursor.line, ch: cursor.ch + 1 });
+    if (!nextCharacter || !/^\s$/.test(nextCharacter)) editor.replaceRange(" ", cursor, cursor, "complete-space");
   });
 }
 
@@ -531,7 +629,61 @@ function handleFallbackEditorKeydown(event) {
   if (event.key === "Enter" && (event.metaKey || event.ctrlKey)) {
     event.preventDefault();
     runCurrentQuery(false);
+    return;
   }
+  if (event.key === "/" && (event.metaKey || event.ctrlKey)) {
+    event.preventDefault();
+    toggleFallbackComments();
+    return;
+  }
+  if ((event.key === "ArrowUp" || event.key === "ArrowDown") && event.altKey) {
+    event.preventDefault();
+    moveFallbackLine(event.key === "ArrowUp" ? -1 : 1);
+    return;
+  }
+  const pairs = { "(": ")", "[": "]", "{": "}", "'": "'", '"': '"' };
+  if (pairs[event.key]) {
+    const start = elements.sqlEditor.selectionStart;
+    const end = elements.sqlEditor.selectionEnd;
+    event.preventDefault();
+    elements.sqlEditor.setRangeText(`${event.key}${pairs[event.key]}`, start, end, "end");
+    elements.sqlEditor.selectionStart = elements.sqlEditor.selectionEnd - 1;
+  }
+}
+
+function toggleFallbackComments() {
+  const textarea = elements.sqlEditor;
+  const start = textarea.selectionStart;
+  const end = textarea.selectionEnd;
+  const lineStart = textarea.value.lastIndexOf("\n", start - 1) + 1;
+  const lineEndIndex = textarea.value.indexOf("\n", end);
+  const lineEnd = lineEndIndex < 0 ? textarea.value.length : lineEndIndex;
+  const selected = textarea.value.slice(lineStart, lineEnd);
+  const lines = selected.split("\n");
+  const nonEmpty = lines.filter((line) => line.trim());
+  const shouldUncomment = nonEmpty.length > 0 && nonEmpty.every((line) => /^\s*--(?:\s|$)/.test(line));
+  const replacement = lines.map((line) => {
+    if (!line.trim()) return line;
+    const indent = line.match(/^\s*/)[0].length;
+    return shouldUncomment
+      ? line.slice(0, indent) + line.slice(indent).replace(/^--\s?/, "")
+      : `${line.slice(0, indent)}-- ${line.slice(indent)}`;
+  }).join("\n");
+  textarea.setRangeText(replacement, lineStart, lineEnd, "select");
+}
+
+function moveFallbackLine(direction) {
+  const textarea = elements.sqlEditor;
+  const lines = textarea.value.split("\n");
+  const lineStart = textarea.value.lastIndexOf("\n", textarea.selectionStart - 1) + 1;
+  const lineIndex = textarea.value.slice(0, lineStart).split("\n").length - 1;
+  const targetIndex = lineIndex + direction;
+  if (targetIndex < 0 || targetIndex >= lines.length) return;
+  [lines[lineIndex], lines[targetIndex]] = [lines[targetIndex], lines[lineIndex]];
+  textarea.value = lines.join("\n");
+  const newLineStart = lines.slice(0, targetIndex).join("\n").length + (targetIndex ? 1 : 0);
+  textarea.selectionStart = newLineStart;
+  textarea.selectionEnd = newLineStart;
 }
 
 function stripSqlComments(sql) {
@@ -628,9 +780,6 @@ function renderResult(result) {
   table.appendChild(tbody);
   elements.resultOutput.innerHTML = "";
   elements.resultOutput.appendChild(table);
-  if (result.values.length > 1000) {
-    elements.resultOutput.insertAdjacentHTML("afterend", '<p class="muted">表示は先頭1000行までです。</p>');
-  }
 }
 
 function showError(message) {
@@ -674,19 +823,14 @@ function runCurrentQuery(submit) {
     }
     const expected = execute(problem.referenceSql);
     if (resultsMatch(actual, expected, problem.comparison)) {
-      const wasCompleted = Boolean(state.progress.completed[problem.id]);
       state.progress.completed[problem.id] = true;
-      const persisted = saveProgress();
+      saveProgress();
       elements.feedback.className = "feedback success";
-      elements.feedback.textContent = wasCompleted
-        ? "正解です。達成済みの問題です。"
-        : persisted
-          ? "正解です。達成状況と正解数を更新しました。"
-          : "正解です。ただし、このブラウザでは達成状況を保存できません。";
+      elements.feedback.textContent = "正解！";
       setAnswerVisibility(true);
     } else {
       elements.feedback.className = "feedback error";
-      elements.feedback.textContent = "不正解です。正解数には加算されません。SQLを修正して再挑戦できます。";
+      elements.feedback.textContent = "不正解！";
     }
   } catch (error) {
     showError(error instanceof Error ? error.message : "SQLの実行に失敗しました。");
@@ -756,5 +900,6 @@ elements.favoriteButton.addEventListener("click", () => {
 elements.runButton.addEventListener("click", () => runCurrentQuery(false));
 elements.submitButton.addEventListener("click", () => runCurrentQuery(true));
 elements.answerButton.addEventListener("click", toggleAnswer);
+elements.hintButton.addEventListener("click", toggleHint);
 
 loadData();
