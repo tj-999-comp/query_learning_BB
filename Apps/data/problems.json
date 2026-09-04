@@ -7,7 +7,7 @@
     "category": "基本検索",
     "sourceTables": ["teams"],
     "referenceSql": "SELECT team_id, team_name_j FROM teams ORDER BY team_name_j, team_id;",
-    "comparison": {"rowOrder": "sensitive"},
+    "comparison": {"rowOrder": "insensitive"},
     "explanation": "まずは1つのテーブルから必要な列を選び、ORDER BYで並び順を指定する問題です。"
   },
   {
