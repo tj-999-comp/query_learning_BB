@@ -78,6 +78,7 @@
                   <div class="editor-actions">
                     <button id="run-button" class="secondary-button" type="button">実行する</button>
                     <button id="submit-button" class="primary-button" type="button">正誤判定</button>
+                    <button id="answer-button" class="secondary-button" type="button" aria-controls="answer-section" aria-expanded="false">解答例</button>
                   </div>
                 </div>
               </section>
@@ -88,7 +89,7 @@
                   <div id="result-output" class="result-output"><p class="muted">SQLを実行すると結果が表示されます。</p></div>
                 </section>
                 <section id="answer-section" class="answer-section hidden" aria-labelledby="answer-title">
-                  <h3 id="answer-title">参考SQLと解説</h3>
+                  <h3 id="answer-title">解答例と解説</h3>
                   <pre id="reference-sql"></pre>
                   <p id="question-explanation"></p>
                 </section>
@@ -98,7 +99,7 @@
         </section>
       </div>
     </main>
-    <footer class="site-footer">個人学習用のMVP · Bリーグスタッツ · version v0.2.1</footer>
+    <footer class="site-footer">個人学習用のMVP · Bリーグスタッツ · version v0.2.2</footer>
 
     <div id="progress-modal" class="modal hidden" aria-hidden="true">
       <div class="modal-backdrop" data-modal-close></div>

@@ -40,6 +40,7 @@ const elements = {
   sqlEditor: document.querySelector("#sql-editor"),
   runButton: document.querySelector("#run-button"),
   submitButton: document.querySelector("#submit-button"),
+  answerButton: document.querySelector("#answer-button"),
   feedback: document.querySelector("#feedback"),
   resultSummary: document.querySelector("#result-summary"),
   resultOutput: document.querySelector("#result-output"),
@@ -221,6 +222,7 @@ function selectProblem(problemId) {
   elements.resultSummary.textContent = "";
   elements.resultOutput.innerHTML = '<p class="muted">SQLを実行すると結果が表示されます。</p>';
   elements.answerSection.classList.add("hidden");
+  elements.answerButton.setAttribute("aria-expanded", "false");
   elements.referenceSql.textContent = problem.referenceSql;
   elements.questionExplanation.textContent = problem.explanation;
   updateFavoriteButton();
@@ -244,6 +246,12 @@ function updateFavoriteButton() {
   elements.favoriteButton.setAttribute("aria-label", label);
   elements.favoriteButton.setAttribute("title", label);
   elements.favoriteButton.textContent = isFavorite ? "★" : "☆";
+}
+
+function showAnswer() {
+  if (!selectedProblem()) return;
+  elements.answerSection.classList.remove("hidden");
+  elements.answerButton.setAttribute("aria-expanded", "true");
 }
 
 function stripSqlComments(sql) {
@@ -466,5 +474,6 @@ elements.favoriteButton.addEventListener("click", () => {
 });
 elements.runButton.addEventListener("click", () => runCurrentQuery(false));
 elements.submitButton.addEventListener("click", () => runCurrentQuery(true));
+elements.answerButton.addEventListener("click", showAnswer);
 
 loadData();
