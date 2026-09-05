@@ -49,16 +49,10 @@
 
     <main class="page-shell">
       <div class="content-grid">
-        <section class="workspace" aria-labelledby="workspace-title">
+        <section class="workspace">
           <div id="empty-state" class="empty-state">
             <h2 class="hero-slogan">JUST DO IT.</h2>
-            <div class="start-intro">
-              <h2 id="workspace-title">問題を選んで始めよう！</h2>
-            </div>
-            <section class="next-problems" aria-labelledby="next-problems-title">
-              <h3 id="next-problems-title">次の問題</h3>
-              <div id="next-problem-list" class="next-problem-list"></div>
-            </section>
+            <div id="next-problem-list" class="next-problem-list" aria-label="問題一覧"></div>
           </div>
 
           <article id="question-view" class="question-view hidden">
@@ -83,7 +77,7 @@
                   <label id="sql-editor-label" for="sql-editor">SQL</label>
                   <textarea id="sql-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="SELECT ..."></textarea>
                   <div class="editor-actions">
-                    <button id="run-button" class="secondary-button" type="button">実行する</button>
+                    <button id="run-button" class="primary-button" type="button">実行する</button>
                     <button id="submit-button" class="primary-button" type="button">正誤判定</button>
                   </div>
                 </div>
