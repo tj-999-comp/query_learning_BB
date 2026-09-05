@@ -44,7 +44,11 @@ a { color: inherit; }
 .header-brand { display: flex; align-items: center; gap: 14px; min-width: 0; }
 .header-brand h1 { margin: 0; line-height: 1; }
 .brand-link { display: block; color: var(--ink); text-decoration: none; font-size: 32px; font-weight: 600; letter-spacing: -.06em; line-height: 1; }
-.menu-button { display: inline-grid; width: 42px; height: 42px; place-items: center; border: 1px solid var(--ink); border-radius: 12px; background: var(--white); color: var(--ink); font-size: 20px; line-height: 1; }
+.menu-button { display: inline-grid; width: 42px; height: 42px; place-items: center; border: 1px solid var(--ink); border-radius: 12px; background: var(--white); color: var(--ink); line-height: 1; }
+.menu-button .menu-glyph { display: flex; width: 24px; flex-direction: column; gap: 5px; }
+.menu-button .menu-glyph i { display: block; height: 2px; border-radius: 9999px; background: var(--ink); }
+.menu-button .menu-glyph i:nth-child(1), .menu-button .menu-glyph i:nth-child(3) { width: 50%; }
+.menu-button .menu-glyph i:nth-child(2) { width: 100%; background: var(--cyan); }
 .menu-button:hover, .menu-button:focus-visible { border-color: var(--yellow); background: var(--yellow); color: #000; outline: 0; }
 .status-chip { border: 1px solid rgba(0, 204, 255, .8); border-radius: var(--radius-pill); background: rgba(0, 204, 255, .08); padding: 8px 13px; color: var(--ink); font-family: var(--font-mono); font-size: 11px; letter-spacing: .02em; white-space: nowrap; }
 .status-chip.ready { border-color: var(--cyan); color: var(--ink); }
