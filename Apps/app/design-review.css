@@ -140,6 +140,52 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -.04em; }
 .button-18 { min-width: 88%; border-color: #000; background: #000; }
 .button-19 { min-height: 32px; padding-inline: 12px; border-radius: 8px; background: var(--cyan); color: #000; font-size: 11px; }
 .button-20 { border-color: var(--white); background: #000; box-shadow: 5px 5px 0 var(--cyan); }
+.menu-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.menu-sample { min-height: 92px; }
+.review-menu { display: grid; width: 52px; height: 44px; place-items: center; border: 1px solid transparent; border-radius: 12px; background: transparent; cursor: pointer; }
+.menu-glyph { display: flex; width: 28px; flex-direction: column; gap: 5px; }
+.menu-glyph i { display: block; height: 2px; border-radius: 9999px; background: var(--white); }
+.menu-01 .menu-glyph i { width: 100%; }
+.menu-02 .menu-glyph { gap: 4px; }
+.menu-02 .menu-glyph i { height: 4px; border-radius: 2px; background: var(--yellow); }
+.menu-03 .menu-glyph { gap: 6px; }
+.menu-03 .menu-glyph i:nth-child(1), .menu-03 .menu-glyph i:nth-child(3) { display: none; }
+.menu-03 .menu-glyph i:nth-child(2) { width: 100%; background: var(--cyan); }
+.menu-04 .menu-glyph i { background: var(--yellow); }
+.menu-04 .menu-glyph i:nth-child(2) { width: 72%; }
+.menu-04 .menu-glyph i:nth-child(3) { width: 44%; }
+.menu-05 .menu-glyph i { background: var(--cyan); }
+.menu-05 .menu-glyph i:nth-child(1) { width: 44%; }
+.menu-05 .menu-glyph i:nth-child(2) { width: 72%; }
+.menu-06 .menu-glyph i { height: 3px; border-radius: 9999px; background: var(--white); }
+.menu-07 .menu-glyph i { height: 3px; border-radius: 0; background: var(--white); }
+.menu-08 { border-left: 4px solid var(--cyan); border-radius: 8px; }
+.menu-08 .menu-glyph i { background: var(--white); }
+.menu-09 { border-right: 4px solid var(--yellow); border-radius: 8px; }
+.menu-09 .menu-glyph i { background: var(--white); }
+.menu-10 { border: 1px solid var(--white); border-radius: 8px; }
+.menu-10 .menu-glyph i { background: var(--cyan); }
+.menu-11 { border: 1px solid var(--cyan); border-radius: 50%; }
+.menu-11 .menu-glyph i { background: var(--white); }
+.menu-12 { border: 2px solid var(--yellow); border-radius: 12px; }
+.menu-12 .menu-glyph i { background: var(--cyan); }
+.menu-13 { background: var(--yellow); }
+.menu-13 .menu-glyph i { background: #000; }
+.menu-14 { background: var(--cyan); }
+.menu-14 .menu-glyph i { background: #000; }
+.menu-dots { flex-direction: row; align-items: center; justify-content: center; gap: 4px; }
+.menu-dots i { width: 5px; height: 5px; border-radius: 50%; background: var(--yellow); }
+.menu-16 .menu-glyph { gap: 7px; }
+.menu-16 .menu-glyph i:nth-child(2) { background: var(--yellow); }
+.menu-17 .menu-glyph i:nth-child(1), .menu-17 .menu-glyph i:nth-child(3) { width: 50%; }
+.menu-17 .menu-glyph i:nth-child(2) { background: var(--cyan); }
+.menu-18 .menu-glyph i:nth-child(2) { width: 50%; margin-left: auto; }
+.menu-18 .menu-glyph i { background: var(--cyan); }
+.menu-19 { border-bottom: 4px solid var(--yellow); border-radius: 8px 8px 0 0; }
+.menu-19 .menu-glyph i { background: var(--white); }
+.menu-20 { border: 1px solid var(--white); border-radius: 8px; box-shadow: 4px 4px 0 var(--cyan); }
+.menu-20 .menu-glyph i { background: var(--yellow); }
+.review-menu:hover, .review-menu:focus-visible { border-color: var(--yellow); outline: 0; }
 .review-footer { display: flex; align-items: center; justify-content: space-between; width: min(1200px, calc(100% - 48px)); margin: 0 auto; padding: 24px 0 34px; border-top: 1px solid var(--line); color: var(--silver); font-size: 11px; }
 .review-footer a { color: var(--cyan); text-decoration: none; }
 
