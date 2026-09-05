@@ -99,8 +99,8 @@ a { color: inherit; }
 .prompt-box p { margin-bottom: 0; color: var(--navy); font-size: 17px; }
 .workspace-panes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
 .query-pane, .result-pane { min-width: 0; border-radius: 16px; padding: 24px; color: var(--white); }
-.query-pane { display: flex; flex-direction: column; border: 1px solid var(--dark-line); border-top: 4px solid var(--cyan); border-radius: 32px 18px 18px 32px; background: var(--navy-soft); }
-.result-pane { border: 1px solid var(--dark-line); border-top: 4px solid var(--yellow); border-radius: 18px 32px 32px 18px; background: var(--navy-soft); }
+.query-pane { display: flex; flex-direction: column; border: 1px solid var(--dark-line); border-top: 4px solid var(--cyan); border-radius: 32px 8px 8px 32px; background: var(--navy-soft); }
+.result-pane { border: 1px solid var(--dark-line); border-top: 4px solid var(--yellow); border-radius: 8px 32px 32px 8px; background: var(--navy-soft); }
 .query-pane label { display: block; margin-bottom: 10px; color: var(--silver-light); font-family: var(--font-mono); font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
 
 /* SQL editor */
@@ -138,7 +138,7 @@ a { color: inherit; }
 .detail-button { padding: 0 16px; white-space: nowrap; }
 .feedback { min-height: 0; margin-bottom: 10px; border-radius: 14px; padding: 0; font-size: 13px; font-weight: 600; }
 .feedback:not(:empty) { padding: 11px 13px; background: rgba(0, 204, 255, .08); }
-.feedback.success { border: 2px solid var(--cyan); color: var(--navy); background: var(--yellow) !important; padding: 15px 17px !important; font-size: 24px; letter-spacing: -.04em; box-shadow: 0 0 22px rgba(255, 255, 0, .14); }
+.feedback.success { border: 0; border-bottom: 3px solid var(--cyan); border-radius: 14px 14px 4px 4px; color: var(--white); background: rgba(0, 30, 67, .72) !important; padding: 13px 15px !important; font-size: 20px; letter-spacing: -.04em; }
 .feedback.error { color: var(--gold); background: rgba(253, 187, 48, .12) !important; }
 .reveal-controls { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
 .reveal-controls .secondary-button { min-height: 36px; border-color: var(--cyan); color: var(--cyan); padding: 0 13px; font-size: 12px; }

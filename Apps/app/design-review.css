@@ -52,8 +52,8 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -.04em; }
 .option-e .sample-stage { background: repeating-linear-gradient(90deg, var(--deep) 0 38px, rgba(0, 204, 255, .22) 38px 40px); }
 .frame-a > div:first-child { border: 1px solid var(--cyan); border-radius: 24px 10px 10px 24px; }
 .frame-a > div:last-child { border: 1px solid rgba(190, 192, 194, .45); border-radius: 10px 24px 24px 10px; background: rgba(6, 59, 120, .85); }
-.frame-b > div:first-child { border-radius: 16px; }
-.frame-b > div:last-child { border-top: 4px solid var(--yellow); border-radius: 16px 16px 6px 6px; background: var(--blue); }
+.frame-b > div:first-child { border-radius: 24px 8px 8px 24px; }
+.frame-b > div:last-child { border-top: 4px solid var(--yellow); border-radius: 8px 24px 24px 8px; background: var(--blue); }
 .frame-c > div:first-child { border: 2px solid var(--white); border-radius: 8px; background: var(--deep); }
 .frame-c > div:last-child { border: 1px solid var(--cyan); border-radius: 24px; background: rgba(0, 45, 98, .86); }
 .frame-d > div:first-child { border: 2px solid var(--gold); border-radius: 24px 8px 8px 24px; }
