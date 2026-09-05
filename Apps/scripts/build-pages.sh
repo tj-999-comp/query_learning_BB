@@ -10,6 +10,9 @@ mkdir -p "$public_dir/data"
 for asset in index.html app.js styles.css; do
   cp "$app_root/app/$asset" "$public_dir/$asset"
 done
+for asset in design-review.html design-review.css; do
+  cp "$app_root/app/$asset" "$public_dir/$asset"
+done
 cp "$app_root/_headers" "$public_dir/_headers"
 cp "$app_root/data/problems.json" "$public_dir/data/problems.json"
 

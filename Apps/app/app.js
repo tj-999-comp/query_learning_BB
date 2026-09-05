@@ -373,12 +373,17 @@ function visibleProblems() {
   });
 }
 
+function currentCategoryProblems() {
+  const current = selectedProblem();
+  return current ? state.problems.filter((problem) => problem.category === current.category) : [];
+}
+
 function updateProblemNavigation() {
-  const visible = visibleProblems();
-  const currentIndex = visible.findIndex((problem) => problem.id === state.selectedId);
+  const categoryProblems = currentCategoryProblems();
+  const currentIndex = categoryProblems.findIndex((problem) => problem.id === state.selectedId);
   const hasCurrentProblem = currentIndex >= 0;
   elements.previousProblemButton.disabled = !hasCurrentProblem || currentIndex === 0;
-  elements.nextProblemButton.disabled = !hasCurrentProblem || currentIndex === visible.length - 1;
+  elements.nextProblemButton.disabled = !hasCurrentProblem || currentIndex === categoryProblems.length - 1;
 }
 
 function nextProblemsByCategory() {
@@ -489,9 +494,9 @@ function updateQuestionCompletion() {
 }
 
 function moveToRelativeProblem(offset) {
-  const visible = visibleProblems();
-  const currentIndex = visible.findIndex((problem) => problem.id === state.selectedId);
-  const target = visible[currentIndex + offset];
+  const categoryProblems = currentCategoryProblems();
+  const currentIndex = categoryProblems.findIndex((problem) => problem.id === state.selectedId);
+  const target = categoryProblems[currentIndex + offset];
   if (target) selectProblem(target.id);
 }
 
