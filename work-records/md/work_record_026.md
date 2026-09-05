@@ -37,7 +37,9 @@ Issue #49「v0.6.0 進捗・お気に入りの端末間同期」に対応した�
 - [`Apps/docs/MVP_REQUIREMENTS.md`](../../Apps/docs/MVP_REQUIREMENTS.md)
 - [#49](https://github.com/tj-999-comp/query_learning_BB/issues/49)
 
-## 未完了の運用作業
+## 本番反映
 
-- Cloudflare DashboardでProduction（および利用するPreview）にKV Namespaceを`PROGRESS_KV`としてバインドする。
-- 本番Basic認証下でMac・iPad mini・Windows間の同期を確認する。
+- Cloudflare OAuthでWranglerへログインし、KV Namespaceを作成した。
+- `Apps/wrangler.toml`へ`PROGRESS_KV` bindingを追加し、`e34e73b`として`main`へPushした。
+- Cloudflare PagesのProduction deploymentがActiveになったことを確認した。
+- 本番Basic認証下でのMac・iPad mini・Windows間の実機確認は、デプロイ反映後のユーザー確認待ちとした。
