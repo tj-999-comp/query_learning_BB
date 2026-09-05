@@ -146,6 +146,7 @@ a { color: inherit; }
 .hint-section, .result-section, .answer-section { border-top: 1px solid var(--dark-line); padding-top: 16px; margin-top: 16px; }
 .hint-section h3, .answer-section h3, .result-section h3 { margin-bottom: 9px; color: var(--white); font-size: 18px; }
 .hint-section p, .answer-explanation { margin-bottom: 0; color: var(--silver-light); font-size: 13px; line-height: 1.55; }
+.section-divider { margin: 28px 0 24px; border-top: 1px solid var(--dark-line); }
 .result-pane .result-section { border-top: 0; padding-top: 0; margin-top: 0; }
 .result-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
 .result-output { max-height: min(32vh, 280px); overflow: auto; border: 1px solid var(--dark-line); border-radius: 14px; background: var(--navy-deep); }
