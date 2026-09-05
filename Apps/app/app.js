@@ -2,6 +2,9 @@ const DATA_ROOT = "../data";
 // The 100-question bank starts with a fresh answer history.
 const STORAGE_KEY = "bleague-sql-learning-progress-v2";
 const LEGACY_STORAGE_KEY = "bleague-sql-learning-progress-v1";
+const SYNC_STATE_KEY = "bleague-sql-learning-progress-sync-v1";
+const SYNC_PENDING_KEY = "bleague-sql-learning-progress-sync-pending-v1";
+const PROGRESS_API_PATH = "/api/progress";
 const CDN_BASE = "https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/";
 const SQL_KEYWORDS = [
   "SELECT", "FROM", "WHERE", "GROUP BY", "HAVING", "ORDER BY", "LIMIT", "OFFSET",
@@ -12,6 +15,11 @@ const SQL_KEYWORDS = [
   "ROUND", "CAST", "COALESCE", "STRFTIME",
 ];
 let storageAvailable = true;
+let syncStatus = "local";
+let syncReady = false;
+let syncInitialized = false;
+let syncPending = false;
+let syncQueue = Promise.resolve();
 
 const state = {
   db: null,
@@ -40,6 +48,7 @@ const elements = {
   favoriteCount: document.querySelector("#favorite-count"),
   storageStatus: document.querySelector("#storage-status"),
   emptyState: document.querySelector("#empty-state"),
+  nextProblemList: document.querySelector("#next-problem-list"),
   questionView: document.querySelector("#question-view"),
   questionCategory: document.querySelector("#question-category"),
   questionTitleText: document.querySelector("#question-title-text"),
@@ -70,6 +79,8 @@ function loadProgress() {
     const currentRaw = localStorage.getItem(STORAGE_KEY);
     const parsed = JSON.parse(currentRaw || "{}");
     const legacy = currentRaw ? {} : JSON.parse(localStorage.getItem(LEGACY_STORAGE_KEY) || "{}");
+    syncInitialized = localStorage.getItem(SYNC_STATE_KEY) === "true";
+    syncPending = localStorage.getItem(SYNC_PENDING_KEY) === "true";
     return {
       completed: currentRaw && parsed.completed && typeof parsed.completed === "object" ? parsed.completed : {},
       favorites: parsed.favorites && typeof parsed.favorites === "object"
@@ -82,16 +93,146 @@ function loadProgress() {
   }
 }
 
-function saveProgress() {
+function saveLocalProgress() {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state.progress));
+    localStorage.setItem(SYNC_PENDING_KEY, "true");
+    syncPending = true;
   } catch {
     storageAvailable = false;
   }
+}
+
+function saveProgress() {
+  saveLocalProgress();
   renderProgress();
   renderProblemList();
+  renderNextProblemList();
   updateQuestionCompletion();
+  if (syncReady) queueProgressSync();
   return storageAvailable;
+}
+
+function normalizedProgress(value) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    return { completed: {}, favorites: {} };
+  }
+  const normalizeFlags = (flags) => {
+    if (!flags || typeof flags !== "object" || Array.isArray(flags)) return {};
+    return Object.fromEntries(
+      Object.entries(flags)
+        .filter(([key, enabled]) => typeof key === "string" && key.length <= 200 && enabled === true),
+    );
+  };
+  return {
+    completed: normalizeFlags(value.completed),
+    favorites: normalizeFlags(value.favorites),
+  };
+}
+
+function mergedProgress(left, right) {
+  return {
+    completed: { ...left.completed, ...right.completed },
+    favorites: { ...left.favorites, ...right.favorites },
+  };
+}
+
+function setSyncStatus(status) {
+  syncStatus = status;
+  renderProgress();
+}
+
+function syncStatusMessage() {
+  if (syncStatus === "syncing") return "進捗とお気に入りを端末間で同期中…";
+  if (syncStatus === "synced") return "進捗とお気に入りは端末間で同期されます。";
+  if (syncStatus === "error") return "同期できないため、このブラウザにも保存しています。";
+  return "進捗とお気に入りは、このブラウザに保存されます。";
+}
+
+async function fetchProgressApi(options = {}) {
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), 8000);
+  try {
+    return await fetch(PROGRESS_API_PATH, {
+      ...options,
+      headers: { Accept: "application/json", ...(options.headers || {}) },
+      cache: "no-store",
+      signal: controller.signal,
+    });
+  } finally {
+    window.clearTimeout(timeout);
+  }
+}
+
+async function putProgress(progress) {
+  const payload = normalizedProgress(progress);
+  const response = await fetchProgressApi({
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (!response.ok) throw new Error(`同期API unavailable (${response.status})`);
+  syncInitialized = true;
+  const current = JSON.stringify(normalizedProgress(state.progress));
+  syncPending = current !== JSON.stringify(payload);
+  try {
+    localStorage.setItem(SYNC_STATE_KEY, "true");
+    if (syncPending) localStorage.setItem(SYNC_PENDING_KEY, "true");
+    else localStorage.removeItem(SYNC_PENDING_KEY);
+  } catch {
+    storageAvailable = false;
+  }
+  setSyncStatus("synced");
+}
+
+async function synchronizeProgress() {
+  setSyncStatus("syncing");
+  try {
+    const response = await fetchProgressApi();
+    if (!response.ok) throw new Error(`同期API unavailable (${response.status})`);
+    const remote = normalizedProgress(await response.json());
+    const local = normalizedProgress(state.progress);
+    const shouldMerge = !syncInitialized || syncPending;
+    state.progress = shouldMerge ? mergedProgress(remote, local) : remote;
+    saveLocalProgress();
+    syncInitialized = true;
+    syncPending = false;
+    try {
+      localStorage.setItem(SYNC_STATE_KEY, "true");
+      localStorage.removeItem(SYNC_PENDING_KEY);
+    } catch {
+      storageAvailable = false;
+    }
+    if (shouldMerge) await putProgress(state.progress);
+    setSyncStatus("synced");
+  } catch (error) {
+    syncPending = true;
+    try {
+      localStorage.setItem(SYNC_PENDING_KEY, "true");
+    } catch {
+      storageAvailable = false;
+    }
+    setSyncStatus("error");
+    console.info("Progress sync is not available; using local storage:", error);
+    syncReady = true;
+    return false;
+  }
+  syncReady = true;
+  return true;
+}
+
+function queueProgressSync() {
+  syncQueue = syncQueue
+    .catch(() => {})
+    .then(async () => {
+      try {
+        await putProgress(state.progress);
+      } catch (error) {
+        syncPending = true;
+        setSyncStatus("error");
+        console.info("Progress sync failed; keeping local storage:", error);
+      }
+    });
 }
 
 function selectedProblem() {
@@ -209,9 +350,9 @@ function renderProgress() {
   elements.favoriteCount.textContent = favoriteCount;
   elements.completionRate.textContent = total ? `${Math.round((completedCount / total) * 100)}%` : "0%";
   elements.storageStatus.textContent = storageAvailable
-    ? "進捗とお気に入りは、このブラウザに保存されます。"
+    ? syncStatusMessage()
     : "このブラウザでは保存できません。ページを閉じると進捗とお気に入りは失われます。";
-  elements.storageStatus.classList.toggle("storage-warning", !storageAvailable);
+  elements.storageStatus.classList.toggle("storage-warning", !storageAvailable || syncStatus === "error");
 }
 
 function difficultyStars(level) {
@@ -238,6 +379,38 @@ function updateProblemNavigation() {
   const hasCurrentProblem = currentIndex >= 0;
   elements.previousProblemButton.disabled = !hasCurrentProblem || currentIndex === 0;
   elements.nextProblemButton.disabled = !hasCurrentProblem || currentIndex === visible.length - 1;
+}
+
+function nextProblemsByCategory() {
+  const nextProblems = new Map();
+  state.problems.forEach((problem) => {
+    if (!state.progress.completed[problem.id] && !nextProblems.has(problem.category)) {
+      nextProblems.set(problem.category, problem);
+    }
+  });
+  return [...nextProblems.values()];
+}
+
+function renderNextProblemList() {
+  if (!elements.nextProblemList) return;
+  const nextProblems = nextProblemsByCategory();
+  elements.nextProblemList.innerHTML = "";
+  if (!nextProblems.length) {
+    elements.nextProblemList.innerHTML = '<p class="muted">すべての問題を達成しました。</p>';
+    return;
+  }
+  nextProblems.forEach((problem) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "next-problem-card";
+    button.setAttribute("aria-label", `${problemNumber(problem)} ${problem.title}を始める`);
+    button.innerHTML = `
+      <div class="next-problem-card-meta"><span class="tag">${escapeHtml(problem.category)}</span><span class="problem-number">${problemNumber(problem)}</span></div>
+      <h4>${escapeHtml(problem.title)}</h4>
+      <p>${escapeHtml(problem.prompt)}</p>`;
+    button.addEventListener("click", () => selectProblem(problem.id));
+    elements.nextProblemList.appendChild(button);
+  });
 }
 
 function renderProblemList() {
@@ -849,9 +1022,12 @@ async function loadData() {
     const problemsResponse = await fetch(`${DATA_ROOT}/problems.json`);
     if (!problemsResponse.ok) throw new Error("問題定義を読み込めませんでした。");
     state.problems = await problemsResponse.json();
+    await synchronizeProgress();
+    elements.progressFilter.value = "incomplete";
     populateCategoryFilter();
     renderProgress();
     renderProblemList();
+    renderNextProblemList();
 
     const manifestResponse = await fetch(`${DATA_ROOT}/db-manifest.json`);
     if (!manifestResponse.ok) throw new Error("データベースのマニフェストを読み込めませんでした。");

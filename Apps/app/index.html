@@ -14,7 +14,7 @@
       <div class="header-inner">
         <div class="header-brand">
           <button id="menu-button" class="menu-button" type="button" aria-expanded="false" aria-controls="problem-drawer" aria-label="問題一覧を開く"><span aria-hidden="true">☰</span></button>
-          <h1>SQL練習帳</h1>
+          <h1><a id="home-link" class="brand-link" href="./">SQL練習帳</a></h1>
         </div>
         <div id="data-status" class="status-chip" role="status">データベースを読み込み中…</div>
       </div>
@@ -34,8 +34,8 @@
       <div class="filters">
         <label>表示
           <select id="progress-filter">
+            <option value="incomplete" selected>未達成</option>
             <option value="all">すべて</option>
-            <option value="incomplete">未達成</option>
             <option value="completed">達成済み</option>
             <option value="favorites">お気に入り</option>
           </select>
@@ -51,9 +51,15 @@
       <div class="content-grid">
         <section class="workspace" aria-labelledby="workspace-title">
           <div id="empty-state" class="empty-state">
-            <p class="eyebrow">START HERE</p>
-            <h2 id="workspace-title">問題を選んで始める</h2>
-            <p>左の一覧から問題を選択すると、SQLを書いて実行できます。</p>
+            <div class="start-intro">
+              <p class="eyebrow">START HERE</p>
+              <h2 id="workspace-title">問題を選んで始める</h2>
+              <p>ジャンルごとの次の問題から、SQL学習を始められます。</p>
+            </div>
+            <section class="next-problems" aria-labelledby="next-problems-title">
+              <h3 id="next-problems-title">次の問題</h3>
+              <div id="next-problem-list" class="next-problem-list"></div>
+            </section>
           </div>
 
           <article id="question-view" class="question-view hidden">
@@ -108,7 +114,7 @@
         </section>
       </div>
     </main>
-    <footer class="site-footer">個人学習用のMVP · Bリーグスタッツ · version v0.5.1</footer>
+    <footer class="site-footer">個人学習用のMVP · Bリーグスタッツ · version v0.6.0</footer>
     <div id="scroll-stabilizer" class="scroll-stabilizer" aria-hidden="true"></div>
 
     <div id="progress-modal" class="modal hidden" aria-hidden="true">
@@ -121,7 +127,7 @@
           </div>
           <button id="progress-modal-close" class="modal-close" type="button" aria-label="学習情報を閉じる">×</button>
         </div>
-        <p id="storage-status" class="muted" role="status">進捗とお気に入りは、このブラウザに保存されます。</p>
+        <p id="storage-status" class="muted" role="status">進捗とお気に入りを端末間で同期中…</p>
         <div class="stats-grid">
           <div class="stat-card"><span>正解数</span><strong id="correct-count">0</strong><small>/ <span id="problem-count">0</span> 問</small></div>
           <div class="stat-card"><span>達成率</span><strong id="completion-rate">0%</strong><small>問題単位</small></div>
