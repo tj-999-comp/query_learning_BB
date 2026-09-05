@@ -1,3 +1,7 @@
 name = "query-learning-bb"
 compatibility_date = "2026-09-03"
 pages_build_output_dir = "./public"
+
+[[kv_namespaces]]
+binding = "PROGRESS_KV"
+id = "60874002e24041be8154a96d3cbc974b"
