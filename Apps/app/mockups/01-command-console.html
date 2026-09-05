@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SQL練習帳 Command Console モックアップ">
+    <title>01 Command Console — SQL練習帳</title>
+    <link rel="stylesheet" href="./mockups.css">
+  </head>
+  <body>
+    <header class="mockup-nav">
+      <a class="brand" href="./"><span class="brand-mark">⌁</span> SQL練習帳</a>
+      <nav class="nav-links" aria-label="メインナビゲーション"><a href="#workspace">問題演習</a><a href="#progress">学習状況</a><a href="#schema">スキーマ</a></nav>
+      <div class="nav-actions"><a class="pill" href="#workspace">問題を続ける&nbsp; →</a></div>
+    </header>
+    <main class="page">
+      <section class="hero-command">
+        <div class="container hero-grid">
+          <div>
+            <p class="eyebrow">01 / COMMAND CONSOLE</p>
+            <h1 class="display">数字の中に、<br><span class="word-box">次の一手</span>を読む。</h1>
+            <p class="lede">Bリーグのリアルなスタッツを使って、SQLを書き、実行し、答えを確かめる。データと向き合うための個人用コマンドコンソール。</p>
+            <p style="margin:32px 0 0"><a class="pill ghost" href="#workspace">→ 今日の問題を開く</a></p>
+          </div>
+          <div class="dark-card card-pad dashboard-card" id="workspace">
+            <div class="card-header"><div><p class="caption">CURRENT SESSION</p><h2 class="card-title" style="margin:6px 0 0">選手別の平均得点を求める</h2></div><span class="status">DB READY</span></div>
+            <div class="tabs" style="margin-top:22px"><button class="tab active" type="button">⌁ 問題</button><button class="tab" type="button">▦ スキーマ</button><button class="tab" type="button">↗ 履歴</button></div>
+            <div class="console-grid">
+              <aside class="sidebar" id="progress">
+                <p class="caption">QUESTION QUEUE</p>
+                <ul class="side-list"><li><a class="active" href="#workspace"><span>01</span><span>基本検索</span><span>✓</span></a></li><li><a href="#workspace"><span>02</span><span>集計</span><span>→</span></a></li><li><a href="#workspace"><span>03</span><span>テーブル結合</span><span>→</span></a></li><li><a href="#workspace"><span>04</span><span>条件分岐</span><span>→</span></a></li></ul>
+                <div style="margin-top:auto"><p class="caption">COMPLETION <strong class="yellow">24%</strong></p><div class="progress-track"><div class="progress-fill" style="width:24%"></div></div></div>
+              </aside>
+              <div class="main-stack">
+                <div class="mini-stats"><div class="mini-stat"><span class="caption">SOLVED</span><strong class="cyan">24</strong></div><div class="mini-stat"><span class="caption">STREAK</span><strong class="gold">04</strong></div><div class="mini-stat"><span class="caption">SAVED</span><strong>08</strong></div></div>
+                <div class="editor"><div class="editor-top"><span class="caption">QUERY_EDITOR.SQL</span><span class="editor-dots"><i></i><i></i><i></i></span></div><textarea spellcheck="false">SELECT player_name,
+       AVG(points) AS avg_points
+FROM player_game_stats
+GROUP BY player_name
+ORDER BY avg_points DESC
+LIMIT 10;</textarea><div class="editor-actions"><span class="caption">READ ONLY / SQLITE</span><button class="pill" type="button">実行する&nbsp; ↗</button></div></div>
+                <div class="dark-card soft card-pad"><div class="card-header"><div><p class="caption">LAST RESULT</p><strong class="cyan" style="font-size:24px">10 rows returned</strong></div><span class="status">READY</span></div><div style="overflow:auto;margin-top:14px"><table class="result-table"><thead><tr><th>player_name</th><th>avg_points</th><th>team</th></tr></thead><tbody><tr><td>富樫 勇樹</td><td class="cyan">18.42</td><td>千葉J</td></tr><tr><td>河村 勇輝</td><td class="cyan">17.98</td><td>横浜BC</td></tr></tbody></table></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="container" id="schema" style="padding-bottom:80px"><div class="dark-card card-pad"><div class="card-header"><div><p class="eyebrow">SCHEMA SNAPSHOT</p><h2 class="card-title">使えるデータを、いつでも隣に。</h2></div><a class="pill ghost" href="../table_definition.md">全テーブルを見る&nbsp; →</a></div><div class="mini-stats"><div class="mini-stat"><span class="caption">TABLES</span><strong>08</strong></div><div class="mini-stat"><span class="caption">GAMES</span><strong class="cyan">12.4k</strong></div><div class="mini-stat"><span class="caption">SEASONS</span><strong class="gold">10</strong></div></div></div></section>
+    </main>
+    <footer class="page-footer"><div class="footer-row"><span>01 / Command Console · v1.0.0</span><a href="./">5案一覧へ戻る →</a></div></footer>
+  </body>
+</html>

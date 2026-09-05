@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ja" class="variant-scoreboard">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SQL練習帳 Scoreboard モックアップ">
+    <title>02 Scoreboard — SQL練習帳</title>
+    <link rel="stylesheet" href="./mockups.css">
+  </head>
+  <body>
+    <header class="mockup-nav"><a class="brand" href="./"><span class="brand-mark">⌁</span> SQL練習帳</a><nav class="nav-links" aria-label="メインナビゲーション"><a href="#question">本日の問題</a><a href="#queue">問題一覧</a><a href="#result">結果</a></nav><div class="nav-actions"><a class="pill ghost" href="#queue">問題一覧&nbsp; ↗</a></div></header>
+    <main class="page">
+      <section class="score-hero"><div class="container score-grid"><div><p class="eyebrow">02 / SCOREBOARD MODE</p><h1>一問ずつ、<br><span class="outline-word">スコア</span>を積む。</h1><p class="lede">問題を選んで、SQLを実行。試合のように、正解するたびに自分のスコアボードが更新される。</p></div><div class="score-board"><div class="team"><span class="caption">YOUR SCORE</span><strong class="cyan">24</strong><span class="muted">SOLVED QUESTIONS</span></div><div class="team"><span class="caption">NEXT TARGET</span><strong>25</strong><span class="muted">KEEP GOING →</span></div></div></div></section>
+      <section class="score-body" id="question"><div class="container exercise-grid"><aside id="queue"><p class="eyebrow">QUESTION QUEUE</p><div class="problem-index">CURRENT QUESTION<strong>03</strong></div><div class="challenge-list"><div class="current"><span>01 / 基本検索</span><strong>✓</strong></div><div><span>02 / 集計</span><span>✓</span></div><div><span>03 / テーブル結合</span><strong>NOW</strong></div><div><span>04 / 条件分岐</span><span>LOCKED</span></div></div><div style="margin-top:32px"><p class="caption">SESSION PROGRESS</p><div class="progress-track"><div class="progress-fill" style="width:32%"></div></div><p class="muted" style="font-size:12px;margin:10px 0 0">8 / 25 問を完了</p></div></aside><div><div class="dark-card card-pad" style="margin-bottom:16px"><div class="card-header"><div><p class="caption">TABLE JOIN / LEVEL 03</p><h2 class="card-title" style="font-size:24px;margin:7px 0">チームごとの勝利数を集計せよ</h2></div><button class="icon-button" aria-label="お気に入りに追加" type="button">☆</button></div><p class="muted" style="margin:0">games と game_team_stats を結合し、2023-24シーズンのチーム別勝利数を多い順に表示してください。</p></div><div class="editor"><div class="editor-top"><span class="caption">ANSWER / WRITE SQL</span><span class="caption yellow">POINTS × 100</span></div><textarea spellcheck="false">SELECT t.team_name,
+       COUNT(*) AS wins
+FROM games AS g
+JOIN game_team_stats AS s ON g.game_id = s.game_id
+JOIN teams AS t ON s.team_id = t.team_id
+WHERE g.season = '2023-24'
+GROUP BY t.team_name;</textarea><div class="editor-actions"><button class="pill ghost" type="button">ヒントを見る</button><button class="pill" type="button">正誤判定&nbsp; →</button></div></div><div class="dark-card card-pad" id="result" style="margin-top:16px"><div class="card-header"><div><p class="caption">EXECUTION RESULT</p><h2 class="card-title" style="margin:5px 0 0">まだ結果はありません</h2></div><span class="caption">0 rows</span></div><p class="muted" style="margin:10px 0 0">SQLを実行すると、ここに結果が表示されます。</p></div></div></div></section>
+    </main>
+    <footer class="page-footer"><div class="footer-row"><span>02 / Scoreboard · v1.0.0</span><a href="./">5案一覧へ戻る →</a></div></footer>
+  </body>
+</html>

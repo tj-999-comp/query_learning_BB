@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ja" class="variant-focus">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SQL練習帳 Focus Mode モックアップ">
+    <title>05 Focus Mode — SQL練習帳</title>
+    <link rel="stylesheet" href="./mockups.css">
+  </head>
+  <body>
+    <header class="mockup-nav"><a class="brand" href="./"><span class="brand-mark">⌁</span> SQL練習帳</a><div class="caption">FOCUS MODE / 01—25</div><div class="nav-actions"><button class="icon-button" type="button" aria-label="メニュー">☰</button></div></header>
+    <main class="page"><div class="container focus-wrap"><aside class="focus-rail"><div><p class="caption">CURRENT</p><div class="rail-number">QUESTION<strong>08</strong></div><div class="rail-rule"></div><p class="caption">CATEGORY</p><p class="gold" style="font-size:13px">GROUP BY<br>AGGREGATION</p></div><a class="caption" href="./">← ALL QUESTIONS</a></aside><section class="focus-content"><p class="eyebrow">FOCUS MODE / WRITE, RUN, LEARN</p><h1>チーム別の勝利数を、<mark>集計</mark>する。</h1><div class="focus-step">01 / READ THE QUESTION</div><div class="dark-card card-pad" style="margin-bottom:18px"><div class="card-header"><p class="caption" style="margin:0">PROMPT</p><span class="status">LEVEL 02</span></div><p style="font-size:17px;margin:18px 0 0;color:var(--silver-2)">2023-24シーズンのチーム別勝利数を、勝利数の多い順に表示してください。</p></div><div class="focus-step">02 / WRITE YOUR QUERY</div><div class="focus-columns"><div class="editor"><div class="editor-top"><span class="caption">UNTITLED.SQL</span><span class="caption yellow">⌘ ↵ RUN</span></div><textarea spellcheck="false">SELECT team_id,
+       COUNT(*) AS wins
+FROM game_team_stats
+WHERE result = 'W'
+GROUP BY team_id
+ORDER BY wins DESC;</textarea><div class="editor-actions"><span class="caption">SQLITE / READ ONLY</span><button class="pill" type="button">実行する&nbsp; ↗</button></div></div><div class="dark-card card-pad focus-result"><div class="card-header"><p class="caption" style="margin:0">RESULT</p><span class="caption cyan">PREVIEW</span></div><table class="result-table"><thead><tr><th>team_id</th><th>wins</th></tr></thead><tbody><tr><td>CHB</td><td class="cyan">42</td></tr><tr><td>UTS</td><td class="cyan">38</td></tr><tr><td>RYK</td><td class="cyan">35</td></tr></tbody></table></div></div><div class="focus-footer"><button class="pill ghost" type="button">← 前の問題</button><button class="pill" type="button">正誤判定&nbsp; →</button></div></section></div></main>
+    <footer class="page-footer"><div class="footer-row"><span>05 / Focus Mode · v1.0.0</span><span>One question at a time.</span></div></footer>
+  </body>
+</html>
