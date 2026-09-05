@@ -180,6 +180,7 @@ select:focus { border-color: var(--cyan); }
 .problem-card-meta { display: flex; flex-wrap: wrap; gap: 5px; color: var(--muted); font-size: 11px; line-height: 1.2; }
 .tag { border-radius: var(--radius-pill); background: rgba(190, 192, 194, .14); padding: 3px 7px; }
 .problem-card-status { display: flex; align-items: center; gap: 5px; flex: 0 0 auto; }
+.problem-card .completion-icon.completed { width: 18px; height: 18px; border-right-width: 2px; border-bottom-width: 2px; }
 .drawer-favorite { display: inline-grid; width: 18px; height: 18px; place-items: center; color: var(--ink); font-size: 15px; line-height: 1; }
 .drawer-favorite.active { color: var(--gold); }
 .star { color: var(--gold); letter-spacing: .06em; }
