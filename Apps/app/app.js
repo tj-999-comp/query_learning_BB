@@ -468,7 +468,7 @@ function selectProblem(problemId) {
   initializeSqlEditor();
   if (state.editor) state.editor.refresh();
   elements.questionCategory.textContent = problem.category;
-  elements.questionTitleText.textContent = `${problemNumber(problem)} ${problem.title}`;
+  elements.questionTitleText.innerHTML = `<span class="question-number-prefix">${problemNumber(problem).replace("Q", "Q.")}</span> ${escapeHtml(problem.title)}`;
   elements.questionDifficulty.textContent = `難易度 ${difficultyStars(problem.difficulty)}`;
   elements.questionTables.textContent = `使用テーブル: ${problem.sourceTables.join(", ")}`;
   elements.questionPrompt.textContent = problem.prompt;
