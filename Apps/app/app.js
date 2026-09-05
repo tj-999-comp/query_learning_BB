@@ -437,7 +437,7 @@ function renderProblemList() {
     button.innerHTML = `
       <div class="problem-card-top"><span class="problem-number">${problemNumber(problem)}</span>
         <span class="problem-card-status">
-          <span class="completion-icon ${completed ? "completed" : "incomplete"}" role="img" aria-label="${completed ? "達成済み" : "未達成"}" title="${completed ? "達成済み" : "未達成"}">✓</span>
+          ${completed ? '<span class="completion-icon completed" role="img" aria-label="達成済み" title="達成済み">✓</span>' : ""}
           <span class="drawer-favorite ${favorite ? "active" : "inactive"}" role="img" aria-label="${favorite ? "お気に入り" : "お気に入りではありません"}" title="${favorite ? "お気に入り" : "お気に入りではありません"}">${favorite ? "★" : "☆"}</span>
         </span></div>
       <h3>${escapeHtml(problem.title)}</h3>
