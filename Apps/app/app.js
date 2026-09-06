@@ -28,6 +28,7 @@ const state = {
   editor: null,
   schema: { tables: [], columnsByTable: {} },
   progress: loadProgress(),
+  problemFilter: { status: "incomplete", favorites: false },
 };
 
 const elements = {
@@ -38,6 +39,7 @@ const elements = {
   dataStatus: document.querySelector("#data-status"),
   problemList: document.querySelector("#problem-list"),
   progressFilter: document.querySelector("#progress-filter"),
+  progressFilterButtons: [...document.querySelectorAll("[data-progress-filter]")],
   categoryFilter: document.querySelector("#category-filter"),
   progressDetailButton: document.querySelector("#progress-detail-button"),
   progressModal: document.querySelector("#progress-modal"),
@@ -49,6 +51,7 @@ const elements = {
   storageStatus: document.querySelector("#storage-status"),
   emptyState: document.querySelector("#empty-state"),
   nextProblemList: document.querySelector("#next-problem-list"),
+  favoriteProblemList: document.querySelector("#favorite-problem-list"),
   questionView: document.querySelector("#question-view"),
   questionCategory: document.querySelector("#question-category"),
   questionTitleText: document.querySelector("#question-title-text"),
@@ -109,6 +112,7 @@ function saveProgress() {
   renderProgress();
   renderProblemList();
   renderNextProblemList();
+  renderFavoriteProblemList();
   updateQuestionCompletion();
   if (syncReady) queueProgressSync();
   return storageAvailable;
@@ -361,15 +365,15 @@ function difficultyStars(level) {
 }
 
 function visibleProblems() {
-  const progressFilter = elements.progressFilter.value;
+  const { status, favorites } = state.problemFilter;
   const categoryFilter = elements.categoryFilter.value;
   return state.problems.filter((problem) => {
     const completed = Boolean(state.progress.completed[problem.id]);
     const favorite = Boolean(state.progress.favorites[problem.id]);
-    const progressMatches = progressFilter === "all"
-      || (progressFilter === "completed" && completed)
-      || (progressFilter === "incomplete" && !completed)
-      || (progressFilter === "favorites" && favorite);
+    const statusMatches = status === "all"
+      || (status === "completed" && completed)
+      || (status === "incomplete" && !completed);
+    const progressMatches = favorites ? statusMatches || favorite : statusMatches;
     return progressMatches && (categoryFilter === "all" || problem.category === categoryFilter);
   });
 }
@@ -389,12 +393,31 @@ function updateProblemNavigation() {
 
 function nextProblemsByCategory() {
   const nextProblems = new Map();
-  state.problems.forEach((problem) => {
-    if (!state.progress.completed[problem.id] && !nextProblems.has(problem.category)) {
-      nextProblems.set(problem.category, problem);
-    }
+  state.problems.forEach((problem, index) => {
+    if (state.progress.completed[problem.id]) return;
+    const current = nextProblems.get(problem.category);
+    if (!current || index < current.index) nextProblems.set(problem.category, { index, problem });
   });
-  return [...nextProblems.values()];
+  return [...nextProblems.values()]
+    .sort((left, right) => left.index - right.index)
+    .map(({ problem }) => problem);
+}
+
+function favoriteProblems() {
+  return state.problems.filter((problem) => Boolean(state.progress.favorites[problem.id]));
+}
+
+function createHomeProblemCard(problem, className, label) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = className;
+  button.setAttribute("aria-label", `${problemNumber(problem)} ${problem.title}${label}`);
+  button.innerHTML = `
+    <div class="next-problem-card-meta"><span class="tag">${escapeHtml(problem.category)}</span><span class="problem-number">${problemNumber(problem)}</span></div>
+    <h4>${escapeHtml(problem.title)}</h4>
+    <p>${escapeHtml(problem.prompt)}</p>`;
+  button.addEventListener("click", () => selectProblem(problem.id));
+  return button;
 }
 
 function renderNextProblemList() {
@@ -405,18 +428,22 @@ function renderNextProblemList() {
     elements.nextProblemList.innerHTML = '<p class="muted">すべての問題を達成しました。</p>';
     return;
   }
-  nextProblems.forEach((problem) => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "next-problem-card";
-    button.setAttribute("aria-label", `${problemNumber(problem)} ${problem.title}を始める`);
-    button.innerHTML = `
-      <div class="next-problem-card-meta"><span class="tag">${escapeHtml(problem.category)}</span><span class="problem-number">${problemNumber(problem)}</span></div>
-      <h4>${escapeHtml(problem.title)}</h4>
-      <p>${escapeHtml(problem.prompt)}</p>`;
-    button.addEventListener("click", () => selectProblem(problem.id));
-    elements.nextProblemList.appendChild(button);
-  });
+  nextProblems.forEach((problem) => elements.nextProblemList.appendChild(
+    createHomeProblemCard(problem, "next-problem-card", "を始める"),
+  ));
+}
+
+function renderFavoriteProblemList() {
+  if (!elements.favoriteProblemList) return;
+  const favorites = favoriteProblems();
+  elements.favoriteProblemList.innerHTML = "";
+  if (!favorites.length) {
+    elements.favoriteProblemList.innerHTML = '<p class="muted">お気に入り登録した問題はありません。</p>';
+    return;
+  }
+  favorites.forEach((problem) => elements.favoriteProblemList.appendChild(
+    createHomeProblemCard(problem, "next-problem-card favorite-problem-card", "を復習する"),
+  ));
 }
 
 function renderProblemList() {
@@ -1046,11 +1073,11 @@ async function loadData() {
     if (!problemsResponse.ok) throw new Error("問題定義を読み込めませんでした。");
     state.problems = await problemsResponse.json();
     await synchronizeProgress();
-    elements.progressFilter.value = "incomplete";
     populateCategoryFilter();
     renderProgress();
     renderProblemList();
     renderNextProblemList();
+    renderFavoriteProblemList();
 
     const manifestResponse = await fetch(`${DATA_ROOT}/db-manifest.json`);
     if (!manifestResponse.ok) throw new Error("データベースのマニフェストを読み込めませんでした。");
@@ -1073,7 +1100,22 @@ async function loadData() {
   }
 }
 
-elements.progressFilter.addEventListener("change", renderProblemList);
+function setProblemFilter(filter) {
+  if (filter === "favorites") state.problemFilter.favorites = !state.problemFilter.favorites;
+  else state.problemFilter.status = filter;
+  elements.progressFilterButtons.forEach((button) => {
+    const isActive = button.dataset.progressFilter === "favorites"
+      ? state.problemFilter.favorites
+      : button.dataset.progressFilter === state.problemFilter.status;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
+  renderProblemList();
+}
+
+elements.progressFilterButtons.forEach((button) => {
+  button.addEventListener("click", () => setProblemFilter(button.dataset.progressFilter));
+});
 elements.categoryFilter.addEventListener("change", renderProblemList);
 elements.previousProblemButton.addEventListener("click", () => moveToRelativeProblem(-1));
 elements.nextProblemButton.addEventListener("click", () => moveToRelativeProblem(1));

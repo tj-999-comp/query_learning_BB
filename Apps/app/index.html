@@ -32,14 +32,15 @@
         </div>
       </div>
       <div class="filters">
-        <label>表示
-          <select id="progress-filter">
-            <option value="incomplete" selected>未達成</option>
-            <option value="all">すべて</option>
-            <option value="completed">達成済み</option>
-            <option value="favorites">お気に入り</option>
-          </select>
-        </label>
+        <fieldset class="filter-group">
+          <legend>表示</legend>
+          <div id="progress-filter" class="filter-chips" role="group" aria-label="達成状況で絞り込む">
+            <button class="filter-chip is-active" type="button" data-progress-filter="incomplete" aria-pressed="true">未達成</button>
+            <button class="filter-chip" type="button" data-progress-filter="completed" aria-pressed="false">達成済み</button>
+            <button class="filter-chip" type="button" data-progress-filter="all" aria-pressed="false">全て</button>
+            <button class="filter-chip" type="button" data-progress-filter="favorites" aria-pressed="false">お気に入り</button>
+          </div>
+        </fieldset>
         <label>カテゴリ
           <select id="category-filter"><option value="all">すべて</option></select>
         </label>
@@ -52,7 +53,20 @@
         <section class="workspace">
           <div id="empty-state" class="empty-state">
             <h2 class="hero-slogan">JUST DO IT.</h2>
-            <div id="next-problem-list" class="next-problem-list" aria-label="問題一覧"></div>
+            <div class="home-sections">
+              <section class="home-section" aria-labelledby="continue-learning-title">
+                <div class="home-section-heading">
+                  <h2 id="continue-learning-title">続きから解こう</h2>
+                </div>
+                <div id="next-problem-list" class="next-problem-list" aria-label="続きから解く問題"></div>
+              </section>
+              <section class="home-section" aria-labelledby="repeat-learning-title">
+                <div class="home-section-heading">
+                  <h2 id="repeat-learning-title">繰り返し解こう</h2>
+                </div>
+                <div id="favorite-problem-list" class="favorite-problem-list" aria-label="お気に入りの問題"></div>
+              </section>
+            </div>
           </div>
 
           <article id="question-view" class="question-view hidden">
@@ -108,7 +122,7 @@
         </section>
       </div>
     </main>
-    <footer class="site-footer">個人学習用のMVP · Bリーグスタッツ · v1.1.2</footer>
+    <footer class="site-footer">個人学習用のMVP · Bリーグスタッツ · v1.2.0</footer>
     <div id="scroll-stabilizer" class="scroll-stabilizer" aria-hidden="true"></div>
 
     <div id="progress-modal" class="modal hidden" aria-hidden="true">
