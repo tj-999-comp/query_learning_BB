@@ -304,3 +304,43 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -.04em; }
   .latest-implementation-grid { grid-template-columns: 1fr; }
   .component-grid { grid-template-columns: 1fr; }
 }
+
+/* Keep the review surface comparable with the production app's white canvas. */
+:root { --text-muted: #5f7185; --line: #d8d8e3; }
+body { background: var(--white); color: var(--navy); }
+.review-nav { color: var(--text-muted); }
+.review-brand { color: var(--navy); }
+.latest-proposal, .review-option, .component-option, .success-option,
+.check-sample, .button-sample, .menu-sample, .action-sample,
+.latest-implementation-grid > div { background: var(--white); color: var(--navy); }
+.option-head { background: var(--white); color: var(--navy); }
+.latest-proposal { border-color: var(--silver); }
+.latest-proposal-heading h2, .option-head h2, .sample-heading h3,
+.component-option h3, .success-option h3, .sample-panels strong,
+.policy-note strong, .live-feedback { color: var(--navy); }
+.latest-proposal-heading > p:last-child, .policy-note p,
+.option-head p, .component-review-heading > p:last-child,
+.success-review-heading > p:last-child { color: var(--text-muted); }
+.review-page .sample-stage { background: var(--white); }
+.review-page .sample-panels > div {
+  background: var(--white);
+  color: var(--navy);
+}
+.review-page .sample-panels small { color: var(--text-muted); }
+.review-check, .latest-check, .live-check-sample { background: var(--white); color: var(--navy); }
+.live-check-sample { box-shadow: none; }
+.success-box { background: var(--white); color: var(--navy); }
+.success-box strong { color: var(--navy); }
+.live-action, .latest-action-grid button.review-action, .component-option button.review-button {
+  background: var(--white);
+  color: var(--navy);
+}
+.latest-proposal .live-action.run, .latest-proposal .live-action.submit {
+  background: var(--white);
+  color: var(--navy);
+}
+.component-option button.review-menu { background: var(--white); }
+.button-02, .action-latest-03, .action-latest-16 { border-color: var(--navy); }
+.live-action.run, .live-action.submit { color: var(--navy); }
+.live-menu-sample { background: var(--white); }
+.review-footer { border-top-color: var(--silver); color: var(--text-muted); }
