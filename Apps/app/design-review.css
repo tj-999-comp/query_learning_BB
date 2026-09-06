@@ -631,3 +631,27 @@ body { background: var(--white); color: var(--navy); }
 .button-color-19.submit { --button-line-normal: #fdbb30; --button-line-hover: #64748b; }
 .button-color-20.run { --button-line-normal: #334155; --button-line-hover: #facc15; }
 .button-color-20.submit { --button-line-normal: #facc15; --button-line-hover: #334155; }
+
+/* Proposal No.05: final readability adjustments for the adopted 17 / 16 pair. */
+.live-check-adopted {
+  width: 50px;
+  height: 50px;
+  border: 0;
+  border-radius: 8px;
+  background: #0891b2;
+  box-shadow: 5px 5px 0 #fef08a;
+  color: var(--yellow);
+  font-size: 34px;
+  line-height: 1;
+}
+.adopted-button-16.run,
+.adopted-button-16.submit {
+  --button-line-normal: #0891b2;
+  --button-line-hover: #fef08a;
+}
+.menu-hover-adopted {
+  background: var(--cyan);
+}
+.menu-hover-adopted .menu-glyph i {
+  background: var(--white);
+}
