@@ -3,4 +3,4 @@ title: 'Issue #52 v1.1.1問題仕様と必要カラム表示の本番反映'
 date: "2026-09-06"
 project_id: query_learning_BB
 tags: [codex, v1.1.1, issue-52, problem-spec, required-columns, production, work-record]
-publish: false
+publish: true

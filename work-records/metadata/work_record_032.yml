@@ -3,4 +3,4 @@ title: 'Issue #57 問題文の論理整合性と必要カラム表示の全問�
 date: "2026-09-06"
 project_id: query_learning_BB
 tags: [codex, issue-57, problem-statements, required-columns, stg, production, work-record]
-publish: false
+publish: true

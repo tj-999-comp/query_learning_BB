@@ -3,4 +3,4 @@ title: 'Issue #55 UI改善案の採用と本番反映'
 date: "2026-09-06"
 project_id: query_learning_BB
 tags: [codex, issue-55, design, ui, design-review, stg, production, work-record]
-publish: false
+publish: true

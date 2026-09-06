@@ -3,4 +3,4 @@ title: 'Issue #58 v1.1.2 達成済みマークの枠調整と本番反映'
 date: "2026-09-06"
 project_id: query_learning_BB
 tags: [codex, issue-58, v1.1.2, completion-mark, design-review, stg, production, work-record]
-publish: false
+publish: true

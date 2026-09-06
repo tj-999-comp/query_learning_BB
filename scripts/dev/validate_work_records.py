@@ -71,6 +71,8 @@ def main() -> int:
             errors.append(f"{path}: missing metadata keys: {', '.join(missing)}")
         if values.get("schema_version") != "1":
             errors.append(f"{path}: schema_version must be 1")
+        if values.get("publish") != "true":
+            errors.append(f"{path}: publish must be true for this repository")
         project_id = values.get("project_id", "")
         if project_id and not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]*", project_id):
             errors.append(f"{path}: project_id contains unsupported characters")

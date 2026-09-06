@@ -3,4 +3,4 @@ title: '#12 PC・iPad・ブラウザ保存のMVP受入確認'
 date: "2026-09-04"
 project_id: query_learning_BB
 tags: [codex, mvp, acceptance, browser, localstorage]
-publish: false
+publish: true
