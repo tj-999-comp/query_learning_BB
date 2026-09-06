@@ -32,8 +32,8 @@
     "numericTolerance": 0
   },
   "requiredColumns": [
-    {"label": "選手名", "reference": "players.player_name_j"},
-    {"label": "国籍", "reference": "players.league_registered_nationality"}
+    {"label": "player_name_j", "reference": "players"},
+    {"label": "league_registered_nationality", "reference": "players"}
   ],
   "learningObjectives": ["INによる複数条件の検索"]
 }
@@ -41,7 +41,7 @@
 
 `answerSql`は解答例として表示し、`judgeSql`は正解結果の生成に使います。2つは別のSQLにできますが、生成時に実行結果が一致することを検証します。`resultSpec.columns`には学習者に返させる列だけを登録し、内部的な結合キーや並び順用の列をSELECTへ追加しません。`rowOrder`、`numericTolerance`もここで管理します。
 
-`requiredColumns`は問題文の直下に表示する補助情報です。`label`が画面表示名、`reference`がテーブル名を含むカラム参照です。省略した場合は`resultSpec.columns`から技術名をそのまま表示します。
+`requiredColumns`は問題文の直下に表示する補助情報です。`label`が画面表示名、`reference`は所属テーブル名だけを指定します。画面では`game_date（games）`のように表示されます。省略した場合も、SQLの出力列と`sourceTables`から所属テーブルを補完します。
 
 既存の`referenceSql`、`comparison`、`requiredSqlTerms`も移行期間中は読み込めますが、新しい問題では使用しません。`learningObjectives`はヒントや解説用であり、SQL文の文字列一致による正誤判定には使いません。
 
