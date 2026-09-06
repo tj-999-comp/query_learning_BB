@@ -684,9 +684,10 @@ body { background: var(--white); color: var(--navy); }
 .divider-preview { display: grid; gap: 8px; padding-top: 8px; }
 .divider-preview span { display: block; height: 1px; background: var(--silver-light, #e9ebed); }
 
-/* Proposal No.07: remove the yellow offset shadow and compare two check outlines. */
-.completion-mark-review-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+/* Proposal No.07: stack a thick yellow check over a thick cyan outline. */
+.completion-mark-review-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .completion-mark-preview {
+  position: relative;
   display: grid;
   width: 56px;
   height: 56px;
@@ -694,13 +695,14 @@ body { background: var(--white); color: var(--navy); }
   margin: 12px 0 8px;
   border-radius: 10px;
   background: #0891b2;
-  color: var(--yellow);
+  color: transparent;
   font-size: 38px;
-  font-weight: 800;
+  font-weight: 900;
   line-height: 1;
-  -webkit-text-stroke: 2.5px var(--yellow);
-  text-shadow: -3px -3px 0 var(--completion-outline, transparent), 3px -3px 0 var(--completion-outline, transparent), -3px 3px 0 var(--completion-outline, transparent), 3px 3px 0 var(--completion-outline, transparent);
 }
+.completion-mark-preview::before, .completion-mark-preview::after { position: absolute; inset: 0; display: grid; place-items: center; color: var(--yellow); content: "✓"; font: inherit; line-height: 1; pointer-events: none; }
+.completion-mark-preview::before { -webkit-text-stroke: 8px var(--completion-outline, transparent); paint-order: stroke fill; }
+.completion-mark-preview::after { -webkit-text-stroke: 4px var(--yellow); paint-order: stroke fill; }
 .completion-check-outline-cyan { --completion-outline: var(--cyan); }
 .completion-check-outline-white { --completion-outline: var(--white); }
 
@@ -712,7 +714,7 @@ body { background: var(--white); color: var(--navy); }
 .latest-proposal-heading > p:last-child,
 .component-review-heading > p:last-child,
 .success-review-heading > p:last-child { font-size: 13px; }
-.completion-mark-review-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.completion-mark-spec { margin: 22px 0 0; color: var(--navy); font-size: 15px; font-weight: 600; line-height: 1.7; }
 
 @media (max-width: 700px) {
   .completion-mark-review-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
