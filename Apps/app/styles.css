@@ -85,9 +85,9 @@ a { color: inherit; }
 .question-header-info > .completion-icon { flex: 0 0 46px; width: 46px; height: 46px; font-size: 1.55rem; }
 .question-meta { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 8px; margin: 0; color: var(--ink); font-family: var(--font-mono); font-size: 12px; }
 .question-meta span { border: 1px solid rgba(51, 51, 51, .28); border-radius: var(--radius-pill); background: var(--white); padding: 10px 14px; }
-.favorite-button { display: inline-grid; width: 46px; height: 46px; flex: 0 0 46px; place-items: center; border: 1px solid var(--ink); border-radius: var(--radius-pill); background: var(--white); color: var(--ink); padding: 0; font-size: 24px; line-height: 1; }
-.favorite-button:hover, .favorite-button:focus-visible { border-color: var(--cyan); color: var(--cyan); outline: 0; }
-.favorite-button.active { border-color: #000; background: var(--yellow); color: #000; }
+.favorite-button { display: inline-grid; width: 18px; height: 18px; flex: 0 0 18px; place-items: center; border: 0; border-radius: 0; background: transparent; color: var(--ink); padding: 0; font-size: 15px; line-height: 1; }
+.favorite-button:hover, .favorite-button:focus-visible { border: 0; background: transparent; color: var(--cyan); outline: 0; }
+.favorite-button.active { border: 0; background: transparent; color: var(--gold); }
 .completion-icon { display: inline-grid; place-items: center; border-radius: 50%; color: var(--ink); font-size: .7rem; font-weight: 600; line-height: 1; }
 .completion-icon.incomplete { background: var(--silver); }
 .completion-icon.completed { display: inline-grid; width: 46px; height: 46px; place-items: center; border: 0; border-radius: 8px; background: #0891b2; box-shadow: 5px 5px 0 #fef08a; color: var(--yellow); font-size: 1.55rem; }
@@ -181,10 +181,11 @@ a { color: inherit; }
 .filters label { display: grid; gap: 6px; color: var(--muted); font-size: 12px; }
 select { width: 100%; border: 1px solid var(--silver); border-radius: var(--radius-input); background: var(--white); color: var(--ink); padding: 11px 12px; outline: 0; }
 select:focus { border-color: var(--cyan); }
-.problem-list { display: grid; gap: 8px; max-height: calc(100vh - 220px); overflow-y: auto; padding-right: 2px; scrollbar-width: none; -ms-overflow-style: none; }
-.problem-card { width: 100%; border: 1px solid var(--silver); border-radius: 16px; background: var(--white); padding: 12px 13px; color: var(--ink); text-align: left; line-height: 1.25; transition: border-color .15s, transform .15s; }
-.problem-card:hover, .problem-card.selected { border-color: var(--cyan); transform: translateY(-1px); }
-.problem-card.selected { box-shadow: 0 0 0 2px rgba(0, 204, 255, .13); }
+.problem-list { display: grid; gap: 0; max-height: calc(100vh - 220px); overflow-y: auto; padding-right: 0; scrollbar-width: none; -ms-overflow-style: none; }
+.problem-card { position: relative; width: 100%; border: 0; border-bottom: 1px solid var(--silver-light); border-radius: 0; background: transparent; padding: 12px 13px 12px 14px; color: var(--ink); text-align: left; line-height: 1.25; transition: background-color .15s ease; }
+.problem-card::before { position: absolute; inset: 8px auto 8px 0; width: 4px; background: var(--cyan); content: ""; opacity: 0; transition: opacity .15s ease; }
+.problem-card:hover, .problem-card:focus-visible, .problem-card.selected { border-color: var(--silver-light); outline: 0; }
+.problem-card:hover::before, .problem-card:focus-visible::before, .problem-card.selected::before { opacity: 1; }
 .problem-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
 .problem-number { color: var(--gold); font: 11px var(--font-mono); }
 .problem-card h3 { margin: 5px 0; color: var(--ink); font-size: 14px; line-height: 1.25; }
