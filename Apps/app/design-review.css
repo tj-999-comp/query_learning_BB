@@ -683,3 +683,35 @@ body { background: var(--white); color: var(--navy); }
 .favorite-preview { display: inline-grid; width: 46px; height: 46px; place-items: center; color: var(--ink); font-size: 24px; line-height: 1; }
 .divider-preview { display: grid; gap: 8px; padding-top: 8px; }
 .divider-preview span { display: block; height: 1px; background: var(--silver-light, #e9ebed); }
+
+/* Proposal No.07: remove the yellow offset shadow and compare two check outlines. */
+.completion-mark-review-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.completion-mark-preview {
+  display: grid;
+  width: 56px;
+  height: 56px;
+  place-items: center;
+  margin: 12px 0 8px;
+  border-radius: 10px;
+  background: #0891b2;
+  color: var(--yellow);
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1;
+  -webkit-text-stroke: 1.75px var(--completion-outline, transparent);
+  text-shadow: -1px -1px 0 var(--completion-outline, transparent), 1px -1px 0 var(--completion-outline, transparent), -1px 1px 0 var(--completion-outline, transparent), 1px 1px 0 var(--completion-outline, transparent);
+}
+.completion-check-no-shadow { --completion-outline: transparent; }
+.completion-check-outline-cyan { --completion-outline: var(--cyan); }
+.completion-check-outline-white { --completion-outline: var(--white); }
+@supports (-webkit-text-stroke: 1px #000) {
+  .completion-mark-preview { text-shadow: none; }
+}
+
+@media (max-width: 700px) {
+  .completion-mark-review-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 420px) {
+  .completion-mark-review-grid { grid-template-columns: 1fr; }
+}

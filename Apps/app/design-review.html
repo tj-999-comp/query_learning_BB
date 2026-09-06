@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="SQL練習帳 v1.1.0 デザイン比較用モックアップ">
-    <title>デザイン比較 | SQL練習帳 v1.1.0</title>
+    <meta name="description" content="SQL練習帳 v1.1.2 デザイン比較用モックアップ">
+    <title>デザイン比較 | SQL練習帳 v1.1.2</title>
     <link rel="stylesheet" href="./design-review.css">
   </head>
   <body>
@@ -13,6 +13,21 @@
       <span>STG / DESIGN REVIEW</span>
     </header>
     <main class="review-page">
+      <section class="latest-proposal proposal-v112" aria-labelledby="latest-proposal-title-v112">
+        <div class="latest-proposal-heading">
+          <p class="proposal-number">提案No.07 / v1.1.2</p>
+          <p class="kicker">LATEST PROPOSAL / REVIEW</p>
+          <h2 id="latest-proposal-title-v112">イエローのチェックを、枠で強くする</h2>
+          <p>達成済みマークのイエローのドロップシャドウを削除し、チェック文字に枠を加えて視認性を上げる案です。枠色はシアンとホワイトを比較中です。</p>
+        </div>
+        <div class="latest-implementation-grid completion-mark-review-grid">
+          <div><span class="implementation-label">共通変更</span><strong class="completion-mark-preview completion-check-no-shadow">✓</strong><p>イエローのドロップシャドウなし</p></div>
+          <div><span class="implementation-label">シアン枠案</span><strong class="completion-mark-preview completion-check-outline-cyan">✓</strong><p>イエローのチェック＋シアンの枠</p></div>
+          <div><span class="implementation-label">ホワイト枠案</span><strong class="completion-mark-preview completion-check-outline-white">✓</strong><p>イエローのチェック＋ホワイトの枠</p></div>
+          <div><span class="implementation-label">本体への暫定反映</span><strong class="completion-mark-preview completion-check-outline-cyan">✓</strong><p>現時点はシアン枠を反映</p></div>
+        </div>
+        <aside class="policy-note"><strong>レビューしてほしい点</strong><p>シアン枠はブランドカラーとの一体感、ホワイト枠はイエローの輪郭の明快さを優先しています。どちらを採用するか確認してください。</p></aside>
+      </section>
       <section class="latest-proposal" aria-labelledby="latest-proposal-title-menu-fix">
         <div class="latest-proposal-heading">
           <p class="proposal-number">提案No.06</p>
