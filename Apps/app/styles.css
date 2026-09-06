@@ -90,7 +90,10 @@ a { color: inherit; }
 .favorite-button.active { border: 0; background: transparent; color: var(--gold); }
 .completion-icon { display: inline-grid; place-items: center; border-radius: 50%; color: var(--ink); font-size: .7rem; font-weight: 600; line-height: 1; }
 .completion-icon.incomplete { background: var(--silver); }
-.completion-icon.completed { display: inline-grid; width: 46px; height: 46px; place-items: center; border: 0; border-radius: 8px; background: #0891b2; box-shadow: 5px 5px 0 #fef08a; color: var(--yellow); font-size: 1.55rem; }
+.completion-icon.completed { position: relative; display: inline-grid; width: 46px; height: 46px; place-items: center; border: 0; border-radius: 8px; background: #0891b2; box-shadow: none; color: transparent; font-size: 1.55rem; font-weight: 900; line-height: 1; }
+.completion-icon.completed::before, .completion-icon.completed::after { position: absolute; inset: 0; display: grid; place-items: center; color: var(--yellow); content: "✓"; font: inherit; line-height: 1; pointer-events: none; }
+.completion-icon.completed::before { -webkit-text-stroke: 12px var(--cyan); paint-order: stroke fill; }
+.completion-icon.completed::after { -webkit-text-stroke: 4px var(--yellow); paint-order: stroke fill; }
 .problem-navigation { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 0 0 20px; }
 .problem-navigation button:disabled { cursor: not-allowed; opacity: .42; }
 .prompt-box { margin-bottom: 16px; padding: 24px 0; border: 0; border-radius: 0; background: transparent; color: var(--ink); }
@@ -193,6 +196,8 @@ select:focus { border-color: var(--cyan); }
 .tag { border-radius: var(--radius-pill); background: rgba(190, 192, 194, .14); padding: 3px 7px; }
 .problem-card-status { display: flex; align-items: center; gap: 5px; flex: 0 0 auto; }
 .problem-card .completion-icon.completed { width: 18px; height: 18px; border: 0; border-radius: 5px; box-shadow: none; font-size: 11px; }
+.problem-card .completion-icon.completed::before { -webkit-text-stroke-width: 6px; }
+.problem-card .completion-icon.completed::after { -webkit-text-stroke-width: 1.5px; }
 .drawer-favorite { display: inline-grid; width: 18px; height: 18px; place-items: center; color: var(--ink); font-size: 15px; line-height: 1; }
 .drawer-favorite.active { color: var(--gold); }
 .star { color: var(--gold); letter-spacing: .06em; }
