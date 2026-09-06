@@ -150,7 +150,7 @@
   {
     "id": "mvp-005",
     "title": "ホームゲームの得点を見る",
-    "prompt": "ホームゲームについて、試合日、チーム名、得点を10件表示してください。新しい試合日を先にし、同じ日なら得点の高い順にします。",
+    "prompt": "ホームゲームについて、試合日、チーム名、得点を10件表示してください。試合日の新しい順に並べ、同じ試合日の場合は得点の高い順、得点も同じ場合は試合IDの大きい順にします。",
     "difficulty": 2,
     "category": "テーブル結合",
     "sourceTables": [
@@ -159,8 +159,8 @@
       "teams"
     ],
     "explanation": "試合、チーム、チーム別スタッツをJOINし、ホームフラグで対象を絞り込みます。",
-    "answerSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_home = 1 ORDER BY g.game_date DESC, s.points DESC LIMIT 10",
-    "judgeSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_home = 1 ORDER BY g.game_date DESC, s.points DESC LIMIT 10",
+    "answerSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_home = 1 ORDER BY g.game_date DESC, s.points DESC, s.schedule_key DESC LIMIT 10",
+    "judgeSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_home = 1 ORDER BY g.game_date DESC, s.points DESC, s.schedule_key DESC LIMIT 10",
     "resultSpec": {
       "rowOrder": "sensitive",
       "columns": [
@@ -409,7 +409,7 @@
   {
     "id": "bball-012",
     "title": "期間を指定して試合を探す",
-    "prompt": "2024年10月1日から2025年3月31日までに行われた試合を10件表示してください。試合日、シーズン、試合IDを表示し、試合日の古い順に並べます。",
+    "prompt": "2024年10月1日から2025年3月31日までに行われた試合を10件表示してください。試合日、シーズン、試合IDを表示し、試合日の古い順に並べます。同じ試合日の場合は試合IDの小さい順にします。",
     "difficulty": 1,
     "category": "基本検索",
     "sourceTables": [
@@ -488,7 +488,7 @@
   {
     "id": "bball-014",
     "title": "試合のホームチームとアウェーチーム",
-    "prompt": "終了した試合について、試合日、ホームチーム名、アウェーチーム名、両チームの得点を10件表示してください。新しい試合を先にします。",
+    "prompt": "終了した試合について、試合日、ホームチーム名、アウェーチーム名、両チームの得点を10件表示してください。試合日の新しい順に並べ、同じ試合日の場合は試合IDの大きい順にします。",
     "difficulty": 2,
     "category": "テーブル結合",
     "sourceTables": [
@@ -1023,7 +1023,7 @@
   {
     "id": "bball-027",
     "title": "選手ごとの最新出場試合",
-    "prompt": "出場した選手ごとに、最も新しい試合の日付、選手名、得点を1件ずつ表示してください。新しい試合日の順に20人表示します。",
+    "prompt": "出場した選手ごとに、試合日の最も新しい記録を1件ずつ取り出し、試合日、選手名、得点を表示してください。試合日の新しい順に20人表示します。同じ試合日の場合は試合IDの大きい順にします。",
     "difficulty": 4,
     "category": "応用集計",
     "sourceTables": [
@@ -1065,7 +1065,7 @@
   {
     "id": "bball-028",
     "title": "シーズン内の累積観客数",
-    "prompt": "観客数が記録されている試合について、シーズン、試合日、観客数、シーズン内の累積観客数を表示してください。古い試合から20件表示します。",
+    "prompt": "観客数が記録されている試合について、シーズン、試合日、観客数、シーズン内の累積観客数を表示してください。シーズンの昇順に並べ、各シーズン内では試合日の古い順、同じ試合日の場合は試合IDの小さい順に20件表示します。",
     "difficulty": 4,
     "category": "応用集計",
     "sourceTables": [
@@ -1198,7 +1198,7 @@
   {
     "id": "bball-031",
     "title": "2025-26シーズンの試合",
-    "prompt": "2025-26シーズンの試合を10件表示してください。試合日、試合ID、試合種別を古い順に表示します。",
+    "prompt": "2025-26シーズンの試合を10件表示してください。試合日の古い順に並べ、同じ試合日の場合は試合IDの小さい順にします。試合日、試合ID、試合種別を表示します。",
     "difficulty": 1,
     "category": "基本検索",
     "sourceTables": [
@@ -1238,7 +1238,7 @@
   {
     "id": "bball-032",
     "title": "2024-25シーズンの試合",
-    "prompt": "2024-25シーズンの試合を10件表示してください。試合日、試合ID、試合種別を新しい順に表示します。",
+    "prompt": "2024-25シーズンの試合を10件表示してください。試合日の新しい順に並べ、同じ試合日の場合は試合IDの大きい順にします。試合日、試合ID、試合種別を表示します。",
     "difficulty": 1,
     "category": "基本検索",
     "sourceTables": [
@@ -1278,7 +1278,7 @@
   {
     "id": "bball-033",
     "title": "レギュラーシーズンの試合",
-    "prompt": "レギュラーシーズン（RS）の試合を10件表示してください。試合日と試合IDを新しい順にします。",
+    "prompt": "レギュラーシーズン（RS）の試合を10件表示してください。試合日の新しい順に並べ、同じ試合日の場合は試合IDの大きい順にします。試合日と試合IDを表示します。",
     "difficulty": 1,
     "category": "基本検索",
     "sourceTables": [
@@ -1312,7 +1312,7 @@
   {
     "id": "bball-034",
     "title": "チャンピオンシップの試合",
-    "prompt": "チャンピオンシップ（CS）の試合を10件表示してください。試合日と試合IDを古い順にします。",
+    "prompt": "チャンピオンシップ（CS）の試合を10件表示してください。試合日の古い順に並べ、同じ試合日の場合は試合IDの小さい順にします。試合日と試合IDを表示します。",
     "difficulty": 1,
     "category": "基本検索",
     "sourceTables": [
@@ -1419,7 +1419,7 @@
   {
     "id": "bball-037",
     "title": "2025年以降の試合",
-    "prompt": "2025年1月1日以降に行われた試合を10件表示してください。試合日、シーズン、試合IDを新しい順にします。",
+    "prompt": "2025年1月1日以降に行われた試合を10件表示してください。試合日の新しい順に並べ、同じ試合日の場合は試合IDの大きい順にします。試合日、シーズン、試合IDを表示します。",
     "difficulty": 1,
     "category": "基本検索",
     "sourceTables": [
@@ -1458,7 +1458,7 @@
   {
     "id": "bball-038",
     "title": "2016-17シーズン前半の試合",
-    "prompt": "2017年4月1日より前の試合を10件表示してください。試合日、シーズン、試合IDを古い順にします。",
+    "prompt": "2017年4月1日より前の試合を10件表示してください。試合日の古い順に並べ、同じ試合日の場合は試合IDの小さい順にします。試合日、シーズン、試合IDを表示します。",
     "difficulty": 1,
     "category": "基本検索",
     "sourceTables": [
@@ -1497,7 +1497,7 @@
   {
     "id": "bball-039",
     "title": "審判名が記録された試合",
-    "prompt": "主審名が記録されている試合を10件表示してください。試合日、会場名、主審名を新しい順にします。",
+    "prompt": "主審名が記録されている試合を10件表示してください。試合日の新しい順に並べ、同じ試合日の場合は試合IDの大きい順にします。試合日、会場名、主審名を表示します。",
     "difficulty": 1,
     "category": "基本検索",
     "sourceTables": [
@@ -1536,7 +1536,7 @@
   {
     "id": "bball-040",
     "title": "試合会場が記録された試合",
-    "prompt": "会場名が記録されている試合を10件表示してください。試合日、会場名、試合種別を新しい順にします。",
+    "prompt": "会場名が記録されている試合を10件表示してください。試合日の新しい順に並べ、同じ試合日の場合は試合IDの大きい順にします。試合日、会場名、試合種別を表示します。",
     "difficulty": 1,
     "category": "基本検索",
     "sourceTables": [
@@ -1770,14 +1770,15 @@
   {
     "id": "bball-046",
     "title": "接戦を制したチーム",
-    "prompt": "3点差以内で勝利したチームの試合ID、チームID、得点を表示してください。新しい試合順に10件表示します。",
+    "prompt": "3点差以内で勝利したチームの試合ID、チームID、得点を表示してください。試合日の新しい順に並べ、同じ試合日の場合は試合IDの大きい順、同じ試合IDの場合はチームIDの昇順にして10件表示します。",
     "difficulty": 2,
     "category": "基本検索",
     "sourceTables": [
-      "game_team_stats"
+      "game_team_stats",
+      "games"
     ],
-    "answerSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE close_win_3pts_or_less = 1 ORDER BY schedule_key DESC, team_id LIMIT 10",
-    "judgeSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE close_win_3pts_or_less = 1 ORDER BY schedule_key DESC, team_id LIMIT 10",
+    "answerSql": "SELECT s.schedule_key, s.team_id, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.close_win_3pts_or_less = 1 ORDER BY g.game_date DESC, s.schedule_key DESC, s.team_id LIMIT 10",
+    "judgeSql": "SELECT s.schedule_key, s.team_id, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.close_win_3pts_or_less = 1 ORDER BY g.game_date DESC, s.schedule_key DESC, s.team_id LIMIT 10",
     "resultSpec": {
       "rowOrder": "insensitive",
       "columns": [
@@ -1801,8 +1802,9 @@
       }
     ],
     "learningObjectives": [
+      "JOIN games",
       "close_win_3pts_or_less = 1",
-      "ORDER BY schedule_key DESC"
+      "ORDER BY g.game_date DESC"
     ],
     "explanation": "チーム別スタッツの数値条件を変えながら、WHEREで必要な行を絞り込む練習です。"
   },
@@ -3615,7 +3617,7 @@
   {
     "id": "bball-093",
     "title": "チーム平均得点の上位10件",
-    "prompt": "チームごとの平均得点を計算し、RANK関数で順位を付けて上位10行を表示してください。",
+    "prompt": "チームごとの平均得点を計算し、RANK関数で順位を付けて順位が10位以内のチームを表示してください。",
     "difficulty": 3,
     "category": "応用集計",
     "sourceTables": [
@@ -3740,14 +3742,14 @@
   {
     "id": "bball-096",
     "title": "シーズン別観客数順位",
-    "prompt": "各シーズンで観客数の多い順に順位を付け、各シーズンの上位試合を10件表示してください。",
+    "prompt": "各シーズンで観客数の多い順に順位を付け、順位が2位以内の試合を各シーズンから表示してください。シーズン、試合日、観客数、順位を表示します。",
     "difficulty": 3,
     "category": "応用集計",
     "sourceTables": [
       "games"
     ],
-    "answerSql": "WITH ranked_games AS (SELECT season, game_date, schedule_key, attendance, RANK() OVER (PARTITION BY season ORDER BY attendance DESC) AS attendance_rank FROM games WHERE attendance IS NOT NULL) SELECT season, game_date, attendance, attendance_rank FROM ranked_games WHERE attendance_rank <= 2 ORDER BY season, attendance_rank, game_date LIMIT 10",
-    "judgeSql": "WITH ranked_games AS (SELECT season, game_date, schedule_key, attendance, RANK() OVER (PARTITION BY season ORDER BY attendance DESC) AS attendance_rank FROM games WHERE attendance IS NOT NULL) SELECT season, game_date, attendance, attendance_rank FROM ranked_games WHERE attendance_rank <= 2 ORDER BY season, attendance_rank, game_date LIMIT 10",
+    "answerSql": "WITH ranked_games AS (SELECT season, game_date, schedule_key, attendance, RANK() OVER (PARTITION BY season ORDER BY attendance DESC) AS attendance_rank FROM games WHERE attendance IS NOT NULL) SELECT season, game_date, attendance, attendance_rank FROM ranked_games WHERE attendance_rank <= 2 ORDER BY season, attendance_rank, game_date",
+    "judgeSql": "WITH ranked_games AS (SELECT season, game_date, schedule_key, attendance, RANK() OVER (PARTITION BY season ORDER BY attendance DESC) AS attendance_rank FROM games WHERE attendance IS NOT NULL) SELECT season, game_date, attendance, attendance_rank FROM ranked_games WHERE attendance_rank <= 2 ORDER BY season, attendance_rank, game_date",
     "resultSpec": {
       "rowOrder": "sensitive",
       "numericTolerance": 0.01,
@@ -3826,7 +3828,7 @@
   },
   {
     "id": "bball-098",
-    "title": "20得点以上の選手人数をシーズン別に数える",
+    "title": "20得点以上の選手記録数をシーズン別に数える",
     "prompt": "シーズンごとに、20得点以上を記録した選手記録の件数を数えてください。件数の多い順に表示します。",
     "difficulty": 3,
     "category": "応用集計",
@@ -3864,7 +3866,7 @@
   {
     "id": "bball-099",
     "title": "平均観客数が高いシーズン",
-    "prompt": "シーズンごとの平均観客数を計算し、全シーズン平均以上のシーズンだけを表示してください。",
+    "prompt": "シーズンごとの平均観客数を計算し、全試合を対象にした平均観客数以上のシーズンだけを表示してください。",
     "difficulty": 3,
     "category": "応用集計",
     "sourceTables": [
@@ -3900,14 +3902,15 @@
   {
     "id": "bball-100",
     "title": "各チームの最新スタッツ",
-    "prompt": "チームごとに最も新しい試合のスタッツを1件ずつ取り出してください。チームID、試合ID、得点を10件表示します。",
+    "prompt": "チームごとに試合日の最も新しい試合のスタッツを1件ずつ取り出してください。同じ試合日の場合は試合IDの大きい記録を選びます。チームID、試合ID、得点を10件表示します。",
     "difficulty": 3,
     "category": "応用集計",
     "sourceTables": [
-      "game_team_stats"
+      "game_team_stats",
+      "games"
     ],
-    "answerSql": "WITH latest AS (SELECT team_id, schedule_key, points, ROW_NUMBER() OVER (PARTITION BY team_id ORDER BY schedule_key DESC) AS row_num FROM game_team_stats) SELECT team_id, schedule_key, points FROM latest WHERE row_num = 1 ORDER BY schedule_key DESC, team_id LIMIT 10",
-    "judgeSql": "WITH latest AS (SELECT team_id, schedule_key, points, ROW_NUMBER() OVER (PARTITION BY team_id ORDER BY schedule_key DESC) AS row_num FROM game_team_stats) SELECT team_id, schedule_key, points FROM latest WHERE row_num = 1 ORDER BY schedule_key DESC, team_id LIMIT 10",
+    "answerSql": "WITH latest AS (SELECT s.team_id, s.schedule_key, s.points, ROW_NUMBER() OVER (PARTITION BY s.team_id ORDER BY g.game_date DESC, s.schedule_key DESC) AS row_num FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key) SELECT team_id, schedule_key, points FROM latest WHERE row_num = 1 ORDER BY schedule_key DESC, team_id LIMIT 10",
+    "judgeSql": "WITH latest AS (SELECT s.team_id, s.schedule_key, s.points, ROW_NUMBER() OVER (PARTITION BY s.team_id ORDER BY g.game_date DESC, s.schedule_key DESC) AS row_num FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key) SELECT team_id, schedule_key, points FROM latest WHERE row_num = 1 ORDER BY schedule_key DESC, team_id LIMIT 10",
     "resultSpec": {
       "rowOrder": "sensitive",
       "numericTolerance": 0.01,
@@ -3932,6 +3935,7 @@
       }
     ],
     "learningObjectives": [
+      "JOIN games",
       "WITH latest",
       "ROW_NUMBER() OVER",
       "PARTITION BY team_id"
