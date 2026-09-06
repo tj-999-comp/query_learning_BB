@@ -683,3 +683,43 @@ body { background: var(--white); color: var(--navy); }
 .favorite-preview { display: inline-grid; width: 46px; height: 46px; place-items: center; color: var(--ink); font-size: 24px; line-height: 1; }
 .divider-preview { display: grid; gap: 8px; padding-top: 8px; }
 .divider-preview span { display: block; height: 1px; background: var(--silver-light, #e9ebed); }
+
+/* Proposal No.07: stack a thick yellow check over a thick cyan outline. */
+.completion-mark-review-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.completion-mark-preview {
+  position: relative;
+  display: grid;
+  width: 56px;
+  height: 56px;
+  place-items: center;
+  margin: 12px 0 8px;
+  border-radius: 10px;
+  background: #0891b2;
+  color: transparent;
+  font-size: 38px;
+  font-weight: 900;
+  line-height: 1;
+}
+.completion-mark-preview::before, .completion-mark-preview::after { position: absolute; inset: 0; display: grid; place-items: center; color: var(--yellow); content: "✓"; font: inherit; line-height: 1; pointer-events: none; }
+.completion-mark-preview::before { -webkit-text-stroke: 12px var(--completion-outline, transparent); paint-order: stroke fill; }
+.completion-mark-preview::after { -webkit-text-stroke: 4px var(--yellow); paint-order: stroke fill; }
+.completion-check-outline-cyan { --completion-outline: var(--cyan); }
+.completion-check-outline-white { --completion-outline: var(--white); }
+
+/* Keep the review page compact and Japanese-first. */
+.kicker { display: none; }
+.latest-proposal-heading h2,
+.component-review-heading h2,
+.success-review-heading h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.1; }
+.latest-proposal-heading > p:last-child,
+.component-review-heading > p:last-child,
+.success-review-heading > p:last-child { font-size: 13px; }
+.completion-mark-spec { margin: 22px 0 0; color: var(--navy); font-size: 15px; font-weight: 600; line-height: 1.7; }
+
+@media (max-width: 700px) {
+  .completion-mark-review-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 420px) {
+  .completion-mark-review-grid { grid-template-columns: 1fr; }
+}

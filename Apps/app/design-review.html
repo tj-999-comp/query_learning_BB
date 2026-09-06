@@ -3,16 +3,31 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="SQL練習帳 v1.1.0 デザイン比較用モックアップ">
-    <title>デザイン比較 | SQL練習帳 v1.1.0</title>
+    <meta name="description" content="SQL練習帳 v1.1.2 デザイン比較用モックアップ">
+    <title>デザイン比較 | SQL練習帳 v1.1.2</title>
     <link rel="stylesheet" href="./design-review.css">
   </head>
   <body>
     <header class="review-nav">
       <a class="review-brand" href="./">SQL練習帳</a>
-      <span>STG / DESIGN REVIEW</span>
+      <span>STG</span>
     </header>
     <main class="review-page">
+      <section class="latest-proposal proposal-v112" aria-labelledby="latest-proposal-title-v112">
+        <div class="latest-proposal-heading">
+          <p class="proposal-number">v1.1.2 / 提案07</p>
+          <h2 id="latest-proposal-title-v112">達成済みマーク</h2>
+          <p>黄色のチェックを太くし、その外側に太いシアン枠を付けます。</p>
+        </div>
+        <div class="latest-implementation-grid completion-mark-review-grid">
+          <div><span class="implementation-label">採用：シアン枠</span><strong class="completion-mark-preview completion-check-outline-cyan">✓</strong><p>太い黄色＋外側をシアンで囲む</p></div>
+          <div><span class="implementation-label">変更内容</span><p class="completion-mark-spec">黄色：太く<br>枠：シアン／太め<br>ドロップシャドウ：なし</p></div>
+        </div>
+        <aside class="policy-note"><strong>採用</strong><p>シアン枠で進めます。</p></aside>
+      </section>
+      <details class="proposal-history">
+        <summary>過去の提案（No.01〜06）</summary>
+        <div class="history-content">
       <section class="latest-proposal" aria-labelledby="latest-proposal-title-menu-fix">
         <div class="latest-proposal-heading">
           <p class="proposal-number">提案No.06</p>
@@ -28,9 +43,6 @@
         </div>
         <aside class="policy-note"><strong>今後の運用ルール</strong><p>UI改善のたびに最新提案をこのページの先頭へ追加し、これまでの提案は下のトグルへ移します。トグルは初期状態で閉じたままにします。</p></aside>
       </section>
-      <details class="proposal-history">
-        <summary>過去の改善提案を表示（提案No.01〜05）</summary>
-        <div class="history-content">
           <p class="history-label">提案No.05：採用案の視認性調整</p>
       <section class="latest-proposal" aria-labelledby="latest-proposal-title-fix">
         <div class="latest-proposal-heading">
