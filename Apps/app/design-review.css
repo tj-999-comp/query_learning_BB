@@ -696,17 +696,23 @@ body { background: var(--white); color: var(--navy); }
   background: #0891b2;
   color: var(--yellow);
   font-size: 38px;
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1;
-  -webkit-text-stroke: 1.75px var(--completion-outline, transparent);
-  text-shadow: -1px -1px 0 var(--completion-outline, transparent), 1px -1px 0 var(--completion-outline, transparent), -1px 1px 0 var(--completion-outline, transparent), 1px 1px 0 var(--completion-outline, transparent);
+  -webkit-text-stroke: 2.5px var(--yellow);
+  text-shadow: -3px -3px 0 var(--completion-outline, transparent), 3px -3px 0 var(--completion-outline, transparent), -3px 3px 0 var(--completion-outline, transparent), 3px 3px 0 var(--completion-outline, transparent);
 }
-.completion-check-no-shadow { --completion-outline: transparent; }
 .completion-check-outline-cyan { --completion-outline: var(--cyan); }
 .completion-check-outline-white { --completion-outline: var(--white); }
-@supports (-webkit-text-stroke: 1px #000) {
-  .completion-mark-preview { text-shadow: none; }
-}
+
+/* Keep the review page compact and Japanese-first. */
+.kicker { display: none; }
+.latest-proposal-heading h2,
+.component-review-heading h2,
+.success-review-heading h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.1; }
+.latest-proposal-heading > p:last-child,
+.component-review-heading > p:last-child,
+.success-review-heading > p:last-child { font-size: 13px; }
+.completion-mark-review-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
 @media (max-width: 700px) {
   .completion-mark-review-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
