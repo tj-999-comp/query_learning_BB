@@ -53,10 +53,10 @@ Issue #34「主題一覧ドキュメントをもとに問題を追加できる�
 
 ## GitHub Issue状況
 
-取得日時: 2026-09-04 17:30 JST  
-取得範囲: `tj-999-comp/query_learning_BB`のPull Requestを除くOpen Issue、最大1000件  
-取得件数: 2件  
-取得方法: `gh issue list --repo tj-999-comp/query_learning_BB --state open --json number,title,state,stateReason,url --limit 1000`  
+取得日時: 2026-09-04 17:30 JST
+取得範囲: `tj-999-comp/query_learning_BB`のPull Requestを除くOpen Issue、最大1000件
+取得件数: 2件
+取得方法: `gh issue list --repo tj-999-comp/query_learning_BB --state open --json number,title,state,stateReason,url --limit 1000`
 親子関係確認: `gh api repos/tj-999-comp/query_learning_BB/issues/26/sub_issues`
 
 | 順位 | 優先度 | GitHub Issue | 状態 | 関係・着手条件 |
