@@ -62,6 +62,7 @@ def expand_document(document: dict) -> dict:
                 "answerSql": answer_sql,
                 "judgeSql": item.get("judgeSql", answer_sql),
                 "resultSpec": item.get("resultSpec", family.get("resultSpec", family.get("comparison"))),
+                "requiredColumns": item.get("requiredColumns"),
                 "learningObjectives": item.get("learningObjectives", item.get("requiredSqlTerms", [])),
                 "explanation": item.get("explanation", family["explanation"]),
             }
@@ -86,6 +87,7 @@ def normalize_problem(problem: dict) -> dict:
     normalized["answerSql"] = answer_sql
     normalized["judgeSql"] = normalized.get("judgeSql", answer_sql)
     normalized["resultSpec"] = result_spec
+    normalized["requiredColumns"] = normalized.get("requiredColumns")
     normalized["learningObjectives"] = normalized.get(
         "learningObjectives",
         normalized.get("requiredSqlTerms", []),
@@ -151,6 +153,17 @@ def validate_document(document: dict) -> list[dict]:
         numeric_tolerance = result_spec.get("numericTolerance", 0)
         if not isinstance(numeric_tolerance, (int, float)) or numeric_tolerance < 0:
             raise ValidationError(f"{label}: resultSpec.numericToleranceが不正です")
+        required_columns = problem.get("requiredColumns")
+        if required_columns is not None:
+            if not isinstance(required_columns, list) or any(
+                not isinstance(column, dict)
+                or not isinstance(column.get("label"), str)
+                or not column["label"]
+                or not isinstance(column.get("reference"), str)
+                or not column["reference"]
+                for column in required_columns
+            ):
+                raise ValidationError(f"{label}: requiredColumnsが不正です")
         answer_sql = validate_sql(problem["answerSql"], label)
         judge_sql = validate_sql(problem["judgeSql"], label)
         key = (re.sub(r"\s+", " ", problem["title"]).strip(), answer_sql)
@@ -239,6 +252,11 @@ def validate_against_database(problems: list[dict], database_path: Path) -> None
             if not expected_columns:
                 problem["resultSpec"]["columns"] = judge_columns
                 expected_columns = judge_columns
+            if not problem.get("requiredColumns"):
+                problem["requiredColumns"] = [
+                    {"label": column, "reference": column}
+                    for column in expected_columns
+                ]
             if judge_columns != expected_columns:
                 raise ValidationError(
                     f"{label}: resultSpec.columnsとjudgeSqlの出力列が一致しません: "

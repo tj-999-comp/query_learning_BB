@@ -225,6 +225,10 @@
         "limit": 20,
         "tieBreakers": ["player_name_j", "player_id"]
       },
+      "requiredColumns": [
+        {"label": "選手名", "reference": "players.player_name_j"},
+        {"label": "国籍", "reference": "players.league_registered_nationality"}
+      ],
       "learningObjectives": ["IN (", "league_registered_nationality", "LIMIT 20"],
       "explanation": "INを使うと、同じ列が候補値のいずれかに一致する行を検索できます。"
     },

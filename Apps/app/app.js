@@ -58,6 +58,7 @@ const elements = {
   previousProblemButton: document.querySelector("#previous-problem-button"),
   nextProblemButton: document.querySelector("#next-problem-button"),
   questionPrompt: document.querySelector("#question-prompt"),
+  questionColumns: document.querySelector("#question-columns"),
   favoriteButton: document.querySelector("#favorite-button"),
   sqlEditor: document.querySelector("#sql-editor"),
   runButton: document.querySelector("#run-button"),
@@ -472,6 +473,7 @@ function selectProblem(problemId) {
   elements.questionDifficulty.textContent = `難易度 ${difficultyStars(problem.difficulty)}`;
   elements.questionTables.textContent = `使用テーブル: ${problem.sourceTables.join(", ")}`;
   elements.questionPrompt.textContent = problem.prompt;
+  renderRequiredColumns(problem);
   setEditorValue("");
   elements.feedback.className = "feedback";
   elements.feedback.textContent = "";
@@ -486,6 +488,21 @@ function selectProblem(problemId) {
   renderProblemList();
   closeProblemDrawer({ restoreFocus: false });
   focusEditor();
+}
+
+function renderRequiredColumns(problem) {
+  const columns = Array.isArray(problem.requiredColumns) && problem.requiredColumns.length
+    ? problem.requiredColumns
+    : (problem.resultSpec?.columns || []).map((column) => ({ label: column, reference: column }));
+  if (!columns.length) {
+    elements.questionColumns.classList.add("hidden");
+    elements.questionColumns.textContent = "";
+    return;
+  }
+  elements.questionColumns.textContent = `必要なカラム: ${columns.map((column) => (
+    `${column.label}（${column.reference}）`
+  )).join("、")}`;
+  elements.questionColumns.classList.remove("hidden");
 }
 
 function updateQuestionCompletion() {

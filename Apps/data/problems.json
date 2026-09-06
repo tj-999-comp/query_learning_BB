@@ -18,6 +18,16 @@
         "team_name_j"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "team_id",
+        "reference": "team_id"
+      },
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      }
+    ],
     "learningObjectives": [
       "SELECT",
       "FROM teams",
@@ -43,6 +53,16 @@
         "game_count"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "season",
+        "reference": "season"
+      },
+      {
+        "label": "game_count",
+        "reference": "game_count"
+      }
+    ],
     "learningObjectives": [
       "COUNT",
       "GROUP BY season"
@@ -68,6 +88,20 @@
         "attendance"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "stadium_name_j",
+        "reference": "stadium_name_j"
+      },
+      {
+        "label": "attendance",
+        "reference": "attendance"
+      }
+    ],
     "learningObjectives": [
       "WHERE attendance IS NOT NULL",
       "ORDER BY attendance DESC",
@@ -94,6 +128,20 @@
         "points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "team_id",
+        "reference": "team_id"
+      },
+      {
+        "label": "points",
+        "reference": "points"
+      }
+    ],
     "learningObjectives": [
       "WHERE points >= 100",
       "ORDER BY points DESC"
@@ -121,6 +169,20 @@
         "points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      },
+      {
+        "label": "points",
+        "reference": "points"
+      }
+    ],
     "learningObjectives": [
       "JOIN games",
       "JOIN teams",
@@ -148,6 +210,16 @@
         "average_points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      },
+      {
+        "label": "average_points",
+        "reference": "average_points"
+      }
+    ],
     "learningObjectives": [
       "JOIN teams",
       "AVG",
@@ -175,6 +247,16 @@
         "total_points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "player_name_j",
+        "reference": "player_name_j"
+      },
+      {
+        "label": "total_points",
+        "reference": "total_points"
+      }
+    ],
     "learningObjectives": [
       "JOIN players",
       "SUM",
@@ -202,6 +284,16 @@
         "game_count"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "player_name_j",
+        "reference": "player_name_j"
+      },
+      {
+        "label": "game_count",
+        "reference": "game_count"
+      }
+    ],
     "learningObjectives": [
       "WHERE s.is_playing = 1",
       "COUNT",
@@ -228,6 +320,16 @@
         "average_points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "venue",
+        "reference": "venue"
+      },
+      {
+        "label": "average_points",
+        "reference": "average_points"
+      }
+    ],
     "learningObjectives": [
       "CASE WHEN",
       "AVG",
@@ -255,6 +357,20 @@
         "schedule_key"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "player_name_j",
+        "reference": "player_name_j"
+      },
+      {
+        "label": "points",
+        "reference": "points"
+      },
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      }
+    ],
     "learningObjectives": [
       "JOIN players",
       "s.is_starter = 1",
@@ -279,6 +395,12 @@
         "game_type"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "game_type",
+        "reference": "game_type"
+      }
+    ],
     "learningObjectives": [
       "DISTINCT",
       "WHERE game_type IS NOT NULL"
@@ -304,6 +426,20 @@
         "schedule_key"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "season",
+        "reference": "season"
+      },
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      }
+    ],
     "learningObjectives": [
       "BETWEEN",
       "ORDER BY game_date",
@@ -330,6 +466,20 @@
         "game_count"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "season",
+        "reference": "season"
+      },
+      {
+        "label": "game_type",
+        "reference": "game_type"
+      },
+      {
+        "label": "game_count",
+        "reference": "game_count"
+      }
+    ],
     "learningObjectives": [
       "COUNT",
       "GROUP BY season, game_type"
@@ -358,6 +508,28 @@
         "away_team_score_total"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "home_team",
+        "reference": "home_team"
+      },
+      {
+        "label": "away_team",
+        "reference": "away_team"
+      },
+      {
+        "label": "home_team_score_total",
+        "reference": "home_team_score_total"
+      },
+      {
+        "label": "away_team_score_total",
+        "reference": "away_team_score_total"
+      }
+    ],
     "learningObjectives": [
       "JOIN teams AS ht",
       "JOIN teams AS at",
@@ -385,6 +557,16 @@
         "game_count"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      },
+      {
+        "label": "game_count",
+        "reference": "game_count"
+      }
+    ],
     "learningObjectives": [
       "LEFT JOIN",
       "COUNT(s.schedule_key)",
@@ -412,6 +594,20 @@
         "away_games"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      },
+      {
+        "label": "home_games",
+        "reference": "home_games"
+      },
+      {
+        "label": "away_games",
+        "reference": "away_games"
+      }
+    ],
     "learningObjectives": [
       "SUM(CASE WHEN",
       "LEFT JOIN",
@@ -442,6 +638,20 @@
         "average_points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "season",
+        "reference": "season"
+      },
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      },
+      {
+        "label": "average_points",
+        "reference": "average_points"
+      }
+    ],
     "learningObjectives": [
       "JOIN games",
       "JOIN teams",
@@ -472,6 +682,16 @@
         "player_id"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "選手名",
+        "reference": "players.player_name_j"
+      },
+      {
+        "label": "国籍",
+        "reference": "players.league_registered_nationality"
+      }
+    ],
     "learningObjectives": [
       "IN (",
       "league_registered_nationality",
@@ -499,6 +719,16 @@
         "best_points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      },
+      {
+        "label": "best_points",
+        "reference": "best_points"
+      }
+    ],
     "learningObjectives": [
       "MAX",
       "JOIN teams",
@@ -528,6 +758,20 @@
         "game_count"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "player_name_j",
+        "reference": "player_name_j"
+      },
+      {
+        "label": "average_points",
+        "reference": "average_points"
+      },
+      {
+        "label": "game_count",
+        "reference": "game_count"
+      }
+    ],
     "learningObjectives": [
       "AVG",
       "HAVING COUNT(*) >= 20",
@@ -554,6 +798,16 @@
         "double_double_games"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "player_name_j",
+        "reference": "player_name_j"
+      },
+      {
+        "label": "double_double_games",
+        "reference": "double_double_games"
+      }
+    ],
     "learningObjectives": [
       "AND",
       "OR",
@@ -582,6 +836,20 @@
         "total_turnovers"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      },
+      {
+        "label": "total_assists",
+        "reference": "total_assists"
+      },
+      {
+        "label": "total_turnovers",
+        "reference": "total_turnovers"
+      }
+    ],
     "learningObjectives": [
       "SUM(s.assists)",
       "SUM(s.turnovers)",
@@ -608,6 +876,20 @@
         "total_score"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "total_score",
+        "reference": "total_score"
+      }
+    ],
     "learningObjectives": [
       "+",
       "IS NOT NULL",
@@ -634,6 +916,20 @@
         "point_diff"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "winner",
+        "reference": "winner"
+      },
+      {
+        "label": "point_diff",
+        "reference": "point_diff"
+      }
+    ],
     "learningObjectives": [
       "CASE WHEN",
       "ABS",
@@ -661,6 +957,20 @@
         "game_count"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      },
+      {
+        "label": "wins",
+        "reference": "wins"
+      },
+      {
+        "label": "game_count",
+        "reference": "game_count"
+      }
+    ],
     "learningObjectives": [
       "JOIN game_team_stats AS o",
       "opponent_team_id",
@@ -690,6 +1000,20 @@
         "average_points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "point_rank",
+        "reference": "point_rank"
+      },
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      },
+      {
+        "label": "average_points",
+        "reference": "average_points"
+      }
+    ],
     "learningObjectives": [
       "WITH team_averages",
       "RANK() OVER",
@@ -718,6 +1042,20 @@
         "points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "player_name_j",
+        "reference": "player_name_j"
+      },
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "points",
+        "reference": "points"
+      }
+    ],
     "learningObjectives": [
       "ROW_NUMBER() OVER",
       "PARTITION BY s.player_id",
@@ -745,6 +1083,24 @@
         "cumulative_attendance"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "season",
+        "reference": "season"
+      },
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "attendance",
+        "reference": "attendance"
+      },
+      {
+        "label": "cumulative_attendance",
+        "reference": "cumulative_attendance"
+      }
+    ],
     "learningObjectives": [
       "SUM(attendance) OVER",
       "PARTITION BY season",
@@ -774,6 +1130,28 @@
         "season_average"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "season",
+        "reference": "season"
+      },
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "stadium_name_j",
+        "reference": "stadium_name_j"
+      },
+      {
+        "label": "attendance",
+        "reference": "attendance"
+      },
+      {
+        "label": "season_average",
+        "reference": "season_average"
+      }
+    ],
     "learningObjectives": [
       "WITH season_attendance",
       "AVG(attendance)",
@@ -801,6 +1179,16 @@
         "average_points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      },
+      {
+        "label": "average_points",
+        "reference": "average_points"
+      }
+    ],
     "learningObjectives": [
       "HAVING AVG(s.points) >",
       "SELECT AVG(points) FROM game_team_stats",
@@ -826,6 +1214,20 @@
         "game_type"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "game_type",
+        "reference": "game_type"
+      }
+    ],
     "learningObjectives": [
       "WHERE season = '2025-26'",
       "ORDER BY game_date",
@@ -852,6 +1254,20 @@
         "game_type"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "game_type",
+        "reference": "game_type"
+      }
+    ],
     "learningObjectives": [
       "WHERE season = '2024-25'",
       "ORDER BY game_date DESC",
@@ -877,6 +1293,16 @@
         "schedule_key"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      }
+    ],
     "learningObjectives": [
       "WHERE game_type = 'RS'",
       "ORDER BY game_date DESC"
@@ -901,6 +1327,16 @@
         "schedule_key"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      }
+    ],
     "learningObjectives": [
       "WHERE game_type = 'CS'",
       "ORDER BY game_date"
@@ -926,6 +1362,20 @@
         "attendance"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "stadium_name_j",
+        "reference": "stadium_name_j"
+      },
+      {
+        "label": "attendance",
+        "reference": "attendance"
+      }
+    ],
     "learningObjectives": [
       "attendance >= 5000",
       "ORDER BY attendance DESC"
@@ -950,6 +1400,16 @@
         "attendance"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "attendance",
+        "reference": "attendance"
+      }
+    ],
     "learningObjectives": [
       "attendance IS NOT NULL",
       "ORDER BY attendance"
@@ -975,6 +1435,20 @@
         "schedule_key"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "season",
+        "reference": "season"
+      },
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      }
+    ],
     "learningObjectives": [
       "game_date >= '2025-01-01'",
       "ORDER BY game_date DESC"
@@ -1000,6 +1474,20 @@
         "schedule_key"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "season",
+        "reference": "season"
+      },
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      }
+    ],
     "learningObjectives": [
       "game_date < '2017-04-01'",
       "ORDER BY game_date"
@@ -1025,6 +1513,20 @@
         "referee_name_j"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "stadium_name_j",
+        "reference": "stadium_name_j"
+      },
+      {
+        "label": "referee_name_j",
+        "reference": "referee_name_j"
+      }
+    ],
     "learningObjectives": [
       "referee_name_j IS NOT NULL",
       "ORDER BY game_date DESC"
@@ -1050,6 +1552,20 @@
         "game_type"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "stadium_name_j",
+        "reference": "stadium_name_j"
+      },
+      {
+        "label": "game_type",
+        "reference": "game_type"
+      }
+    ],
     "learningObjectives": [
       "stadium_name_j IS NOT NULL",
       "ORDER BY game_date DESC"
@@ -1075,6 +1591,20 @@
         "points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "team_id",
+        "reference": "team_id"
+      },
+      {
+        "label": "points",
+        "reference": "points"
+      }
+    ],
     "learningObjectives": [
       "points >= 90",
       "ORDER BY points DESC"
@@ -1100,6 +1630,20 @@
         "points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "team_id",
+        "reference": "team_id"
+      },
+      {
+        "label": "points",
+        "reference": "points"
+      }
+    ],
     "learningObjectives": [
       "points <= 60",
       "ORDER BY points"
@@ -1125,6 +1669,20 @@
         "assists"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "team_id",
+        "reference": "team_id"
+      },
+      {
+        "label": "assists",
+        "reference": "assists"
+      }
+    ],
     "learningObjectives": [
       "assists >= 10",
       "ORDER BY assists DESC"
@@ -1150,6 +1708,20 @@
         "total_rebounds"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "team_id",
+        "reference": "team_id"
+      },
+      {
+        "label": "total_rebounds",
+        "reference": "total_rebounds"
+      }
+    ],
     "learningObjectives": [
       "total_rebounds >= 20",
       "ORDER BY total_rebounds DESC"
@@ -1175,6 +1747,20 @@
         "fg3m"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "team_id",
+        "reference": "team_id"
+      },
+      {
+        "label": "fg3m",
+        "reference": "fg3m"
+      }
+    ],
     "learningObjectives": [
       "fg3m >= 5",
       "ORDER BY fg3m DESC"
@@ -1200,6 +1786,20 @@
         "points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "team_id",
+        "reference": "team_id"
+      },
+      {
+        "label": "points",
+        "reference": "points"
+      }
+    ],
     "learningObjectives": [
       "close_win_3pts_or_less = 1",
       "ORDER BY schedule_key DESC"
@@ -1225,6 +1825,20 @@
         "points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "team_id",
+        "reference": "team_id"
+      },
+      {
+        "label": "points",
+        "reference": "points"
+      }
+    ],
     "learningObjectives": [
       "is_home = 1",
       "points >= 90",
@@ -1251,6 +1865,20 @@
         "points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "team_id",
+        "reference": "team_id"
+      },
+      {
+        "label": "points",
+        "reference": "points"
+      }
+    ],
     "learningObjectives": [
       "is_home = 0",
       "points >= 90",
@@ -1277,6 +1905,20 @@
         "fga"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "team_id",
+        "reference": "team_id"
+      },
+      {
+        "label": "fga",
+        "reference": "fga"
+      }
+    ],
     "learningObjectives": [
       "fga >= 70",
       "ORDER BY fga DESC"
@@ -1302,6 +1944,20 @@
         "fgm"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "team_id",
+        "reference": "team_id"
+      },
+      {
+        "label": "fgm",
+        "reference": "fgm"
+      }
+    ],
     "learningObjectives": [
       "fgm >= 20",
       "ORDER BY fgm DESC"
@@ -1327,6 +1983,20 @@
         "points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "player_id",
+        "reference": "player_id"
+      },
+      {
+        "label": "points",
+        "reference": "points"
+      }
+    ],
     "learningObjectives": [
       "points >= 30",
       "ORDER BY points DESC"
@@ -1352,6 +2022,20 @@
         "points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "player_id",
+        "reference": "player_id"
+      },
+      {
+        "label": "points",
+        "reference": "points"
+      }
+    ],
     "learningObjectives": [
       "points BETWEEN 15 AND 20",
       "ORDER BY points DESC"
@@ -1377,6 +2061,20 @@
         "assists"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "player_id",
+        "reference": "player_id"
+      },
+      {
+        "label": "assists",
+        "reference": "assists"
+      }
+    ],
     "learningObjectives": [
       "assists >= 10",
       "ORDER BY assists DESC"
@@ -1402,6 +2100,20 @@
         "total_rebounds"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "player_id",
+        "reference": "player_id"
+      },
+      {
+        "label": "total_rebounds",
+        "reference": "total_rebounds"
+      }
+    ],
     "learningObjectives": [
       "total_rebounds >= 15",
       "ORDER BY total_rebounds DESC"
@@ -1427,6 +2139,20 @@
         "steals"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "player_id",
+        "reference": "player_id"
+      },
+      {
+        "label": "steals",
+        "reference": "steals"
+      }
+    ],
     "learningObjectives": [
       "steals >= 5",
       "ORDER BY steals DESC"
@@ -1452,6 +2178,20 @@
         "play_time"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "player_id",
+        "reference": "player_id"
+      },
+      {
+        "label": "play_time",
+        "reference": "play_time"
+      }
+    ],
     "learningObjectives": [
       "is_starter = 1",
       "is_playing = 1",
@@ -1478,6 +2218,20 @@
         "play_time"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "player_id",
+        "reference": "player_id"
+      },
+      {
+        "label": "play_time",
+        "reference": "play_time"
+      }
+    ],
     "learningObjectives": [
       "is_playing = 0",
       "ORDER BY schedule_key DESC"
@@ -1503,6 +2257,20 @@
         "fga"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "player_id",
+        "reference": "player_id"
+      },
+      {
+        "label": "fga",
+        "reference": "fga"
+      }
+    ],
     "learningObjectives": [
       "fga >= 10",
       "ORDER BY fga DESC"
@@ -1528,6 +2296,20 @@
         "fg3m"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "player_id",
+        "reference": "player_id"
+      },
+      {
+        "label": "fg3m",
+        "reference": "fg3m"
+      }
+    ],
     "learningObjectives": [
       "fg3m >= 5",
       "ORDER BY fg3m DESC"
@@ -1553,6 +2335,20 @@
         "efficiency"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "player_id",
+        "reference": "player_id"
+      },
+      {
+        "label": "efficiency",
+        "reference": "efficiency"
+      }
+    ],
     "learningObjectives": [
       "efficiency >= 30",
       "ORDER BY efficiency DESC"
@@ -1580,6 +2376,20 @@
         "points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      },
+      {
+        "label": "points",
+        "reference": "points"
+      }
+    ],
     "learningObjectives": [
       "JOIN games",
       "JOIN teams",
@@ -1608,6 +2418,20 @@
         "points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      },
+      {
+        "label": "points",
+        "reference": "points"
+      }
+    ],
     "learningObjectives": [
       "JOIN games",
       "JOIN teams",
@@ -1636,6 +2460,20 @@
         "points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      },
+      {
+        "label": "points",
+        "reference": "points"
+      }
+    ],
     "learningObjectives": [
       "JOIN games",
       "JOIN teams",
@@ -1662,6 +2500,16 @@
         "points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      },
+      {
+        "label": "points",
+        "reference": "points"
+      }
+    ],
     "learningObjectives": [
       "JOIN teams",
       "ORDER BY s.points DESC"
@@ -1689,6 +2537,24 @@
         "opponent_points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      },
+      {
+        "label": "opponent_team",
+        "reference": "opponent_team"
+      },
+      {
+        "label": "points",
+        "reference": "points"
+      },
+      {
+        "label": "opponent_points",
+        "reference": "opponent_points"
+      }
+    ],
     "learningObjectives": [
       "JOIN teams AS t",
       "JOIN teams AS o",
@@ -1715,6 +2581,20 @@
         "points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "player_id",
+        "reference": "player_id"
+      },
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      },
+      {
+        "label": "points",
+        "reference": "points"
+      }
+    ],
     "learningObjectives": [
       "JOIN teams",
       "s.points >= 20"
@@ -1740,6 +2620,20 @@
         "points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "player_id",
+        "reference": "player_id"
+      },
+      {
+        "label": "points",
+        "reference": "points"
+      }
+    ],
     "learningObjectives": [
       "JOIN games",
       "s.points >= 20"
@@ -1767,6 +2661,24 @@
         "points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "player_id",
+        "reference": "player_id"
+      },
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      },
+      {
+        "label": "points",
+        "reference": "points"
+      }
+    ],
     "learningObjectives": [
       "JOIN games",
       "JOIN teams",
@@ -1794,6 +2706,20 @@
         "attendance"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      },
+      {
+        "label": "attendance",
+        "reference": "attendance"
+      }
+    ],
     "learningObjectives": [
       "JOIN teams",
       "g.attendance IS NOT NULL"
@@ -1821,6 +2747,20 @@
         "points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "season",
+        "reference": "season"
+      },
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      },
+      {
+        "label": "points",
+        "reference": "points"
+      }
+    ],
     "learningObjectives": [
       "JOIN games",
       "JOIN teams",
@@ -1847,6 +2787,16 @@
         "average_attendance"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "season",
+        "reference": "season"
+      },
+      {
+        "label": "average_attendance",
+        "reference": "average_attendance"
+      }
+    ],
     "learningObjectives": [
       "AVG(attendance)",
       "GROUP BY season",
@@ -1873,6 +2823,16 @@
         "total_attendance"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "season",
+        "reference": "season"
+      },
+      {
+        "label": "total_attendance",
+        "reference": "total_attendance"
+      }
+    ],
     "learningObjectives": [
       "SUM(attendance)",
       "GROUP BY season"
@@ -1898,6 +2858,16 @@
         "game_count"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "game_type",
+        "reference": "game_type"
+      },
+      {
+        "label": "game_count",
+        "reference": "game_count"
+      }
+    ],
     "learningObjectives": [
       "COUNT(*)",
       "GROUP BY game_type"
@@ -1924,6 +2894,16 @@
         "total_points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      },
+      {
+        "label": "total_points",
+        "reference": "total_points"
+      }
+    ],
     "learningObjectives": [
       "SUM(s.points)",
       "JOIN teams",
@@ -1951,6 +2931,16 @@
         "average_rebounds"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      },
+      {
+        "label": "average_rebounds",
+        "reference": "average_rebounds"
+      }
+    ],
     "learningObjectives": [
       "AVG(s.total_rebounds)",
       "GROUP BY",
@@ -1978,6 +2968,16 @@
         "max_assists"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      },
+      {
+        "label": "max_assists",
+        "reference": "max_assists"
+      }
+    ],
     "learningObjectives": [
       "MAX(s.assists)",
       "GROUP BY"
@@ -2004,6 +3004,16 @@
         "average_assists"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "player_name_j",
+        "reference": "player_name_j"
+      },
+      {
+        "label": "average_assists",
+        "reference": "average_assists"
+      }
+    ],
     "learningObjectives": [
       "AVG(s.assists)",
       "JOIN players",
@@ -2031,6 +3041,16 @@
         "max_points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "player_name_j",
+        "reference": "player_name_j"
+      },
+      {
+        "label": "max_points",
+        "reference": "max_points"
+      }
+    ],
     "learningObjectives": [
       "MAX(s.points)",
       "JOIN players",
@@ -2058,6 +3078,16 @@
         "total_points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "season",
+        "reference": "season"
+      },
+      {
+        "label": "total_points",
+        "reference": "total_points"
+      }
+    ],
     "learningObjectives": [
       "JOIN games",
       "SUM(s.points)",
@@ -2085,6 +3115,16 @@
         "average_points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "season",
+        "reference": "season"
+      },
+      {
+        "label": "average_points",
+        "reference": "average_points"
+      }
+    ],
     "learningObjectives": [
       "JOIN games",
       "AVG(s.points)",
@@ -2113,6 +3153,20 @@
         "away_games"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      },
+      {
+        "label": "home_games",
+        "reference": "home_games"
+      },
+      {
+        "label": "away_games",
+        "reference": "away_games"
+      }
+    ],
     "learningObjectives": [
       "LEFT JOIN",
       "SUM(CASE WHEN",
@@ -2140,6 +3194,20 @@
         "point_diff"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "game_class",
+        "reference": "game_class"
+      },
+      {
+        "label": "point_diff",
+        "reference": "point_diff"
+      }
+    ],
     "learningObjectives": [
       "CASE WHEN",
       "ABS",
@@ -2167,6 +3235,20 @@
         "attendance"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "attendance_class",
+        "reference": "attendance_class"
+      },
+      {
+        "label": "attendance",
+        "reference": "attendance"
+      }
+    ],
     "learningObjectives": [
       "CASE WHEN",
       "attendance >= 5000",
@@ -2194,6 +3276,20 @@
         "point_diff"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "result",
+        "reference": "result"
+      },
+      {
+        "label": "point_diff",
+        "reference": "point_diff"
+      }
+    ],
     "learningObjectives": [
       "CASE WHEN",
       "home_team_score_total",
@@ -2221,6 +3317,20 @@
         "points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "player_id",
+        "reference": "player_id"
+      },
+      {
+        "label": "scoring_class",
+        "reference": "scoring_class"
+      },
+      {
+        "label": "points",
+        "reference": "points"
+      }
+    ],
     "learningObjectives": [
       "CASE WHEN",
       "points >= 20",
@@ -2248,6 +3358,16 @@
         "stats_count"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      },
+      {
+        "label": "stats_count",
+        "reference": "stats_count"
+      }
+    ],
     "learningObjectives": [
       "LEFT JOIN",
       "COUNT(s.schedule_key)",
@@ -2275,6 +3395,16 @@
         "team_name_j"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "team_id",
+        "reference": "team_id"
+      },
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      }
+    ],
     "learningObjectives": [
       "LEFT JOIN",
       "HAVING COUNT(s.schedule_key) = 0"
@@ -2301,6 +3431,16 @@
         "player_name_j"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "player_id",
+        "reference": "player_id"
+      },
+      {
+        "label": "player_name_j",
+        "reference": "player_name_j"
+      }
+    ],
     "learningObjectives": [
       "LEFT JOIN",
       "HAVING COUNT(s.schedule_key) = 0"
@@ -2328,6 +3468,20 @@
         "home_wins"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      },
+      {
+        "label": "home_games",
+        "reference": "home_games"
+      },
+      {
+        "label": "home_wins",
+        "reference": "home_wins"
+      }
+    ],
     "learningObjectives": [
       "JOIN game_team_stats AS o",
       "s.is_home = 1",
@@ -2356,6 +3510,24 @@
         "offense_total"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "player_id",
+        "reference": "player_id"
+      },
+      {
+        "label": "points",
+        "reference": "points"
+      },
+      {
+        "label": "assists",
+        "reference": "assists"
+      },
+      {
+        "label": "offense_total",
+        "reference": "offense_total"
+      }
+    ],
     "learningObjectives": [
       "points + assists",
       "offense_total",
@@ -2383,6 +3555,20 @@
         "attendance"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "season",
+        "reference": "season"
+      },
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "attendance",
+        "reference": "attendance"
+      }
+    ],
     "learningObjectives": [
       "WITH season_average",
       "AVG(attendance)",
@@ -2410,6 +3596,16 @@
         "average_points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      },
+      {
+        "label": "average_points",
+        "reference": "average_points"
+      }
+    ],
     "learningObjectives": [
       "HAVING AVG(s.points) >=",
       "SELECT AVG(points) FROM game_team_stats"
@@ -2437,6 +3633,20 @@
         "average_points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "point_rank",
+        "reference": "point_rank"
+      },
+      {
+        "label": "team_name_j",
+        "reference": "team_name_j"
+      },
+      {
+        "label": "average_points",
+        "reference": "average_points"
+      }
+    ],
     "learningObjectives": [
       "WITH averages",
       "RANK() OVER",
@@ -2464,6 +3674,20 @@
         "points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "team_id",
+        "reference": "team_id"
+      },
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "points",
+        "reference": "points"
+      }
+    ],
     "learningObjectives": [
       "ROW_NUMBER() OVER",
       "PARTITION BY team_id",
@@ -2492,6 +3716,20 @@
         "total_points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "point_rank",
+        "reference": "point_rank"
+      },
+      {
+        "label": "player_name_j",
+        "reference": "player_name_j"
+      },
+      {
+        "label": "total_points",
+        "reference": "total_points"
+      }
+    ],
     "learningObjectives": [
       "WITH totals",
       "RANK() OVER",
@@ -2520,6 +3758,24 @@
         "attendance_rank"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "season",
+        "reference": "season"
+      },
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "attendance",
+        "reference": "attendance"
+      },
+      {
+        "label": "attendance_rank",
+        "reference": "attendance_rank"
+      }
+    ],
     "learningObjectives": [
       "RANK() OVER",
       "PARTITION BY season",
@@ -2547,6 +3803,20 @@
         "cumulative_games"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "season",
+        "reference": "season"
+      },
+      {
+        "label": "game_date",
+        "reference": "game_date"
+      },
+      {
+        "label": "cumulative_games",
+        "reference": "cumulative_games"
+      }
+    ],
     "learningObjectives": [
       "COUNT(*) OVER",
       "PARTITION BY season",
@@ -2574,6 +3844,16 @@
         "high_scoring_records"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "season",
+        "reference": "season"
+      },
+      {
+        "label": "high_scoring_records",
+        "reference": "high_scoring_records"
+      }
+    ],
     "learningObjectives": [
       "JOIN player_game_stats",
       "s.points >= 20",
@@ -2600,6 +3880,16 @@
         "average_attendance"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "season",
+        "reference": "season"
+      },
+      {
+        "label": "average_attendance",
+        "reference": "average_attendance"
+      }
+    ],
     "learningObjectives": [
       "HAVING AVG(attendance) >=",
       "SELECT AVG(attendance) FROM games",
@@ -2627,6 +3917,20 @@
         "points"
       ]
     },
+    "requiredColumns": [
+      {
+        "label": "team_id",
+        "reference": "team_id"
+      },
+      {
+        "label": "schedule_key",
+        "reference": "schedule_key"
+      },
+      {
+        "label": "points",
+        "reference": "points"
+      }
+    ],
     "learningObjectives": [
       "WITH latest",
       "ROW_NUMBER() OVER",
