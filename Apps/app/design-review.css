@@ -507,3 +507,30 @@ body { background: var(--white); color: var(--navy); }
 .color-action-08.hover-state, .color-action-08:hover { border-radius: 6px; outline: 1px solid var(--action-color); outline-offset: 3px; }
 .color-action-09.hover-state, .color-action-09:hover { box-shadow: 0 3px 0 var(--action-accent); }
 .color-action-10.hover-state, .color-action-10:hover { box-shadow: 4px 4px 0 var(--action-accent); }
+
+/* Current check proposal: 18-O's gold/cyan offset shadow with coordinated combinations. */
+.check-family-18.check-multi-01 { border-color: var(--gold); color: #9a6800; box-shadow: 5px 5px 0 var(--cyan); }
+.check-family-18.check-multi-02 { border-color: var(--cyan); color: var(--navy); box-shadow: 5px 5px 0 var(--gold); }
+.check-family-18.check-multi-03 { border-color: var(--navy); color: #007a99; box-shadow: 5px 5px 0 var(--yellow); }
+.check-family-18.check-multi-04 { border-color: var(--deep); color: var(--deep); box-shadow: 5px 5px 0 var(--gold); }
+.check-family-18.check-multi-05 { border-color: var(--blue); color: var(--navy); box-shadow: 5px 5px 0 var(--cyan); }
+.check-family-18.check-multi-06 { border-color: var(--silver); color: #405978; box-shadow: 5px 5px 0 var(--yellow); }
+.check-family-18.check-multi-07 { border-color: var(--cyan); color: #9a6800; box-shadow: 5px 5px 0 var(--navy); }
+.check-family-18.check-multi-08 { border-color: var(--gold); color: var(--deep); box-shadow: 5px 5px 0 var(--yellow); }
+.check-family-18.check-multi-09 { border-color: var(--blue-2); color: #007a99; box-shadow: 5px 5px 0 var(--gold); }
+.check-family-18.check-multi-10 { border-color: var(--navy); color: #9a6800; box-shadow: 5px 5px 0 var(--cyan); }
+.check-family-18.check-multi-11 { border-color: var(--cyan); color: #756d00; box-shadow: 5px 5px 0 var(--gold); }
+
+/* Current action proposal: compare color palettes while keeping one shared hover action. */
+.color-action.hover-state,
+.color-action:hover {
+  border: 1px solid var(--action-color, #000);
+  border-bottom: 6px solid var(--action-accent, var(--cyan));
+  border-radius: 0;
+  box-shadow: 3px 3px 0 var(--action-accent, var(--cyan));
+  outline: none;
+  outline-offset: 0;
+  transform: translateY(-1px);
+}
+.history-entry { margin-top: 72px; }
+.history-entry > .history-label, .history-archive > .history-label { margin-bottom: 0; }
