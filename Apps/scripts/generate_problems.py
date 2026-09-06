@@ -164,6 +164,8 @@ def validate_document(document: dict) -> list[dict]:
                 for column in required_columns
             ):
                 raise ValidationError(f"{label}: requiredColumnsが不正です")
+            if any("." in column["reference"] for column in required_columns):
+                raise ValidationError(f"{label}: requiredColumns.referenceはテーブル名だけを指定してください")
         answer_sql = validate_sql(problem["answerSql"], label)
         judge_sql = validate_sql(problem["judgeSql"], label)
         key = (re.sub(r"\s+", " ", problem["title"]).strip(), answer_sql)
@@ -183,6 +185,71 @@ def sqlite_table_names(connection: sqlite3.Connection) -> set[str]:
         "SELECT name FROM sqlite_master WHERE type IN ('table', 'view') AND name NOT LIKE 'sqlite_%'"
     )
     return {str(row[0]).lower() for row in rows}
+
+
+SQL_ALIAS_KEYWORDS = {
+    "AS", "ON", "WHERE", "GROUP", "ORDER", "LIMIT", "HAVING", "JOIN", "LEFT",
+    "RIGHT", "INNER", "OUTER", "CROSS", "FULL", "UNION", "EXCEPT", "INTERSECT",
+}
+
+
+def table_aliases(sql: str, source_tables: list[str]) -> dict[str, str]:
+    """Return SQL aliases that resolve to one of the declared source tables."""
+    declared = {table.lower(): table for table in source_tables}
+    aliases: dict[str, str] = {}
+    pattern = re.compile(
+        r"\b(?:FROM|JOIN)\s+([A-Za-z_][A-Za-z0-9_]*)"
+        r"(?:\s+(?:AS\s+)?([A-Za-z_][A-Za-z0-9_]*))?",
+        re.IGNORECASE,
+    )
+    for match in pattern.finditer(sql):
+        table_name = match.group(1)
+        canonical_table = declared.get(table_name.lower())
+        if canonical_table is None:
+            continue
+        aliases[table_name.lower()] = canonical_table
+        alias = match.group(2)
+        if alias and alias.upper() not in SQL_ALIAS_KEYWORDS:
+            aliases[alias.lower()] = canonical_table
+    return aliases
+
+
+def sqlite_columns(connection: sqlite3.Connection, table_name: str) -> set[str]:
+    escaped_name = table_name.replace('"', '""')
+    rows = connection.execute(f'PRAGMA table_info("{escaped_name}")').fetchall()
+    return {str(row[1]).lower() for row in rows}
+
+
+def infer_required_column_table(
+    connection: sqlite3.Connection,
+    sql: str,
+    column: str,
+    source_tables: list[str],
+) -> str:
+    """Infer the base table to show beside a result column in the UI."""
+    aliases = table_aliases(sql, source_tables)
+    qualified_pattern = re.compile(
+        rf"\b([A-Za-z_][A-Za-z0-9_]*)\.{re.escape(column)}\b",
+        re.IGNORECASE,
+    )
+    qualified_candidates = {
+        aliases[match.group(1).lower()]
+        for match in qualified_pattern.finditer(sql)
+        if match.group(1).lower() in aliases
+    }
+    if len(qualified_candidates) == 1:
+        return next(iter(qualified_candidates))
+
+    column_lower = column.lower()
+    schema_candidates = [
+        table for table in source_tables
+        if column_lower in sqlite_columns(connection, table)
+    ]
+    if len(schema_candidates) == 1:
+        return schema_candidates[0]
+    if source_tables:
+        return source_tables[0]
+    return "unknown"
 
 
 def values_match(actual, expected, numeric_tolerance: float) -> bool:
@@ -254,9 +321,26 @@ def validate_against_database(problems: list[dict], database_path: Path) -> None
                 expected_columns = judge_columns
             if not problem.get("requiredColumns"):
                 problem["requiredColumns"] = [
-                    {"label": column, "reference": column}
+                    {
+                        "label": column,
+                        "reference": infer_required_column_table(
+                            connection,
+                            judge_sql,
+                            column,
+                            problem["sourceTables"],
+                        ),
+                    }
                     for column in expected_columns
                 ]
+            if any(
+                " in " in column["reference"].lower()
+                or "." in column["reference"]
+                or column["reference"] not in problem["sourceTables"]
+                for column in problem["requiredColumns"]
+            ):
+                raise ValidationError(
+                    f"{label}: requiredColumns.referenceはsourceTables内のテーブル名だけを指定してください"
+                )
             if judge_columns != expected_columns:
                 raise ValidationError(
                     f"{label}: resultSpec.columnsとjudgeSqlの出力列が一致しません: "
