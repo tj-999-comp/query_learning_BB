@@ -680,6 +680,6 @@ body { background: var(--white); color: var(--navy); }
 .drawer-row-preview.is-hover::before { opacity: 1; }
 .drawer-row-preview span { color: var(--gold); font: 10px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 .drawer-row-preview strong { color: var(--navy); font-size: 10px; }
-.favorite-preview { display: inline-grid; width: 18px; height: 18px; place-items: center; color: var(--ink); font-size: 15px; line-height: 1; }
+.favorite-preview { display: inline-grid; width: 46px; height: 46px; place-items: center; color: var(--ink); font-size: 24px; line-height: 1; }
 .divider-preview { display: grid; gap: 8px; padding-top: 8px; }
 .divider-preview span { display: block; height: 1px; background: var(--silver-light, #e9ebed); }
