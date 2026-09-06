@@ -385,3 +385,45 @@ body { background: var(--white); color: var(--navy); }
 .live-action.run, .live-action.submit { color: var(--navy); }
 .live-menu-sample { background: var(--white); }
 .review-footer { border-top-color: var(--silver); color: var(--text-muted); }
+
+/* Latest comparison: keep the offset-shadow silhouette and vary only its color. */
+.check-family-18.check-color-red { border-color: #e5484d; color: #9f1239; box-shadow: 5px 5px 0 #e5484d; }
+.check-family-18.check-color-green { border-color: #16a34a; color: #166534; box-shadow: 5px 5px 0 #16a34a; }
+.check-family-18.check-color-purple { border-color: #8b5cf6; color: #5b21b6; box-shadow: 5px 5px 0 #8b5cf6; }
+.check-family-18.check-color-orange { border-color: #f97316; color: #9a3412; box-shadow: 5px 5px 0 #f97316; }
+.check-family-18.check-color-pink { border-color: #ec4899; color: #9d174d; box-shadow: 5px 5px 0 #ec4899; }
+.check-family-18.check-color-brown { border-color: #92400e; color: #78350f; box-shadow: 5px 5px 0 #92400e; }
+.check-family-18.check-color-lime { border-color: #84cc16; color: #3f6212; box-shadow: 5px 5px 0 #84cc16; }
+.check-family-18.check-color-teal { border-color: #14b8a6; color: #115e59; box-shadow: 5px 5px 0 #14b8a6; }
+.check-family-18.check-color-coral { border-color: #fb7185; color: #9f1239; box-shadow: 5px 5px 0 #fb7185; }
+
+/* Latest comparison: option 05 shape with ten coordinated run/judge palettes. */
+.latest-action-grid button.review-action,
+.latest-proposal .live-action.action-color-05 {
+  border: 1px solid var(--action-border);
+  border-bottom: 4px solid var(--action-accent);
+  border-radius: 0;
+  background: var(--white);
+  color: var(--action-text);
+  box-shadow: none;
+}
+.action-color-01.run { --action-border: #000; --action-text: #000; --action-accent: var(--cyan); }
+.action-color-01.submit { --action-border: var(--cyan); --action-text: #007a99; --action-accent: #000; }
+.action-color-02.run { --action-border: var(--navy); --action-text: var(--navy); --action-accent: var(--cyan); }
+.action-color-02.submit { --action-border: var(--cyan); --action-text: #007a99; --action-accent: var(--navy); }
+.action-color-03.run { --action-border: var(--navy); --action-text: var(--navy); --action-accent: var(--yellow); }
+.action-color-03.submit { --action-border: #b8a900; --action-text: #756d00; --action-accent: var(--navy); }
+.action-color-04.run { --action-border: #007a99; --action-text: #007a99; --action-accent: var(--navy); }
+.action-color-04.submit { --action-border: var(--navy); --action-text: var(--navy); --action-accent: var(--cyan); }
+.action-color-05.run { --action-border: var(--gold); --action-text: #9a6800; --action-accent: var(--navy); }
+.action-color-05.submit { --action-border: var(--navy); --action-text: var(--navy); --action-accent: var(--gold); }
+.action-color-06.run { --action-border: #000; --action-text: #000; --action-accent: var(--gold); }
+.action-color-06.submit { --action-border: var(--gold); --action-text: #9a6800; --action-accent: #000; }
+.action-color-07.run { --action-border: #5f7185; --action-text: #405978; --action-accent: var(--silver); }
+.action-color-07.submit { --action-border: #405978; --action-text: #405978; --action-accent: var(--silver); }
+.action-color-08.run { --action-border: #007a99; --action-text: #007a99; --action-accent: var(--yellow); }
+.action-color-08.submit { --action-border: #b8a900; --action-text: #756d00; --action-accent: var(--cyan); }
+.action-color-09.run { --action-border: var(--deep); --action-text: var(--deep); --action-accent: var(--gold); }
+.action-color-09.submit { --action-border: var(--gold); --action-text: #9a6800; --action-accent: var(--deep); }
+.action-color-10.run { --action-border: #000; --action-text: #000; --action-accent: var(--yellow); }
+.action-color-10.submit { --action-border: #b8a900; --action-text: #756d00; --action-accent: #000; }
