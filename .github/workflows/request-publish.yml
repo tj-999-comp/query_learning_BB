@@ -63,7 +63,7 @@ jobs:
             [[ "$basename" =~ ^work_record_[0-9]{3}$ ]]
             test -f "work-records/md/$basename.md"
             test -f "work-records/metadata/$basename.yml"
-            rg -q '^publish: true$' "work-records/metadata/$basename.yml"
+            grep -Eq '^publish: true$' "work-records/metadata/$basename.yml"
             echo "$basename" >> "$targets_file"
           done
           test -s "$targets_file"
