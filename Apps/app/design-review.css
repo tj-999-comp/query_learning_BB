@@ -397,6 +397,17 @@ body { background: var(--white); color: var(--navy); }
 .check-family-18.check-color-teal { border-color: #14b8a6; color: #115e59; box-shadow: 5px 5px 0 #14b8a6; }
 .check-family-18.check-color-coral { border-color: #fb7185; color: #9f1239; box-shadow: 5px 5px 0 #fb7185; }
 
+/* The current 15 colors stay within the established navy/blue/cyan/gold system. */
+.check-family-18.check-color-blue { border-color: var(--blue); color: var(--navy); box-shadow: 5px 5px 0 var(--blue); }
+.check-family-18.check-color-blue-two { border-color: var(--blue-2); color: var(--navy); box-shadow: 5px 5px 0 var(--blue-2); }
+.check-family-18.check-color-deep { border-color: var(--deep); color: var(--deep); box-shadow: 5px 5px 0 var(--deep); }
+.check-family-18.check-color-soft-cyan { border-color: #66ddff; color: #007a99; box-shadow: 5px 5px 0 #66ddff; }
+.check-family-18.check-color-muted-gold { border-color: #d6a638; color: #756d00; box-shadow: 5px 5px 0 #d6a638; }
+.check-family-18.check-color-slate { border-color: #5f7185; color: #405978; box-shadow: 5px 5px 0 #5f7185; }
+.check-family-18.check-color-charcoal { border-color: #333; color: #333; box-shadow: 5px 5px 0 #333; }
+.check-family-18.check-color-cyan-yellow { border-color: var(--cyan); color: var(--navy); box-shadow: 5px 5px 0 var(--yellow); }
+.check-family-18.check-color-gold-cyan { border-color: var(--gold); color: #9a6800; box-shadow: 5px 5px 0 var(--cyan); }
+
 /* Latest comparison: option 05 shape with ten coordinated run/judge palettes. */
 .latest-action-grid button.review-action,
 .latest-proposal .live-action.action-color-05 {
@@ -427,3 +438,72 @@ body { background: var(--white); color: var(--navy); }
 .action-color-09.submit { --action-border: var(--gold); --action-text: #9a6800; --action-accent: var(--deep); }
 .action-color-10.run { --action-border: #000; --action-text: #000; --action-accent: var(--yellow); }
 .action-color-10.submit { --action-border: #b8a900; --action-text: #756d00; --action-accent: #000; }
+
+/* Current proposal: option 05 structure, with white surfaces and site-color accents. */
+.offset-check-live {
+  border: 2px solid var(--navy);
+  border-radius: 8px;
+  background: var(--white);
+  color: var(--navy);
+  box-shadow: 5px 5px 0 var(--cyan);
+}
+.variant-count { display: block; color: var(--navy); font-size: 38px; line-height: 1; }
+.option-five-live {
+  border: 1px solid #000;
+  border-bottom: 4px solid var(--cyan);
+  border-radius: 0;
+  background: var(--white);
+  color: var(--navy);
+  transition: border-color .16s ease, border-bottom-width .16s ease, box-shadow .16s ease, transform .16s ease;
+}
+.option-five-live.submit { border-bottom-color: var(--yellow); }
+.option-five-live:hover { border-bottom-width: 6px; box-shadow: 3px 3px 0 var(--cyan); transform: translateX(1px); }
+.option-five-live.submit:hover { box-shadow: 3px 3px 0 var(--yellow); }
+.live-hover-live { display: flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 11px; }
+.live-hover-arrow { color: var(--cyan); font-size: 18px; }
+.color-action-sample { gap: 7px; }
+.color-action {
+  min-height: 32px;
+  border: 1px solid var(--action-color, #000);
+  border-bottom: 4px solid var(--action-accent, var(--cyan));
+  border-radius: 0;
+  background: var(--white);
+  color: var(--action-text, var(--navy));
+  padding: 0 7px;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color .16s ease, border-bottom-width .16s ease, box-shadow .16s ease, color .16s ease, outline .16s ease, transform .16s ease;
+}
+.color-action.hover-state, .color-action:hover { border-bottom-width: 6px; }
+.color-action-01.run { --action-color: #000; --action-text: #000; --action-accent: var(--cyan); }
+.color-action-01.submit { --action-color: var(--cyan); --action-text: #007a99; --action-accent: var(--yellow); }
+.color-action-02.run { --action-color: var(--navy); --action-text: var(--navy); --action-accent: var(--cyan); }
+.color-action-02.submit { --action-color: var(--cyan); --action-text: #007a99; --action-accent: var(--navy); }
+.color-action-03.run { --action-color: var(--navy); --action-text: var(--navy); --action-accent: var(--gold); }
+.color-action-03.submit { --action-color: var(--gold); --action-text: #9a6800; --action-accent: var(--navy); }
+.color-action-04.run { --action-color: var(--cyan); --action-text: #007a99; --action-accent: var(--navy); }
+.color-action-04.submit { --action-color: var(--navy); --action-text: var(--navy); --action-accent: var(--cyan); }
+.color-action-05.run { --action-color: var(--gold); --action-text: #9a6800; --action-accent: var(--navy); }
+.color-action-05.submit { --action-color: var(--navy); --action-text: var(--navy); --action-accent: var(--gold); }
+.color-action-06.run { --action-color: var(--blue-2); --action-text: var(--blue); --action-accent: var(--yellow); }
+.color-action-06.submit { --action-color: var(--yellow); --action-text: #756d00; --action-accent: var(--blue-2); }
+.color-action-07.run { --action-color: var(--deep); --action-text: var(--deep); --action-accent: var(--gold); }
+.color-action-07.submit { --action-color: var(--gold); --action-text: #9a6800; --action-accent: var(--deep); }
+.color-action-08.run { --action-color: var(--silver); --action-text: #405978; --action-accent: var(--navy); }
+.color-action-08.submit { --action-color: var(--navy); --action-text: var(--navy); --action-accent: var(--silver); }
+.color-action-09.run { --action-color: var(--cyan); --action-text: #007a99; --action-accent: var(--gold); }
+.color-action-09.submit { --action-color: var(--gold); --action-text: #9a6800; --action-accent: var(--cyan); }
+.color-action-10.run { --action-color: var(--yellow); --action-text: #756d00; --action-accent: var(--navy); }
+.color-action-10.submit { --action-color: var(--navy); --action-text: var(--navy); --action-accent: var(--yellow); }
+.color-action-02.hover-state, .color-action-02:hover { outline: 2px solid var(--action-accent); outline-offset: 3px; }
+.color-action-03.hover-state, .color-action-03:hover { border-bottom-style: dashed; }
+.color-action-04.hover-state, .color-action-04:hover { border-width: 2px; border-bottom-width: 6px; }
+.color-action-05.hover-state, .color-action-05:hover { transform: translateX(2px); }
+.color-action-06.hover-state, .color-action-06:hover { box-shadow: inset 0 -7px 0 color-mix(in srgb, var(--action-accent) 28%, transparent); }
+.color-action-07.hover-state, .color-action-07:hover { border-left-width: 5px; }
+.color-action-08.hover-state, .color-action-08:hover { border-radius: 6px; outline: 1px solid var(--action-color); outline-offset: 3px; }
+.color-action-09.hover-state, .color-action-09:hover { box-shadow: 0 3px 0 var(--action-accent); }
+.color-action-10.hover-state, .color-action-10:hover { box-shadow: 4px 4px 0 var(--action-accent); }
