@@ -8,16 +8,21 @@
     "sourceTables": [
       "teams"
     ],
-    "referenceSql": "SELECT team_id, team_name_j FROM teams ORDER BY team_name_j, team_id;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "explanation": "まずは1つのテーブルから必要な列を選び、ORDER BYで並び順を指定する問題です。",
+    "answerSql": "SELECT team_id, team_name_j FROM teams ORDER BY team_name_j, team_id",
+    "judgeSql": "SELECT team_id, team_name_j FROM teams ORDER BY team_name_j, team_id",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "team_id",
+        "team_name_j"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "SELECT",
       "FROM teams",
       "ORDER BY team_name_j"
-    ],
-    "explanation": "まずは1つのテーブルから必要な列を選び、ORDER BYで並び順を指定する問題です。"
+    ]
   },
   {
     "id": "mvp-002",
@@ -28,15 +33,20 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "SELECT season, COUNT(*) AS game_count FROM games GROUP BY season ORDER BY season;",
-    "comparison": {
-      "rowOrder": "sensitive"
+    "explanation": "GROUP BYでシーズン単位にグループ化し、COUNTで行数を集計します。",
+    "answerSql": "SELECT season, COUNT(*) AS game_count FROM games GROUP BY season ORDER BY season",
+    "judgeSql": "SELECT season, COUNT(*) AS game_count FROM games GROUP BY season ORDER BY season",
+    "resultSpec": {
+      "rowOrder": "sensitive",
+      "columns": [
+        "season",
+        "game_count"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "COUNT",
       "GROUP BY season"
-    ],
-    "explanation": "GROUP BYでシーズン単位にグループ化し、COUNTで行数を集計します。"
+    ]
   },
   {
     "id": "mvp-003",
@@ -47,16 +57,22 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "SELECT game_date, stadium_name_j, attendance FROM games WHERE attendance IS NOT NULL ORDER BY attendance DESC, game_date DESC LIMIT 10;",
-    "comparison": {
-      "rowOrder": "sensitive"
+    "explanation": "NULLではない行をWHEREで絞り込み、ORDER BYとLIMITで上位の行を取得します。",
+    "answerSql": "SELECT game_date, stadium_name_j, attendance FROM games WHERE attendance IS NOT NULL ORDER BY attendance DESC, game_date DESC LIMIT 10",
+    "judgeSql": "SELECT game_date, stadium_name_j, attendance FROM games WHERE attendance IS NOT NULL ORDER BY attendance DESC, game_date DESC LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "sensitive",
+      "columns": [
+        "game_date",
+        "stadium_name_j",
+        "attendance"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "WHERE attendance IS NOT NULL",
       "ORDER BY attendance DESC",
       "LIMIT 10"
-    ],
-    "explanation": "NULLではない行をWHEREで絞り込み、ORDER BYとLIMITで上位の行を取得します。"
+    ]
   },
   {
     "id": "mvp-004",
@@ -67,15 +83,21 @@
     "sourceTables": [
       "game_team_stats"
     ],
-    "referenceSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE points >= 100 ORDER BY points DESC, schedule_key, team_id;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "explanation": "数値条件をWHEREで指定し、複数の列を使って安定した並び順にします。",
+    "answerSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE points >= 100 ORDER BY points DESC, schedule_key, team_id",
+    "judgeSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE points >= 100 ORDER BY points DESC, schedule_key, team_id",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "schedule_key",
+        "team_id",
+        "points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "WHERE points >= 100",
       "ORDER BY points DESC"
-    ],
-    "explanation": "数値条件をWHEREで指定し、複数の列を使って安定した並び順にします。"
+    ]
   },
   {
     "id": "mvp-005",
@@ -88,16 +110,22 @@
       "games",
       "teams"
     ],
-    "referenceSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_home = 1 ORDER BY g.game_date DESC, s.points DESC LIMIT 10;",
-    "comparison": {
-      "rowOrder": "sensitive"
+    "explanation": "試合、チーム、チーム別スタッツをJOINし、ホームフラグで対象を絞り込みます。",
+    "answerSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_home = 1 ORDER BY g.game_date DESC, s.points DESC LIMIT 10",
+    "judgeSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_home = 1 ORDER BY g.game_date DESC, s.points DESC LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "sensitive",
+      "columns": [
+        "game_date",
+        "team_name_j",
+        "points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "JOIN games",
       "JOIN teams",
       "WHERE s.is_home = 1"
-    ],
-    "explanation": "試合、チーム、チーム別スタッツをJOINし、ホームフラグで対象を絞り込みます。"
+    ]
   },
   {
     "id": "mvp-006",
@@ -109,18 +137,23 @@
       "game_team_stats",
       "teams"
     ],
-    "referenceSql": "SELECT t.team_name_j, ROUND(AVG(s.points), 2) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY average_points DESC, t.team_id;",
-    "comparison": {
+    "explanation": "JOINしたデータをチーム単位でGROUP BYし、AVGで平均を求めます。",
+    "answerSql": "SELECT t.team_name_j, ROUND(AVG(s.points), 2) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY average_points DESC, t.team_id",
+    "judgeSql": "SELECT t.team_name_j, ROUND(AVG(s.points), 2) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY average_points DESC, t.team_id",
+    "resultSpec": {
       "rowOrder": "insensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "team_name_j",
+        "average_points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "JOIN teams",
       "AVG",
       "GROUP BY",
       "ROUND"
-    ],
-    "explanation": "JOINしたデータをチーム単位でGROUP BYし、AVGで平均を求めます。"
+    ]
   },
   {
     "id": "mvp-007",
@@ -132,17 +165,22 @@
       "player_game_stats",
       "players"
     ],
-    "referenceSql": "SELECT p.player_name_j, SUM(s.points) AS total_points FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.points IS NOT NULL GROUP BY p.player_id, p.player_name_j ORDER BY total_points DESC, p.player_id LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "explanation": "選手マスタと試合別スタッツを結合し、選手単位でSUMします。",
+    "answerSql": "SELECT p.player_name_j, SUM(s.points) AS total_points FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.points IS NOT NULL GROUP BY p.player_id, p.player_name_j ORDER BY total_points DESC, p.player_id LIMIT 10",
+    "judgeSql": "SELECT p.player_name_j, SUM(s.points) AS total_points FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.points IS NOT NULL GROUP BY p.player_id, p.player_name_j ORDER BY total_points DESC, p.player_id LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "player_name_j",
+        "total_points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "JOIN players",
       "SUM",
       "GROUP BY",
       "LIMIT 10"
-    ],
-    "explanation": "選手マスタと試合別スタッツを結合し、選手単位でSUMします。"
+    ]
   },
   {
     "id": "mvp-008",
@@ -154,16 +192,21 @@
       "player_game_stats",
       "players"
     ],
-    "referenceSql": "SELECT p.player_name_j, COUNT(*) AS game_count FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 GROUP BY p.player_id, p.player_name_j ORDER BY game_count DESC, p.player_id LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "explanation": "出場フラグで絞り込んだ後、選手単位でCOUNTします。",
+    "answerSql": "SELECT p.player_name_j, COUNT(*) AS game_count FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 GROUP BY p.player_id, p.player_name_j ORDER BY game_count DESC, p.player_id LIMIT 10",
+    "judgeSql": "SELECT p.player_name_j, COUNT(*) AS game_count FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 GROUP BY p.player_id, p.player_name_j ORDER BY game_count DESC, p.player_id LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "player_name_j",
+        "game_count"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "WHERE s.is_playing = 1",
       "COUNT",
       "GROUP BY"
-    ],
-    "explanation": "出場フラグで絞り込んだ後、選手単位でCOUNTします。"
+    ]
   },
   {
     "id": "mvp-009",
@@ -174,17 +217,22 @@
     "sourceTables": [
       "game_team_stats"
     ],
-    "referenceSql": "SELECT CASE WHEN is_home = 1 THEN 'ホーム' ELSE 'アウェー' END AS venue, ROUND(AVG(points), 2) AS average_points FROM game_team_stats WHERE points IS NOT NULL GROUP BY is_home ORDER BY is_home DESC;",
-    "comparison": {
+    "explanation": "CASE式でフラグを表示用のラベルに変換し、条件ごとに平均を集計します。",
+    "answerSql": "SELECT CASE WHEN is_home = 1 THEN 'ホーム' ELSE 'アウェー' END AS venue, ROUND(AVG(points), 2) AS average_points FROM game_team_stats WHERE points IS NOT NULL GROUP BY is_home ORDER BY is_home DESC",
+    "judgeSql": "SELECT CASE WHEN is_home = 1 THEN 'ホーム' ELSE 'アウェー' END AS venue, ROUND(AVG(points), 2) AS average_points FROM game_team_stats WHERE points IS NOT NULL GROUP BY is_home ORDER BY is_home DESC",
+    "resultSpec": {
       "rowOrder": "insensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "venue",
+        "average_points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "CASE WHEN",
       "AVG",
       "GROUP BY is_home"
-    ],
-    "explanation": "CASE式でフラグを表示用のラベルに変換し、条件ごとに平均を集計します。"
+    ]
   },
   {
     "id": "mvp-010",
@@ -196,16 +244,22 @@
       "player_game_stats",
       "players"
     ],
-    "referenceSql": "SELECT p.player_name_j, s.points, s.schedule_key FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_starter = 1 AND s.points >= 20 ORDER BY s.points DESC, s.schedule_key, p.player_id;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "explanation": "先発フラグと得点の2つの条件で絞り込み、選手名をJOINで取得します。",
+    "answerSql": "SELECT p.player_name_j, s.points, s.schedule_key FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_starter = 1 AND s.points >= 20 ORDER BY s.points DESC, s.schedule_key, p.player_id",
+    "judgeSql": "SELECT p.player_name_j, s.points, s.schedule_key FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_starter = 1 AND s.points >= 20 ORDER BY s.points DESC, s.schedule_key, p.player_id",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "player_name_j",
+        "points",
+        "schedule_key"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "JOIN players",
       "s.is_starter = 1",
       "s.points >= 20"
-    ],
-    "explanation": "先発フラグと得点の2つの条件で絞り込み、選手名をJOINで取得します。"
+    ]
   },
   {
     "id": "bball-011",
@@ -216,15 +270,19 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "SELECT DISTINCT game_type FROM games WHERE game_type IS NOT NULL ORDER BY game_type;",
-    "comparison": {
-      "rowOrder": "sensitive"
+    "explanation": "DISTINCTを使うと、同じ値が複数ある列から重複を除いて取り出せます。",
+    "answerSql": "SELECT DISTINCT game_type FROM games WHERE game_type IS NOT NULL ORDER BY game_type",
+    "judgeSql": "SELECT DISTINCT game_type FROM games WHERE game_type IS NOT NULL ORDER BY game_type",
+    "resultSpec": {
+      "rowOrder": "sensitive",
+      "columns": [
+        "game_type"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "DISTINCT",
       "WHERE game_type IS NOT NULL"
-    ],
-    "explanation": "DISTINCTを使うと、同じ値が複数ある列から重複を除いて取り出せます。"
+    ]
   },
   {
     "id": "bball-012",
@@ -235,16 +293,22 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "SELECT game_date, season, schedule_key FROM games WHERE game_date BETWEEN '2024-10-01' AND '2025-03-31' ORDER BY game_date, schedule_key LIMIT 10;",
-    "comparison": {
-      "rowOrder": "sensitive"
+    "explanation": "BETWEENは、日付や数値が指定した範囲に入る行を検索するときに使います。",
+    "answerSql": "SELECT game_date, season, schedule_key FROM games WHERE game_date BETWEEN '2024-10-01' AND '2025-03-31' ORDER BY game_date, schedule_key LIMIT 10",
+    "judgeSql": "SELECT game_date, season, schedule_key FROM games WHERE game_date BETWEEN '2024-10-01' AND '2025-03-31' ORDER BY game_date, schedule_key LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "sensitive",
+      "columns": [
+        "game_date",
+        "season",
+        "schedule_key"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "BETWEEN",
       "ORDER BY game_date",
       "LIMIT 10"
-    ],
-    "explanation": "BETWEENは、日付や数値が指定した範囲に入る行を検索するときに使います。"
+    ]
   },
   {
     "id": "bball-013",
@@ -255,15 +319,21 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "SELECT season, game_type, COUNT(*) AS game_count FROM games GROUP BY season, game_type ORDER BY season, game_type;",
-    "comparison": {
-      "rowOrder": "sensitive"
+    "explanation": "GROUP BYに複数の列を指定すると、シーズンと試合種別の組み合わせごとに集計できます。",
+    "answerSql": "SELECT season, game_type, COUNT(*) AS game_count FROM games GROUP BY season, game_type ORDER BY season, game_type",
+    "judgeSql": "SELECT season, game_type, COUNT(*) AS game_count FROM games GROUP BY season, game_type ORDER BY season, game_type",
+    "resultSpec": {
+      "rowOrder": "sensitive",
+      "columns": [
+        "season",
+        "game_type",
+        "game_count"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "COUNT",
       "GROUP BY season, game_type"
-    ],
-    "explanation": "GROUP BYに複数の列を指定すると、シーズンと試合種別の組み合わせごとに集計できます。"
+    ]
   },
   {
     "id": "bball-014",
@@ -275,17 +345,25 @@
       "games",
       "teams"
     ],
-    "referenceSql": "SELECT g.game_date, ht.team_name_j AS home_team, at.team_name_j AS away_team, g.home_team_score_total, g.away_team_score_total FROM games AS g JOIN teams AS ht ON ht.team_id = g.home_team_id JOIN teams AS at ON at.team_id = g.away_team_id WHERE g.home_team_score_total IS NOT NULL AND g.away_team_score_total IS NOT NULL ORDER BY g.game_date DESC, g.schedule_key DESC LIMIT 10;",
-    "comparison": {
-      "rowOrder": "sensitive"
+    "explanation": "同じteamsテーブルをホーム用とアウェー用の2つの別名でJOINします。",
+    "answerSql": "SELECT g.game_date, ht.team_name_j AS home_team, at.team_name_j AS away_team, g.home_team_score_total, g.away_team_score_total FROM games AS g JOIN teams AS ht ON ht.team_id = g.home_team_id JOIN teams AS at ON at.team_id = g.away_team_id WHERE g.home_team_score_total IS NOT NULL AND g.away_team_score_total IS NOT NULL ORDER BY g.game_date DESC, g.schedule_key DESC LIMIT 10",
+    "judgeSql": "SELECT g.game_date, ht.team_name_j AS home_team, at.team_name_j AS away_team, g.home_team_score_total, g.away_team_score_total FROM games AS g JOIN teams AS ht ON ht.team_id = g.home_team_id JOIN teams AS at ON at.team_id = g.away_team_id WHERE g.home_team_score_total IS NOT NULL AND g.away_team_score_total IS NOT NULL ORDER BY g.game_date DESC, g.schedule_key DESC LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "sensitive",
+      "columns": [
+        "game_date",
+        "home_team",
+        "away_team",
+        "home_team_score_total",
+        "away_team_score_total"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "JOIN teams AS ht",
       "JOIN teams AS at",
       "home_team_score_total",
       "away_team_score_total"
-    ],
-    "explanation": "同じteamsテーブルをホーム用とアウェー用の2つの別名でJOINします。"
+    ]
   },
   {
     "id": "bball-015",
@@ -297,16 +375,21 @@
       "teams",
       "game_team_stats"
     ],
-    "referenceSql": "SELECT t.team_name_j, COUNT(s.schedule_key) AS game_count FROM teams AS t LEFT JOIN game_team_stats AS s ON s.team_id = t.team_id GROUP BY t.team_id, t.team_name_j ORDER BY game_count, t.team_id;",
-    "comparison": {
-      "rowOrder": "sensitive"
+    "explanation": "LEFT JOINとCOUNT(結合先のキー)を組み合わせると、結合先がないチームも0件で残せます。",
+    "answerSql": "SELECT t.team_name_j, COUNT(s.schedule_key) AS game_count FROM teams AS t LEFT JOIN game_team_stats AS s ON s.team_id = t.team_id GROUP BY t.team_id, t.team_name_j ORDER BY game_count, t.team_id",
+    "judgeSql": "SELECT t.team_name_j, COUNT(s.schedule_key) AS game_count FROM teams AS t LEFT JOIN game_team_stats AS s ON s.team_id = t.team_id GROUP BY t.team_id, t.team_name_j ORDER BY game_count, t.team_id",
+    "resultSpec": {
+      "rowOrder": "sensitive",
+      "columns": [
+        "team_name_j",
+        "game_count"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "LEFT JOIN",
       "COUNT(s.schedule_key)",
       "GROUP BY"
-    ],
-    "explanation": "LEFT JOINとCOUNT(結合先のキー)を組み合わせると、結合先がないチームも0件で残せます。"
+    ]
   },
   {
     "id": "bball-016",
@@ -318,17 +401,23 @@
       "teams",
       "game_team_stats"
     ],
-    "referenceSql": "SELECT t.team_name_j, SUM(CASE WHEN s.is_home = 1 THEN 1 ELSE 0 END) AS home_games, SUM(CASE WHEN s.is_home = 0 THEN 1 ELSE 0 END) AS away_games FROM teams AS t LEFT JOIN game_team_stats AS s ON s.team_id = t.team_id GROUP BY t.team_id, t.team_name_j ORDER BY t.team_id;",
-    "comparison": {
-      "rowOrder": "sensitive"
+    "explanation": "CASE式で条件ごとに1または0へ変換してからSUMすると、条件別の件数を一度に数えられます。",
+    "answerSql": "SELECT t.team_name_j, SUM(CASE WHEN s.is_home = 1 THEN 1 ELSE 0 END) AS home_games, SUM(CASE WHEN s.is_home = 0 THEN 1 ELSE 0 END) AS away_games FROM teams AS t LEFT JOIN game_team_stats AS s ON s.team_id = t.team_id GROUP BY t.team_id, t.team_name_j ORDER BY t.team_id",
+    "judgeSql": "SELECT t.team_name_j, SUM(CASE WHEN s.is_home = 1 THEN 1 ELSE 0 END) AS home_games, SUM(CASE WHEN s.is_home = 0 THEN 1 ELSE 0 END) AS away_games FROM teams AS t LEFT JOIN game_team_stats AS s ON s.team_id = t.team_id GROUP BY t.team_id, t.team_name_j ORDER BY t.team_id",
+    "resultSpec": {
+      "rowOrder": "sensitive",
+      "columns": [
+        "team_name_j",
+        "home_games",
+        "away_games"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "SUM(CASE WHEN",
       "LEFT JOIN",
       "home_games",
       "away_games"
-    ],
-    "explanation": "CASE式で条件ごとに1または0へ変換してからSUMすると、条件別の件数を一度に数えられます。"
+    ]
   },
   {
     "id": "bball-017",
@@ -341,18 +430,24 @@
       "game_team_stats",
       "teams"
     ],
-    "referenceSql": "SELECT g.season, t.team_name_j, ROUND(AVG(s.points), 1) AS average_points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY g.season, t.team_id, t.team_name_j ORDER BY g.season, average_points DESC, t.team_id;",
-    "comparison": {
+    "explanation": "複数テーブルを結合した後、GROUP BYへシーズンとチームを指定して細かい単位で集計します。",
+    "answerSql": "SELECT g.season, t.team_name_j, ROUND(AVG(s.points), 1) AS average_points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY g.season, t.team_id, t.team_name_j ORDER BY g.season, average_points DESC, t.team_id",
+    "judgeSql": "SELECT g.season, t.team_name_j, ROUND(AVG(s.points), 1) AS average_points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY g.season, t.team_id, t.team_name_j ORDER BY g.season, average_points DESC, t.team_id",
+    "resultSpec": {
       "rowOrder": "sensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "season",
+        "team_name_j",
+        "average_points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "JOIN games",
       "JOIN teams",
       "AVG",
       "GROUP BY g.season"
-    ],
-    "explanation": "複数テーブルを結合した後、GROUP BYへシーズンとチームを指定して細かい単位で集計します。"
+    ]
   },
   {
     "id": "bball-018",
@@ -363,11 +458,21 @@
     "sourceTables": [
       "players"
     ],
-    "referenceSql": "SELECT player_id, player_name_j, league_registered_nationality FROM players WHERE league_registered_nationality IN ('日本', 'アメリカ合衆国') ORDER BY player_name_j, player_id LIMIT 20;",
-    "comparison": {
-      "rowOrder": "sensitive"
+    "answerSql": "SELECT player_name_j, league_registered_nationality FROM players WHERE league_registered_nationality IN ('日本', 'アメリカ合衆国') ORDER BY player_name_j LIMIT 20",
+    "judgeSql": "SELECT player_name_j, league_registered_nationality FROM players WHERE league_registered_nationality IN ('日本', 'アメリカ合衆国') ORDER BY player_name_j, player_id LIMIT 20",
+    "resultSpec": {
+      "columns": [
+        "player_name_j",
+        "league_registered_nationality"
+      ],
+      "rowOrder": "sensitive",
+      "limit": 20,
+      "tieBreakers": [
+        "player_name_j",
+        "player_id"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "IN (",
       "league_registered_nationality",
       "LIMIT 20"
@@ -384,17 +489,22 @@
       "game_team_stats",
       "teams"
     ],
-    "referenceSql": "SELECT t.team_name_j, MAX(s.points) AS best_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY best_points DESC, t.team_id LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "explanation": "MAXはグループ内の最大値を求める集計関数です。チームごとに最大得点を求めます。",
+    "answerSql": "SELECT t.team_name_j, MAX(s.points) AS best_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY best_points DESC, t.team_id LIMIT 10",
+    "judgeSql": "SELECT t.team_name_j, MAX(s.points) AS best_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY best_points DESC, t.team_id LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "team_name_j",
+        "best_points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "MAX",
       "JOIN teams",
       "GROUP BY",
       "LIMIT 10"
-    ],
-    "explanation": "MAXはグループ内の最大値を求める集計関数です。チームごとに最大得点を求めます。"
+    ]
   },
   {
     "id": "bball-020",
@@ -406,17 +516,23 @@
       "player_game_stats",
       "players"
     ],
-    "referenceSql": "SELECT p.player_name_j, ROUND(AVG(s.points), 1) AS average_points, COUNT(*) AS game_count FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 AND s.points IS NOT NULL GROUP BY p.player_id, p.player_name_j HAVING COUNT(*) >= 20 ORDER BY average_points DESC, p.player_id LIMIT 10;",
-    "comparison": {
+    "explanation": "WHEREは集計前、HAVINGはGROUP BY後のグループに対する条件です。",
+    "answerSql": "SELECT p.player_name_j, ROUND(AVG(s.points), 1) AS average_points, COUNT(*) AS game_count FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 AND s.points IS NOT NULL GROUP BY p.player_id, p.player_name_j HAVING COUNT(*) >= 20 ORDER BY average_points DESC, p.player_id LIMIT 10",
+    "judgeSql": "SELECT p.player_name_j, ROUND(AVG(s.points), 1) AS average_points, COUNT(*) AS game_count FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 AND s.points IS NOT NULL GROUP BY p.player_id, p.player_name_j HAVING COUNT(*) >= 20 ORDER BY average_points DESC, p.player_id LIMIT 10",
+    "resultSpec": {
       "rowOrder": "insensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "player_name_j",
+        "average_points",
+        "game_count"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "AVG",
       "HAVING COUNT(*) >= 20",
       "ROUND"
-    ],
-    "explanation": "WHEREは集計前、HAVINGはGROUP BY後のグループに対する条件です。"
+    ]
   },
   {
     "id": "bball-021",
@@ -428,17 +544,22 @@
       "player_game_stats",
       "players"
     ],
-    "referenceSql": "SELECT p.player_name_j, COUNT(*) AS double_double_games FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 AND s.points >= 10 AND (s.total_rebounds >= 10 OR s.assists >= 10) GROUP BY p.player_id, p.player_name_j ORDER BY double_double_games DESC, p.player_id LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "explanation": "ANDとORを組み合わせ、複数の条件のどれを満たすかを明確に指定します。",
+    "answerSql": "SELECT p.player_name_j, COUNT(*) AS double_double_games FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 AND s.points >= 10 AND (s.total_rebounds >= 10 OR s.assists >= 10) GROUP BY p.player_id, p.player_name_j ORDER BY double_double_games DESC, p.player_id LIMIT 10",
+    "judgeSql": "SELECT p.player_name_j, COUNT(*) AS double_double_games FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 AND s.points >= 10 AND (s.total_rebounds >= 10 OR s.assists >= 10) GROUP BY p.player_id, p.player_name_j ORDER BY double_double_games DESC, p.player_id LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "player_name_j",
+        "double_double_games"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "AND",
       "OR",
       "COUNT",
       "GROUP BY"
-    ],
-    "explanation": "ANDとORを組み合わせ、複数の条件のどれを満たすかを明確に指定します。"
+    ]
   },
   {
     "id": "bball-022",
@@ -450,16 +571,22 @@
       "game_team_stats",
       "teams"
     ],
-    "referenceSql": "SELECT t.team_name_j, SUM(s.assists) AS total_assists, SUM(s.turnovers) AS total_turnovers FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id GROUP BY t.team_id, t.team_name_j ORDER BY total_assists DESC, t.team_id LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "explanation": "同じグループに対して複数のSUMを指定すると、複数の指標を同時に集計できます。",
+    "answerSql": "SELECT t.team_name_j, SUM(s.assists) AS total_assists, SUM(s.turnovers) AS total_turnovers FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id GROUP BY t.team_id, t.team_name_j ORDER BY total_assists DESC, t.team_id LIMIT 10",
+    "judgeSql": "SELECT t.team_name_j, SUM(s.assists) AS total_assists, SUM(s.turnovers) AS total_turnovers FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id GROUP BY t.team_id, t.team_name_j ORDER BY total_assists DESC, t.team_id LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "team_name_j",
+        "total_assists",
+        "total_turnovers"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "SUM(s.assists)",
       "SUM(s.turnovers)",
       "GROUP BY"
-    ],
-    "explanation": "同じグループに対して複数のSUMを指定すると、複数の指標を同時に集計できます。"
+    ]
   },
   {
     "id": "bball-023",
@@ -470,16 +597,22 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "SELECT game_date, schedule_key, home_team_score_total + away_team_score_total AS total_score FROM games WHERE home_team_score_total IS NOT NULL AND away_team_score_total IS NOT NULL ORDER BY total_score DESC, schedule_key LIMIT 10;",
-    "comparison": {
-      "rowOrder": "sensitive"
+    "explanation": "SELECT句で列同士を計算し、その結果に別名を付けて表示や並び替えに利用します。",
+    "answerSql": "SELECT game_date, schedule_key, home_team_score_total + away_team_score_total AS total_score FROM games WHERE home_team_score_total IS NOT NULL AND away_team_score_total IS NOT NULL ORDER BY total_score DESC, schedule_key LIMIT 10",
+    "judgeSql": "SELECT game_date, schedule_key, home_team_score_total + away_team_score_total AS total_score FROM games WHERE home_team_score_total IS NOT NULL AND away_team_score_total IS NOT NULL ORDER BY total_score DESC, schedule_key LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "sensitive",
+      "columns": [
+        "game_date",
+        "schedule_key",
+        "total_score"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "+",
       "IS NOT NULL",
       "ORDER BY total_score DESC"
-    ],
-    "explanation": "SELECT句で列同士を計算し、その結果に別名を付けて表示や並び替えに利用します。"
+    ]
   },
   {
     "id": "bball-024",
@@ -490,16 +623,22 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "SELECT schedule_key, CASE WHEN home_team_score_total > away_team_score_total THEN 'ホーム' ELSE 'アウェー' END AS winner, ABS(home_team_score_total - away_team_score_total) AS point_diff FROM games WHERE home_team_score_total IS NOT NULL AND away_team_score_total IS NOT NULL ORDER BY point_diff DESC, schedule_key LIMIT 10;",
-    "comparison": {
-      "rowOrder": "sensitive"
+    "explanation": "CASEで条件に応じたラベルを作り、ABSで差の絶対値を求めます。",
+    "answerSql": "SELECT schedule_key, CASE WHEN home_team_score_total > away_team_score_total THEN 'ホーム' ELSE 'アウェー' END AS winner, ABS(home_team_score_total - away_team_score_total) AS point_diff FROM games WHERE home_team_score_total IS NOT NULL AND away_team_score_total IS NOT NULL ORDER BY point_diff DESC, schedule_key LIMIT 10",
+    "judgeSql": "SELECT schedule_key, CASE WHEN home_team_score_total > away_team_score_total THEN 'ホーム' ELSE 'アウェー' END AS winner, ABS(home_team_score_total - away_team_score_total) AS point_diff FROM games WHERE home_team_score_total IS NOT NULL AND away_team_score_total IS NOT NULL ORDER BY point_diff DESC, schedule_key LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "sensitive",
+      "columns": [
+        "schedule_key",
+        "winner",
+        "point_diff"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "CASE WHEN",
       "ABS",
       "point_diff"
-    ],
-    "explanation": "CASEで条件に応じたラベルを作り、ABSで差の絶対値を求めます。"
+    ]
   },
   {
     "id": "bball-025",
@@ -511,17 +650,23 @@
       "game_team_stats",
       "teams"
     ],
-    "referenceSql": "SELECT t.team_name_j, SUM(CASE WHEN s.points > o.points THEN 1 ELSE 0 END) AS wins, COUNT(*) AS game_count FROM game_team_stats AS s JOIN game_team_stats AS o ON o.schedule_key = s.schedule_key AND o.team_id = s.opponent_team_id JOIN teams AS t ON t.team_id = s.team_id GROUP BY t.team_id, t.team_name_j ORDER BY wins DESC, t.team_id LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "explanation": "同じ試合の相手チームの行を自己結合し、得点を比較して勝利数を集計します。",
+    "answerSql": "SELECT t.team_name_j, SUM(CASE WHEN s.points > o.points THEN 1 ELSE 0 END) AS wins, COUNT(*) AS game_count FROM game_team_stats AS s JOIN game_team_stats AS o ON o.schedule_key = s.schedule_key AND o.team_id = s.opponent_team_id JOIN teams AS t ON t.team_id = s.team_id GROUP BY t.team_id, t.team_name_j ORDER BY wins DESC, t.team_id LIMIT 10",
+    "judgeSql": "SELECT t.team_name_j, SUM(CASE WHEN s.points > o.points THEN 1 ELSE 0 END) AS wins, COUNT(*) AS game_count FROM game_team_stats AS s JOIN game_team_stats AS o ON o.schedule_key = s.schedule_key AND o.team_id = s.opponent_team_id JOIN teams AS t ON t.team_id = s.team_id GROUP BY t.team_id, t.team_name_j ORDER BY wins DESC, t.team_id LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "team_name_j",
+        "wins",
+        "game_count"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "JOIN game_team_stats AS o",
       "opponent_team_id",
       "SUM(CASE WHEN",
       "COUNT(*)"
-    ],
-    "explanation": "同じ試合の相手チームの行を自己結合し、得点を比較して勝利数を集計します。"
+    ]
   },
   {
     "id": "bball-026",
@@ -533,17 +678,23 @@
       "game_team_stats",
       "teams"
     ],
-    "referenceSql": "WITH team_averages AS (SELECT t.team_id, t.team_name_j, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j) SELECT RANK() OVER (ORDER BY average_points DESC) AS point_rank, team_name_j, ROUND(average_points, 2) AS average_points FROM team_averages ORDER BY point_rank, team_name_j;",
-    "comparison": {
+    "explanation": "CTEで平均値を先に作り、ウィンドウ関数RANKで順位を付けます。",
+    "answerSql": "WITH team_averages AS (SELECT t.team_id, t.team_name_j, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j) SELECT RANK() OVER (ORDER BY average_points DESC) AS point_rank, team_name_j, ROUND(average_points, 2) AS average_points FROM team_averages ORDER BY point_rank, team_name_j",
+    "judgeSql": "WITH team_averages AS (SELECT t.team_id, t.team_name_j, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j) SELECT RANK() OVER (ORDER BY average_points DESC) AS point_rank, team_name_j, ROUND(average_points, 2) AS average_points FROM team_averages ORDER BY point_rank, team_name_j",
+    "resultSpec": {
       "rowOrder": "sensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "point_rank",
+        "team_name_j",
+        "average_points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "WITH team_averages",
       "RANK() OVER",
       "ORDER BY average_points DESC"
-    ],
-    "explanation": "CTEで平均値を先に作り、ウィンドウ関数RANKで順位を付けます。"
+    ]
   },
   {
     "id": "bball-027",
@@ -556,16 +707,22 @@
       "players",
       "games"
     ],
-    "referenceSql": "WITH player_games AS (SELECT s.player_id, p.player_name_j, g.game_date, s.points, s.schedule_key, ROW_NUMBER() OVER (PARTITION BY s.player_id ORDER BY g.game_date DESC, s.schedule_key DESC) AS row_num FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.is_playing = 1) SELECT player_name_j, game_date, points FROM player_games WHERE row_num = 1 ORDER BY game_date DESC, player_id LIMIT 20;",
-    "comparison": {
-      "rowOrder": "sensitive"
+    "explanation": "ROW_NUMBERを選手ごとに振り、各選手の1行目だけを残すと最新記録を取り出せます。",
+    "answerSql": "WITH player_games AS (SELECT s.player_id, p.player_name_j, g.game_date, s.points, s.schedule_key, ROW_NUMBER() OVER (PARTITION BY s.player_id ORDER BY g.game_date DESC, s.schedule_key DESC) AS row_num FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.is_playing = 1) SELECT player_name_j, game_date, points FROM player_games WHERE row_num = 1 ORDER BY game_date DESC, player_id LIMIT 20",
+    "judgeSql": "WITH player_games AS (SELECT s.player_id, p.player_name_j, g.game_date, s.points, s.schedule_key, ROW_NUMBER() OVER (PARTITION BY s.player_id ORDER BY g.game_date DESC, s.schedule_key DESC) AS row_num FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.is_playing = 1) SELECT player_name_j, game_date, points FROM player_games WHERE row_num = 1 ORDER BY game_date DESC, player_id LIMIT 20",
+    "resultSpec": {
+      "rowOrder": "sensitive",
+      "columns": [
+        "player_name_j",
+        "game_date",
+        "points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "ROW_NUMBER() OVER",
       "PARTITION BY s.player_id",
       "WHERE row_num = 1"
-    ],
-    "explanation": "ROW_NUMBERを選手ごとに振り、各選手の1行目だけを残すと最新記録を取り出せます。"
+    ]
   },
   {
     "id": "bball-028",
@@ -576,16 +733,23 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "SELECT season, game_date, attendance, SUM(attendance) OVER (PARTITION BY season ORDER BY game_date, schedule_key ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS cumulative_attendance FROM games WHERE attendance IS NOT NULL ORDER BY season, game_date, schedule_key LIMIT 20;",
-    "comparison": {
-      "rowOrder": "sensitive"
+    "explanation": "ウィンドウ関数のフレームを指定すると、シーズンごとの累積値を計算できます。",
+    "answerSql": "SELECT season, game_date, attendance, SUM(attendance) OVER (PARTITION BY season ORDER BY game_date, schedule_key ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS cumulative_attendance FROM games WHERE attendance IS NOT NULL ORDER BY season, game_date, schedule_key LIMIT 20",
+    "judgeSql": "SELECT season, game_date, attendance, SUM(attendance) OVER (PARTITION BY season ORDER BY game_date, schedule_key ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS cumulative_attendance FROM games WHERE attendance IS NOT NULL ORDER BY season, game_date, schedule_key LIMIT 20",
+    "resultSpec": {
+      "rowOrder": "sensitive",
+      "columns": [
+        "season",
+        "game_date",
+        "attendance",
+        "cumulative_attendance"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "SUM(attendance) OVER",
       "PARTITION BY season",
       "ROWS BETWEEN"
-    ],
-    "explanation": "ウィンドウ関数のフレームを指定すると、シーズンごとの累積値を計算できます。"
+    ]
   },
   {
     "id": "bball-029",
@@ -596,17 +760,25 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "WITH season_attendance AS (SELECT season, AVG(attendance) AS average_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season) SELECT g.season, g.game_date, g.stadium_name_j, g.attendance, ROUND(sa.average_attendance, 2) AS season_average FROM games AS g JOIN season_attendance AS sa ON sa.season = g.season WHERE g.attendance > sa.average_attendance ORDER BY g.attendance DESC, g.schedule_key LIMIT 10;",
-    "comparison": {
+    "explanation": "CTEでシーズン別平均を作り、元の試合データと結合して平均超えの行だけを抽出します。",
+    "answerSql": "WITH season_attendance AS (SELECT season, AVG(attendance) AS average_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season) SELECT g.season, g.game_date, g.stadium_name_j, g.attendance, ROUND(sa.average_attendance, 2) AS season_average FROM games AS g JOIN season_attendance AS sa ON sa.season = g.season WHERE g.attendance > sa.average_attendance ORDER BY g.attendance DESC, g.schedule_key LIMIT 10",
+    "judgeSql": "WITH season_attendance AS (SELECT season, AVG(attendance) AS average_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season) SELECT g.season, g.game_date, g.stadium_name_j, g.attendance, ROUND(sa.average_attendance, 2) AS season_average FROM games AS g JOIN season_attendance AS sa ON sa.season = g.season WHERE g.attendance > sa.average_attendance ORDER BY g.attendance DESC, g.schedule_key LIMIT 10",
+    "resultSpec": {
       "rowOrder": "sensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "season",
+        "game_date",
+        "stadium_name_j",
+        "attendance",
+        "season_average"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "WITH season_attendance",
       "AVG(attendance)",
       "g.attendance > sa.average_attendance"
-    ],
-    "explanation": "CTEでシーズン別平均を作り、元の試合データと結合して平均超えの行だけを抽出します。"
+    ]
   },
   {
     "id": "bball-030",
@@ -618,17 +790,22 @@
       "game_team_stats",
       "teams"
     ],
-    "referenceSql": "SELECT t.team_name_j, ROUND(AVG(s.points), 2) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j HAVING AVG(s.points) > (SELECT AVG(points) FROM game_team_stats WHERE points IS NOT NULL) ORDER BY average_points DESC, t.team_id;",
-    "comparison": {
+    "explanation": "サブクエリで求めたリーグ全体の平均をHAVINGの比較対象にして、チームの平均と比べます。",
+    "answerSql": "SELECT t.team_name_j, ROUND(AVG(s.points), 2) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j HAVING AVG(s.points) > (SELECT AVG(points) FROM game_team_stats WHERE points IS NOT NULL) ORDER BY average_points DESC, t.team_id",
+    "judgeSql": "SELECT t.team_name_j, ROUND(AVG(s.points), 2) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j HAVING AVG(s.points) > (SELECT AVG(points) FROM game_team_stats WHERE points IS NOT NULL) ORDER BY average_points DESC, t.team_id",
+    "resultSpec": {
       "rowOrder": "sensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "team_name_j",
+        "average_points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "HAVING AVG(s.points) >",
       "SELECT AVG(points) FROM game_team_stats",
       "GROUP BY"
-    ],
-    "explanation": "サブクエリで求めたリーグ全体の平均をHAVINGの比較対象にして、チームの平均と比べます。"
+    ]
   },
   {
     "id": "bball-031",
@@ -639,11 +816,17 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "SELECT game_date, schedule_key, game_type FROM games WHERE season = '2025-26' ORDER BY game_date, schedule_key LIMIT 10;",
-    "comparison": {
-      "rowOrder": "sensitive"
+    "answerSql": "SELECT game_date, schedule_key, game_type FROM games WHERE season = '2025-26' ORDER BY game_date, schedule_key LIMIT 10",
+    "judgeSql": "SELECT game_date, schedule_key, game_type FROM games WHERE season = '2025-26' ORDER BY game_date, schedule_key LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "sensitive",
+      "columns": [
+        "game_date",
+        "schedule_key",
+        "game_type"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "WHERE season = '2025-26'",
       "ORDER BY game_date",
       "LIMIT 10"
@@ -659,11 +842,17 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "SELECT game_date, schedule_key, game_type FROM games WHERE season = '2024-25' ORDER BY game_date DESC, schedule_key DESC LIMIT 10;",
-    "comparison": {
-      "rowOrder": "sensitive"
+    "answerSql": "SELECT game_date, schedule_key, game_type FROM games WHERE season = '2024-25' ORDER BY game_date DESC, schedule_key DESC LIMIT 10",
+    "judgeSql": "SELECT game_date, schedule_key, game_type FROM games WHERE season = '2024-25' ORDER BY game_date DESC, schedule_key DESC LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "sensitive",
+      "columns": [
+        "game_date",
+        "schedule_key",
+        "game_type"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "WHERE season = '2024-25'",
       "ORDER BY game_date DESC",
       "LIMIT 10"
@@ -679,11 +868,16 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "SELECT game_date, schedule_key FROM games WHERE game_type = 'RS' ORDER BY game_date DESC, schedule_key DESC LIMIT 10;",
-    "comparison": {
-      "rowOrder": "sensitive"
+    "answerSql": "SELECT game_date, schedule_key FROM games WHERE game_type = 'RS' ORDER BY game_date DESC, schedule_key DESC LIMIT 10",
+    "judgeSql": "SELECT game_date, schedule_key FROM games WHERE game_type = 'RS' ORDER BY game_date DESC, schedule_key DESC LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "sensitive",
+      "columns": [
+        "game_date",
+        "schedule_key"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "WHERE game_type = 'RS'",
       "ORDER BY game_date DESC"
     ],
@@ -698,11 +892,16 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "SELECT game_date, schedule_key FROM games WHERE game_type = 'CS' ORDER BY game_date, schedule_key LIMIT 10;",
-    "comparison": {
-      "rowOrder": "sensitive"
+    "answerSql": "SELECT game_date, schedule_key FROM games WHERE game_type = 'CS' ORDER BY game_date, schedule_key LIMIT 10",
+    "judgeSql": "SELECT game_date, schedule_key FROM games WHERE game_type = 'CS' ORDER BY game_date, schedule_key LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "sensitive",
+      "columns": [
+        "game_date",
+        "schedule_key"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "WHERE game_type = 'CS'",
       "ORDER BY game_date"
     ],
@@ -717,11 +916,17 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "SELECT game_date, stadium_name_j, attendance FROM games WHERE attendance >= 5000 ORDER BY attendance DESC, game_date DESC LIMIT 10;",
-    "comparison": {
-      "rowOrder": "sensitive"
+    "answerSql": "SELECT game_date, stadium_name_j, attendance FROM games WHERE attendance >= 5000 ORDER BY attendance DESC, game_date DESC LIMIT 10",
+    "judgeSql": "SELECT game_date, stadium_name_j, attendance FROM games WHERE attendance >= 5000 ORDER BY attendance DESC, game_date DESC LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "sensitive",
+      "columns": [
+        "game_date",
+        "stadium_name_j",
+        "attendance"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "attendance >= 5000",
       "ORDER BY attendance DESC"
     ],
@@ -736,11 +941,16 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "SELECT game_date, attendance FROM games WHERE attendance IS NOT NULL ORDER BY attendance, game_date LIMIT 10;",
-    "comparison": {
-      "rowOrder": "sensitive"
+    "answerSql": "SELECT game_date, attendance FROM games WHERE attendance IS NOT NULL ORDER BY attendance, game_date LIMIT 10",
+    "judgeSql": "SELECT game_date, attendance FROM games WHERE attendance IS NOT NULL ORDER BY attendance, game_date LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "sensitive",
+      "columns": [
+        "game_date",
+        "attendance"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "attendance IS NOT NULL",
       "ORDER BY attendance"
     ],
@@ -755,11 +965,17 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "SELECT game_date, season, schedule_key FROM games WHERE game_date >= '2025-01-01' ORDER BY game_date DESC, schedule_key DESC LIMIT 10;",
-    "comparison": {
-      "rowOrder": "sensitive"
+    "answerSql": "SELECT game_date, season, schedule_key FROM games WHERE game_date >= '2025-01-01' ORDER BY game_date DESC, schedule_key DESC LIMIT 10",
+    "judgeSql": "SELECT game_date, season, schedule_key FROM games WHERE game_date >= '2025-01-01' ORDER BY game_date DESC, schedule_key DESC LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "sensitive",
+      "columns": [
+        "game_date",
+        "season",
+        "schedule_key"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "game_date >= '2025-01-01'",
       "ORDER BY game_date DESC"
     ],
@@ -774,11 +990,17 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "SELECT game_date, season, schedule_key FROM games WHERE game_date < '2017-04-01' ORDER BY game_date, schedule_key LIMIT 10;",
-    "comparison": {
-      "rowOrder": "sensitive"
+    "answerSql": "SELECT game_date, season, schedule_key FROM games WHERE game_date < '2017-04-01' ORDER BY game_date, schedule_key LIMIT 10",
+    "judgeSql": "SELECT game_date, season, schedule_key FROM games WHERE game_date < '2017-04-01' ORDER BY game_date, schedule_key LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "sensitive",
+      "columns": [
+        "game_date",
+        "season",
+        "schedule_key"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "game_date < '2017-04-01'",
       "ORDER BY game_date"
     ],
@@ -793,11 +1015,17 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "SELECT game_date, stadium_name_j, referee_name_j FROM games WHERE referee_name_j IS NOT NULL ORDER BY game_date DESC, schedule_key DESC LIMIT 10;",
-    "comparison": {
-      "rowOrder": "sensitive"
+    "answerSql": "SELECT game_date, stadium_name_j, referee_name_j FROM games WHERE referee_name_j IS NOT NULL ORDER BY game_date DESC, schedule_key DESC LIMIT 10",
+    "judgeSql": "SELECT game_date, stadium_name_j, referee_name_j FROM games WHERE referee_name_j IS NOT NULL ORDER BY game_date DESC, schedule_key DESC LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "sensitive",
+      "columns": [
+        "game_date",
+        "stadium_name_j",
+        "referee_name_j"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "referee_name_j IS NOT NULL",
       "ORDER BY game_date DESC"
     ],
@@ -812,11 +1040,17 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "SELECT game_date, stadium_name_j, game_type FROM games WHERE stadium_name_j IS NOT NULL ORDER BY game_date DESC, schedule_key DESC LIMIT 10;",
-    "comparison": {
-      "rowOrder": "sensitive"
+    "answerSql": "SELECT game_date, stadium_name_j, game_type FROM games WHERE stadium_name_j IS NOT NULL ORDER BY game_date DESC, schedule_key DESC LIMIT 10",
+    "judgeSql": "SELECT game_date, stadium_name_j, game_type FROM games WHERE stadium_name_j IS NOT NULL ORDER BY game_date DESC, schedule_key DESC LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "sensitive",
+      "columns": [
+        "game_date",
+        "stadium_name_j",
+        "game_type"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "stadium_name_j IS NOT NULL",
       "ORDER BY game_date DESC"
     ],
@@ -831,11 +1065,17 @@
     "sourceTables": [
       "game_team_stats"
     ],
-    "referenceSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE points >= 90 ORDER BY points DESC, schedule_key, team_id;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE points >= 90 ORDER BY points DESC, schedule_key, team_id",
+    "judgeSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE points >= 90 ORDER BY points DESC, schedule_key, team_id",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "schedule_key",
+        "team_id",
+        "points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "points >= 90",
       "ORDER BY points DESC"
     ],
@@ -850,11 +1090,17 @@
     "sourceTables": [
       "game_team_stats"
     ],
-    "referenceSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE points <= 60 ORDER BY points, schedule_key, team_id LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE points <= 60 ORDER BY points, schedule_key, team_id LIMIT 10",
+    "judgeSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE points <= 60 ORDER BY points, schedule_key, team_id LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "schedule_key",
+        "team_id",
+        "points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "points <= 60",
       "ORDER BY points"
     ],
@@ -869,11 +1115,17 @@
     "sourceTables": [
       "game_team_stats"
     ],
-    "referenceSql": "SELECT schedule_key, team_id, assists FROM game_team_stats WHERE assists >= 10 ORDER BY assists DESC, schedule_key, team_id LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT schedule_key, team_id, assists FROM game_team_stats WHERE assists >= 10 ORDER BY assists DESC, schedule_key, team_id LIMIT 10",
+    "judgeSql": "SELECT schedule_key, team_id, assists FROM game_team_stats WHERE assists >= 10 ORDER BY assists DESC, schedule_key, team_id LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "schedule_key",
+        "team_id",
+        "assists"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "assists >= 10",
       "ORDER BY assists DESC"
     ],
@@ -888,11 +1140,17 @@
     "sourceTables": [
       "game_team_stats"
     ],
-    "referenceSql": "SELECT schedule_key, team_id, total_rebounds FROM game_team_stats WHERE total_rebounds >= 20 ORDER BY total_rebounds DESC, schedule_key, team_id LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT schedule_key, team_id, total_rebounds FROM game_team_stats WHERE total_rebounds >= 20 ORDER BY total_rebounds DESC, schedule_key, team_id LIMIT 10",
+    "judgeSql": "SELECT schedule_key, team_id, total_rebounds FROM game_team_stats WHERE total_rebounds >= 20 ORDER BY total_rebounds DESC, schedule_key, team_id LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "schedule_key",
+        "team_id",
+        "total_rebounds"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "total_rebounds >= 20",
       "ORDER BY total_rebounds DESC"
     ],
@@ -907,11 +1165,17 @@
     "sourceTables": [
       "game_team_stats"
     ],
-    "referenceSql": "SELECT schedule_key, team_id, fg3m FROM game_team_stats WHERE fg3m >= 5 ORDER BY fg3m DESC, schedule_key, team_id LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT schedule_key, team_id, fg3m FROM game_team_stats WHERE fg3m >= 5 ORDER BY fg3m DESC, schedule_key, team_id LIMIT 10",
+    "judgeSql": "SELECT schedule_key, team_id, fg3m FROM game_team_stats WHERE fg3m >= 5 ORDER BY fg3m DESC, schedule_key, team_id LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "schedule_key",
+        "team_id",
+        "fg3m"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "fg3m >= 5",
       "ORDER BY fg3m DESC"
     ],
@@ -926,11 +1190,17 @@
     "sourceTables": [
       "game_team_stats"
     ],
-    "referenceSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE close_win_3pts_or_less = 1 ORDER BY schedule_key DESC, team_id LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE close_win_3pts_or_less = 1 ORDER BY schedule_key DESC, team_id LIMIT 10",
+    "judgeSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE close_win_3pts_or_less = 1 ORDER BY schedule_key DESC, team_id LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "schedule_key",
+        "team_id",
+        "points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "close_win_3pts_or_less = 1",
       "ORDER BY schedule_key DESC"
     ],
@@ -945,11 +1215,17 @@
     "sourceTables": [
       "game_team_stats"
     ],
-    "referenceSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE is_home = 1 AND points >= 90 ORDER BY points DESC, schedule_key, team_id;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE is_home = 1 AND points >= 90 ORDER BY points DESC, schedule_key, team_id",
+    "judgeSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE is_home = 1 AND points >= 90 ORDER BY points DESC, schedule_key, team_id",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "schedule_key",
+        "team_id",
+        "points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "is_home = 1",
       "points >= 90",
       "AND"
@@ -965,11 +1241,17 @@
     "sourceTables": [
       "game_team_stats"
     ],
-    "referenceSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE is_home = 0 AND points >= 90 ORDER BY points DESC, schedule_key, team_id;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE is_home = 0 AND points >= 90 ORDER BY points DESC, schedule_key, team_id",
+    "judgeSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE is_home = 0 AND points >= 90 ORDER BY points DESC, schedule_key, team_id",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "schedule_key",
+        "team_id",
+        "points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "is_home = 0",
       "points >= 90",
       "AND"
@@ -985,11 +1267,17 @@
     "sourceTables": [
       "game_team_stats"
     ],
-    "referenceSql": "SELECT schedule_key, team_id, fga FROM game_team_stats WHERE fga >= 70 ORDER BY fga DESC, schedule_key, team_id LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT schedule_key, team_id, fga FROM game_team_stats WHERE fga >= 70 ORDER BY fga DESC, schedule_key, team_id LIMIT 10",
+    "judgeSql": "SELECT schedule_key, team_id, fga FROM game_team_stats WHERE fga >= 70 ORDER BY fga DESC, schedule_key, team_id LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "schedule_key",
+        "team_id",
+        "fga"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "fga >= 70",
       "ORDER BY fga DESC"
     ],
@@ -1004,11 +1292,17 @@
     "sourceTables": [
       "game_team_stats"
     ],
-    "referenceSql": "SELECT schedule_key, team_id, fgm FROM game_team_stats WHERE fgm >= 20 ORDER BY fgm DESC, schedule_key, team_id LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT schedule_key, team_id, fgm FROM game_team_stats WHERE fgm >= 20 ORDER BY fgm DESC, schedule_key, team_id LIMIT 10",
+    "judgeSql": "SELECT schedule_key, team_id, fgm FROM game_team_stats WHERE fgm >= 20 ORDER BY fgm DESC, schedule_key, team_id LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "schedule_key",
+        "team_id",
+        "fgm"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "fgm >= 20",
       "ORDER BY fgm DESC"
     ],
@@ -1023,11 +1317,17 @@
     "sourceTables": [
       "player_game_stats"
     ],
-    "referenceSql": "SELECT schedule_key, player_id, points FROM player_game_stats WHERE points >= 30 ORDER BY points DESC, schedule_key, player_id LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT schedule_key, player_id, points FROM player_game_stats WHERE points >= 30 ORDER BY points DESC, schedule_key, player_id LIMIT 10",
+    "judgeSql": "SELECT schedule_key, player_id, points FROM player_game_stats WHERE points >= 30 ORDER BY points DESC, schedule_key, player_id LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "schedule_key",
+        "player_id",
+        "points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "points >= 30",
       "ORDER BY points DESC"
     ],
@@ -1042,11 +1342,17 @@
     "sourceTables": [
       "player_game_stats"
     ],
-    "referenceSql": "SELECT schedule_key, player_id, points FROM player_game_stats WHERE points BETWEEN 15 AND 20 ORDER BY points DESC, schedule_key, player_id LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT schedule_key, player_id, points FROM player_game_stats WHERE points BETWEEN 15 AND 20 ORDER BY points DESC, schedule_key, player_id LIMIT 10",
+    "judgeSql": "SELECT schedule_key, player_id, points FROM player_game_stats WHERE points BETWEEN 15 AND 20 ORDER BY points DESC, schedule_key, player_id LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "schedule_key",
+        "player_id",
+        "points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "points BETWEEN 15 AND 20",
       "ORDER BY points DESC"
     ],
@@ -1061,11 +1367,17 @@
     "sourceTables": [
       "player_game_stats"
     ],
-    "referenceSql": "SELECT schedule_key, player_id, assists FROM player_game_stats WHERE assists >= 10 ORDER BY assists DESC, schedule_key, player_id LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT schedule_key, player_id, assists FROM player_game_stats WHERE assists >= 10 ORDER BY assists DESC, schedule_key, player_id LIMIT 10",
+    "judgeSql": "SELECT schedule_key, player_id, assists FROM player_game_stats WHERE assists >= 10 ORDER BY assists DESC, schedule_key, player_id LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "schedule_key",
+        "player_id",
+        "assists"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "assists >= 10",
       "ORDER BY assists DESC"
     ],
@@ -1080,11 +1392,17 @@
     "sourceTables": [
       "player_game_stats"
     ],
-    "referenceSql": "SELECT schedule_key, player_id, total_rebounds FROM player_game_stats WHERE total_rebounds >= 15 ORDER BY total_rebounds DESC, schedule_key, player_id LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT schedule_key, player_id, total_rebounds FROM player_game_stats WHERE total_rebounds >= 15 ORDER BY total_rebounds DESC, schedule_key, player_id LIMIT 10",
+    "judgeSql": "SELECT schedule_key, player_id, total_rebounds FROM player_game_stats WHERE total_rebounds >= 15 ORDER BY total_rebounds DESC, schedule_key, player_id LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "schedule_key",
+        "player_id",
+        "total_rebounds"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "total_rebounds >= 15",
       "ORDER BY total_rebounds DESC"
     ],
@@ -1099,11 +1417,17 @@
     "sourceTables": [
       "player_game_stats"
     ],
-    "referenceSql": "SELECT schedule_key, player_id, steals FROM player_game_stats WHERE steals >= 5 ORDER BY steals DESC, schedule_key, player_id LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT schedule_key, player_id, steals FROM player_game_stats WHERE steals >= 5 ORDER BY steals DESC, schedule_key, player_id LIMIT 10",
+    "judgeSql": "SELECT schedule_key, player_id, steals FROM player_game_stats WHERE steals >= 5 ORDER BY steals DESC, schedule_key, player_id LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "schedule_key",
+        "player_id",
+        "steals"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "steals >= 5",
       "ORDER BY steals DESC"
     ],
@@ -1118,11 +1442,17 @@
     "sourceTables": [
       "player_game_stats"
     ],
-    "referenceSql": "SELECT schedule_key, player_id, play_time FROM player_game_stats WHERE is_starter = 1 AND is_playing = 1 ORDER BY schedule_key DESC, player_id LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT schedule_key, player_id, play_time FROM player_game_stats WHERE is_starter = 1 AND is_playing = 1 ORDER BY schedule_key DESC, player_id LIMIT 10",
+    "judgeSql": "SELECT schedule_key, player_id, play_time FROM player_game_stats WHERE is_starter = 1 AND is_playing = 1 ORDER BY schedule_key DESC, player_id LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "schedule_key",
+        "player_id",
+        "play_time"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "is_starter = 1",
       "is_playing = 1",
       "AND"
@@ -1138,11 +1468,17 @@
     "sourceTables": [
       "player_game_stats"
     ],
-    "referenceSql": "SELECT schedule_key, player_id, play_time FROM player_game_stats WHERE is_playing = 0 ORDER BY schedule_key DESC, player_id LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT schedule_key, player_id, play_time FROM player_game_stats WHERE is_playing = 0 ORDER BY schedule_key DESC, player_id LIMIT 10",
+    "judgeSql": "SELECT schedule_key, player_id, play_time FROM player_game_stats WHERE is_playing = 0 ORDER BY schedule_key DESC, player_id LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "schedule_key",
+        "player_id",
+        "play_time"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "is_playing = 0",
       "ORDER BY schedule_key DESC"
     ],
@@ -1157,11 +1493,17 @@
     "sourceTables": [
       "player_game_stats"
     ],
-    "referenceSql": "SELECT schedule_key, player_id, fga FROM player_game_stats WHERE fga >= 10 ORDER BY fga DESC, schedule_key, player_id LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT schedule_key, player_id, fga FROM player_game_stats WHERE fga >= 10 ORDER BY fga DESC, schedule_key, player_id LIMIT 10",
+    "judgeSql": "SELECT schedule_key, player_id, fga FROM player_game_stats WHERE fga >= 10 ORDER BY fga DESC, schedule_key, player_id LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "schedule_key",
+        "player_id",
+        "fga"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "fga >= 10",
       "ORDER BY fga DESC"
     ],
@@ -1176,11 +1518,17 @@
     "sourceTables": [
       "player_game_stats"
     ],
-    "referenceSql": "SELECT schedule_key, player_id, fg3m FROM player_game_stats WHERE fg3m >= 5 ORDER BY fg3m DESC, schedule_key, player_id LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT schedule_key, player_id, fg3m FROM player_game_stats WHERE fg3m >= 5 ORDER BY fg3m DESC, schedule_key, player_id LIMIT 10",
+    "judgeSql": "SELECT schedule_key, player_id, fg3m FROM player_game_stats WHERE fg3m >= 5 ORDER BY fg3m DESC, schedule_key, player_id LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "schedule_key",
+        "player_id",
+        "fg3m"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "fg3m >= 5",
       "ORDER BY fg3m DESC"
     ],
@@ -1195,11 +1543,17 @@
     "sourceTables": [
       "player_game_stats"
     ],
-    "referenceSql": "SELECT schedule_key, player_id, efficiency FROM player_game_stats WHERE efficiency >= 30 ORDER BY efficiency DESC, schedule_key, player_id LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT schedule_key, player_id, efficiency FROM player_game_stats WHERE efficiency >= 30 ORDER BY efficiency DESC, schedule_key, player_id LIMIT 10",
+    "judgeSql": "SELECT schedule_key, player_id, efficiency FROM player_game_stats WHERE efficiency >= 30 ORDER BY efficiency DESC, schedule_key, player_id LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "schedule_key",
+        "player_id",
+        "efficiency"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "efficiency >= 30",
       "ORDER BY efficiency DESC"
     ],
@@ -1216,11 +1570,17 @@
       "game_team_stats",
       "teams"
     ],
-    "referenceSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_home = 1 AND s.points >= 90 ORDER BY g.game_date DESC, s.points DESC LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_home = 1 AND s.points >= 90 ORDER BY g.game_date DESC, s.points DESC LIMIT 10",
+    "judgeSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_home = 1 AND s.points >= 90 ORDER BY g.game_date DESC, s.points DESC LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "game_date",
+        "team_name_j",
+        "points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "JOIN games",
       "JOIN teams",
       "s.is_home = 1"
@@ -1238,11 +1598,17 @@
       "game_team_stats",
       "teams"
     ],
-    "referenceSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_home = 0 AND s.points >= 90 ORDER BY g.game_date DESC, s.points DESC LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_home = 0 AND s.points >= 90 ORDER BY g.game_date DESC, s.points DESC LIMIT 10",
+    "judgeSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_home = 0 AND s.points >= 90 ORDER BY g.game_date DESC, s.points DESC LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "game_date",
+        "team_name_j",
+        "points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "JOIN games",
       "JOIN teams",
       "s.is_home = 0"
@@ -1260,11 +1626,17 @@
       "game_team_stats",
       "teams"
     ],
-    "referenceSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE g.season = '2025-26' ORDER BY g.game_date DESC, s.team_id LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE g.season = '2025-26' ORDER BY g.game_date DESC, s.team_id LIMIT 10",
+    "judgeSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE g.season = '2025-26' ORDER BY g.game_date DESC, s.team_id LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "game_date",
+        "team_name_j",
+        "points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "JOIN games",
       "JOIN teams",
       "g.season = '2025-26'"
@@ -1281,11 +1653,16 @@
       "game_team_stats",
       "teams"
     ],
-    "referenceSql": "SELECT t.team_name_j, s.points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id ORDER BY s.points DESC, s.schedule_key, s.team_id LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT t.team_name_j, s.points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id ORDER BY s.points DESC, s.schedule_key, s.team_id LIMIT 10",
+    "judgeSql": "SELECT t.team_name_j, s.points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id ORDER BY s.points DESC, s.schedule_key, s.team_id LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "team_name_j",
+        "points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "JOIN teams",
       "ORDER BY s.points DESC"
     ],
@@ -1301,11 +1678,18 @@
       "game_team_stats",
       "teams"
     ],
-    "referenceSql": "SELECT t.team_name_j, o.team_name_j AS opponent_team, s.points, os.points AS opponent_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id JOIN teams AS o ON o.team_id = s.opponent_team_id JOIN game_team_stats AS os ON os.schedule_key = s.schedule_key AND os.team_id = s.opponent_team_id ORDER BY s.schedule_key DESC, s.team_id LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT t.team_name_j, o.team_name_j AS opponent_team, s.points, os.points AS opponent_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id JOIN teams AS o ON o.team_id = s.opponent_team_id JOIN game_team_stats AS os ON os.schedule_key = s.schedule_key AND os.team_id = s.opponent_team_id ORDER BY s.schedule_key DESC, s.team_id LIMIT 10",
+    "judgeSql": "SELECT t.team_name_j, o.team_name_j AS opponent_team, s.points, os.points AS opponent_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id JOIN teams AS o ON o.team_id = s.opponent_team_id JOIN game_team_stats AS os ON os.schedule_key = s.schedule_key AND os.team_id = s.opponent_team_id ORDER BY s.schedule_key DESC, s.team_id LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "team_name_j",
+        "opponent_team",
+        "points",
+        "opponent_points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "JOIN teams AS t",
       "JOIN teams AS o",
       "opponent_team_id"
@@ -1321,11 +1705,17 @@
     "sourceTables": [
       "teams"
     ],
-    "referenceSql": "SELECT s.player_id, t.team_name_j, s.points FROM player_game_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points >= 20 ORDER BY s.points DESC, s.schedule_key, s.player_id LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT s.player_id, t.team_name_j, s.points FROM player_game_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points >= 20 ORDER BY s.points DESC, s.schedule_key, s.player_id LIMIT 10",
+    "judgeSql": "SELECT s.player_id, t.team_name_j, s.points FROM player_game_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points >= 20 ORDER BY s.points DESC, s.schedule_key, s.player_id LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "player_id",
+        "team_name_j",
+        "points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "JOIN teams",
       "s.points >= 20"
     ],
@@ -1340,11 +1730,17 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "SELECT g.game_date, s.player_id, s.points FROM player_game_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.points >= 20 ORDER BY g.game_date DESC, s.points DESC LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT g.game_date, s.player_id, s.points FROM player_game_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.points >= 20 ORDER BY g.game_date DESC, s.points DESC LIMIT 10",
+    "judgeSql": "SELECT g.game_date, s.player_id, s.points FROM player_game_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.points >= 20 ORDER BY g.game_date DESC, s.points DESC LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "game_date",
+        "player_id",
+        "points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "JOIN games",
       "s.points >= 20"
     ],
@@ -1360,11 +1756,18 @@
       "games",
       "teams"
     ],
-    "referenceSql": "SELECT g.game_date, s.player_id, t.team_name_j, s.points FROM player_game_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_starter = 1 ORDER BY g.game_date DESC, s.points DESC LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT g.game_date, s.player_id, t.team_name_j, s.points FROM player_game_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_starter = 1 ORDER BY g.game_date DESC, s.points DESC LIMIT 10",
+    "judgeSql": "SELECT g.game_date, s.player_id, t.team_name_j, s.points FROM player_game_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_starter = 1 ORDER BY g.game_date DESC, s.points DESC LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "game_date",
+        "player_id",
+        "team_name_j",
+        "points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "JOIN games",
       "JOIN teams",
       "s.is_starter = 1"
@@ -1381,11 +1784,17 @@
       "games",
       "teams"
     ],
-    "referenceSql": "SELECT g.game_date, t.team_name_j, g.attendance FROM games AS g JOIN teams AS t ON t.team_id = g.home_team_id WHERE g.attendance IS NOT NULL ORDER BY g.attendance DESC, g.game_date DESC LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT g.game_date, t.team_name_j, g.attendance FROM games AS g JOIN teams AS t ON t.team_id = g.home_team_id WHERE g.attendance IS NOT NULL ORDER BY g.attendance DESC, g.game_date DESC LIMIT 10",
+    "judgeSql": "SELECT g.game_date, t.team_name_j, g.attendance FROM games AS g JOIN teams AS t ON t.team_id = g.home_team_id WHERE g.attendance IS NOT NULL ORDER BY g.attendance DESC, g.game_date DESC LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "game_date",
+        "team_name_j",
+        "attendance"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "JOIN teams",
       "g.attendance IS NOT NULL"
     ],
@@ -1402,11 +1811,17 @@
       "game_team_stats",
       "teams"
     ],
-    "referenceSql": "SELECT g.season, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL ORDER BY g.season DESC, s.points DESC LIMIT 10;",
-    "comparison": {
-      "rowOrder": "insensitive"
+    "answerSql": "SELECT g.season, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL ORDER BY g.season DESC, s.points DESC LIMIT 10",
+    "judgeSql": "SELECT g.season, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL ORDER BY g.season DESC, s.points DESC LIMIT 10",
+    "resultSpec": {
+      "rowOrder": "insensitive",
+      "columns": [
+        "season",
+        "team_name_j",
+        "points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "JOIN games",
       "JOIN teams",
       "s.points IS NOT NULL"
@@ -1422,12 +1837,17 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "SELECT season, ROUND(AVG(attendance), 2) AS average_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season ORDER BY season;",
-    "comparison": {
+    "answerSql": "SELECT season, ROUND(AVG(attendance), 2) AS average_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season ORDER BY season",
+    "judgeSql": "SELECT season, ROUND(AVG(attendance), 2) AS average_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season ORDER BY season",
+    "resultSpec": {
       "rowOrder": "insensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "season",
+        "average_attendance"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "AVG(attendance)",
       "GROUP BY season",
       "ROUND"
@@ -1443,12 +1863,17 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "SELECT season, SUM(attendance) AS total_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season ORDER BY total_attendance DESC, season;",
-    "comparison": {
+    "answerSql": "SELECT season, SUM(attendance) AS total_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season ORDER BY total_attendance DESC, season",
+    "judgeSql": "SELECT season, SUM(attendance) AS total_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season ORDER BY total_attendance DESC, season",
+    "resultSpec": {
       "rowOrder": "insensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "season",
+        "total_attendance"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "SUM(attendance)",
       "GROUP BY season"
     ],
@@ -1463,12 +1888,17 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "SELECT game_type, COUNT(*) AS game_count FROM games GROUP BY game_type ORDER BY game_count DESC, game_type;",
-    "comparison": {
+    "answerSql": "SELECT game_type, COUNT(*) AS game_count FROM games GROUP BY game_type ORDER BY game_count DESC, game_type",
+    "judgeSql": "SELECT game_type, COUNT(*) AS game_count FROM games GROUP BY game_type ORDER BY game_count DESC, game_type",
+    "resultSpec": {
       "rowOrder": "insensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "game_type",
+        "game_count"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "COUNT(*)",
       "GROUP BY game_type"
     ],
@@ -1484,12 +1914,17 @@
       "game_team_stats",
       "teams"
     ],
-    "referenceSql": "SELECT t.team_name_j, SUM(s.points) AS total_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY total_points DESC, t.team_id LIMIT 10;",
-    "comparison": {
+    "answerSql": "SELECT t.team_name_j, SUM(s.points) AS total_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY total_points DESC, t.team_id LIMIT 10",
+    "judgeSql": "SELECT t.team_name_j, SUM(s.points) AS total_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY total_points DESC, t.team_id LIMIT 10",
+    "resultSpec": {
       "rowOrder": "insensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "team_name_j",
+        "total_points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "SUM(s.points)",
       "JOIN teams",
       "GROUP BY"
@@ -1506,12 +1941,17 @@
       "game_team_stats",
       "teams"
     ],
-    "referenceSql": "SELECT t.team_name_j, ROUND(AVG(s.total_rebounds), 2) AS average_rebounds FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.total_rebounds IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY average_rebounds DESC, t.team_id LIMIT 10;",
-    "comparison": {
+    "answerSql": "SELECT t.team_name_j, ROUND(AVG(s.total_rebounds), 2) AS average_rebounds FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.total_rebounds IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY average_rebounds DESC, t.team_id LIMIT 10",
+    "judgeSql": "SELECT t.team_name_j, ROUND(AVG(s.total_rebounds), 2) AS average_rebounds FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.total_rebounds IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY average_rebounds DESC, t.team_id LIMIT 10",
+    "resultSpec": {
       "rowOrder": "insensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "team_name_j",
+        "average_rebounds"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "AVG(s.total_rebounds)",
       "GROUP BY",
       "ROUND"
@@ -1528,12 +1968,17 @@
       "game_team_stats",
       "teams"
     ],
-    "referenceSql": "SELECT t.team_name_j, MAX(s.assists) AS max_assists FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.assists IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY max_assists DESC, t.team_id LIMIT 10;",
-    "comparison": {
+    "answerSql": "SELECT t.team_name_j, MAX(s.assists) AS max_assists FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.assists IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY max_assists DESC, t.team_id LIMIT 10",
+    "judgeSql": "SELECT t.team_name_j, MAX(s.assists) AS max_assists FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.assists IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY max_assists DESC, t.team_id LIMIT 10",
+    "resultSpec": {
       "rowOrder": "insensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "team_name_j",
+        "max_assists"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "MAX(s.assists)",
       "GROUP BY"
     ],
@@ -1549,12 +1994,17 @@
       "players",
       "player_game_stats"
     ],
-    "referenceSql": "SELECT p.player_name_j, ROUND(AVG(s.assists), 2) AS average_assists FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 AND s.assists IS NOT NULL GROUP BY p.player_id, p.player_name_j ORDER BY average_assists DESC, p.player_id LIMIT 10;",
-    "comparison": {
+    "answerSql": "SELECT p.player_name_j, ROUND(AVG(s.assists), 2) AS average_assists FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 AND s.assists IS NOT NULL GROUP BY p.player_id, p.player_name_j ORDER BY average_assists DESC, p.player_id LIMIT 10",
+    "judgeSql": "SELECT p.player_name_j, ROUND(AVG(s.assists), 2) AS average_assists FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 AND s.assists IS NOT NULL GROUP BY p.player_id, p.player_name_j ORDER BY average_assists DESC, p.player_id LIMIT 10",
+    "resultSpec": {
       "rowOrder": "insensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "player_name_j",
+        "average_assists"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "AVG(s.assists)",
       "JOIN players",
       "GROUP BY"
@@ -1571,12 +2021,17 @@
       "players",
       "player_game_stats"
     ],
-    "referenceSql": "SELECT p.player_name_j, MAX(s.points) AS max_points FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.points IS NOT NULL GROUP BY p.player_id, p.player_name_j ORDER BY max_points DESC, p.player_id LIMIT 10;",
-    "comparison": {
+    "answerSql": "SELECT p.player_name_j, MAX(s.points) AS max_points FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.points IS NOT NULL GROUP BY p.player_id, p.player_name_j ORDER BY max_points DESC, p.player_id LIMIT 10",
+    "judgeSql": "SELECT p.player_name_j, MAX(s.points) AS max_points FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.points IS NOT NULL GROUP BY p.player_id, p.player_name_j ORDER BY max_points DESC, p.player_id LIMIT 10",
+    "resultSpec": {
       "rowOrder": "insensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "player_name_j",
+        "max_points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "MAX(s.points)",
       "JOIN players",
       "GROUP BY"
@@ -1593,12 +2048,17 @@
       "games",
       "game_team_stats"
     ],
-    "referenceSql": "SELECT g.season, SUM(s.points) AS total_points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.points IS NOT NULL GROUP BY g.season ORDER BY g.season;",
-    "comparison": {
+    "answerSql": "SELECT g.season, SUM(s.points) AS total_points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.points IS NOT NULL GROUP BY g.season ORDER BY g.season",
+    "judgeSql": "SELECT g.season, SUM(s.points) AS total_points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.points IS NOT NULL GROUP BY g.season ORDER BY g.season",
+    "resultSpec": {
       "rowOrder": "insensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "season",
+        "total_points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "JOIN games",
       "SUM(s.points)",
       "GROUP BY g.season"
@@ -1615,12 +2075,17 @@
       "games",
       "game_team_stats"
     ],
-    "referenceSql": "SELECT g.season, ROUND(AVG(s.points), 2) AS average_points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.points IS NOT NULL GROUP BY g.season ORDER BY average_points DESC, g.season;",
-    "comparison": {
+    "answerSql": "SELECT g.season, ROUND(AVG(s.points), 2) AS average_points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.points IS NOT NULL GROUP BY g.season ORDER BY average_points DESC, g.season",
+    "judgeSql": "SELECT g.season, ROUND(AVG(s.points), 2) AS average_points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.points IS NOT NULL GROUP BY g.season ORDER BY average_points DESC, g.season",
+    "resultSpec": {
       "rowOrder": "insensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "season",
+        "average_points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "JOIN games",
       "AVG(s.points)",
       "GROUP BY g.season"
@@ -1637,12 +2102,18 @@
       "teams",
       "game_team_stats"
     ],
-    "referenceSql": "SELECT t.team_name_j, SUM(CASE WHEN s.is_home = 1 THEN 1 ELSE 0 END) AS home_games, SUM(CASE WHEN s.is_home = 0 THEN 1 ELSE 0 END) AS away_games FROM teams AS t LEFT JOIN game_team_stats AS s ON s.team_id = t.team_id GROUP BY t.team_id, t.team_name_j ORDER BY t.team_id;",
-    "comparison": {
+    "answerSql": "SELECT t.team_name_j, SUM(CASE WHEN s.is_home = 1 THEN 1 ELSE 0 END) AS home_games, SUM(CASE WHEN s.is_home = 0 THEN 1 ELSE 0 END) AS away_games FROM teams AS t LEFT JOIN game_team_stats AS s ON s.team_id = t.team_id GROUP BY t.team_id, t.team_name_j ORDER BY t.team_id",
+    "judgeSql": "SELECT t.team_name_j, SUM(CASE WHEN s.is_home = 1 THEN 1 ELSE 0 END) AS home_games, SUM(CASE WHEN s.is_home = 0 THEN 1 ELSE 0 END) AS away_games FROM teams AS t LEFT JOIN game_team_stats AS s ON s.team_id = t.team_id GROUP BY t.team_id, t.team_name_j ORDER BY t.team_id",
+    "resultSpec": {
       "rowOrder": "insensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "team_name_j",
+        "home_games",
+        "away_games"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "LEFT JOIN",
       "SUM(CASE WHEN",
       "GROUP BY"
@@ -1658,12 +2129,18 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "SELECT schedule_key, CASE WHEN ABS(home_team_score_total - away_team_score_total) < 10 THEN '接戦' ELSE '通常' END AS game_class, ABS(home_team_score_total - away_team_score_total) AS point_diff FROM games WHERE home_team_score_total IS NOT NULL AND away_team_score_total IS NOT NULL ORDER BY point_diff, schedule_key LIMIT 10;",
-    "comparison": {
+    "answerSql": "SELECT schedule_key, CASE WHEN ABS(home_team_score_total - away_team_score_total) < 10 THEN '接戦' ELSE '通常' END AS game_class, ABS(home_team_score_total - away_team_score_total) AS point_diff FROM games WHERE home_team_score_total IS NOT NULL AND away_team_score_total IS NOT NULL ORDER BY point_diff, schedule_key LIMIT 10",
+    "judgeSql": "SELECT schedule_key, CASE WHEN ABS(home_team_score_total - away_team_score_total) < 10 THEN '接戦' ELSE '通常' END AS game_class, ABS(home_team_score_total - away_team_score_total) AS point_diff FROM games WHERE home_team_score_total IS NOT NULL AND away_team_score_total IS NOT NULL ORDER BY point_diff, schedule_key LIMIT 10",
+    "resultSpec": {
       "rowOrder": "insensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "schedule_key",
+        "game_class",
+        "point_diff"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "CASE WHEN",
       "ABS",
       "game_class"
@@ -1679,12 +2156,18 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "SELECT game_date, CASE WHEN attendance >= 5000 THEN '大規模' ELSE '通常' END AS attendance_class, attendance FROM games WHERE attendance IS NOT NULL ORDER BY attendance DESC, game_date DESC LIMIT 10;",
-    "comparison": {
+    "answerSql": "SELECT game_date, CASE WHEN attendance >= 5000 THEN '大規模' ELSE '通常' END AS attendance_class, attendance FROM games WHERE attendance IS NOT NULL ORDER BY attendance DESC, game_date DESC LIMIT 10",
+    "judgeSql": "SELECT game_date, CASE WHEN attendance >= 5000 THEN '大規模' ELSE '通常' END AS attendance_class, attendance FROM games WHERE attendance IS NOT NULL ORDER BY attendance DESC, game_date DESC LIMIT 10",
+    "resultSpec": {
       "rowOrder": "insensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "game_date",
+        "attendance_class",
+        "attendance"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "CASE WHEN",
       "attendance >= 5000",
       "attendance_class"
@@ -1700,12 +2183,18 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "SELECT schedule_key, CASE WHEN home_team_score_total > away_team_score_total THEN 'ホーム勝利' ELSE 'アウェー勝利' END AS result, ABS(home_team_score_total - away_team_score_total) AS point_diff FROM games WHERE home_team_score_total IS NOT NULL AND away_team_score_total IS NOT NULL ORDER BY schedule_key DESC LIMIT 10;",
-    "comparison": {
+    "answerSql": "SELECT schedule_key, CASE WHEN home_team_score_total > away_team_score_total THEN 'ホーム勝利' ELSE 'アウェー勝利' END AS result, ABS(home_team_score_total - away_team_score_total) AS point_diff FROM games WHERE home_team_score_total IS NOT NULL AND away_team_score_total IS NOT NULL ORDER BY schedule_key DESC LIMIT 10",
+    "judgeSql": "SELECT schedule_key, CASE WHEN home_team_score_total > away_team_score_total THEN 'ホーム勝利' ELSE 'アウェー勝利' END AS result, ABS(home_team_score_total - away_team_score_total) AS point_diff FROM games WHERE home_team_score_total IS NOT NULL AND away_team_score_total IS NOT NULL ORDER BY schedule_key DESC LIMIT 10",
+    "resultSpec": {
       "rowOrder": "insensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "schedule_key",
+        "result",
+        "point_diff"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "CASE WHEN",
       "home_team_score_total",
       "point_diff"
@@ -1721,12 +2210,18 @@
     "sourceTables": [
       "player_game_stats"
     ],
-    "referenceSql": "SELECT player_id, CASE WHEN points >= 20 THEN '高得点' ELSE '通常' END AS scoring_class, points FROM player_game_stats WHERE is_playing = 1 AND points IS NOT NULL ORDER BY points DESC, schedule_key LIMIT 10;",
-    "comparison": {
+    "answerSql": "SELECT player_id, CASE WHEN points >= 20 THEN '高得点' ELSE '通常' END AS scoring_class, points FROM player_game_stats WHERE is_playing = 1 AND points IS NOT NULL ORDER BY points DESC, schedule_key LIMIT 10",
+    "judgeSql": "SELECT player_id, CASE WHEN points >= 20 THEN '高得点' ELSE '通常' END AS scoring_class, points FROM player_game_stats WHERE is_playing = 1 AND points IS NOT NULL ORDER BY points DESC, schedule_key LIMIT 10",
+    "resultSpec": {
       "rowOrder": "insensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "player_id",
+        "scoring_class",
+        "points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "CASE WHEN",
       "points >= 20",
       "is_playing = 1"
@@ -1743,12 +2238,17 @@
       "teams",
       "game_team_stats"
     ],
-    "referenceSql": "SELECT t.team_name_j, COUNT(s.schedule_key) AS stats_count FROM teams AS t LEFT JOIN game_team_stats AS s ON s.team_id = t.team_id GROUP BY t.team_id, t.team_name_j ORDER BY stats_count DESC, t.team_id LIMIT 10;",
-    "comparison": {
+    "answerSql": "SELECT t.team_name_j, COUNT(s.schedule_key) AS stats_count FROM teams AS t LEFT JOIN game_team_stats AS s ON s.team_id = t.team_id GROUP BY t.team_id, t.team_name_j ORDER BY stats_count DESC, t.team_id LIMIT 10",
+    "judgeSql": "SELECT t.team_name_j, COUNT(s.schedule_key) AS stats_count FROM teams AS t LEFT JOIN game_team_stats AS s ON s.team_id = t.team_id GROUP BY t.team_id, t.team_name_j ORDER BY stats_count DESC, t.team_id LIMIT 10",
+    "resultSpec": {
       "rowOrder": "insensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "team_name_j",
+        "stats_count"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "LEFT JOIN",
       "COUNT(s.schedule_key)",
       "GROUP BY"
@@ -1765,12 +2265,17 @@
       "teams",
       "game_team_stats"
     ],
-    "referenceSql": "SELECT t.team_id, t.team_name_j FROM teams AS t LEFT JOIN game_team_stats AS s ON s.team_id = t.team_id GROUP BY t.team_id, t.team_name_j HAVING COUNT(s.schedule_key) = 0 ORDER BY t.team_id;",
-    "comparison": {
+    "answerSql": "SELECT t.team_id, t.team_name_j FROM teams AS t LEFT JOIN game_team_stats AS s ON s.team_id = t.team_id GROUP BY t.team_id, t.team_name_j HAVING COUNT(s.schedule_key) = 0 ORDER BY t.team_id",
+    "judgeSql": "SELECT t.team_id, t.team_name_j FROM teams AS t LEFT JOIN game_team_stats AS s ON s.team_id = t.team_id GROUP BY t.team_id, t.team_name_j HAVING COUNT(s.schedule_key) = 0 ORDER BY t.team_id",
+    "resultSpec": {
       "rowOrder": "insensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "team_id",
+        "team_name_j"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "LEFT JOIN",
       "HAVING COUNT(s.schedule_key) = 0"
     ],
@@ -1786,12 +2291,17 @@
       "players",
       "player_game_stats"
     ],
-    "referenceSql": "SELECT p.player_id, p.player_name_j FROM players AS p LEFT JOIN player_game_stats AS s ON s.player_id = p.player_id GROUP BY p.player_id, p.player_name_j HAVING COUNT(s.schedule_key) = 0 ORDER BY p.player_id;",
-    "comparison": {
+    "answerSql": "SELECT p.player_id, p.player_name_j FROM players AS p LEFT JOIN player_game_stats AS s ON s.player_id = p.player_id GROUP BY p.player_id, p.player_name_j HAVING COUNT(s.schedule_key) = 0 ORDER BY p.player_id",
+    "judgeSql": "SELECT p.player_id, p.player_name_j FROM players AS p LEFT JOIN player_game_stats AS s ON s.player_id = p.player_id GROUP BY p.player_id, p.player_name_j HAVING COUNT(s.schedule_key) = 0 ORDER BY p.player_id",
+    "resultSpec": {
       "rowOrder": "insensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "player_id",
+        "player_name_j"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "LEFT JOIN",
       "HAVING COUNT(s.schedule_key) = 0"
     ],
@@ -1807,12 +2317,18 @@
       "teams",
       "game_team_stats"
     ],
-    "referenceSql": "SELECT t.team_name_j, COUNT(*) AS home_games, SUM(CASE WHEN s.points > o.points THEN 1 ELSE 0 END) AS home_wins FROM teams AS t JOIN game_team_stats AS s ON s.team_id = t.team_id AND s.is_home = 1 JOIN game_team_stats AS o ON o.schedule_key = s.schedule_key AND o.team_id = s.opponent_team_id GROUP BY t.team_id, t.team_name_j ORDER BY home_wins DESC, t.team_id LIMIT 10;",
-    "comparison": {
+    "answerSql": "SELECT t.team_name_j, COUNT(*) AS home_games, SUM(CASE WHEN s.points > o.points THEN 1 ELSE 0 END) AS home_wins FROM teams AS t JOIN game_team_stats AS s ON s.team_id = t.team_id AND s.is_home = 1 JOIN game_team_stats AS o ON o.schedule_key = s.schedule_key AND o.team_id = s.opponent_team_id GROUP BY t.team_id, t.team_name_j ORDER BY home_wins DESC, t.team_id LIMIT 10",
+    "judgeSql": "SELECT t.team_name_j, COUNT(*) AS home_games, SUM(CASE WHEN s.points > o.points THEN 1 ELSE 0 END) AS home_wins FROM teams AS t JOIN game_team_stats AS s ON s.team_id = t.team_id AND s.is_home = 1 JOIN game_team_stats AS o ON o.schedule_key = s.schedule_key AND o.team_id = s.opponent_team_id GROUP BY t.team_id, t.team_name_j ORDER BY home_wins DESC, t.team_id LIMIT 10",
+    "resultSpec": {
       "rowOrder": "insensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "team_name_j",
+        "home_games",
+        "home_wins"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "JOIN game_team_stats AS o",
       "s.is_home = 1",
       "SUM(CASE WHEN"
@@ -1828,12 +2344,19 @@
     "sourceTables": [
       "player_game_stats"
     ],
-    "referenceSql": "SELECT player_id, points, assists, points + assists AS offense_total FROM player_game_stats WHERE is_playing = 1 AND points IS NOT NULL AND assists IS NOT NULL AND points + assists >= 25 ORDER BY offense_total DESC, schedule_key LIMIT 10;",
-    "comparison": {
+    "answerSql": "SELECT player_id, points, assists, points + assists AS offense_total FROM player_game_stats WHERE is_playing = 1 AND points IS NOT NULL AND assists IS NOT NULL AND points + assists >= 25 ORDER BY offense_total DESC, schedule_key LIMIT 10",
+    "judgeSql": "SELECT player_id, points, assists, points + assists AS offense_total FROM player_game_stats WHERE is_playing = 1 AND points IS NOT NULL AND assists IS NOT NULL AND points + assists >= 25 ORDER BY offense_total DESC, schedule_key LIMIT 10",
+    "resultSpec": {
       "rowOrder": "insensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "player_id",
+        "points",
+        "assists",
+        "offense_total"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "points + assists",
       "offense_total",
       "AND"
@@ -1849,12 +2372,18 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "WITH season_average AS (SELECT season, AVG(attendance) AS average_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season) SELECT g.season, g.game_date, g.attendance FROM games AS g JOIN season_average AS a ON a.season = g.season WHERE g.attendance > a.average_attendance ORDER BY g.attendance DESC, g.schedule_key LIMIT 10;",
-    "comparison": {
+    "answerSql": "WITH season_average AS (SELECT season, AVG(attendance) AS average_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season) SELECT g.season, g.game_date, g.attendance FROM games AS g JOIN season_average AS a ON a.season = g.season WHERE g.attendance > a.average_attendance ORDER BY g.attendance DESC, g.schedule_key LIMIT 10",
+    "judgeSql": "WITH season_average AS (SELECT season, AVG(attendance) AS average_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season) SELECT g.season, g.game_date, g.attendance FROM games AS g JOIN season_average AS a ON a.season = g.season WHERE g.attendance > a.average_attendance ORDER BY g.attendance DESC, g.schedule_key LIMIT 10",
+    "resultSpec": {
       "rowOrder": "sensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "season",
+        "game_date",
+        "attendance"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "WITH season_average",
       "AVG(attendance)",
       "g.attendance > a.average_attendance"
@@ -1871,12 +2400,17 @@
       "game_team_stats",
       "teams"
     ],
-    "referenceSql": "SELECT t.team_name_j, ROUND(AVG(s.points), 2) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j HAVING AVG(s.points) >= (SELECT AVG(points) FROM game_team_stats WHERE points IS NOT NULL) ORDER BY average_points DESC, t.team_id;",
-    "comparison": {
+    "answerSql": "SELECT t.team_name_j, ROUND(AVG(s.points), 2) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j HAVING AVG(s.points) >= (SELECT AVG(points) FROM game_team_stats WHERE points IS NOT NULL) ORDER BY average_points DESC, t.team_id",
+    "judgeSql": "SELECT t.team_name_j, ROUND(AVG(s.points), 2) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j HAVING AVG(s.points) >= (SELECT AVG(points) FROM game_team_stats WHERE points IS NOT NULL) ORDER BY average_points DESC, t.team_id",
+    "resultSpec": {
       "rowOrder": "sensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "team_name_j",
+        "average_points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "HAVING AVG(s.points) >=",
       "SELECT AVG(points) FROM game_team_stats"
     ],
@@ -1892,12 +2426,18 @@
       "game_team_stats",
       "teams"
     ],
-    "referenceSql": "WITH averages AS (SELECT t.team_id, t.team_name_j, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j), ranked AS (SELECT team_name_j, average_points, RANK() OVER (ORDER BY average_points DESC) AS point_rank FROM averages) SELECT point_rank, team_name_j, ROUND(average_points, 2) AS average_points FROM ranked WHERE point_rank <= 10 ORDER BY point_rank, team_name_j;",
-    "comparison": {
+    "answerSql": "WITH averages AS (SELECT t.team_id, t.team_name_j, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j), ranked AS (SELECT team_name_j, average_points, RANK() OVER (ORDER BY average_points DESC) AS point_rank FROM averages) SELECT point_rank, team_name_j, ROUND(average_points, 2) AS average_points FROM ranked WHERE point_rank <= 10 ORDER BY point_rank, team_name_j",
+    "judgeSql": "WITH averages AS (SELECT t.team_id, t.team_name_j, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j), ranked AS (SELECT team_name_j, average_points, RANK() OVER (ORDER BY average_points DESC) AS point_rank FROM averages) SELECT point_rank, team_name_j, ROUND(average_points, 2) AS average_points FROM ranked WHERE point_rank <= 10 ORDER BY point_rank, team_name_j",
+    "resultSpec": {
       "rowOrder": "sensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "point_rank",
+        "team_name_j",
+        "average_points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "WITH averages",
       "RANK() OVER",
       "WHERE point_rank <= 10"
@@ -1913,12 +2453,18 @@
     "sourceTables": [
       "game_team_stats"
     ],
-    "referenceSql": "WITH ranked_games AS (SELECT team_id, schedule_key, points, ROW_NUMBER() OVER (PARTITION BY team_id ORDER BY points DESC, schedule_key) AS row_num FROM game_team_stats WHERE points IS NOT NULL) SELECT team_id, schedule_key, points FROM ranked_games WHERE row_num = 1 ORDER BY points DESC, team_id LIMIT 10;",
-    "comparison": {
+    "answerSql": "WITH ranked_games AS (SELECT team_id, schedule_key, points, ROW_NUMBER() OVER (PARTITION BY team_id ORDER BY points DESC, schedule_key) AS row_num FROM game_team_stats WHERE points IS NOT NULL) SELECT team_id, schedule_key, points FROM ranked_games WHERE row_num = 1 ORDER BY points DESC, team_id LIMIT 10",
+    "judgeSql": "WITH ranked_games AS (SELECT team_id, schedule_key, points, ROW_NUMBER() OVER (PARTITION BY team_id ORDER BY points DESC, schedule_key) AS row_num FROM game_team_stats WHERE points IS NOT NULL) SELECT team_id, schedule_key, points FROM ranked_games WHERE row_num = 1 ORDER BY points DESC, team_id LIMIT 10",
+    "resultSpec": {
       "rowOrder": "sensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "team_id",
+        "schedule_key",
+        "points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "ROW_NUMBER() OVER",
       "PARTITION BY team_id",
       "WHERE row_num = 1"
@@ -1935,12 +2481,18 @@
       "player_game_stats",
       "players"
     ],
-    "referenceSql": "WITH totals AS (SELECT p.player_id, p.player_name_j, SUM(s.points) AS total_points FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.points IS NOT NULL GROUP BY p.player_id, p.player_name_j) SELECT RANK() OVER (ORDER BY total_points DESC) AS point_rank, player_name_j, total_points FROM totals ORDER BY point_rank, player_id LIMIT 10;",
-    "comparison": {
+    "answerSql": "WITH totals AS (SELECT p.player_id, p.player_name_j, SUM(s.points) AS total_points FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.points IS NOT NULL GROUP BY p.player_id, p.player_name_j) SELECT RANK() OVER (ORDER BY total_points DESC) AS point_rank, player_name_j, total_points FROM totals ORDER BY point_rank, player_id LIMIT 10",
+    "judgeSql": "WITH totals AS (SELECT p.player_id, p.player_name_j, SUM(s.points) AS total_points FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.points IS NOT NULL GROUP BY p.player_id, p.player_name_j) SELECT RANK() OVER (ORDER BY total_points DESC) AS point_rank, player_name_j, total_points FROM totals ORDER BY point_rank, player_id LIMIT 10",
+    "resultSpec": {
       "rowOrder": "sensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "point_rank",
+        "player_name_j",
+        "total_points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "WITH totals",
       "RANK() OVER",
       "SUM(s.points)"
@@ -1956,12 +2508,19 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "WITH ranked_games AS (SELECT season, game_date, schedule_key, attendance, RANK() OVER (PARTITION BY season ORDER BY attendance DESC) AS attendance_rank FROM games WHERE attendance IS NOT NULL) SELECT season, game_date, attendance, attendance_rank FROM ranked_games WHERE attendance_rank <= 2 ORDER BY season, attendance_rank, game_date LIMIT 10;",
-    "comparison": {
+    "answerSql": "WITH ranked_games AS (SELECT season, game_date, schedule_key, attendance, RANK() OVER (PARTITION BY season ORDER BY attendance DESC) AS attendance_rank FROM games WHERE attendance IS NOT NULL) SELECT season, game_date, attendance, attendance_rank FROM ranked_games WHERE attendance_rank <= 2 ORDER BY season, attendance_rank, game_date LIMIT 10",
+    "judgeSql": "WITH ranked_games AS (SELECT season, game_date, schedule_key, attendance, RANK() OVER (PARTITION BY season ORDER BY attendance DESC) AS attendance_rank FROM games WHERE attendance IS NOT NULL) SELECT season, game_date, attendance, attendance_rank FROM ranked_games WHERE attendance_rank <= 2 ORDER BY season, attendance_rank, game_date LIMIT 10",
+    "resultSpec": {
       "rowOrder": "sensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "season",
+        "game_date",
+        "attendance",
+        "attendance_rank"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "RANK() OVER",
       "PARTITION BY season",
       "attendance_rank <= 2"
@@ -1977,12 +2536,18 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "SELECT season, game_date, COUNT(*) OVER (PARTITION BY season ORDER BY game_date, schedule_key ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS cumulative_games FROM games ORDER BY season, game_date, schedule_key LIMIT 20;",
-    "comparison": {
+    "answerSql": "SELECT season, game_date, COUNT(*) OVER (PARTITION BY season ORDER BY game_date, schedule_key ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS cumulative_games FROM games ORDER BY season, game_date, schedule_key LIMIT 20",
+    "judgeSql": "SELECT season, game_date, COUNT(*) OVER (PARTITION BY season ORDER BY game_date, schedule_key ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS cumulative_games FROM games ORDER BY season, game_date, schedule_key LIMIT 20",
+    "resultSpec": {
       "rowOrder": "sensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "season",
+        "game_date",
+        "cumulative_games"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "COUNT(*) OVER",
       "PARTITION BY season",
       "ROWS BETWEEN"
@@ -1999,12 +2564,17 @@
       "games",
       "player_game_stats"
     ],
-    "referenceSql": "SELECT g.season, COUNT(*) AS high_scoring_records FROM games AS g JOIN player_game_stats AS s ON s.schedule_key = g.schedule_key WHERE s.points >= 20 GROUP BY g.season ORDER BY high_scoring_records DESC, g.season;",
-    "comparison": {
+    "answerSql": "SELECT g.season, COUNT(*) AS high_scoring_records FROM games AS g JOIN player_game_stats AS s ON s.schedule_key = g.schedule_key WHERE s.points >= 20 GROUP BY g.season ORDER BY high_scoring_records DESC, g.season",
+    "judgeSql": "SELECT g.season, COUNT(*) AS high_scoring_records FROM games AS g JOIN player_game_stats AS s ON s.schedule_key = g.schedule_key WHERE s.points >= 20 GROUP BY g.season ORDER BY high_scoring_records DESC, g.season",
+    "resultSpec": {
       "rowOrder": "sensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "season",
+        "high_scoring_records"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "JOIN player_game_stats",
       "s.points >= 20",
       "GROUP BY g.season"
@@ -2020,12 +2590,17 @@
     "sourceTables": [
       "games"
     ],
-    "referenceSql": "SELECT season, ROUND(AVG(attendance), 2) AS average_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season HAVING AVG(attendance) >= (SELECT AVG(attendance) FROM games WHERE attendance IS NOT NULL) ORDER BY average_attendance DESC, season;",
-    "comparison": {
+    "answerSql": "SELECT season, ROUND(AVG(attendance), 2) AS average_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season HAVING AVG(attendance) >= (SELECT AVG(attendance) FROM games WHERE attendance IS NOT NULL) ORDER BY average_attendance DESC, season",
+    "judgeSql": "SELECT season, ROUND(AVG(attendance), 2) AS average_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season HAVING AVG(attendance) >= (SELECT AVG(attendance) FROM games WHERE attendance IS NOT NULL) ORDER BY average_attendance DESC, season",
+    "resultSpec": {
       "rowOrder": "sensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "season",
+        "average_attendance"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "HAVING AVG(attendance) >=",
       "SELECT AVG(attendance) FROM games",
       "GROUP BY season"
@@ -2041,12 +2616,18 @@
     "sourceTables": [
       "game_team_stats"
     ],
-    "referenceSql": "WITH latest AS (SELECT team_id, schedule_key, points, ROW_NUMBER() OVER (PARTITION BY team_id ORDER BY schedule_key DESC) AS row_num FROM game_team_stats) SELECT team_id, schedule_key, points FROM latest WHERE row_num = 1 ORDER BY schedule_key DESC, team_id LIMIT 10;",
-    "comparison": {
+    "answerSql": "WITH latest AS (SELECT team_id, schedule_key, points, ROW_NUMBER() OVER (PARTITION BY team_id ORDER BY schedule_key DESC) AS row_num FROM game_team_stats) SELECT team_id, schedule_key, points FROM latest WHERE row_num = 1 ORDER BY schedule_key DESC, team_id LIMIT 10",
+    "judgeSql": "WITH latest AS (SELECT team_id, schedule_key, points, ROW_NUMBER() OVER (PARTITION BY team_id ORDER BY schedule_key DESC) AS row_num FROM game_team_stats) SELECT team_id, schedule_key, points FROM latest WHERE row_num = 1 ORDER BY schedule_key DESC, team_id LIMIT 10",
+    "resultSpec": {
       "rowOrder": "sensitive",
-      "numericTolerance": 0.01
+      "numericTolerance": 0.01,
+      "columns": [
+        "team_id",
+        "schedule_key",
+        "points"
+      ]
     },
-    "requiredSqlTerms": [
+    "learningObjectives": [
       "WITH latest",
       "ROW_NUMBER() OVER",
       "PARTITION BY team_id"

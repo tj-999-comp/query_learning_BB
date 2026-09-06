@@ -480,7 +480,7 @@ function selectProblem(problemId) {
   elements.questionHint.textContent = createProblemHint(problem);
   setHintVisibility(false);
   setAnswerVisibility(false);
-  elements.referenceSql.textContent = formatReferenceSql(problem.referenceSql);
+  elements.referenceSql.textContent = formatReferenceSql(problem.answerSql || problem.referenceSql);
   elements.questionExplanation.textContent = problem.explanation;
   updateFavoriteButton();
   renderProblemList();
@@ -532,8 +532,9 @@ function toggleHint() {
 }
 
 function createProblemHint(problem) {
-  if (Array.isArray(problem.requiredSqlTerms) && problem.requiredSqlTerms.length) {
-    return `使うとよい要素: ${problem.requiredSqlTerms.join("、")}`;
+  const learningObjectives = problem.learningObjectives || problem.requiredSqlTerms;
+  if (Array.isArray(learningObjectives) && learningObjectives.length) {
+    return `使うとよい要素: ${learningObjectives.join("、")}`;
   }
   return `使用テーブル: ${problem.sourceTables.join("、")}`;
 }
@@ -908,12 +909,12 @@ function rowsMatch(actual, expected, numericTolerance) {
     && actual.every((value, index) => valuesMatch(value, expected[index], numericTolerance));
 }
 
-function resultsMatch(actual, expected, comparison) {
+function resultsMatch(actual, expected, resultSpec) {
   if (actual.columns.length !== expected.columns.length || actual.values.length !== expected.values.length) return false;
-  const numericTolerance = Number.isFinite(comparison?.numericTolerance) ? comparison.numericTolerance : 0;
+  const numericTolerance = Number.isFinite(resultSpec?.numericTolerance) ? resultSpec.numericTolerance : 0;
   const actualRows = actual.values;
   const expectedRows = expected.values;
-  if (comparison.rowOrder !== "sensitive") {
+  if (resultSpec?.rowOrder !== "sensitive") {
     if (numericTolerance === 0) {
       const normalizeRows = (rows) => rows.map((row) => row.map(normalizedValue).join("\u0001")).sort();
       return JSON.stringify(normalizeRows(actualRows)) === JSON.stringify(normalizeRows(expectedRows));
@@ -1002,8 +1003,8 @@ function runCurrentQuery(submit) {
       elements.feedback.textContent = "";
       return;
     }
-    const expected = execute(problem.referenceSql);
-    if (resultsMatch(actual, expected, problem.comparison)) {
+    const expected = execute(problem.judgeSql || problem.referenceSql || problem.answerSql);
+    if (resultsMatch(actual, expected, problem.resultSpec || problem.comparison)) {
       state.progress.completed[problem.id] = true;
       saveProgress();
       elements.feedback.className = "feedback success";

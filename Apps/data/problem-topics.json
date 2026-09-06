@@ -217,9 +217,15 @@
       "difficulty": 1,
       "category": "基本検索",
       "sourceTables": ["players"],
-      "referenceSql": "SELECT player_id, player_name_j, league_registered_nationality FROM players WHERE league_registered_nationality IN ('日本', 'アメリカ合衆国') ORDER BY player_name_j, player_id LIMIT 20;",
-      "comparison": {"rowOrder": "sensitive"},
-      "requiredSqlTerms": ["IN (", "league_registered_nationality", "LIMIT 20"],
+      "answerSql": "SELECT player_name_j, league_registered_nationality FROM players WHERE league_registered_nationality IN ('日本', 'アメリカ合衆国') ORDER BY player_name_j LIMIT 20;",
+      "judgeSql": "SELECT player_name_j, league_registered_nationality FROM players WHERE league_registered_nationality IN ('日本', 'アメリカ合衆国') ORDER BY player_name_j, player_id LIMIT 20;",
+      "resultSpec": {
+        "columns": ["player_name_j", "league_registered_nationality"],
+        "rowOrder": "sensitive",
+        "limit": 20,
+        "tieBreakers": ["player_name_j", "player_id"]
+      },
+      "learningObjectives": ["IN (", "league_registered_nationality", "LIMIT 20"],
       "explanation": "INを使うと、同じ列が候補値のいずれかに一致する行を検索できます。"
     },
     {
