@@ -341,6 +341,47 @@ body { background: var(--white); color: var(--navy); }
 }
 .component-option button.review-menu { background: var(--white); }
 .button-02, .action-latest-03, .action-latest-16 { border-color: var(--navy); }
+.check-family-06 { border: 2px solid var(--navy); border-radius: 9px; background: var(--white); color: var(--navy); box-shadow: inset 0 0 0 3px var(--cyan); }
+.check-family-09 { border: 2px solid var(--navy); border-radius: 6px 14px 6px 14px; background: var(--white); color: var(--navy); }
+.check-family-18 { border: 2px solid var(--navy); border-radius: 8px; background: var(--white); color: var(--navy); box-shadow: 5px 5px 0 var(--cyan); }
+.check-family-06.check-color-cyan, .check-family-09.check-color-cyan, .check-family-18.check-color-cyan { border-color: var(--cyan); color: var(--navy); }
+.check-family-06.check-color-cyan { box-shadow: inset 0 0 0 3px var(--cyan); }
+.check-family-18.check-color-cyan { box-shadow: 5px 5px 0 var(--cyan); }
+.check-family-06.check-color-navy, .check-family-09.check-color-navy, .check-family-18.check-color-navy { border-color: var(--navy); color: var(--navy); }
+.check-family-06.check-color-navy { box-shadow: inset 0 0 0 3px var(--navy); }
+.check-family-18.check-color-navy { box-shadow: 5px 5px 0 var(--navy); }
+.check-family-06.check-color-yellow, .check-family-09.check-color-yellow, .check-family-18.check-color-yellow { border-color: var(--yellow); color: var(--navy); }
+.check-family-06.check-color-yellow { box-shadow: inset 0 0 0 3px var(--yellow); }
+.check-family-18.check-color-yellow { box-shadow: 5px 5px 0 var(--yellow); }
+.check-family-06.check-color-gold, .check-family-09.check-color-gold, .check-family-18.check-color-gold { border-color: var(--gold); color: var(--navy); }
+.check-family-06.check-color-gold { box-shadow: inset 0 0 0 3px var(--gold); }
+.check-family-18.check-color-gold { box-shadow: 5px 5px 0 var(--gold); }
+.check-family-06.check-color-black, .check-family-09.check-color-black, .check-family-18.check-color-black { border-color: #000; color: #000; }
+.check-family-06.check-color-black { box-shadow: inset 0 0 0 3px #000; }
+.check-family-18.check-color-black { box-shadow: 5px 5px 0 #000; }
+.check-family-06.check-color-silver, .check-family-09.check-color-silver, .check-family-18.check-color-silver { border-color: var(--silver); color: var(--navy); }
+.check-family-06.check-color-silver { box-shadow: inset 0 0 0 3px var(--silver); }
+.check-family-18.check-color-silver { box-shadow: 5px 5px 0 var(--silver); }
+.latest-hover-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.hover-sample { display: grid; min-height: 190px; align-content: center; gap: 6px; margin-top: 10px; border: 1px solid var(--silver-light); border-radius: 13px; background: var(--white); padding: 12px; }
+.hover-sample > span { color: var(--text-muted); font: 10px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: .08em; text-transform: uppercase; }
+.hover-sample > div { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+.hover-action { min-height: 32px; border: 0; border-bottom: 3px solid var(--cyan); border-radius: 0; background: var(--white); color: var(--navy); padding: 0 5px; font-family: inherit; font-size: 11px; font-weight: 600; line-height: 1; cursor: pointer; transition: border-color .16s ease, border-width .16s ease, box-shadow .16s ease, color .16s ease, transform .16s ease; }
+.hover-action.submit { border-bottom-color: var(--yellow); }
+.hover-01.hover-state, .hover-01:hover { border-bottom-width: 6px; }
+.hover-02.hover-state, .hover-02:hover { outline: 2px solid var(--cyan); outline-offset: 3px; }
+.hover-02.submit.hover-state, .hover-02.submit:hover { outline-color: var(--yellow); }
+.hover-03.hover-state, .hover-03:hover { box-shadow: inset 0 -8px 0 var(--navy-soft); }
+.hover-04.hover-state, .hover-04:hover { color: #000; }
+.hover-05.hover-state, .hover-05:hover { border-bottom-color: var(--navy); }
+.hover-05.submit.hover-state, .hover-05.submit:hover { border-bottom-color: var(--gold); }
+.hover-06.hover-state, .hover-06:hover { transform: translateX(2px); }
+.hover-07.hover-state, .hover-07:hover { border-left: 4px solid var(--cyan); }
+.hover-07.submit.hover-state, .hover-07.submit:hover { border-left-color: var(--yellow); }
+.hover-08.hover-state, .hover-08:hover { border-radius: 6px; outline: 1px solid var(--navy); outline-offset: 3px; }
+.hover-09.hover-state, .hover-09:hover { border-bottom-style: dashed; }
+.hover-10.hover-state, .hover-10:hover { box-shadow: 4px 4px 0 var(--cyan); }
+.hover-10.submit.hover-state, .hover-10.submit:hover { box-shadow: 4px 4px 0 var(--yellow); }
 .live-action.run, .live-action.submit { color: var(--navy); }
 .live-menu-sample { background: var(--white); }
 .review-footer { border-top-color: var(--silver); color: var(--text-muted); }
