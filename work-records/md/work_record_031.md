@@ -47,4 +47,3 @@ Issue #55では、問題画面の達成済み表示、クエリ操作ボタン�
 - 本番URL：https://query-learning-bb.pages.dev/
 - 本番レビューページ：https://query-learning-bb.pages.dev/design-review
 - Issue #55：クローズ済み
-
