@@ -14,11 +14,79 @@
     </header>
     <main class="review-page">
       <div class="review-intro">
-        <p class="kicker">V1.1.0 / COMPONENT OPTIONS</p>
-        <h1>チェックマークと<br><em>ボタンの比較。</em></h1>
-        <p>白ベースの学習画面に合わせたチェックマーク20案とボタン20案を、同じページで比較しています。</p>
+        <p class="kicker">LATEST / V1.1.0 UI REFINEMENT</p>
+        <h1>見やすさを、<br><em>もう一段。</em></h1>
+        <p>今回の最新提案です。達成済みチェックマーク20案と、クエリ実行・正誤判定ボタン20案を比較し、画面には採用案を反映しています。</p>
       </div>
-      <section class="review-list" aria-label="デザイン案">
+      <section class="latest-proposal" aria-labelledby="latest-proposal-title">
+        <div class="latest-proposal-heading">
+          <p class="kicker">LATEST PROPOSAL / IMPLEMENTED</p>
+          <h2 id="latest-proposal-title">今回の採用方針</h2>
+          <p>採用案は、達成済みをネイビー面＋黄色のチェックで即時認識できるようにし、操作ボタンは「実行」と「判定」の役割を色で分けます。正解表示は文字に重なる黄色のライン、不正解表示は同じ構造のゴールド系ラインで統一します。</p>
+        </div>
+        <div class="latest-implementation-grid">
+          <div><span class="implementation-label">達成済み</span><strong class="live-check-sample">✓</strong><p>ネイビー面 / シアン枠 / 黄色チェック</p></div>
+          <div><span class="implementation-label">クエリ操作</span><div class="live-action-sample"><button class="live-action run" type="button">実行する</button><button class="live-action submit" type="button">正誤判定</button></div><p>実行＝ネイビー、判定＝黄色</p></div>
+          <div><span class="implementation-label">フィードバック</span><div class="live-feedback-sample"><span class="live-feedback success">正解！</span><span class="live-feedback error">不正解！</span></div><p>文字にラインを重ねて視線を誘導</p></div>
+          <div><span class="implementation-label">メニュー</span><div class="live-menu-sample"><span class="live-menu-line" aria-hidden="true"></span><span class="menu-glyph" aria-hidden="true"><i></i><i></i><i></i></span></div><p>ホバー時は左側のネイビー線だけを表示</p></div>
+        </div>
+        <aside class="policy-note"><strong>今後の運用ルール</strong><p>UI改善のたびに最新提案をこのページの先頭へ追加し、これまでの提案は下のトグル内へ移します。トグルは初期状態で閉じたままにします。</p></aside>
+      </section>
+      <section class="component-review latest-component" aria-labelledby="latest-checkmark-title">
+        <div class="component-review-heading"><p class="kicker">LATEST / COMPLETION MARK / 20 OPTIONS</p><h2 id="latest-checkmark-title">達成済みチェックマーク20案</h2><p>見落としにくさ、縮小時の判別、既存のネイビー・シアン・黄色との相性を比較しています。01を今回の採用案にしています。</p></div>
+        <div class="component-grid latest-checkmark-grid">
+          <article class="component-option latest-selected"><div class="component-option-head"><span class="option-number">01</span><h3>ネイビー角丸・高コントラスト</h3></div><div class="check-sample"><span class="review-check latest-check check-latest-01">✓</span></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">02</span><h3>白抜き円</h3></div><div class="check-sample"><span class="review-check latest-check check-latest-02">✓</span></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">03</span><h3>太線サークル</h3></div><div class="check-sample"><span class="review-check latest-check check-latest-03">✓</span></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">04</span><h3>黄色スクエア</h3></div><div class="check-sample"><span class="review-check latest-check check-latest-04">✓</span></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">05</span><h3>シアンリング</h3></div><div class="check-sample"><span class="review-check latest-check check-latest-05">✓</span></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">06</span><h3>白角丸チップ</h3></div><div class="check-sample"><span class="review-check latest-check check-latest-06">✓</span></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">07</span><h3>左線シグナル</h3></div><div class="check-sample"><span class="review-check latest-check check-latest-07">✓</span></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">08</span><h3>黄色リング</h3></div><div class="check-sample"><span class="review-check latest-check check-latest-08">✓</span></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">09</span><h3>二重角丸</h3></div><div class="check-sample"><span class="review-check latest-check check-latest-09">✓</span></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">10</span><h3>シアン塗り</h3></div><div class="check-sample"><span class="review-check latest-check check-latest-10">✓</span></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">11</span><h3>黄色タグ</h3></div><div class="check-sample"><span class="review-check latest-check check-latest-11">✓</span></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">12</span><h3>ミニバッジ</h3></div><div class="check-sample"><span class="review-check latest-check check-latest-12">✓</span></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">13</span><h3>ひし形サイン</h3></div><div class="check-sample"><span class="review-check latest-check check-latest-13">✓</span></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">14</span><h3>横長カプセル</h3></div><div class="check-sample"><span class="review-check latest-check check-latest-14">✓</span></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">15</span><h3>太字チェック</h3></div><div class="check-sample"><span class="review-check latest-check check-latest-15">✓</span></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">16</span><h3>コーナーライン</h3></div><div class="check-sample"><span class="review-check latest-check check-latest-16">✓</span></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">17</span><h3>照準リング</h3></div><div class="check-sample"><span class="review-check latest-check check-latest-17">✓</span></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">18</span><h3>オフセット影</h3></div><div class="check-sample"><span class="review-check latest-check check-latest-18">✓</span></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">19</span><h3>縦長タグ</h3></div><div class="check-sample"><span class="review-check latest-check check-latest-19">✓</span></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">20</span><h3>ドット付き円</h3></div><div class="check-sample"><span class="review-check latest-check check-latest-20">✓</span></div></article>
+        </div>
+      </section>
+      <section class="component-review latest-component" aria-labelledby="latest-action-title">
+        <div class="component-review-heading"><p class="kicker">LATEST / QUERY ACTION / 20 OPTIONS</p><h2 id="latest-action-title">クエリ実行・正誤判定ボタン20案</h2><p>各案は2ボタンの組み合わせです。実行と判定の優先度、押し間違いにくさ、キーボードフォーカスの見え方を比較しています。01を今回の採用案にしています。</p></div>
+        <div class="component-grid latest-action-grid">
+          <article class="component-option latest-selected"><div class="component-option-head"><span class="option-number">01</span><h3>役割カラー分離</h3></div><div class="action-sample"><button class="review-action action-latest-01 run" type="button">実行する</button><button class="review-action action-latest-01 submit" type="button">正誤判定</button></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">02</span><h3>黒地＋黄色線</h3></div><div class="action-sample"><button class="review-action action-latest-02 run" type="button">実行する</button><button class="review-action action-latest-02 submit" type="button">正誤判定</button></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">03</span><h3>白地アウトライン</h3></div><div class="action-sample"><button class="review-action action-latest-03 run" type="button">実行する</button><button class="review-action action-latest-03 submit" type="button">正誤判定</button></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">04</span><h3>黄色主役</h3></div><div class="action-sample"><button class="review-action action-latest-04 run" type="button">実行する</button><button class="review-action action-latest-04 submit" type="button">正誤判定</button></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">05</span><h3>シアン主役</h3></div><div class="action-sample"><button class="review-action action-latest-05 run" type="button">実行する</button><button class="review-action action-latest-05 submit" type="button">正誤判定</button></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">06</span><h3>上下ライン</h3></div><div class="action-sample"><button class="review-action action-latest-06 run" type="button">実行する</button><button class="review-action action-latest-06 submit" type="button">正誤判定</button></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">07</span><h3>左アクセント</h3></div><div class="action-sample"><button class="review-action action-latest-07 run" type="button">実行する</button><button class="review-action action-latest-07 submit" type="button">正誤判定</button></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">08</span><h3>二重枠</h3></div><div class="action-sample"><button class="review-action action-latest-08 run" type="button">実行する</button><button class="review-action action-latest-08 submit" type="button">正誤判定</button></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">09</span><h3>角丸スクエア</h3></div><div class="action-sample"><button class="review-action action-latest-09 run" type="button">実行する</button><button class="review-action action-latest-09 submit" type="button">正誤判定</button></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">10</span><h3>ワイドCTA</h3></div><div class="action-sample"><button class="review-action action-latest-10 run" type="button">実行する</button><button class="review-action action-latest-10 submit" type="button">正誤判定</button></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">11</span><h3>テキスト＋矢印</h3></div><div class="action-sample"><button class="review-action action-latest-11 run" type="button">実行する</button><button class="review-action action-latest-11 submit" type="button">正誤判定</button></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">12</span><h3>ラベル帯</h3></div><div class="action-sample"><button class="review-action action-latest-12 run" type="button">実行する</button><button class="review-action action-latest-12 submit" type="button">正誤判定</button></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">13</span><h3>ノッチ付き</h3></div><div class="action-sample"><button class="review-action action-latest-13 run" type="button">実行する</button><button class="review-action action-latest-13 submit" type="button">正誤判定</button></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">14</span><h3>短い判定ボタン</h3></div><div class="action-sample"><button class="review-action action-latest-14 run" type="button">実行する</button><button class="review-action action-latest-14 submit" type="button">正誤判定</button></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">15</span><h3>タブ風</h3></div><div class="action-sample"><button class="review-action action-latest-15 run" type="button">実行する</button><button class="review-action action-latest-15 submit" type="button">正誤判定</button></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">16</span><h3>点線アウトライン</h3></div><div class="action-sample"><button class="review-action action-latest-16 run" type="button">実行する</button><button class="review-action action-latest-16 submit" type="button">正誤判定</button></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">17</span><h3>影付き</h3></div><div class="action-sample"><button class="review-action action-latest-17 run" type="button">実行する</button><button class="review-action action-latest-17 submit" type="button">正誤判定</button></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">18</span><h3>モノスペース</h3></div><div class="action-sample"><button class="review-action action-latest-18 run" type="button">実行する</button><button class="review-action action-latest-18 submit" type="button">正誤判定</button></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">19</span><h3>コンパクト</h3></div><div class="action-sample"><button class="review-action action-latest-19 run" type="button">実行する</button><button class="review-action action-latest-19 submit" type="button">正誤判定</button></div></article>
+          <article class="component-option"><div class="component-option-head"><span class="option-number">20</span><h3>反転フォーカス</h3></div><div class="action-sample"><button class="review-action action-latest-20 run" type="button">実行する</button><button class="review-action action-latest-20 submit" type="button">正誤判定</button></div></article>
+        </div>
+      </section>
+      <details class="proposal-history">
+        <summary>これまでの改善提案を表示（前回提案）</summary>
+        <div class="history-content">
+          <p class="history-label">前回提案</p>
+      <section class="review-list" aria-label="前回のデザイン案">
         <article class="review-option option-a">
           <div class="option-head"><span class="option-number">A</span><div><h2>Deep Navy / Diagonal</h2><p>濃紺と青の細い斜めストライプ。最も落ち着いた案。</p></div><span class="swatch-note">#002D62 × #063B78</span></div>
           <div class="sample-stage"><div class="sample-heading"><span class="sample-number">Q08</span><h3>チーム別の勝利数を集計する</h3><span class="sample-chip">集計</span></div><div class="sample-panels frame-a"><div><span>SQL</span><strong>QUERY EDITOR</strong><small>左側：濃紺の入力枠</small></div><div><span>RESULT</span><strong>実行結果</strong><small>右側：青の結果枠</small></div></div></div>
@@ -125,7 +193,9 @@
           <article class="component-option"><div class="component-option-head"><span class="option-number">20</span><h3>オフセット枠</h3></div><div class="menu-sample"><button class="review-menu menu-20" type="button" aria-label="メニュー案20"><span class="menu-glyph" aria-hidden="true"><i></i><i></i><i></i></span></button></div></article>
         </div>
       </section>
+        </div>
+      </details>
     </main>
-    <footer class="review-footer"><span>STG専用のデザイン比較ページ</span><a href="./">アプリ本体へ戻る →</a></footer>
+    <footer class="review-footer"><span>STG専用のデザイン比較ページ · 最新提案を先頭、過去提案はトグル内</span><a href="./">アプリ本体へ戻る →</a></footer>
   </body>
 </html>
