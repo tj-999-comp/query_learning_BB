@@ -59,10 +59,10 @@ Issue #13へ受入確認結果をコメントし、2026-09-04にクローズし�
 
 ## 関連ファイル
 
-- [`Apps/data/problems.json`](../../Apps/data/problems.json)
-- [`Apps/data/DATA_AUDIT.md`](../../Apps/data/DATA_AUDIT.md)
-- [`Apps/app/app.js`](../../Apps/app/app.js)
-- [`Apps/docs/MVP_REQUIREMENTS.md`](../../Apps/docs/MVP_REQUIREMENTS.md)
+- [`Apps/data/problems.json`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/data/problems.json)
+- [`Apps/data/DATA_AUDIT.md`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/data/DATA_AUDIT.md)
+- [`Apps/app/app.js`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/app.js)
+- [`Apps/docs/MVP_REQUIREMENTS.md`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/docs/MVP_REQUIREMENTS.md)
 
 ## GitHub Issue状況
 

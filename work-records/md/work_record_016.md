@@ -44,8 +44,8 @@ Issue #30「エディタと実行結果を左右2ペインで表示」に対応�
 
 ## 関連ファイル
 
-- [`Apps/app/index.html`](../../Apps/app/index.html)
-- [`Apps/app/styles.css`](../../Apps/app/styles.css)
+- [`Apps/app/index.html`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/index.html)
+- [`Apps/app/styles.css`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/styles.css)
 - [#30](https://github.com/tj-999-comp/query_learning_BB/issues/30)
 
 ## GitHub Issue状況

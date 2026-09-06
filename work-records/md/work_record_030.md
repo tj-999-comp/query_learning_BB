@@ -34,12 +34,12 @@ v1.0.0までの濃色デザインから、v1.1.0では白を基調にした学�
 
 ## 関連ファイル
 
-- [`Apps/app/index.html`](../../Apps/app/index.html)
-- [`Apps/app/app.js`](../../Apps/app/app.js)
-- [`Apps/app/styles.css`](../../Apps/app/styles.css)
-- [`Apps/app/design-review.html`](../../Apps/app/design-review.html)
-- [`Apps/app/design-review.css`](../../Apps/app/design-review.css)
-- [`Apps/scripts/build-pages.sh`](../../Apps/scripts/build-pages.sh)
+- [`Apps/app/index.html`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/index.html)
+- [`Apps/app/app.js`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/app.js)
+- [`Apps/app/styles.css`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/styles.css)
+- [`Apps/app/design-review.html`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/design-review.html)
+- [`Apps/app/design-review.css`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/design-review.css)
+- [`Apps/scripts/build-pages.sh`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/scripts/build-pages.sh)
 - [#26](https://github.com/tj-999-comp/query_learning_BB/issues/26)
 
 ## GitHub

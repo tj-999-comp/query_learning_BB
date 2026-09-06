@@ -30,11 +30,11 @@ Issue #49「v0.6.0 進捗・お気に入りの端末間同期」に対応した�
 
 ## 関連ファイル
 
-- [`Apps/functions/api/progress.js`](../../Apps/functions/api/progress.js)
-- [`Apps/app/app.js`](../../Apps/app/app.js)
-- [`Apps/app/index.html`](../../Apps/app/index.html)
-- [`Apps/docs/HOSTING_CLOUDFLARE.md`](../../Apps/docs/HOSTING_CLOUDFLARE.md)
-- [`Apps/docs/MVP_REQUIREMENTS.md`](../../Apps/docs/MVP_REQUIREMENTS.md)
+- [`Apps/functions/api/progress.js`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/functions/api/progress.js)
+- [`Apps/app/app.js`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/app.js)
+- [`Apps/app/index.html`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/index.html)
+- [`Apps/docs/HOSTING_CLOUDFLARE.md`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/docs/HOSTING_CLOUDFLARE.md)
+- [`Apps/docs/MVP_REQUIREMENTS.md`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/docs/MVP_REQUIREMENTS.md)
 - [#49](https://github.com/tj-999-comp/query_learning_BB/issues/49)
 
 ## 本番反映

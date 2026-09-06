@@ -44,11 +44,11 @@ Issue #8へ完了判定結果をコメントし、2026-09-04にクローズし�
 
 ## 関連ファイル・記録
 
-- [`Apps/docs/MVP_REQUIREMENTS.md`](../../Apps/docs/MVP_REQUIREMENTS.md)
-- [`Apps/data/DATA_AUDIT.md`](../../Apps/data/DATA_AUDIT.md)
-- [`Apps/data/problems.json`](../../Apps/data/problems.json)
-- [`Apps/functions/_middleware.js`](../../Apps/functions/_middleware.js)
-- [`Apps/docs/HOSTING_CLOUDFLARE.md`](../../Apps/docs/HOSTING_CLOUDFLARE.md)
+- [`Apps/docs/MVP_REQUIREMENTS.md`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/docs/MVP_REQUIREMENTS.md)
+- [`Apps/data/DATA_AUDIT.md`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/data/DATA_AUDIT.md)
+- [`Apps/data/problems.json`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/data/problems.json)
+- [`Apps/functions/_middleware.js`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/functions/_middleware.js)
+- [`Apps/docs/HOSTING_CLOUDFLARE.md`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/docs/HOSTING_CLOUDFLARE.md)
 - [work_record_004](./work_record_004.md)
 - [work_record_005](./work_record_005.md)
 - [work_record_006](./work_record_006.md)

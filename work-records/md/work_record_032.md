@@ -42,9 +42,9 @@ Issue #57「[v1.1.1] 必要なカラムのテーブル表示と問題文の並�
 
 ## 関連ファイル
 
-- [`Apps/data/problem-topics.json`](../../Apps/data/problem-topics.json)
-- [`Apps/data/problems.json`](../../Apps/data/problems.json)
-- [`Apps/docs/PROBLEM_AUTHORING.md`](../../Apps/docs/PROBLEM_AUTHORING.md)
+- [`Apps/data/problem-topics.json`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/data/problem-topics.json)
+- [`Apps/data/problems.json`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/data/problems.json)
+- [`Apps/docs/PROBLEM_AUTHORING.md`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/docs/PROBLEM_AUTHORING.md)
 - [Issue #57](https://github.com/tj-999-comp/query_learning_BB/issues/57)
 
 ## GitHub

@@ -27,13 +27,13 @@
 
 ## 関連ファイル
 
-- [`Apps/data/problem-topics.json`](../../Apps/data/problem-topics.json)
-- [`Apps/data/problems.json`](../../Apps/data/problems.json)
-- [`Apps/scripts/generate_problems.py`](../../Apps/scripts/generate_problems.py)
-- [`Apps/app/app.js`](../../Apps/app/app.js)
-- [`Apps/app/index.html`](../../Apps/app/index.html)
-- [`Apps/app/styles.css`](../../Apps/app/styles.css)
-- [`Apps/docs/PROBLEM_AUTHORING.md`](../../Apps/docs/PROBLEM_AUTHORING.md)
+- [`Apps/data/problem-topics.json`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/data/problem-topics.json)
+- [`Apps/data/problems.json`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/data/problems.json)
+- [`Apps/scripts/generate_problems.py`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/scripts/generate_problems.py)
+- [`Apps/app/app.js`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/app.js)
+- [`Apps/app/index.html`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/index.html)
+- [`Apps/app/styles.css`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/styles.css)
+- [`Apps/docs/PROBLEM_AUTHORING.md`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/docs/PROBLEM_AUTHORING.md)
 - [#52](https://github.com/tj-999-comp/query_learning_BB/issues/52)
 
 ## GitHub

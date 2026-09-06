@@ -25,9 +25,9 @@ Issue #49「v0.6.0 進捗・お気に入りの端末間同期」の本番反映�
 
 ## 関連ファイル
 
-- [`Apps/wrangler.toml`](../../Apps/wrangler.toml)
-- [`Apps/functions/api/progress.js`](../../Apps/functions/api/progress.js)
-- [`Apps/docs/HOSTING_CLOUDFLARE.md`](../../Apps/docs/HOSTING_CLOUDFLARE.md)
+- [`Apps/wrangler.toml`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/wrangler.toml)
+- [`Apps/functions/api/progress.js`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/functions/api/progress.js)
+- [`Apps/docs/HOSTING_CLOUDFLARE.md`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/docs/HOSTING_CLOUDFLARE.md)
 - [#49](https://github.com/tj-999-comp/query_learning_BB/issues/49)
 
 ## GitHub

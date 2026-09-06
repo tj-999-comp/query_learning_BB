@@ -33,11 +33,11 @@ Issue #55では、問題画面の達成済み表示、クエリ操作ボタン�
 
 ## 関連ファイル
 
-- [`Apps/app/styles.css`](../../Apps/app/styles.css)
-- [`Apps/app/index.html`](../../Apps/app/index.html)
-- [`Apps/app/design-review.html`](../../Apps/app/design-review.html)
-- [`Apps/app/design-review.css`](../../Apps/app/design-review.css)
-- [`Apps/scripts/build-pages.sh`](../../Apps/scripts/build-pages.sh)
+- [`Apps/app/styles.css`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/styles.css)
+- [`Apps/app/index.html`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/index.html)
+- [`Apps/app/design-review.html`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/design-review.html)
+- [`Apps/app/design-review.css`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/design-review.css)
+- [`Apps/scripts/build-pages.sh`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/scripts/build-pages.sh)
 - [Issue #55](https://github.com/tj-999-comp/query_learning_BB/issues/55)
 
 ## GitHub

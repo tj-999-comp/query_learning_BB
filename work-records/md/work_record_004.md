@@ -34,7 +34,7 @@ Issue #6「MVPホスティング先とBasic認証方式の検討」に対応し�
 
 ## 運用手順
 
-公開・更新設定と認証情報の変更方法は [`Apps/docs/HOSTING_CLOUDFLARE.md`](../../Apps/docs/HOSTING_CLOUDFLARE.md) に記載した。
+公開・更新設定と認証情報の変更方法は [`Apps/docs/HOSTING_CLOUDFLARE.md`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/docs/HOSTING_CLOUDFLARE.md) に記載した。
 
 ## 判定
 

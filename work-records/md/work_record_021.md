@@ -33,7 +33,7 @@ Issue #43「解答例ボタンと実行結果エリアの表示改善」に対�
 
 ## 関連ファイル
 
-- [`Apps/app/index.html`](../../Apps/app/index.html)
-- [`Apps/app/app.js`](../../Apps/app/app.js)
-- [`Apps/app/styles.css`](../../Apps/app/styles.css)
+- [`Apps/app/index.html`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/index.html)
+- [`Apps/app/app.js`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/app.js)
+- [`Apps/app/styles.css`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/styles.css)
 - [#43](https://github.com/tj-999-comp/query_learning_BB/issues/43)
