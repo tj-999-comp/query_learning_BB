@@ -72,9 +72,11 @@ a { color: inherit; }
 .home-section { min-width: 0; }
 .home-section-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 8px; border-bottom: 1px solid var(--silver); padding-bottom: 10px; }
 .home-section-heading h2 { margin: 0; color: var(--ink); font-size: clamp(20px, 3vw, 28px); letter-spacing: -.05em; }
-.next-problem-list { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; }
+.next-problem-list { display: flex; min-width: 0; gap: 0; overflow-x: auto; padding-bottom: 8px; scrollbar-width: thin; }
 .favorite-problem-list { display: flex; min-width: 0; gap: 0; overflow-x: auto; padding-bottom: 8px; scrollbar-width: thin; }
 .next-problem-card { width: 100%; border: 0; border-bottom: 1px solid var(--silver-light); border-radius: 0; padding: 14px 0; background: transparent; color: var(--ink); text-align: left; transition: background-color .18s ease; }
+.next-problem-list .next-problem-card { flex: 0 0 min(310px, 78vw); padding: 0 18px 14px; }
+.next-problem-list .next-problem-card:first-child { padding-left: 0; }
 .next-problem-card:hover, .next-problem-card:focus-visible { background: var(--navy-soft); outline: 0; }
 .next-problem-card:focus-visible { box-shadow: inset 4px 0 0 var(--cyan); }
 .favorite-problem-card { flex: 0 0 min(310px, 78vw); padding: 0 18px 14px; border-bottom: 1px solid var(--silver-light); }
