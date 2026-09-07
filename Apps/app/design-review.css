@@ -725,6 +725,7 @@ body { background: var(--white); color: var(--navy); }
 .completion-candidate-svg .candidate-core { stroke: var(--yellow); stroke-width: var(--candidate-core-width, 5); }
 .completion-candidate-svg .candidate-gap { display: none; stroke: var(--white); stroke-width: 10; }
 .completion-candidate-card p { margin: 8px 0 0; color: #405978; font-size: 11px; line-height: 1.3; }
+.completion-candidate-card.latest-selected { border: 2px solid var(--cyan); box-shadow: inset 0 0 0 2px rgba(255, 255, 0, .65); }
 .candidate-01 { --candidate-outline-width: 16; --candidate-core-width: 5; }
 .candidate-02 { --candidate-outline-width: 18; --candidate-core-width: 5; }
 .candidate-03 { --candidate-outline-width: 18; --candidate-core-width: 7; }
