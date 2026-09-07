@@ -21,6 +21,12 @@ gh api repos/tj-999-comp/query_learning_BB/issues/<番号>/sub_issues
 
 取得結果は各作業記録末尾の `## GitHub Issue状況` に、`順位`、`優先度`、`GitHub Issue`、`状態`、`関係・着手条件` の5列で記録します。件数と一覧行数が一致しない場合はcommitしません。
 
+## 承認範囲と作業完了
+
+本番反映の承認とIssueの状態変更は別の操作です。「本番反映してよい」という承認だけでは、Issueのクローズ、PRのクローズ、ブランチ削除、関連Issueの状態変更を行いません。Issueをクローズする場合は、ユーザーが対象Issueを明示してクローズを依頼したことを確認します。本番反映の完了、CI成功、受入条件の充足、PRマージ、作業者の判断は、クローズ承認とはみなしません。
+
+ユーザーから作業記録を残すよう依頼された場合は、実作業と検証が完了した後に作業記録を作成します。作業記録の作成はIssueクローズとは独立して扱い、記録作成を理由にIssueをクローズしません。
+
 ## 共通HTMLデザイン
 
 公開HTMLの正本は、公開リポジトリの [`work-records/design.md`](https://github.com/tj-999-comp/sandbox-pages/blob/main/work-records/design.md) とA側の `a_rendered` renderer/CSSです。生成元ではHTML・CSS・designを管理せず、全生成元で `record-page`、`shell`、`topbar`、`record-header`、`record-meta`、番号付き`record-section`、共通footerを使う同一の詳細ページ形式を利用します。新規・更新時は1280px、900px、640px、320pxで横overflow、console/page error、failed requestがなく、生成元間の主要構造・スタイルが一致することを確認します。不一致が残る場合は公開導入を完了扱いにしません。
