@@ -95,7 +95,7 @@ a { color: inherit; }
 .question-header-info > .completion-icon { flex: 0 0 46px; width: 46px; height: 46px; font-size: 1.55rem; }
 .question-meta { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 8px; margin: 0; color: var(--ink); font-family: var(--font-mono); font-size: 12px; }
 .question-meta span { border: 1px solid rgba(51, 51, 51, .28); border-radius: var(--radius-pill); background: var(--white); padding: 10px 14px; }
-.favorite-button { display: inline-grid; width: 46px; height: 46px; flex: 0 0 46px; place-items: center; border: 0; border-radius: 0; background: transparent; color: var(--ink); padding: 0; font-size: 24px; line-height: 1; }
+.favorite-button { display: inline-grid; width: 46px; height: 46px; flex: 0 0 46px; place-items: center; border: 0; border-radius: 0; background: transparent; color: var(--ink); padding: 0; font-size: 40px; line-height: 1; }
 .favorite-button:hover, .favorite-button:focus-visible { border: 0; background: transparent; color: var(--cyan); outline: 0; }
 .favorite-button.active { border: 0; background: transparent; color: var(--gold); }
 .completion-icon { display: inline-grid; place-items: center; border-radius: 50%; color: var(--ink); font-size: .7rem; font-weight: 600; line-height: 1; }
