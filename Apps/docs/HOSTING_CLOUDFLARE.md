@@ -44,8 +44,10 @@ Secretが未設定の場合は認証を通さず、500で停止する。認証�
 `build-pages.sh`は、公開用`public/`へ次だけをコピー・生成する。
 
 - `index.html`
+- `404.html`
 - `app.js`
 - `styles.css`
+- `problems/{problemId}/index.html`（問題定義の全件）
 - `data/problems.json`
 - `data/bleague.sqlite` またはPagesの上限に合わせたSQLiteチャンク
 - `data/db-manifest.json`
