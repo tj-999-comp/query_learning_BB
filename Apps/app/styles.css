@@ -68,9 +68,19 @@ a { color: inherit; }
 /* Start screen — cards on a clean white canvas */
 .empty-state { min-height: 0; padding: clamp(40px, 7vw, 84px) clamp(24px, 7vw, 88px); }
 .hero-slogan { margin: 0 auto clamp(28px, 5vw, 58px); color: #000; font-size: clamp(38px, 9vw, 112px); line-height: .82; letter-spacing: -.075em; text-align: center; white-space: nowrap; }
-.next-problem-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; margin-top: clamp(32px, 5vw, 56px); }
-.next-problem-card { width: 100%; border: 1px solid var(--silver); border-radius: 16px; padding: 14px; background: var(--white); color: var(--ink); text-align: left; transition: border-color .18s ease, transform .18s ease; }
-.next-problem-card:hover, .next-problem-card:focus-visible { border-color: var(--cyan); outline: 0; transform: translateY(-2px); }
+.home-sections { display: grid; gap: clamp(36px, 6vw, 64px); margin-top: clamp(32px, 5vw, 56px); }
+.home-section { min-width: 0; }
+.home-section-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 8px; border-bottom: 1px solid var(--silver); padding-bottom: 10px; }
+.home-section-heading h2 { margin: 0; color: var(--ink); font-size: clamp(20px, 3vw, 28px); letter-spacing: -.05em; }
+.next-problem-list { display: flex; min-width: 0; gap: 0; overflow-x: auto; padding-bottom: 8px; scrollbar-width: thin; }
+.favorite-problem-list { display: flex; min-width: 0; gap: 0; overflow-x: auto; padding-bottom: 8px; scrollbar-width: thin; }
+.next-problem-card { width: 100%; border: 0; border-bottom: 1px solid var(--silver-light); border-radius: 0; padding: 14px 0; background: transparent; color: var(--ink); text-align: left; transition: background-color .18s ease; }
+.next-problem-list .next-problem-card { flex: 0 0 min(310px, 78vw); padding: 0 18px 14px; }
+.next-problem-list .next-problem-card:first-child { padding-left: 0; }
+.next-problem-card:hover, .next-problem-card:focus-visible { background: var(--navy-soft); outline: 0; }
+.next-problem-card:focus-visible { box-shadow: inset 4px 0 0 var(--cyan); }
+.favorite-problem-card { flex: 0 0 min(310px, 78vw); padding: 0 18px 14px; border-bottom: 1px solid var(--silver-light); }
+.favorite-problem-card:first-child { padding-left: 0; }
 .next-problem-card-meta { display: flex; align-items: center; justify-content: space-between; gap: 6px; color: var(--muted); font-family: var(--font-mono); font-size: 10px; }
 .next-problem-card h4 { margin: 8px 0 3px; color: var(--ink); font-size: 14px; font-weight: 600; letter-spacing: -.03em; }
 .next-problem-card p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.44; }
@@ -182,6 +192,12 @@ a { color: inherit; }
 .drawer-close:hover, .drawer-close:focus-visible { border-color: var(--cyan); color: var(--cyan); outline: 0; }
 .filters { display: grid; gap: 10px; margin-bottom: 16px; }
 .filters label { display: grid; gap: 6px; color: var(--muted); font-size: 12px; }
+.filter-group { min-width: 0; margin: 0; border: 0; padding: 0; }
+.filter-group legend { margin-bottom: 6px; color: var(--muted); font-size: 12px; }
+.filter-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.filter-chip { border: 1px solid var(--silver); border-radius: var(--radius-pill); background: var(--white); color: var(--ink); padding: 8px 11px; font-size: 12px; line-height: 1; }
+.filter-chip:hover, .filter-chip:focus-visible { border-color: var(--cyan); outline: 0; }
+.filter-chip.is-active { border-color: var(--cyan); background: rgba(0, 204, 255, .12); color: var(--ink); }
 select { width: 100%; border: 1px solid var(--silver); border-radius: var(--radius-input); background: var(--white); color: var(--ink); padding: 11px 12px; outline: 0; }
 select:focus { border-color: var(--cyan); }
 .problem-list { display: grid; gap: 0; max-height: calc(100vh - 220px); overflow-y: auto; padding-right: 0; scrollbar-width: none; -ms-overflow-style: none; }
@@ -234,7 +250,6 @@ select:focus { border-color: var(--cyan); }
   .page-shell { padding: 28px 0 52px; }
   .empty-state { padding: 36px 18px; }
   .hero-slogan { font-size: clamp(42px, 14vw, 88px); }
-  .next-problem-list { grid-template-columns: 1fr; }
   .question-topline { flex-direction: column; gap: 14px; }
   .question-header-info { width: 100%; justify-content: flex-start; }
   .question-meta { flex: 1; justify-content: flex-start; }
