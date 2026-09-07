@@ -76,3 +76,9 @@ GitHub Appには、公開リポジトリ `tj-999-comp/sandbox-pages` のActions 
 Cloudflare Pages Freeへの公開方針、Basic認証、公開成果物の作成方法は [`Apps/docs/HOSTING_CLOUDFLARE.md`](Apps/docs/HOSTING_CLOUDFLARE.md) を参照してください。
 
 本番反映は、STG（`https://stg.query-learning-bb.pages.dev/`）で確認した後、ユーザーから明示的なOKを受けてから行います。CI成功、STG確認、Issueクローズ、作業者の判断だけでは本番反映しません。詳細は [`Apps/docs/HOSTING_CLOUDFLARE.md`](Apps/docs/HOSTING_CLOUDFLARE.md) の「リリース手順と本番反映ルール」を参照してください。
+
+## 承認範囲と完了処理
+
+- ユーザーの「本番反映してよい」という承認は、承認済みコミットを本番へデプロイする操作だけを許可する。Issueのクローズ、PRのクローズ、ブランチ削除、作業記録の作成などは別操作として扱う。
+- Issueをクローズできるのは、ユーザーがIssue番号を指定してクローズを明示的に依頼した場合だけとする。本番反映完了、CI成功、受入条件の充足、PRマージ、作業者の判断をクローズ承認とみなさない。
+- ユーザーから作業記録の作成を依頼された場合は、作業完了後に記録を作成する。作業記録の作成とIssueのクローズを一つの完了処理として扱わない。
