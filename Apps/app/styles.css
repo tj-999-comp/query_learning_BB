@@ -114,7 +114,21 @@ a { color: inherit; }
 .prompt-box { margin-bottom: 16px; padding: 24px 0; border: 0; border-radius: 0; background: transparent; color: var(--ink); }
 .prompt-box h3 { margin-bottom: 8px; color: var(--ink); font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
 .prompt-box p { margin-bottom: 0; color: var(--ink); font-size: 17px; }
-.prompt-box .question-columns { margin-top: 8px; color: var(--muted); font-size: 11px; font-weight: 500; letter-spacing: 0; }
+.prompt-box .question-columns { display: flex; align-items: center; flex-wrap: wrap; gap: 7px 10px; margin-top: 12px; color: var(--muted); font-size: 11px; font-weight: 500; letter-spacing: 0; }
+.question-columns-label { color: var(--ink); font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: .06em; }
+.required-columns-legend { display: inline-flex; align-items: center; gap: 6px; color: var(--muted-dark); font-family: var(--font-mono); font-size: 10px; }
+.required-columns-legend-source, .required-columns-legend-derived { white-space: nowrap; }
+.required-columns-legend-source { color: var(--navy); }
+.required-columns-legend-derived { color: #087f8c; }
+.required-column-list { display: inline-flex; flex-wrap: wrap; gap: 6px; min-width: 0; }
+.required-column { display: inline-flex; align-items: center; gap: 5px; min-height: 26px; border: 1px solid rgba(51, 51, 51, .18); border-radius: var(--radius-pill); background: var(--white); padding: 4px 8px; color: var(--ink); white-space: nowrap; }
+.required-column code { color: var(--ink); font: 11px var(--font-mono); }
+.required-column-icon { font-size: 12px; font-weight: 700; line-height: 1; }
+.required-column-source { border-color: rgba(0, 45, 98, .2); }
+.required-column-source .required-column-icon { color: var(--navy); }
+.required-column-derived { border-style: dashed; border-color: rgba(8, 127, 140, .4); background: #f4fbfb; }
+.required-column-derived .required-column-icon { color: #087f8c; }
+.required-column-reference { border-radius: var(--radius-pill); background: var(--silver-light); padding: 1px 5px; color: var(--muted); font: 10px var(--font-mono); }
 .workspace-panes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
 .query-pane, .result-pane { min-width: 0; border-radius: 16px; padding: 24px; color: var(--ink); box-shadow: none; }
 .query-pane { display: flex; flex-direction: column; border: 1px solid rgba(51, 51, 51, .16); border-top: 4px solid var(--cyan); border-radius: 32px 8px 8px 32px; background: var(--white); }
