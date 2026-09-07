@@ -701,7 +701,7 @@ body { background: var(--white); color: var(--navy); }
   line-height: 1;
 }
 .completion-mark-preview::before, .completion-mark-preview::after { position: absolute; inset: 0; display: grid; place-items: center; color: var(--yellow); content: "✓"; font: inherit; line-height: 1; pointer-events: none; }
-.completion-mark-preview::before { -webkit-text-stroke: 12px var(--completion-outline, transparent); paint-order: stroke fill; }
+.completion-mark-preview::before { -webkit-text-stroke: 12px var(--completion-outline, transparent); paint-order: stroke fill; transform: scale(1.08); }
 .completion-mark-preview::after { -webkit-text-stroke: 4px var(--yellow); paint-order: stroke fill; }
 .completion-check-outline-cyan { --completion-outline: var(--cyan); }
 .completion-check-outline-white { --completion-outline: var(--white); }
