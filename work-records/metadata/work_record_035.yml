@@ -1,0 +1,6 @@
+schema_version: 1
+title: 'Issue #58 達成済みマークの表示調整と本番反映'
+date: "2026-09-07"
+project_id: query_learning_BB
+tags: [codex, work-record, issue-58, v1.1.2, completion-mark, production, design-review]
+publish: true
