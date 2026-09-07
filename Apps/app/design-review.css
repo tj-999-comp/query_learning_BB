@@ -753,18 +753,18 @@ body { background: var(--white); color: var(--navy); }
 
 /* Full-size context checks: compare the same mark where users actually see it. */
 .completion-context-grid { display: grid; gap: 24px; }
-.completion-context-section { padding: 18px; border: 1px solid rgba(0, 45, 98, .16); border-radius: 16px; background: #f7fbfd; }
+.completion-context-section { padding: 18px; border: 1px solid rgba(0, 45, 98, .16); border-radius: 16px; background: var(--white); }
 .completion-context-heading { margin-bottom: 14px; }
 .completion-context-heading h3 { margin: 0 0 4px; color: var(--navy); font-size: 18px; }
 .completion-context-heading p { margin: 0; color: #405978; font-size: 12px; }
 .completion-context-options { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
-.completion-context-option { display: flex; min-width: 0; min-height: 132px; flex-direction: column; align-items: flex-start; padding: 10px; border: 1px solid rgba(0, 45, 98, .18); border-radius: 12px; background: #063b78; color: var(--white); }
+.completion-context-option { display: flex; min-width: 0; min-height: 132px; flex-direction: column; align-items: flex-start; padding: 10px; border: 1px solid rgba(0, 45, 98, .18); border-radius: 12px; background: var(--white); color: var(--navy); }
 .completion-context-option > span { display: grid; width: 24px; height: 24px; place-items: center; border-radius: 7px; background: var(--cyan); color: var(--navy); font: 600 10px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 .completion-context-option > svg { align-self: center; margin: auto 0; overflow: visible; }
-.completion-context-option > p { width: 100%; margin: 0; color: var(--text-muted); font-size: 10px; line-height: 1.25; }
-.completion-context-section:first-child .completion-context-option > p::before { display: block; margin-bottom: 3px; color: var(--white); content: "シーズンごとの試合数を数える"; font-size: 10px; font-weight: 600; white-space: nowrap; }
-.completion-context-section:last-child .completion-context-option > p::before { display: block; margin-bottom: 3px; color: var(--white); content: "Q.02  シーズンごとの試合数を数える"; font-size: 10px; font-weight: 600; white-space: nowrap; }
-.completion-context-svg { width: 46px; height: 46px; }
+.completion-context-option > p { width: 100%; margin: 0; color: #405978; font-size: 10px; line-height: 1.25; }
+.completion-context-section:first-child .completion-context-option > p::before { display: block; margin-bottom: 3px; color: var(--navy); content: "シーズンごとの試合数を数える"; font-size: 10px; font-weight: 600; white-space: nowrap; }
+.completion-context-section:last-child .completion-context-option > p::before { display: block; margin-bottom: 3px; color: var(--navy); content: "Q.02  シーズンごとの試合数を数える"; font-size: 10px; font-weight: 600; white-space: nowrap; }
+.completion-context-svg { width: 46px; height: 46px; border-radius: 8px; background: #0891b2; }
 .completion-context-svg use { fill: none; stroke-linecap: round; stroke-linejoin: round; }
 .completion-context-svg .context-outline { stroke: var(--cyan); stroke-width: var(--context-outline-width, 18); }
 .completion-context-svg .context-core { stroke: var(--yellow); stroke-width: var(--context-core-width, 8); }
@@ -797,7 +797,8 @@ body { background: var(--white); color: var(--navy); }
 .context-menu-07 > svg,
 .context-menu-08 > svg,
 .context-menu-09 > svg,
-.context-menu-10 > svg { width: 18px; height: 18px; }
+ .context-menu-10 > svg { width: 18px; height: 18px; }
+.completion-context-section:last-child .completion-context-svg { border-radius: 5px; }
 
 /* Keep the review page compact and Japanese-first. */
 .kicker { display: none; }
