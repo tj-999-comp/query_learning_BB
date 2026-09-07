@@ -373,7 +373,7 @@ function visibleProblems() {
     const statusMatches = status === "all"
       || (status === "completed" && completed)
       || (status === "incomplete" && !completed);
-    const progressMatches = favorites ? statusMatches || favorite : statusMatches;
+    const progressMatches = statusMatches && (!favorites || favorite);
     return progressMatches && (categoryFilter === "all" || problem.category === categoryFilter);
   });
 }
