@@ -751,6 +751,54 @@ body { background: var(--white); color: var(--navy); }
 .candidate-19 { --candidate-outline-width: 20; --candidate-core-width: 7; }
 .candidate-20 { --candidate-outline-width: 18; --candidate-core-width: 6; }
 
+/* Full-size context checks: compare the same mark where users actually see it. */
+.completion-context-grid { display: grid; gap: 24px; }
+.completion-context-section { padding: 18px; border: 1px solid rgba(0, 45, 98, .16); border-radius: 16px; background: #f7fbfd; }
+.completion-context-heading { margin-bottom: 14px; }
+.completion-context-heading h3 { margin: 0 0 4px; color: var(--navy); font-size: 18px; }
+.completion-context-heading p { margin: 0; color: #405978; font-size: 12px; }
+.completion-context-options { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+.completion-context-option { display: flex; min-width: 0; min-height: 132px; flex-direction: column; align-items: flex-start; padding: 10px; border: 1px solid rgba(0, 45, 98, .18); border-radius: 12px; background: #063b78; color: var(--white); }
+.completion-context-option > span { display: grid; width: 24px; height: 24px; place-items: center; border-radius: 7px; background: var(--cyan); color: var(--navy); font: 600 10px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.completion-context-option > svg { align-self: center; margin: auto 0; overflow: visible; }
+.completion-context-option > p { width: 100%; margin: 0; color: var(--text-muted); font-size: 10px; line-height: 1.25; }
+.completion-context-section:first-child .completion-context-option > p::before { display: block; margin-bottom: 3px; color: var(--white); content: "シーズンごとの試合数を数える"; font-size: 10px; font-weight: 600; white-space: nowrap; }
+.completion-context-section:last-child .completion-context-option > p::before { display: block; margin-bottom: 3px; color: var(--white); content: "Q.02  シーズンごとの試合数を数える"; font-size: 10px; font-weight: 600; white-space: nowrap; }
+.completion-context-svg { width: 46px; height: 46px; }
+.completion-context-svg use { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.completion-context-svg .context-outline { stroke: var(--cyan); stroke-width: var(--context-outline-width, 18); }
+.completion-context-svg .context-core { stroke: var(--yellow); stroke-width: var(--context-core-width, 8); }
+.context-problem-01 { --context-outline-width: 18; }
+.context-problem-02 { --context-outline-width: 19; }
+.context-problem-03 { --context-outline-width: 20; }
+.context-problem-04 { --context-outline-width: 21; }
+.context-problem-05 { --context-outline-width: 22; }
+.context-problem-06 { --context-outline-width: 23; }
+.context-problem-07 { --context-outline-width: 24; }
+.context-problem-08 { --context-outline-width: 22; }
+.context-problem-09 { --context-outline-width: 22; }
+.context-problem-10 { --context-outline-width: 24; }
+.context-menu-01 { --context-outline-width: 7; --context-core-width: 2; }
+.context-menu-02 { --context-outline-width: 8; --context-core-width: 3; }
+.context-menu-03 { --context-outline-width: 9; --context-core-width: 3; }
+.context-menu-04 { --context-outline-width: 10; --context-core-width: 3; }
+.context-menu-05 { --context-outline-width: 10; --context-core-width: 4; }
+.context-menu-06 { --context-outline-width: 11; --context-core-width: 4; }
+.context-menu-07 { --context-outline-width: 9; --context-core-width: 5; }
+.context-menu-08 { --context-outline-width: 10; --context-core-width: 5; }
+.context-menu-09 { --context-outline-width: 10; --context-core-width: 5; }
+.context-menu-10 { --context-outline-width: 10; --context-core-width: 6; }
+.context-menu-01 > svg,
+.context-menu-02 > svg,
+.context-menu-03 > svg,
+.context-menu-04 > svg,
+.context-menu-05 > svg,
+.context-menu-06 > svg,
+.context-menu-07 > svg,
+.context-menu-08 > svg,
+.context-menu-09 > svg,
+.context-menu-10 > svg { width: 18px; height: 18px; }
+
 /* Keep the review page compact and Japanese-first. */
 .kicker { display: none; }
 .latest-proposal-heading h2,
@@ -764,9 +812,11 @@ body { background: var(--white); color: var(--navy); }
 @media (max-width: 700px) {
   .completion-mark-review-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .completion-candidate-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .completion-context-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 420px) {
   .completion-mark-review-grid { grid-template-columns: 1fr; }
   .completion-candidate-grid { grid-template-columns: 1fr; }
+  .completion-context-options { grid-template-columns: 1fr; }
 }
