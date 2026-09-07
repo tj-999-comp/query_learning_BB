@@ -159,12 +159,18 @@ def validate_document(document: dict) -> list[dict]:
                 not isinstance(column, dict)
                 or not isinstance(column.get("label"), str)
                 or not column["label"]
-                or not isinstance(column.get("reference"), str)
-                or not column["reference"]
+                or column.get("type") not in {None, "source", "derived"}
+                or (column.get("type") != "derived" and (
+                    not isinstance(column.get("reference"), str)
+                    or not column["reference"]
+                ))
                 for column in required_columns
             ):
                 raise ValidationError(f"{label}: requiredColumnsが不正です")
-            if any("." in column["reference"] for column in required_columns):
+            if any(
+                column.get("type") != "derived" and "." in column["reference"]
+                for column in required_columns
+            ):
                 raise ValidationError(f"{label}: requiredColumns.referenceはテーブル名だけを指定してください")
         answer_sql = validate_sql(problem["answerSql"], label)
         judge_sql = validate_sql(problem["judgeSql"], label)
@@ -252,6 +258,48 @@ def infer_required_column_table(
     return "unknown"
 
 
+def is_physical_column(
+    connection: sqlite3.Connection,
+    column: str,
+    source_tables: list[str],
+) -> bool:
+    """Return whether a result label is a column physically present in a source table."""
+    column_lower = column.lower()
+    return any(
+        column_lower in sqlite_columns(connection, table)
+        for table in source_tables
+    )
+
+
+def normalize_required_columns(
+    connection: sqlite3.Connection,
+    sql: str,
+    columns: list[dict],
+    source_tables: list[str],
+) -> list[dict]:
+    """Add the display kind while keeping derived columns free of source-table tags."""
+    normalized = []
+    for column in columns:
+        label = column["label"]
+        if is_physical_column(connection, label, source_tables):
+            normalized.append({
+                "label": label,
+                "type": "source",
+                "reference": column.get("reference") or infer_required_column_table(
+                    connection,
+                    sql,
+                    label,
+                    source_tables,
+                ),
+            })
+        else:
+            normalized.append({
+                "label": label,
+                "type": "derived",
+            })
+    return normalized
+
+
 def values_match(actual, expected, numeric_tolerance: float) -> bool:
     if isinstance(actual, (int, float)) and isinstance(expected, (int, float)):
         return abs(actual - expected) <= numeric_tolerance
@@ -332,10 +380,18 @@ def validate_against_database(problems: list[dict], database_path: Path) -> None
                     }
                     for column in expected_columns
                 ]
+            problem["requiredColumns"] = normalize_required_columns(
+                connection,
+                judge_sql,
+                problem["requiredColumns"],
+                problem["sourceTables"],
+            )
             if any(
-                " in " in column["reference"].lower()
-                or "." in column["reference"]
-                or column["reference"] not in problem["sourceTables"]
+                column["type"] == "source" and (
+                    " in " in column["reference"].lower()
+                    or "." in column["reference"]
+                    or column["reference"] not in problem["sourceTables"]
+                )
                 for column in problem["requiredColumns"]
             ):
                 raise ValidationError(

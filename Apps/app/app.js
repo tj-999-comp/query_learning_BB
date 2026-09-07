@@ -545,15 +545,22 @@ function selectProblem(problemId) {
 function renderRequiredColumns(problem) {
   const columns = Array.isArray(problem.requiredColumns) && problem.requiredColumns.length
     ? problem.requiredColumns
-    : (problem.resultSpec?.columns || []).map((column) => ({ label: column, reference: column }));
+    : (problem.resultSpec?.columns || []).map((column) => ({ label: column, type: "derived" }));
   if (!columns.length) {
     elements.questionColumns.classList.add("hidden");
-    elements.questionColumns.textContent = "";
+    elements.questionColumns.innerHTML = "";
     return;
   }
-  elements.questionColumns.textContent = `必要なカラム: ${columns.map((column) => (
-    `${column.label}（${column.reference}）`
-  )).join("、")}`;
+  const renderedColumns = columns.map((column) => {
+    const isSource = column.type === "source" && column.reference;
+    const icon = isSource ? "▣" : "✦";
+    const kind = isSource ? "テーブルにあるカラム" : "SQLで作成するカラム";
+    const reference = isSource
+      ? `<span class="required-column-reference">[${escapeHtml(column.reference)}]</span>`
+      : "";
+    return `<span class="required-column required-column-${isSource ? "source" : "derived"}" role="listitem" aria-label="${escapeHtml(column.label)}（${kind}）" title="${kind}"><span class="required-column-icon" aria-hidden="true">${icon}</span><code>${escapeHtml(column.label)}</code>${reference}</span>`;
+  }).join("");
+  elements.questionColumns.innerHTML = `<span class="question-columns-label">必要なカラム</span><span class="required-columns-legend" aria-hidden="true"><span class="required-columns-legend-source">▣ テーブル</span><span class="required-columns-legend-derived">✦ 作成</span></span><span class="required-column-list" role="list">${renderedColumns}</span>`;
   elements.questionColumns.classList.remove("hidden");
 }
 
