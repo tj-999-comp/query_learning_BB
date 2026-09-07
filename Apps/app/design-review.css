@@ -705,6 +705,10 @@ body { background: var(--white); color: var(--navy); }
 .completion-mark-preview::after { -webkit-text-stroke: 4px var(--yellow); paint-order: stroke fill; }
 .completion-check-outline-cyan { --completion-outline: var(--cyan); }
 .completion-check-outline-white { --completion-outline: var(--white); }
+.completion-mark-preview-current,
+.completion-mark-preview-followup { width: 46px; height: 46px; border-radius: 8px; font-size: 1.55rem; }
+.completion-mark-preview-followup::before { -webkit-text-stroke-width: 16px; }
+.completion-mark-preview-followup::after { -webkit-text-stroke-width: 5px; }
 
 /* Keep the review page compact and Japanese-first. */
 .kicker { display: none; }
