@@ -768,6 +768,7 @@ body { background: var(--white); color: var(--navy); }
 .completion-context-svg use { fill: none; stroke-linecap: round; stroke-linejoin: round; }
 .completion-context-svg .context-outline { stroke: var(--cyan); stroke-width: var(--context-outline-width, 18); }
 .completion-context-svg .context-core { stroke: var(--yellow); stroke-width: var(--context-core-width, 8); }
+.completion-context-option.latest-selected { border: 2px solid var(--cyan); box-shadow: inset 0 0 0 2px rgba(255, 255, 0, .65); }
 .context-problem-01 { --context-outline-width: 18; }
 .context-problem-02 { --context-outline-width: 19; }
 .context-problem-03 { --context-outline-width: 20; }
@@ -787,7 +788,8 @@ body { background: var(--white); color: var(--navy); }
 .context-menu-07 { --context-outline-width: 9; --context-core-width: 5; }
 .context-menu-08 { --context-outline-width: 10; --context-core-width: 5; }
 .context-menu-09 { --context-outline-width: 10; --context-core-width: 5; }
-.context-menu-10 { --context-outline-width: 10; --context-core-width: 6; }
+.context-menu-10 { --context-outline-width: 0; --context-core-width: 13; }
+.context-menu-10 .context-outline { display: none; }
 .context-menu-01 > svg,
 .context-menu-02 > svg,
 .context-menu-03 > svg,
