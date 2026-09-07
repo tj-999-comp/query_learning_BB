@@ -3,7 +3,7 @@
 ## 採用構成
 
 - ホスティング: Cloudflare Pages Free
-- 公開方式: GitHub連携による`main`ブランチの自動デプロイ
+- 公開方式: `stg`ブランチでPreviewを確認し、明示承認後に`main`へ反映してProductionへデプロイ
 - PagesのRoot directory: `Apps`
 - Build command: `bash scripts/build-pages.sh`
 - Build output directory: `public`
@@ -11,6 +11,13 @@
 - 認証: Pages Functionsの全体middlewareによるHTTP Basic認証
 - 学習情報: Pages Functionsの`/api/progress`とCloudflare KVによる端末間同期
 - 公開URL: 初期はCloudflare提供の`*.pages.dev`。カスタムドメインは後続で検討する
+
+## 環境
+
+- STG（Preview）: `https://stg.query-learning-bb.pages.dev/`
+- 本番（Production）: `https://query-learning-bb.pages.dev/`
+
+STGと本番は別環境として扱う。本番URLでの確認だけではSTG確認の代わりにならない。
 
 ## Secret
 
@@ -31,7 +38,7 @@ binding = "PROGRESS_KV"
 id = "取得したNamespace ID"
 ```
 
-その変更をCommitして`main`へPushすると、Git連携のPagesがWrangler設定を含むProduction deploymentを作成する。`npx wrangler pages deployment list --project-name query-learning-bb`で、対象CommitのDeploymentが`Active`になったことを確認する。KV NamespaceのIDや認証情報はリポジトリへ保存しない。バインディング未設定時はアプリがlocalStorageへフォールバックするため、公開後に同期状態が「端末間で同期されます」と表示されることを確認する。
+その変更を承認済みのリリースとして`main`へPushすると、Git連携のPagesがWrangler設定を含むProduction deploymentを作成する。`npx wrangler pages deployment list --project-name query-learning-bb`で、対象CommitのDeploymentが`Active`になったことを確認する。KV NamespaceのIDや認証情報はリポジトリへ保存しない。バインディング未設定時はアプリがlocalStorageへフォールバックするため、公開後に同期状態が「端末間で同期されます」と表示されることを確認する。
 
 Preview環境をProductionと分離する場合は、Preview用Namespaceを別途作成し、Wranglerの`[[env.preview.kv_namespaces]]`で`PROGRESS_KV`を上書きする。環境設定を上書きする場合は、Cloudflare公式の非継承キーの注意事項を確認する。既存のWrangler設定を保持するため、`npx wrangler pages download config`は実行しない。
 
@@ -56,6 +63,28 @@ Secretが未設定の場合は認証を通さず、500で停止する。認証�
 CSV、CSV取り込みスクリプト、テーブル定義、要件書などは公開成果物に含めない。SQLiteが用意されていない場合は、8つのCSVからビルド時に生成する。
 
 確定SQLiteが25MiBを超える場合、ビルドスクリプトは20MiB以下のチャンクへ分割し、ブラウザ側で結合してからsql.jsへ渡す。これによりR2などの追加サービスを使わず、Pages Freeの1ファイル上限内で配信する。
+
+## リリース手順と本番反映ルール
+
+本番反映には、必ず次の順序と承認ゲートを適用する。
+
+1. 実装用ブランチから`stg`へ反映するPull Requestを作成する。
+2. `stg`へのマージ後、STG Preview deploymentが生成されるのを待つ。
+3. `https://stg.query-learning-bb.pages.dev/`で、対象変更の主要フローと必要な回帰確認を実施する。
+4. 確認結果、対象コミット、STG URLを作業記録またはPull Requestへ残す。
+5. ユーザーから「本番反映してよい」と明示的なOKを受けるまで、`main`へのマージ・Push、本番デプロイ、Production URLでの受入完了宣言を行わない。
+6. 明示承認後にのみ、承認済みの同一コミットを`main`へ反映する。
+7. Production deploymentが対象コミットで`Active`になったことを確認し、本番の最低限のスモークテスト結果を記録する。
+
+次の操作は、STG確認だけでは承認とはみなさない。
+
+- Pull RequestのCI成功
+- STG deploymentの`Active`
+- Issueや子Issueのクローズ
+- 作業者自身の「受入条件を満たした」という判断
+- ユーザーが明示していない「進めて」「確認した」などの文脈からの推測
+
+本番反映の明示承認がない場合は、STG確認までで停止し、承認待ちとして報告する。本番反映を伴わないドキュメント変更や検証作業でも、この承認ゲートを迂回してはならない。
 
 ## 初回設定
 

@@ -74,3 +74,5 @@ GitHub Appには、公開リポジトリ `tj-999-comp/sandbox-pages` のActions 
 ## アプリ公開
 
 Cloudflare Pages Freeへの公開方針、Basic認証、公開成果物の作成方法は [`Apps/docs/HOSTING_CLOUDFLARE.md`](Apps/docs/HOSTING_CLOUDFLARE.md) を参照してください。
+
+本番反映は、STG（`https://stg.query-learning-bb.pages.dev/`）で確認した後、ユーザーから明示的なOKを受けてから行います。CI成功、STG確認、Issueクローズ、作業者の判断だけでは本番反映しません。詳細は [`Apps/docs/HOSTING_CLOUDFLARE.md`](Apps/docs/HOSTING_CLOUDFLARE.md) の「リリース手順と本番反映ルール」を参照してください。
