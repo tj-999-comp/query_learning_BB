@@ -701,7 +701,7 @@ body { background: var(--white); color: var(--navy); }
   line-height: 1;
 }
 .completion-mark-preview::before, .completion-mark-preview::after { position: absolute; inset: 0; display: grid; place-items: center; color: var(--yellow); content: "✓"; font: inherit; line-height: 1; pointer-events: none; }
-.completion-mark-preview::before { -webkit-text-stroke: 12px var(--completion-outline, transparent); paint-order: stroke fill; }
+.completion-mark-preview::before { -webkit-text-stroke: 12px var(--completion-outline, transparent); paint-order: stroke fill; transform: scale(1.08); }
 .completion-mark-preview::after { -webkit-text-stroke: 4px var(--yellow); paint-order: stroke fill; }
 .completion-check-outline-cyan { --completion-outline: var(--cyan); }
 .completion-check-outline-white { --completion-outline: var(--white); }
@@ -709,8 +709,98 @@ body { background: var(--white); color: var(--navy); }
 .completion-mark-preview-followup { width: 46px; height: 46px; border-radius: 8px; font-size: 1.55rem; }
 .completion-mark-preview-followup::before { -webkit-text-stroke-width: 16px; }
 .completion-mark-preview-followup::after { -webkit-text-stroke-width: 5px; }
-/* Trim the lower edge so the cyan outline never drops below the yellow check. */
-.completion-mark-preview-followup::before { clip-path: inset(0 0 5px 0); }
+
+/* Proposal No.09: compare clean cyan enclosures without terminal bleed. */
+.proposal-v112-candidates { padding-bottom: 28px; }
+.completion-candidate-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.completion-candidate-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.completion-candidate-card { min-width: 0; padding: 14px; border: 1px solid rgba(0, 45, 98, .16); border-radius: 14px; background: #f7fbfd; color: var(--navy); }
+.completion-candidate-head { display: flex; align-items: center; gap: 8px; min-height: 30px; }
+.completion-candidate-head > span { display: grid; width: 26px; height: 26px; flex: 0 0 26px; place-items: center; border-radius: 8px; background: var(--cyan); color: var(--navy); font: 600 11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.completion-candidate-head h3 { margin: 0; color: var(--navy); font-size: 13px; line-height: 1.2; }
+.completion-candidate-stage { display: grid; min-height: 104px; place-items: center; margin-top: 10px; border-radius: 10px; background: #063b78; }
+.completion-candidate-svg { width: 72px; height: 72px; overflow: visible; }
+.completion-candidate-svg use { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.completion-candidate-svg .candidate-outline { stroke: var(--cyan); stroke-width: var(--candidate-outline-width, 16); }
+.completion-candidate-svg .candidate-core { stroke: var(--yellow); stroke-width: var(--candidate-core-width, 5); }
+.completion-candidate-svg .candidate-gap { display: none; stroke: var(--white); stroke-width: 10; }
+.completion-candidate-card p { margin: 8px 0 0; color: #405978; font-size: 11px; line-height: 1.3; }
+.completion-candidate-card.latest-selected { border: 2px solid var(--cyan); box-shadow: inset 0 0 0 2px rgba(255, 255, 0, .65); }
+.candidate-01 { --candidate-outline-width: 16; --candidate-core-width: 5; }
+.candidate-02 { --candidate-outline-width: 18; --candidate-core-width: 5; }
+.candidate-03 { --candidate-outline-width: 18; --candidate-core-width: 7; }
+.candidate-04 { --candidate-outline-width: 20; --candidate-core-width: 6; }
+.candidate-05 { --candidate-outline-width: 20; --candidate-core-width: 8; }
+.candidate-06 .completion-candidate-svg use { stroke-linecap: round; }
+.candidate-07 .completion-candidate-svg use { stroke-linejoin: round; }
+.candidate-08 .completion-candidate-svg,
+.candidate-16 .completion-candidate-svg,
+.candidate-18 .completion-candidate-svg,
+.candidate-20 .completion-candidate-svg { transform: translateY(1px); }
+.candidate-09 .completion-candidate-svg { transform: translateX(1px); }
+.candidate-10 .completion-candidate-svg { transform: translateX(-1px); }
+.candidate-11 .completion-candidate-svg { transform: scale(.94); }
+.candidate-12 .completion-candidate-svg { transform: translateY(-2px); }
+.candidate-13 { --candidate-outline-width: 14; --candidate-core-width: 6; }
+.candidate-14 { --candidate-outline-width: 16; --candidate-core-width: 6; }
+.candidate-15 { --candidate-outline-width: 18; --candidate-core-width: 8; }
+.candidate-16 { --candidate-outline-width: 18; --candidate-core-width: 6; }
+.candidate-17 { --candidate-outline-width: 20; --candidate-core-width: 5; }
+.candidate-17 .completion-candidate-svg .candidate-gap { display: inline; }
+.candidate-18 { --candidate-outline-width: 18; --candidate-core-width: 6; }
+.candidate-19 { --candidate-outline-width: 20; --candidate-core-width: 7; }
+.candidate-20 { --candidate-outline-width: 18; --candidate-core-width: 6; }
+
+/* Full-size context checks: compare the same mark where users actually see it. */
+.completion-context-grid { display: grid; gap: 24px; }
+.completion-context-section { padding: 18px; border: 1px solid rgba(0, 45, 98, .16); border-radius: 16px; background: var(--white); }
+.completion-context-heading { margin-bottom: 14px; }
+.completion-context-heading h3 { margin: 0 0 4px; color: var(--navy); font-size: 18px; }
+.completion-context-heading p { margin: 0; color: #405978; font-size: 12px; }
+.completion-context-options { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+.completion-context-option { display: flex; min-width: 0; min-height: 132px; flex-direction: column; align-items: flex-start; padding: 10px; border: 1px solid rgba(0, 45, 98, .18); border-radius: 12px; background: var(--white); color: var(--navy); }
+.completion-context-option > span { display: grid; width: 24px; height: 24px; place-items: center; border-radius: 7px; background: var(--cyan); color: var(--navy); font: 600 10px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.completion-context-option > svg { align-self: center; margin: auto 0; overflow: visible; }
+.completion-context-option > p { width: 100%; margin: 0; color: #405978; font-size: 10px; line-height: 1.25; }
+.completion-context-section:first-child .completion-context-option > p::before { display: block; margin-bottom: 3px; color: var(--navy); content: "シーズンごとの試合数を数える"; font-size: 10px; font-weight: 600; white-space: nowrap; }
+.completion-context-section:last-child .completion-context-option > p::before { display: block; margin-bottom: 3px; color: var(--navy); content: "Q.02  シーズンごとの試合数を数える"; font-size: 10px; font-weight: 600; white-space: nowrap; }
+.completion-context-svg { width: 46px; height: 46px; border-radius: 8px; background: #0891b2; }
+.completion-context-svg use { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.completion-context-svg .context-outline { stroke: var(--cyan); stroke-width: var(--context-outline-width, 18); }
+.completion-context-svg .context-core { stroke: var(--yellow); stroke-width: var(--context-core-width, 8); }
+.completion-context-option.latest-selected { border: 2px solid var(--cyan); box-shadow: inset 0 0 0 2px rgba(255, 255, 0, .65); }
+.context-problem-01 { --context-outline-width: 18; }
+.context-problem-02 { --context-outline-width: 19; }
+.context-problem-03 { --context-outline-width: 20; }
+.context-problem-04 { --context-outline-width: 21; }
+.context-problem-05 { --context-outline-width: 22; }
+.context-problem-06 { --context-outline-width: 23; }
+.context-problem-07 { --context-outline-width: 24; }
+.context-problem-08 { --context-outline-width: 22; }
+.context-problem-09 { --context-outline-width: 22; }
+.context-problem-10 { --context-outline-width: 24; }
+.context-menu-01 { --context-outline-width: 7; --context-core-width: 2; }
+.context-menu-02 { --context-outline-width: 8; --context-core-width: 3; }
+.context-menu-03 { --context-outline-width: 9; --context-core-width: 3; }
+.context-menu-04 { --context-outline-width: 10; --context-core-width: 3; }
+.context-menu-05 { --context-outline-width: 10; --context-core-width: 4; }
+.context-menu-06 { --context-outline-width: 11; --context-core-width: 4; }
+.context-menu-07 { --context-outline-width: 9; --context-core-width: 5; }
+.context-menu-08 { --context-outline-width: 10; --context-core-width: 5; }
+.context-menu-09 { --context-outline-width: 10; --context-core-width: 5; }
+.context-menu-10 { --context-outline-width: 0; --context-core-width: 13; }
+.context-menu-10 .context-outline { display: none; }
+.context-menu-01 > svg,
+.context-menu-02 > svg,
+.context-menu-03 > svg,
+.context-menu-04 > svg,
+.context-menu-05 > svg,
+.context-menu-06 > svg,
+.context-menu-07 > svg,
+.context-menu-08 > svg,
+.context-menu-09 > svg,
+ .context-menu-10 > svg { width: 18px; height: 18px; }
+.completion-context-section:last-child .completion-context-svg { border-radius: 5px; }
 
 /* Keep the review page compact and Japanese-first. */
 .kicker { display: none; }
@@ -724,8 +814,12 @@ body { background: var(--white); color: var(--navy); }
 
 @media (max-width: 700px) {
   .completion-mark-review-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .completion-candidate-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .completion-context-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 420px) {
   .completion-mark-review-grid { grid-template-columns: 1fr; }
+  .completion-candidate-grid { grid-template-columns: 1fr; }
+  .completion-context-options { grid-template-columns: 1fr; }
 }

@@ -6,6 +6,7 @@ const SYNC_STATE_KEY = "bleague-sql-learning-progress-sync-v1";
 const SYNC_PENDING_KEY = "bleague-sql-learning-progress-sync-pending-v1";
 const PROGRESS_API_PATH = "/api/progress";
 const CDN_BASE = "https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/";
+const COMPLETION_MARKUP = '<svg class="completion-mark-svg" viewBox="0 0 64 64" aria-hidden="true"><path class="completion-mark-outline" d="M16 31 L28 43 L49 19"></path><path class="completion-mark-core" d="M16 31 L28 43 L49 19"></path></svg>';
 const SQL_KEYWORDS = [
   "SELECT", "FROM", "WHERE", "GROUP BY", "HAVING", "ORDER BY", "LIMIT", "OFFSET",
   "JOIN", "LEFT JOIN", "LEFT OUTER JOIN", "RIGHT JOIN", "INNER JOIN", "CROSS JOIN", "ON",
@@ -465,7 +466,7 @@ function renderProblemList() {
     button.innerHTML = `
       <div class="problem-card-top"><span class="problem-number">${problemNumber(problem)}</span>
         <span class="problem-card-status">
-          ${completed ? '<span class="completion-icon completed" role="img" aria-label="達成済み" title="達成済み">✓</span>' : ""}
+          ${completed ? `<span class="completion-icon completed" role="img" aria-label="達成済み" title="達成済み">${COMPLETION_MARKUP}</span>` : ""}
           <span class="drawer-favorite ${favorite ? "active" : "inactive"}" role="img" aria-label="${favorite ? "お気に入り" : "お気に入りではありません"}" title="${favorite ? "お気に入り" : "お気に入りではありません"}">${favorite ? "★" : "☆"}</span>
         </span></div>
       <h3>${escapeHtml(problem.title)}</h3>
