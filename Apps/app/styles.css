@@ -105,7 +105,11 @@ a { color: inherit; }
 .completion-mark-svg path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
 .completion-mark-outline { stroke: var(--cyan); stroke-width: 23; }
 .completion-mark-core { stroke: var(--yellow); stroke-width: 8; }
-.problem-navigation { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 0 0 20px; }
+.problem-navigation { display: grid; grid-template-columns: 50% auto auto minmax(0, 1fr); align-items: center; column-gap: 8px; margin: 0 0 20px; }
+.problem-navigation #previous-problem-button { justify-self: start; }
+.problem-navigation #answer-button, .problem-navigation #hint-button { min-height: 36px; border-color: var(--cyan); color: var(--cyan); padding: 0 13px; font-size: 12px; }
+.problem-navigation #answer-button.is-visible, .problem-navigation #hint-button.is-visible { border-color: var(--silver); background: transparent; color: var(--silver); }
+.problem-navigation #next-problem-button { justify-self: end; }
 .problem-navigation button:disabled { cursor: not-allowed; opacity: .42; }
 .prompt-box { margin-bottom: 16px; padding: 24px 0; border: 0; border-radius: 0; background: transparent; color: var(--ink); }
 .prompt-box h3 { margin-bottom: 8px; color: var(--ink); font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
@@ -161,13 +165,9 @@ a { color: inherit; }
 .feedback.success::after { background: var(--yellow); }
 .feedback.error { color: var(--ink); }
 .feedback.error::after { background: var(--gold); }
-.reveal-controls { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
-.reveal-controls .secondary-button { min-height: 36px; border-color: var(--cyan); color: var(--cyan); padding: 0 13px; font-size: 12px; }
-.reveal-controls .secondary-button.is-visible { border-color: var(--silver); background: transparent; color: var(--silver); }
 .hint-section, .result-section, .answer-section { border-top: 1px solid var(--dark-line); padding-top: 16px; margin-top: 16px; }
 .hint-section h3, .answer-section h3, .result-section h3 { margin-bottom: 9px; color: var(--ink); font-size: 18px; }
 .hint-section p, .answer-explanation { margin-bottom: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
-.section-divider { margin: 28px 0 24px; border-top: 1px solid var(--dark-line); }
 .result-pane .result-section { border-top: 0; padding-top: 0; margin-top: 0; }
 .result-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
 .result-output { max-height: min(32vh, 280px); overflow: auto; border: 1px solid rgba(51, 51, 51, .16); border-radius: 14px; background: var(--white); }
@@ -255,7 +255,7 @@ select:focus { border-color: var(--cyan); }
   .question-topline { flex-direction: column; gap: 14px; }
   .question-header-info { width: 100%; justify-content: flex-start; }
   .question-meta { flex: 1; justify-content: flex-start; }
-  .problem-navigation { gap: 6px; }
+  .problem-navigation { grid-template-columns: 1fr auto auto 1fr; gap: 6px; }
   .problem-navigation .secondary-button { padding-inline: 12px; }
   .prompt-box, .query-pane, .result-pane { padding: 18px; }
   .query-pane { border-radius: 24px 16px 16px 24px; }
@@ -263,7 +263,6 @@ select:focus { border-color: var(--cyan); }
   .prompt-box p { font-size: 15px; }
   .editor-actions { align-items: stretch; flex-direction: column; }
   .editor-actions .primary-button, .editor-actions .secondary-button { width: 100%; }
-  .reveal-controls .secondary-button { flex: 1; }
   .stats-grid { gap: 7px; }
   .stat-card { min-height: 105px; padding: 12px 10px; }
   .stat-card strong { font-size: 29px; }
@@ -274,8 +273,12 @@ select:focus { border-color: var(--cyan); }
 @media (max-width: 420px) {
   .brand-link { font-size: 26px; }
   .question-topline h2 { font-size: 28px; }
-  .problem-navigation { align-items: stretch; flex-direction: column; }
+  .problem-navigation { grid-template-columns: 1fr 1fr; align-items: stretch; }
   .problem-navigation .secondary-button { width: 100%; }
+  .problem-navigation #previous-problem-button { grid-column: 1; grid-row: 1; }
+  .problem-navigation #answer-button { grid-column: 1; grid-row: 2; }
+  .problem-navigation #hint-button { grid-column: 2; grid-row: 2; }
+  .problem-navigation #next-problem-button { grid-column: 2; grid-row: 1; }
   .stats-grid { grid-template-columns: 1fr; }
   .stat-card { min-height: 0; }
 }
