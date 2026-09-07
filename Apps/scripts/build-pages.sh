@@ -7,7 +7,7 @@ public_dir="$app_root/public"
 rm -rf "$public_dir"
 mkdir -p "$public_dir/data"
 
-for asset in index.html app.js styles.css; do
+for asset in app.js styles.css; do
   cp "$app_root/app/$asset" "$public_dir/$asset"
 done
 for asset in design-review.html design-review.css; do
@@ -15,6 +15,11 @@ for asset in design-review.html design-review.css; do
 done
 cp "$app_root/_headers" "$public_dir/_headers"
 cp "$app_root/data/problems.json" "$public_dir/data/problems.json"
+cp "$app_root/app/404.html" "$public_dir/404.html"
+python3 "$app_root/scripts/generate_problem_pages.py" \
+  --template "$app_root/app/index.html" \
+  --problems "$app_root/data/problems.json" \
+  --output "$public_dir"
 
 if [[ -f "$app_root/data/bleague.sqlite" ]]; then
   cp "$app_root/data/bleague.sqlite" "$public_dir/data/bleague.sqlite"
