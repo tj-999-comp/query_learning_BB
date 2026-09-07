@@ -49,7 +49,7 @@ title: '内容'
 date: "2026-09-01"
 project_id: query_learning_BB
 tags: []
-publish: false
+publish: true
 ```
 
 番号はプロジェクトごとに `001` から始め、いったん使用した番号は再利用しません。
@@ -58,7 +58,7 @@ publish: false
 
 Pull Requestまたはpush時に、`validate.yml` が命名、Markdown、metadataの対応を確認します。
 
-公開要求は、内容をcommitした後にActionsの `Request publish` workflowを手動実行します。入力には対象recordのbasenameだけを指定し、workflowは固定commit SHAとともに公開リポジトリの受入workflowを起動します。
+`work-records/md/` または `work-records/metadata/` の作業記録をmainへpushすると、Actionsの `Request publish` workflowが変更された全recordを検出し、固定commit SHAとともに公開リポジトリの受入workflowを自動起動します。手動実行では対象recordのbasenameを指定できます。
 
 公開前に、公開リポジトリ側でsource registry登録、disabled dry-run、固定commitによる手動E2Eを完了させてください。Actions Variableに `PUBLISH_APP_ID`、Actions Secretに `PUBLISH_APP_PRIVATE_KEY` を登録します。秘密鍵をファイルやmetadataへ保存しないでください。
 

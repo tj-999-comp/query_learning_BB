@@ -38,11 +38,11 @@ Issue #34「主題一覧ドキュメントをもとに問題を追加できる�
 
 ## 関連ファイル
 
-- [`Apps/data/problem-topics.json`](../../Apps/data/problem-topics.json)
-- [`Apps/data/problems.json`](../../Apps/data/problems.json)
-- [`Apps/scripts/generate_problems.py`](../../Apps/scripts/generate_problems.py)
-- [`Apps/docs/PROBLEM_AUTHORING.md`](../../Apps/docs/PROBLEM_AUTHORING.md)
-- [`Apps/app/app.js`](../../Apps/app/app.js)
+- [`Apps/data/problem-topics.json`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/data/problem-topics.json)
+- [`Apps/data/problems.json`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/data/problems.json)
+- [`Apps/scripts/generate_problems.py`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/scripts/generate_problems.py)
+- [`Apps/docs/PROBLEM_AUTHORING.md`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/docs/PROBLEM_AUTHORING.md)
+- [`Apps/app/app.js`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/app.js)
 - [#34](https://github.com/tj-999-comp/query_learning_BB/issues/34)
 
 ## Git
@@ -53,10 +53,10 @@ Issue #34「主題一覧ドキュメントをもとに問題を追加できる�
 
 ## GitHub Issue状況
 
-取得日時: 2026-09-04 17:30 JST  
-取得範囲: `tj-999-comp/query_learning_BB`のPull Requestを除くOpen Issue、最大1000件  
-取得件数: 2件  
-取得方法: `gh issue list --repo tj-999-comp/query_learning_BB --state open --json number,title,state,stateReason,url --limit 1000`  
+取得日時: 2026-09-04 17:30 JST
+取得範囲: `tj-999-comp/query_learning_BB`のPull Requestを除くOpen Issue、最大1000件
+取得件数: 2件
+取得方法: `gh issue list --repo tj-999-comp/query_learning_BB --state open --json number,title,state,stateReason,url --limit 1000`
 親子関係確認: `gh api repos/tj-999-comp/query_learning_BB/issues/26/sub_issues`
 
 | 順位 | 優先度 | GitHub Issue | 状態 | 関係・着手条件 |

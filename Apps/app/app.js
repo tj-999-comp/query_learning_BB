@@ -1,4 +1,9 @@
-const DATA_ROOT = "../data";
+const APP_ROOT = document.documentElement.dataset.appRoot || "../";
+const DATA_ROOT = document.documentElement.dataset.dataRoot || `${APP_ROOT}data`;
+const PROBLEM_PAGES_ENABLED = document.documentElement.dataset.problemPages === "true";
+const INITIAL_PROBLEM_ID = document.documentElement.dataset.problemId || "";
+const homeLink = document.querySelector("#home-link");
+if (PROBLEM_PAGES_ENABLED && homeLink) homeLink.href = APP_ROOT;
 // The 100-question bank starts with a fresh answer history.
 const STORAGE_KEY = "bleague-sql-learning-progress-v2";
 const LEGACY_STORAGE_KEY = "bleague-sql-learning-progress-v1";
@@ -409,16 +414,35 @@ function favoriteProblems() {
 }
 
 function createHomeProblemCard(problem, className, label) {
-  const button = document.createElement("button");
-  button.type = "button";
+  const button = document.createElement("a");
+  const href = problemPageHref(problem);
+  button.href = href || "#";
   button.className = className;
   button.setAttribute("aria-label", `${problemNumber(problem)} ${problem.title}${label}`);
   button.innerHTML = `
     <div class="next-problem-card-meta"><span class="tag">${escapeHtml(problem.category)}</span><span class="problem-number">${problemNumber(problem)}</span></div>
     <h4>${escapeHtml(problem.title)}</h4>
     <p>${escapeHtml(problem.prompt)}</p>`;
-  button.addEventListener("click", () => selectProblem(problem.id));
+  button.addEventListener("click", (event) => {
+    if (href) return;
+    event.preventDefault();
+    selectProblem(problem.id);
+  });
   return button;
+}
+
+function problemPageHref(problem) {
+  if (!PROBLEM_PAGES_ENABLED || !problem) return null;
+  return `${APP_ROOT}problems/${encodeURIComponent(problem.id)}/`;
+}
+
+function navigateToProblem(problem) {
+  const href = problemPageHref(problem);
+  if (href) {
+    window.location.assign(href);
+    return;
+  }
+  selectProblem(problem.id);
 }
 
 function renderNextProblemList() {
@@ -471,7 +495,7 @@ function renderProblemList() {
         </span></div>
       <h3>${escapeHtml(problem.title)}</h3>
       <div class="problem-card-meta"><span class="star">${difficultyStars(problem.difficulty)}</span><span class="tag">${escapeHtml(problem.category)}</span></div>`;
-    button.addEventListener("click", () => selectProblem(problem.id));
+    button.addEventListener("click", () => navigateToProblem(problem));
     elements.problemList.appendChild(button);
   });
   updateProblemNavigation();
@@ -542,7 +566,7 @@ function moveToRelativeProblem(offset) {
   const categoryProblems = currentCategoryProblems();
   const currentIndex = categoryProblems.findIndex((problem) => problem.id === state.selectedId);
   const target = categoryProblems[currentIndex + offset];
-  if (target) selectProblem(target.id);
+  if (target) navigateToProblem(target);
 }
 
 function updateFavoriteButton() {
@@ -1079,6 +1103,11 @@ async function loadData() {
     renderProblemList();
     renderNextProblemList();
     renderFavoriteProblemList();
+
+    if (INITIAL_PROBLEM_ID) {
+      const initialProblem = state.problems.find((problem) => problem.id === INITIAL_PROBLEM_ID);
+      if (initialProblem) selectProblem(initialProblem.id);
+    }
 
     const manifestResponse = await fetch(`${DATA_ROOT}/db-manifest.json`);
     if (!manifestResponse.ok) throw new Error("データベースのマニフェストを読み込めませんでした。");

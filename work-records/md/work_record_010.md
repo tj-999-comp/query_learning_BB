@@ -47,9 +47,9 @@ Issue #11へ受入確認結果をコメントし、2026-09-04にクローズし�
 
 ## 関連ファイル・Issue
 
-- [`Apps/docs/HOSTING_CLOUDFLARE.md`](../../Apps/docs/HOSTING_CLOUDFLARE.md)
-- [`Apps/functions/_middleware.js`](../../Apps/functions/_middleware.js)
-- [`Apps/scripts/build-pages.sh`](../../Apps/scripts/build-pages.sh)
+- [`Apps/docs/HOSTING_CLOUDFLARE.md`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/docs/HOSTING_CLOUDFLARE.md)
+- [`Apps/functions/_middleware.js`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/functions/_middleware.js)
+- [`Apps/scripts/build-pages.sh`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/scripts/build-pages.sh)
 - [#6 ホスティング先とBasic認証方式の決定・受入確認](./work_record_004.md)
 - [#8 MVP完了に向けた残作業の整理・完了管理](https://github.com/tj-999-comp/query_learning_BB/issues/8)
 

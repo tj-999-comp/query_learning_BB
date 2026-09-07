@@ -3,4 +3,4 @@ title: 'Issue #28 前後の問題への移動'
 date: "2026-09-04"
 project_id: query_learning_BB
 tags: [codex, v0.2.0, ui, navigation, accessibility]
-publish: false
+publish: true

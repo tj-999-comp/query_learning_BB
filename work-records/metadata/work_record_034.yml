@@ -1,0 +1,6 @@
+schema_version: 1
+title: '作業記録の全件自動連携とSlack通知制御の設定'
+date: "2026-09-06"
+project_id: query_learning_BB
+tags: [codex, work-record, auto-publish, github-actions, slack, sandbox-pages, automation]
+publish: true

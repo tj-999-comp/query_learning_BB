@@ -72,8 +72,8 @@ v0.2.0の学習画面UX改善として進めてきたIssue #27〜#31が完了し
 
 ## 関連ファイル
 
-- [`Apps/app/app.js`](../../Apps/app/app.js)
-- [`Apps/app/styles.css`](../../Apps/app/styles.css)
-- [`Apps/app/index.html`](../../Apps/app/index.html)
+- [`Apps/app/app.js`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/app.js)
+- [`Apps/app/styles.css`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/styles.css)
+- [`Apps/app/index.html`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/index.html)
 - [#26](https://github.com/tj-999-comp/query_learning_BB/issues/26)
 - [#41](https://github.com/tj-999-comp/query_learning_BB/issues/41)

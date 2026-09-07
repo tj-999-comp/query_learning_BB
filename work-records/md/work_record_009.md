@@ -63,11 +63,11 @@ Issue #12へ受入確認結果をコメントし、2026-09-04にクローズし�
 
 ## 関連ファイル・Issue
 
-- [`Apps/docs/MVP_REQUIREMENTS.md`](../../Apps/docs/MVP_REQUIREMENTS.md)
-- [`Apps/app/app.js`](../../Apps/app/app.js)
-- [`Apps/app/index.html`](../../Apps/app/index.html)
-- [`Apps/app/styles.css`](../../Apps/app/styles.css)
-- [`Apps/docs/HOSTING_CLOUDFLARE.md`](../../Apps/docs/HOSTING_CLOUDFLARE.md)
+- [`Apps/docs/MVP_REQUIREMENTS.md`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/docs/MVP_REQUIREMENTS.md)
+- [`Apps/app/app.js`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/app.js)
+- [`Apps/app/index.html`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/index.html)
+- [`Apps/app/styles.css`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/styles.css)
+- [`Apps/docs/HOSTING_CLOUDFLARE.md`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/docs/HOSTING_CLOUDFLARE.md)
 - [#4 ホスティング先とBasic認証方式の決定・受入確認](./work_record_004.md)
 
 ## GitHub Issue状況

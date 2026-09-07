@@ -36,18 +36,18 @@ Issue #33「SQL構文・テーブル名・カラム名の補完を追加」に�
 
 ## 関連ファイル
 
-- [`Apps/app/index.html`](../../Apps/app/index.html)
-- [`Apps/app/app.js`](../../Apps/app/app.js)
-- [`Apps/app/styles.css`](../../Apps/app/styles.css)
-- [`Apps/app/README.md`](../../Apps/app/README.md)
+- [`Apps/app/index.html`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/index.html)
+- [`Apps/app/app.js`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/app.js)
+- [`Apps/app/styles.css`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/styles.css)
+- [`Apps/app/README.md`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/README.md)
 - [#33](https://github.com/tj-999-comp/query_learning_BB/issues/33)
 
 ## GitHub Issue状況
 
-取得日時: 2026-09-04 16:55 JST  
-取得範囲: `tj-999-comp/query_learning_BB` のPull Requestを除くOpen Issue、最大100件  
-取得件数: 3件  
-取得方法: `gh issue list --repo tj-999-comp/query_learning_BB --state open --limit 100 --json number,title,state,createdAt,updatedAt,url`  
+取得日時: 2026-09-04 16:55 JST
+取得範囲: `tj-999-comp/query_learning_BB` のPull Requestを除くOpen Issue、最大100件
+取得件数: 3件
+取得方法: `gh issue list --repo tj-999-comp/query_learning_BB --state open --limit 100 --json number,title,state,createdAt,updatedAt,url`
 親子関係確認: `gh api repos/tj-999-comp/query_learning_BB/issues/26/sub_issues`
 
 | 順位 | 優先度 | GitHub Issue | 状態 | 関係・着手条件 |

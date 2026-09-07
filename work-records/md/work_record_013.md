@@ -37,8 +37,8 @@ Issue #27「達成済み表示をコンパクトなチェックアイコンに�
 
 ## 関連ファイル
 
-- [`Apps/app/app.js`](../../Apps/app/app.js)
-- [`Apps/app/styles.css`](../../Apps/app/styles.css)
+- [`Apps/app/app.js`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/app.js)
+- [`Apps/app/styles.css`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/styles.css)
 - [#27](https://github.com/tj-999-comp/query_learning_BB/issues/27)
 
 ## GitHub Issue状況

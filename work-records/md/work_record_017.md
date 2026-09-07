@@ -46,8 +46,8 @@ Issue #31「実行結果を結果ペイン内でスクロール可能にする�
 
 ## 関連ファイル
 
-- [`Apps/app/app.js`](../../Apps/app/app.js)
-- [`Apps/app/styles.css`](../../Apps/app/styles.css)
+- [`Apps/app/app.js`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/app.js)
+- [`Apps/app/styles.css`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/app/styles.css)
 - [#31](https://github.com/tj-999-comp/query_learning_BB/issues/31)
 
 ## GitHub Issue状況

@@ -31,7 +31,7 @@ gh api repos/tj-999-comp/query_learning_BB/issues/<番号>/sub_issues
 python3 scripts/dev/validate_work_records.py
 ```
 
-Pull Requestまたはpush時の `Validate source` 成功を確認し、公開内容を人間が承認してから `publish: true` の固定commitを作成します。`Request publish` workflowには対象basenameだけを入力し、workflowが固定SHA、`project_id`、`publish: true`、命名を検証して公開側へ要求します。Actions Variable `PUBLISH_APP_ID` とSecret `PUBLISH_APP_PRIVATE_KEY` を使い、秘密鍵・tokenをファイル、ログ、metadata、Issue、作業記録へ保存しません。
+全作業記録を公開対象とするため、metadataの `publish` は常に `true` とします。Pull Requestまたはpush時の `Validate source` 成功後、mainへのpushで `Request publish` workflowが変更された全recordを検出し、固定SHA、`project_id`、`publish: true`、命名を検証して公開側へ自動要求します。手動実行では対象basenameを指定できます。Actions Variable `PUBLISH_APP_ID` とSecret `PUBLISH_APP_PRIVATE_KEY` を使い、秘密鍵・tokenをファイル、ログ、metadata、Issue、作業記録へ保存しません。
 
 公開要求の入力例:
 
