@@ -10,7 +10,7 @@ v2.0.0の問題別ページ化をmainへ反映済みだったが、STG環境はv
 - mainのv2.0.0をSTGへ反映するPR [#79](https://github.com/tj-999-comp/query_learning_BB/pull/79)を作成し、`stg`へマージした。
 - STGコミット`3b2fd35`で、ホームと問題別ページに`v2.0.0`が表示されることを確認した。
 - STGで問題別URL `/problems/mvp-001/` がHTTP 200、不正な問題URLがHTTP 404になることを確認した。
-- 本番反映の手順を [`Apps/docs/HOSTING_CLOUDFLARE.md`](../../Apps/docs/HOSTING_CLOUDFLARE.md) に追加した。
+- 本番反映の手順を [`Apps/docs/HOSTING_CLOUDFLARE.md`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/docs/HOSTING_CLOUDFLARE.md) に追加した。
 - READMEにも、STG確認とユーザーの明示的なOKを本番反映の必須条件とすることを追記した。
 - 公開ルール変更PR [#78](https://github.com/tj-999-comp/query_learning_BB/pull/78)をマージした。
 - Issue #65と子Issue #66〜#70の完了状態を確認した。作業記録作成時点でOpen Issueは0件だった。
@@ -46,8 +46,8 @@ CI成功、STG deploymentのActive、Issueクローズ、作業者自身の受�
 
 - [#78 公開ルール変更](https://github.com/tj-999-comp/query_learning_BB/pull/78)
 - [#79 v2.0.0のSTG反映](https://github.com/tj-999-comp/query_learning_BB/pull/79)
-- [`Apps/docs/HOSTING_CLOUDFLARE.md`](../../Apps/docs/HOSTING_CLOUDFLARE.md)
-- [`README.md`](../../README.md)
+- [`Apps/docs/HOSTING_CLOUDFLARE.md`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/docs/HOSTING_CLOUDFLARE.md)
+- [`README.md`](https://github.com/tj-999-comp/query_learning_BB/blob/main/README.md)
 
 ## 検証
 
