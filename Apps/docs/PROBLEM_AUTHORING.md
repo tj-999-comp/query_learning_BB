@@ -41,7 +41,7 @@
 
 `answerSql`は解答例として表示し、`judgeSql`は正解結果の生成に使います。2つは別のSQLにできますが、生成時に実行結果が一致することを検証します。`resultSpec.columns`には学習者に返させる列だけを登録し、内部的な結合キーや並び順用の列をSELECTへ追加しません。`rowOrder`、`numericTolerance`もここで管理します。
 
-`requiredColumns`は問題文の直下に表示する補助情報です。`label`が画面表示名、`reference`は所属テーブル名だけを指定します。画面では`game_date（games）`のように表示されます。省略した場合も、SQLの出力列と`sourceTables`から所属テーブルを補完します。
+`requiredColumns`は問題文の直下に表示する補助情報です。`label`が画面表示名、`reference`は所属テーブル名だけを指定します。生成時に、SQLiteの実在カラムは`type: "source"`、集計・計算などで作成する出力列は`type: "derived"`として分類されます。画面では実在カラムを`▣ season [games]`、作成カラムを`✦ game_count`のように表示します。作成カラムのSQL式は表示しません。省略した場合も、SQLの出力列と`sourceTables`から分類と所属テーブルを補完します。
 
 既存の`referenceSql`、`comparison`、`requiredSqlTerms`も移行期間中は読み込めますが、新しい問題では使用しません。`learningObjectives`はヒントや解説用であり、SQL文の文字列一致による正誤判定には使いません。
 
