@@ -15,7 +15,7 @@ Issue #81「必要なカラムで実カラムとSQLで作成する派生カラ�
 - STG向けPR [#82](https://github.com/tj-999-comp/query_learning_BB/pull/82)を`stg`へマージし、Q.13の表示と320px幅の横スクロールなしを確認した。
 - ユーザーの明示承認後、本番昇格PR [#83](https://github.com/tj-999-comp/query_learning_BB/pull/83)を`main`へマージした。
 - Production反映コミットは`4c92d82741e36369bee6803b4ddbdc10f2a9a035`である。
-- 承認範囲の誤解を防ぐため、[`README.md`](../../README.md)、[`Apps/docs/HOSTING_CLOUDFLARE.md`](../../Apps/docs/HOSTING_CLOUDFLARE.md)、[`work-records/README.md`](../README.md)へルールを追記した。
+- 承認範囲の誤解を防ぐため、[`README.md`](https://github.com/tj-999-comp/query_learning_BB/blob/main/README.md)、[`Apps/docs/HOSTING_CLOUDFLARE.md`](https://github.com/tj-999-comp/query_learning_BB/blob/main/Apps/docs/HOSTING_CLOUDFLARE.md)、[`work-records/README.md`](https://github.com/tj-999-comp/query_learning_BB/blob/main/work-records/README.md)へルールを追記した。
 - 「本番反映してよい」はデプロイのみの承認であり、Issueクローズ等は別承認が必要であることを明記した。
 - 本番反映完了後、Production URLが未認証アクセスに`401 Basic認証`を返すことを確認した。
 
@@ -45,4 +45,3 @@ Issue #81「必要なカラムで実カラムとSQLで作成する派生カラ�
 - [#81 [v2.0.1] 必要なカラムで実カラムとSQLで作成する派生カラムを区別する](https://github.com/tj-999-comp/query_learning_BB/issues/81)
 - [#82 STG反映PR](https://github.com/tj-999-comp/query_learning_BB/pull/82)
 - [#83 本番昇格PR](https://github.com/tj-999-comp/query_learning_BB/pull/83)
-
