@@ -212,8 +212,8 @@
       "teams"
     ],
     "explanation": "JOINしたデータをチーム単位でGROUP BYし、AVGで平均を求めます。",
-    "answerSql": "SELECT t.team_name_j, ROUND(AVG(s.points), 2) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY average_points DESC, t.team_id",
-    "judgeSql": "SELECT t.team_name_j, ROUND(AVG(s.points), 2) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY average_points DESC, t.team_id",
+    "answerSql": "SELECT t.team_name_j, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY average_points DESC, t.team_id",
+    "judgeSql": "SELECT t.team_name_j, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY average_points DESC, t.team_id",
     "resultSpec": {
       "rowOrder": "insensitive",
       "numericTolerance": 0.01,
@@ -236,8 +236,7 @@
     "learningObjectives": [
       "JOIN teams",
       "AVG",
-      "GROUP BY",
-      "ROUND"
+      "GROUP BY"
     ]
   },
   {
@@ -325,8 +324,8 @@
       "game_team_stats"
     ],
     "explanation": "CASE式でフラグを表示用のラベルに変換し、条件ごとに平均を集計します。",
-    "answerSql": "SELECT CASE WHEN is_home = 1 THEN 'ホーム' ELSE 'アウェー' END AS venue, ROUND(AVG(points), 2) AS average_points FROM game_team_stats WHERE points IS NOT NULL GROUP BY is_home ORDER BY is_home DESC",
-    "judgeSql": "SELECT CASE WHEN is_home = 1 THEN 'ホーム' ELSE 'アウェー' END AS venue, ROUND(AVG(points), 2) AS average_points FROM game_team_stats WHERE points IS NOT NULL GROUP BY is_home ORDER BY is_home DESC",
+    "answerSql": "SELECT CASE WHEN is_home = 1 THEN 'ホーム' ELSE 'アウェー' END AS venue, AVG(points) AS average_points FROM game_team_stats WHERE points IS NOT NULL GROUP BY is_home ORDER BY is_home DESC",
+    "judgeSql": "SELECT CASE WHEN is_home = 1 THEN 'ホーム' ELSE 'アウェー' END AS venue, AVG(points) AS average_points FROM game_team_stats WHERE points IS NOT NULL GROUP BY is_home ORDER BY is_home DESC",
     "resultSpec": {
       "rowOrder": "insensitive",
       "numericTolerance": 0.01,
@@ -656,11 +655,11 @@
       "teams"
     ],
     "explanation": "複数テーブルを結合した後、GROUP BYへシーズンとチームを指定して細かい単位で集計します。",
-    "answerSql": "SELECT g.season, t.team_name_j, ROUND(AVG(s.points), 1) AS average_points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY g.season, t.team_id, t.team_name_j ORDER BY g.season, average_points DESC, t.team_id",
-    "judgeSql": "SELECT g.season, t.team_name_j, ROUND(AVG(s.points), 1) AS average_points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY g.season, t.team_id, t.team_name_j ORDER BY g.season, average_points DESC, t.team_id",
+    "answerSql": "SELECT g.season, t.team_name_j, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY g.season, t.team_id, t.team_name_j ORDER BY g.season, average_points DESC, t.team_id",
+    "judgeSql": "SELECT g.season, t.team_name_j, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY g.season, t.team_id, t.team_name_j ORDER BY g.season, average_points DESC, t.team_id",
     "resultSpec": {
       "rowOrder": "sensitive",
-      "numericTolerance": 0.01,
+      "numericTolerance": 0.05,
       "columns": [
         "season",
         "team_name_j",
@@ -781,11 +780,11 @@
       "players"
     ],
     "explanation": "WHEREは集計前、HAVINGはGROUP BY後のグループに対する条件です。",
-    "answerSql": "SELECT p.player_name_j, ROUND(AVG(s.points), 1) AS average_points, COUNT(*) AS game_count FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 AND s.points IS NOT NULL GROUP BY p.player_id, p.player_name_j HAVING COUNT(*) >= 20 ORDER BY average_points DESC, p.player_id LIMIT 10",
-    "judgeSql": "SELECT p.player_name_j, ROUND(AVG(s.points), 1) AS average_points, COUNT(*) AS game_count FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 AND s.points IS NOT NULL GROUP BY p.player_id, p.player_name_j HAVING COUNT(*) >= 20 ORDER BY average_points DESC, p.player_id LIMIT 10",
+    "answerSql": "SELECT p.player_name_j, AVG(s.points) AS average_points, COUNT(*) AS game_count FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 AND s.points IS NOT NULL GROUP BY p.player_id, p.player_name_j HAVING COUNT(*) >= 20 ORDER BY average_points DESC, p.player_id LIMIT 10",
+    "judgeSql": "SELECT p.player_name_j, AVG(s.points) AS average_points, COUNT(*) AS game_count FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 AND s.points IS NOT NULL GROUP BY p.player_id, p.player_name_j HAVING COUNT(*) >= 20 ORDER BY average_points DESC, p.player_id LIMIT 10",
     "resultSpec": {
       "rowOrder": "insensitive",
-      "numericTolerance": 0.01,
+      "numericTolerance": 0.05,
       "columns": [
         "player_name_j",
         "average_points",
@@ -809,8 +808,7 @@
     ],
     "learningObjectives": [
       "AVG",
-      "HAVING COUNT(*) >= 20",
-      "ROUND"
+      "HAVING COUNT(*) >= 20"
     ]
   },
   {
@@ -1022,7 +1020,7 @@
   {
     "id": "bball-026",
     "title": "平均得点でチームを順位付けする",
-    "prompt": "平均得点によるチームの順位について知りたいです。チームごとの平均得点を計算し、順位を付けてください。順位、チーム名、平均得点を取得し、順位の昇順に並べてください。",
+    "prompt": "平均得点によるチームの順位について知りたいです。チームごとの平均得点を計算し、順位を付けてください。平均得点は小数点以下2桁に丸めてください。順位、チーム名、平均得点を取得し、順位の昇順に並べてください。",
     "difficulty": 4,
     "category": "応用集計",
     "sourceTables": [
@@ -1034,7 +1032,7 @@
     "judgeSql": "WITH team_averages AS (SELECT t.team_id, t.team_name_j, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j) SELECT RANK() OVER (ORDER BY average_points DESC) AS point_rank, team_name_j, ROUND(average_points, 2) AS average_points FROM team_averages ORDER BY point_rank, team_name_j",
     "resultSpec": {
       "rowOrder": "sensitive",
-      "numericTolerance": 0.01,
+      "numericTolerance": 0,
       "columns": [
         "point_rank",
         "team_name_j",
@@ -1059,7 +1057,8 @@
     "learningObjectives": [
       "WITH team_averages",
       "RANK() OVER",
-      "ORDER BY average_points DESC"
+      "ORDER BY average_points DESC",
+      "ROUND"
     ]
   },
   {
@@ -1158,7 +1157,7 @@
   {
     "id": "bball-029",
     "title": "シーズン平均を上回る観客数の試合",
-    "prompt": "シーズン平均を上回る観客数の試合について知りたいです。各シーズンの平均観客数を上回った試合を10件取得してください。シーズン、試合日、会場名、観客数、シーズン平均を取得し、観客数の多い順に並べてください。",
+    "prompt": "シーズン平均を上回る観客数の試合について知りたいです。各シーズンの平均観客数を上回った試合を10件取得してください。シーズン平均は小数点以下2桁に丸めてください。シーズン、試合日、会場名、観客数、シーズン平均を取得し、観客数の多い順に並べてください。",
     "difficulty": 4,
     "category": "条件分岐・サブクエリ",
     "sourceTables": [
@@ -1169,7 +1168,7 @@
     "judgeSql": "WITH season_attendance AS (SELECT season, AVG(attendance) AS average_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season) SELECT g.season, g.game_date, g.stadium_name_j, g.attendance, ROUND(sa.average_attendance, 2) AS season_average FROM games AS g JOIN season_attendance AS sa ON sa.season = g.season WHERE g.attendance > sa.average_attendance ORDER BY g.attendance DESC, g.schedule_key LIMIT 10",
     "resultSpec": {
       "rowOrder": "sensitive",
-      "numericTolerance": 0.01,
+      "numericTolerance": 0,
       "columns": [
         "season",
         "game_date",
@@ -1207,13 +1206,14 @@
     "learningObjectives": [
       "WITH season_attendance",
       "AVG(attendance)",
-      "g.attendance > sa.average_attendance"
+      "g.attendance > sa.average_attendance",
+      "ROUND"
     ]
   },
   {
     "id": "bball-030",
     "title": "リーグ平均を上回るチーム",
-    "prompt": "リーグ平均を上回るチームについて知りたいです。リーグ全体の平均得点を上回るチームを抽出してください。チーム名とチーム平均得点を取得し、平均得点の高い順に並べてください。",
+    "prompt": "リーグ平均を上回るチームについて知りたいです。リーグ全体の平均得点を上回るチームを抽出してください。チーム平均得点は小数点以下2桁に丸めてください。チーム名とチーム平均得点を取得し、平均得点の高い順に並べてください。",
     "difficulty": 4,
     "category": "条件分岐・サブクエリ",
     "sourceTables": [
@@ -1225,7 +1225,7 @@
     "judgeSql": "SELECT t.team_name_j, ROUND(AVG(s.points), 2) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j HAVING AVG(s.points) > (SELECT AVG(points) FROM game_team_stats WHERE points IS NOT NULL) ORDER BY average_points DESC, t.team_id",
     "resultSpec": {
       "rowOrder": "sensitive",
-      "numericTolerance": 0.01,
+      "numericTolerance": 0,
       "columns": [
         "team_name_j",
         "average_points"
@@ -1245,7 +1245,8 @@
     "learningObjectives": [
       "HAVING AVG(s.points) >",
       "SELECT AVG(points) FROM game_team_stats",
-      "GROUP BY"
+      "GROUP BY",
+      "ROUND"
     ]
   },
   {
@@ -2942,8 +2943,8 @@
     "sourceTables": [
       "games"
     ],
-    "answerSql": "SELECT season, ROUND(AVG(attendance), 2) AS average_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season ORDER BY season",
-    "judgeSql": "SELECT season, ROUND(AVG(attendance), 2) AS average_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season ORDER BY season",
+    "answerSql": "SELECT season, AVG(attendance) AS average_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season ORDER BY season",
+    "judgeSql": "SELECT season, AVG(attendance) AS average_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season ORDER BY season",
     "resultSpec": {
       "rowOrder": "insensitive",
       "numericTolerance": 0.01,
@@ -2965,8 +2966,7 @@
     ],
     "learningObjectives": [
       "AVG(attendance)",
-      "GROUP BY season",
-      "ROUND"
+      "GROUP BY season"
     ],
     "explanation": "GROUP BYとCOUNT・SUM・AVG・MAXを、集計単位を変えながら反復します。"
   },
@@ -3090,8 +3090,8 @@
       "game_team_stats",
       "teams"
     ],
-    "answerSql": "SELECT t.team_name_j, ROUND(AVG(s.total_rebounds), 2) AS average_rebounds FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.total_rebounds IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY average_rebounds DESC, t.team_id LIMIT 10",
-    "judgeSql": "SELECT t.team_name_j, ROUND(AVG(s.total_rebounds), 2) AS average_rebounds FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.total_rebounds IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY average_rebounds DESC, t.team_id LIMIT 10",
+    "answerSql": "SELECT t.team_name_j, AVG(s.total_rebounds) AS average_rebounds FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.total_rebounds IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY average_rebounds DESC, t.team_id LIMIT 10",
+    "judgeSql": "SELECT t.team_name_j, AVG(s.total_rebounds) AS average_rebounds FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.total_rebounds IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY average_rebounds DESC, t.team_id LIMIT 10",
     "resultSpec": {
       "rowOrder": "insensitive",
       "numericTolerance": 0.01,
@@ -3113,8 +3113,7 @@
     ],
     "learningObjectives": [
       "AVG(s.total_rebounds)",
-      "GROUP BY",
-      "ROUND"
+      "GROUP BY"
     ],
     "explanation": "GROUP BYとCOUNT・SUM・AVG・MAXを、集計単位を変えながら反復します。"
   },
@@ -3165,8 +3164,8 @@
       "players",
       "player_game_stats"
     ],
-    "answerSql": "SELECT p.player_name_j, ROUND(AVG(s.assists), 2) AS average_assists FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 AND s.assists IS NOT NULL GROUP BY p.player_id, p.player_name_j ORDER BY average_assists DESC, p.player_id LIMIT 10",
-    "judgeSql": "SELECT p.player_name_j, ROUND(AVG(s.assists), 2) AS average_assists FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 AND s.assists IS NOT NULL GROUP BY p.player_id, p.player_name_j ORDER BY average_assists DESC, p.player_id LIMIT 10",
+    "answerSql": "SELECT p.player_name_j, AVG(s.assists) AS average_assists FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 AND s.assists IS NOT NULL GROUP BY p.player_id, p.player_name_j ORDER BY average_assists DESC, p.player_id LIMIT 10",
+    "judgeSql": "SELECT p.player_name_j, AVG(s.assists) AS average_assists FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 AND s.assists IS NOT NULL GROUP BY p.player_id, p.player_name_j ORDER BY average_assists DESC, p.player_id LIMIT 10",
     "resultSpec": {
       "rowOrder": "insensitive",
       "numericTolerance": 0.01,
@@ -3279,8 +3278,8 @@
       "games",
       "game_team_stats"
     ],
-    "answerSql": "SELECT g.season, ROUND(AVG(s.points), 2) AS average_points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.points IS NOT NULL GROUP BY g.season ORDER BY average_points DESC, g.season",
-    "judgeSql": "SELECT g.season, ROUND(AVG(s.points), 2) AS average_points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.points IS NOT NULL GROUP BY g.season ORDER BY average_points DESC, g.season",
+    "answerSql": "SELECT g.season, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.points IS NOT NULL GROUP BY g.season ORDER BY average_points DESC, g.season",
+    "judgeSql": "SELECT g.season, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.points IS NOT NULL GROUP BY g.season ORDER BY average_points DESC, g.season",
     "resultSpec": {
       "rowOrder": "insensitive",
       "numericTolerance": 0.01,
@@ -3780,8 +3779,8 @@
       "game_team_stats",
       "teams"
     ],
-    "answerSql": "SELECT t.team_name_j, ROUND(AVG(s.points), 2) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j HAVING AVG(s.points) >= (SELECT AVG(points) FROM game_team_stats WHERE points IS NOT NULL) ORDER BY average_points DESC, t.team_id",
-    "judgeSql": "SELECT t.team_name_j, ROUND(AVG(s.points), 2) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j HAVING AVG(s.points) >= (SELECT AVG(points) FROM game_team_stats WHERE points IS NOT NULL) ORDER BY average_points DESC, t.team_id",
+    "answerSql": "SELECT t.team_name_j, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j HAVING AVG(s.points) >= (SELECT AVG(points) FROM game_team_stats WHERE points IS NOT NULL) ORDER BY average_points DESC, t.team_id",
+    "judgeSql": "SELECT t.team_name_j, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j HAVING AVG(s.points) >= (SELECT AVG(points) FROM game_team_stats WHERE points IS NOT NULL) ORDER BY average_points DESC, t.team_id",
     "resultSpec": {
       "rowOrder": "sensitive",
       "numericTolerance": 0.01,
@@ -3817,8 +3816,8 @@
       "game_team_stats",
       "teams"
     ],
-    "answerSql": "WITH averages AS (SELECT t.team_id, t.team_name_j, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j), ranked AS (SELECT team_name_j, average_points, RANK() OVER (ORDER BY average_points DESC) AS point_rank FROM averages) SELECT point_rank, team_name_j, ROUND(average_points, 2) AS average_points FROM ranked WHERE point_rank <= 10 ORDER BY point_rank, team_name_j",
-    "judgeSql": "WITH averages AS (SELECT t.team_id, t.team_name_j, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j), ranked AS (SELECT team_name_j, average_points, RANK() OVER (ORDER BY average_points DESC) AS point_rank FROM averages) SELECT point_rank, team_name_j, ROUND(average_points, 2) AS average_points FROM ranked WHERE point_rank <= 10 ORDER BY point_rank, team_name_j",
+    "answerSql": "WITH averages AS (SELECT t.team_id, t.team_name_j, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j), ranked AS (SELECT team_name_j, average_points, RANK() OVER (ORDER BY average_points DESC) AS point_rank FROM averages) SELECT point_rank, team_name_j, average_points FROM ranked WHERE point_rank <= 10 ORDER BY point_rank, team_name_j",
+    "judgeSql": "WITH averages AS (SELECT t.team_id, t.team_name_j, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j), ranked AS (SELECT team_name_j, average_points, RANK() OVER (ORDER BY average_points DESC) AS point_rank FROM averages) SELECT point_rank, team_name_j, average_points FROM ranked WHERE point_rank <= 10 ORDER BY point_rank, team_name_j",
     "resultSpec": {
       "rowOrder": "sensitive",
       "numericTolerance": 0.01,

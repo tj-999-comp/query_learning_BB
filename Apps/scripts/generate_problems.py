@@ -20,6 +20,8 @@ FORBIDDEN_SQL = re.compile(
     re.IGNORECASE,
 )
 SQL_START = re.compile(r"^(SELECT|WITH)\b", re.IGNORECASE)
+ROUND_FUNCTION = re.compile(r"\bROUND\s*\(\s*[^,]+,\s*(\d+)\s*\)", re.IGNORECASE)
+ROUNDING_PROMPT = re.compile(r"(?:ROUND|丸め|小数|桁)", re.IGNORECASE)
 
 
 class ValidationError(Exception):
@@ -95,6 +97,28 @@ def normalize_problem(problem: dict) -> dict:
     for legacy_key in ("referenceSql", "comparison", "requiredSqlTerms"):
         normalized.pop(legacy_key, None)
     return normalized
+
+
+def validate_rounding_policy(problem: dict, label: str) -> None:
+    """Keep rounding requirements aligned with difficulty and prompt wording."""
+    precisions = [int(match) for match in ROUND_FUNCTION.findall(problem["answerSql"])]
+    precisions += [int(match) for match in ROUND_FUNCTION.findall(problem["judgeSql"])]
+    if not precisions:
+        return
+    prompt_mentions_rounding = ROUNDING_PROMPT.search(problem["prompt"]) is not None
+    tolerance = problem["resultSpec"].get("numericTolerance", 0)
+    if problem["difficulty"] >= 4:
+        if not prompt_mentions_rounding:
+            raise ValidationError(f"{label}: 星4以上でROUNDを使う場合は問題文に丸め条件を明記してください")
+        if tolerance != 0:
+            raise ValidationError(f"{label}: 星4以上で明記した丸め条件のnumericToleranceは0にしてください")
+        return
+    required_tolerance = max(0.5 * (10 ** -precision) for precision in precisions)
+    if tolerance < required_tolerance:
+        raise ValidationError(
+            f"{label}: 星3以下でROUNDを使う場合は丸めを必須にしないため、"
+            f"numericToleranceを{required_tolerance:g}以上にしてください"
+        )
 
 
 def strip_sql_comments(sql: str) -> str:
@@ -174,6 +198,9 @@ def validate_document(document: dict) -> list[dict]:
                 raise ValidationError(f"{label}: requiredColumns.referenceはテーブル名だけを指定してください")
         answer_sql = validate_sql(problem["answerSql"], label)
         judge_sql = validate_sql(problem["judgeSql"], label)
+        problem["answerSql"] = answer_sql
+        problem["judgeSql"] = judge_sql
+        validate_rounding_policy(problem, label)
         key = (re.sub(r"\s+", " ", problem["title"]).strip(), answer_sql)
         if key in duplicate_keys:
             raise ValidationError(f"{label}: タイトルと参考SQLが重複しています")
@@ -181,8 +208,6 @@ def validate_document(document: dict) -> list[dict]:
         for term in problem.get("learningObjectives", []):
             if not isinstance(term, str) or not term:
                 raise ValidationError(f"{label}: learningObjectivesに不正な値があります")
-        problem["answerSql"] = answer_sql
-        problem["judgeSql"] = judge_sql
     return problems
 
 

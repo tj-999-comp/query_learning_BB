@@ -43,6 +43,8 @@
 
 `requiredColumns`は問題文の直下に表示する補助情報です。`label`が画面表示名、`reference`は所属テーブル名だけを指定します。生成時に、SQLiteの実在カラムは`type: "source"`、集計・計算などで作成する出力列は`type: "derived"`として分類されます。画面では実在カラムを`▣ season [games]`、作成カラムを`✦ game_count`のように表示します。作成カラムのSQL式は表示しません。省略した場合も、SQLの出力列と`sourceTables`から分類と所属テーブルを補完します。
 
+丸めの扱いは難易度で分けます。星1〜3では、問題文に丸め条件を書かない場合、丸めた解答も正解にできるよう、`numericTolerance`を丸め幅の半分以上に設定します。星4〜5で丸めを問う場合は、問題文に「小数点以下2桁」のように桁数を明記し、`numericTolerance`は0にして厳密に比較します。生成時にもこの方針を検証します。
+
 既存の`referenceSql`、`comparison`、`requiredSqlTerms`も移行期間中は読み込めますが、新しい問題では使用しません。`learningObjectives`はヒントや解説用であり、SQL文の文字列一致による正誤判定には使いません。
 
 ## 追加手順
