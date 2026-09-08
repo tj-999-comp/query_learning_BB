@@ -1,0 +1,6 @@
+schema_version: 1
+title: 'Issue #81 v2.0.1本番反映と承認範囲ルールの明文化'
+date: "2026-09-07"
+project_id: query_learning_BB
+tags: [codex, issue-81, pr-82, pr-83, v2.0.1, production, approval-scope, work-record]
+publish: true

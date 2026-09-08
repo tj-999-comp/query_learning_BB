@@ -73,9 +73,9 @@
       "difficulty": 2,
       "category": "集計",
       "sourceTables": ["game_team_stats", "teams"],
-      "referenceSql": "SELECT t.team_name_j, ROUND(AVG(s.points), 2) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY average_points DESC, t.team_id;",
+      "referenceSql": "SELECT t.team_name_j, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY average_points DESC, t.team_id;",
       "comparison": {"rowOrder": "insensitive", "numericTolerance": 0.01},
-      "requiredSqlTerms": ["JOIN teams", "AVG", "GROUP BY", "ROUND"],
+      "requiredSqlTerms": ["JOIN teams", "AVG", "GROUP BY"],
       "explanation": "JOINしたデータをチーム単位でGROUP BYし、AVGで平均を求めます。"
     },
     {
@@ -109,7 +109,7 @@
       "difficulty": 2,
       "category": "条件分岐・サブクエリ",
       "sourceTables": ["game_team_stats"],
-      "referenceSql": "SELECT CASE WHEN is_home = 1 THEN 'ホーム' ELSE 'アウェー' END AS venue, ROUND(AVG(points), 2) AS average_points FROM game_team_stats WHERE points IS NOT NULL GROUP BY is_home ORDER BY is_home DESC;",
+      "referenceSql": "SELECT CASE WHEN is_home = 1 THEN 'ホーム' ELSE 'アウェー' END AS venue, AVG(points) AS average_points FROM game_team_stats WHERE points IS NOT NULL GROUP BY is_home ORDER BY is_home DESC;",
       "comparison": {"rowOrder": "insensitive", "numericTolerance": 0.01},
       "requiredSqlTerms": ["CASE WHEN", "AVG", "GROUP BY is_home"],
       "explanation": "CASE式でフラグを表示用のラベルに変換し、条件ごとに平均を集計します。"
@@ -205,8 +205,8 @@
       "difficulty": 3,
       "category": "集計",
       "sourceTables": ["games", "game_team_stats", "teams"],
-      "referenceSql": "SELECT g.season, t.team_name_j, ROUND(AVG(s.points), 1) AS average_points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY g.season, t.team_id, t.team_name_j ORDER BY g.season, average_points DESC, t.team_id;",
-      "comparison": {"rowOrder": "sensitive", "numericTolerance": 0.01},
+      "referenceSql": "SELECT g.season, t.team_name_j, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY g.season, t.team_id, t.team_name_j ORDER BY g.season, average_points DESC, t.team_id;",
+      "comparison": {"rowOrder": "sensitive", "numericTolerance": 0.05},
       "requiredSqlTerms": ["JOIN games", "JOIN teams", "AVG", "GROUP BY g.season"],
       "explanation": "複数テーブルを結合した後、GROUP BYへシーズンとチームを指定して細かい単位で集計します。"
     },
@@ -251,9 +251,9 @@
       "difficulty": 3,
       "category": "集計",
       "sourceTables": ["player_game_stats", "players"],
-      "referenceSql": "SELECT p.player_name_j, ROUND(AVG(s.points), 1) AS average_points, COUNT(*) AS game_count FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 AND s.points IS NOT NULL GROUP BY p.player_id, p.player_name_j HAVING COUNT(*) >= 20 ORDER BY average_points DESC, p.player_id LIMIT 10;",
-      "comparison": {"rowOrder": "insensitive", "numericTolerance": 0.01},
-      "requiredSqlTerms": ["AVG", "HAVING COUNT(*) >= 20", "ROUND"],
+      "referenceSql": "SELECT p.player_name_j, AVG(s.points) AS average_points, COUNT(*) AS game_count FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 AND s.points IS NOT NULL GROUP BY p.player_id, p.player_name_j HAVING COUNT(*) >= 20 ORDER BY average_points DESC, p.player_id LIMIT 10;",
+      "comparison": {"rowOrder": "insensitive", "numericTolerance": 0.05},
+      "requiredSqlTerms": ["AVG", "HAVING COUNT(*) >= 20"],
       "explanation": "WHEREは集計前、HAVINGはGROUP BY後のグループに対する条件です。"
     },
     {
@@ -319,13 +319,13 @@
     {
       "id": "bball-026",
       "title": "平均得点でチームを順位付けする",
-      "prompt": "平均得点によるチームの順位について知りたいです。チームごとの平均得点を計算し、順位を付けてください。順位、チーム名、平均得点を取得し、順位の昇順に並べてください。",
+      "prompt": "平均得点によるチームの順位について知りたいです。チームごとの平均得点を計算し、順位を付けてください。平均得点は小数点以下2桁に丸めてください。順位、チーム名、平均得点を取得し、順位の昇順に並べてください。",
       "difficulty": 4,
       "category": "応用集計",
       "sourceTables": ["game_team_stats", "teams"],
       "referenceSql": "WITH team_averages AS (SELECT t.team_id, t.team_name_j, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j) SELECT RANK() OVER (ORDER BY average_points DESC) AS point_rank, team_name_j, ROUND(average_points, 2) AS average_points FROM team_averages ORDER BY point_rank, team_name_j;",
-      "comparison": {"rowOrder": "sensitive", "numericTolerance": 0.01},
-      "requiredSqlTerms": ["WITH team_averages", "RANK() OVER", "ORDER BY average_points DESC"],
+      "comparison": {"rowOrder": "sensitive", "numericTolerance": 0},
+      "requiredSqlTerms": ["WITH team_averages", "RANK() OVER", "ORDER BY average_points DESC", "ROUND"],
       "explanation": "CTEで平均値を先に作り、ウィンドウ関数RANKで順位を付けます。"
     },
     {
@@ -355,25 +355,25 @@
     {
       "id": "bball-029",
       "title": "シーズン平均を上回る観客数の試合",
-      "prompt": "シーズン平均を上回る観客数の試合について知りたいです。各シーズンの平均観客数を上回った試合を10件取得してください。シーズン、試合日、会場名、観客数、シーズン平均を取得し、観客数の多い順に並べてください。",
+      "prompt": "シーズン平均を上回る観客数の試合について知りたいです。各シーズンの平均観客数を上回った試合を10件取得してください。シーズン平均は小数点以下2桁に丸めてください。シーズン、試合日、会場名、観客数、シーズン平均を取得し、観客数の多い順に並べてください。",
       "difficulty": 4,
       "category": "条件分岐・サブクエリ",
       "sourceTables": ["games"],
       "referenceSql": "WITH season_attendance AS (SELECT season, AVG(attendance) AS average_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season) SELECT g.season, g.game_date, g.stadium_name_j, g.attendance, ROUND(sa.average_attendance, 2) AS season_average FROM games AS g JOIN season_attendance AS sa ON sa.season = g.season WHERE g.attendance > sa.average_attendance ORDER BY g.attendance DESC, g.schedule_key LIMIT 10;",
-      "comparison": {"rowOrder": "sensitive", "numericTolerance": 0.01},
-      "requiredSqlTerms": ["WITH season_attendance", "AVG(attendance)", "g.attendance > sa.average_attendance"],
+      "comparison": {"rowOrder": "sensitive", "numericTolerance": 0},
+      "requiredSqlTerms": ["WITH season_attendance", "AVG(attendance)", "g.attendance > sa.average_attendance", "ROUND"],
       "explanation": "CTEでシーズン別平均を作り、元の試合データと結合して平均超えの行だけを抽出します。"
     },
     {
       "id": "bball-030",
       "title": "リーグ平均を上回るチーム",
-      "prompt": "リーグ平均を上回るチームについて知りたいです。リーグ全体の平均得点を上回るチームを抽出してください。チーム名とチーム平均得点を取得し、平均得点の高い順に並べてください。",
+      "prompt": "リーグ平均を上回るチームについて知りたいです。リーグ全体の平均得点を上回るチームを抽出してください。チーム平均得点は小数点以下2桁に丸めてください。チーム名とチーム平均得点を取得し、平均得点の高い順に並べてください。",
       "difficulty": 4,
       "category": "条件分岐・サブクエリ",
       "sourceTables": ["game_team_stats", "teams"],
       "referenceSql": "SELECT t.team_name_j, ROUND(AVG(s.points), 2) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j HAVING AVG(s.points) > (SELECT AVG(points) FROM game_team_stats WHERE points IS NOT NULL) ORDER BY average_points DESC, t.team_id;",
-      "comparison": {"rowOrder": "sensitive", "numericTolerance": 0.01},
-      "requiredSqlTerms": ["HAVING AVG(s.points) >", "SELECT AVG(points) FROM game_team_stats", "GROUP BY"],
+      "comparison": {"rowOrder": "sensitive", "numericTolerance": 0},
+      "requiredSqlTerms": ["HAVING AVG(s.points) >", "SELECT AVG(points) FROM game_team_stats", "GROUP BY", "ROUND"],
       "explanation": "サブクエリで求めたリーグ全体の平均をHAVINGの比較対象にして、チームの平均と比べます。"
     }
   ],
@@ -466,16 +466,16 @@
       "comparison": {"rowOrder": "insensitive", "numericTolerance": 0.01},
       "explanation": "GROUP BYとCOUNT・SUM・AVG・MAXを、集計単位を変えながら反復します。",
       "items": [
-        {"title": "シーズンごとの平均観客数", "prompt": "シーズンごとの平均観客数について知りたいです。シーズンごとの平均観客数を計算してください。シーズンと平均観客数を取得してください。", "referenceSql": "SELECT season, ROUND(AVG(attendance), 2) AS average_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season ORDER BY season;", "requiredSqlTerms": ["AVG(attendance)", "GROUP BY season", "ROUND"]},
+        {"title": "シーズンごとの平均観客数", "prompt": "シーズンごとの平均観客数について知りたいです。シーズンごとの平均観客数を計算してください。シーズンと平均観客数を取得してください。", "referenceSql": "SELECT season, AVG(attendance) AS average_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season ORDER BY season;", "requiredSqlTerms": ["AVG(attendance)", "GROUP BY season"]},
         {"title": "シーズンごとの総観客数", "prompt": "シーズンごとの総観客数について知りたいです。シーズンごとの総観客数を計算してください。シーズンと総観客数を取得し、総観客数の多い順に並べてください。", "referenceSql": "SELECT season, SUM(attendance) AS total_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season ORDER BY total_attendance DESC, season;", "requiredSqlTerms": ["SUM(attendance)", "GROUP BY season"]},
         {"title": "試合種別ごとの件数", "prompt": "試合種別ごとの件数について知りたいです。試合種別ごとの試合数を集計してください。試合種別と試合数を取得し、試合数の多い順に並べてください。", "referenceSql": "SELECT game_type, COUNT(*) AS game_count FROM games GROUP BY game_type ORDER BY game_count DESC, game_type;", "requiredSqlTerms": ["COUNT(*)", "GROUP BY game_type"]},
         {"title": "チームごとの総得点", "prompt": "チームごとの総得点について知りたいです。チームごとの総得点を計算してください。チーム名と総得点を取得し、総得点の多い順に10チーム並べてください。", "referenceSql": "SELECT t.team_name_j, SUM(s.points) AS total_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY total_points DESC, t.team_id LIMIT 10;", "requiredSqlTerms": ["SUM(s.points)", "JOIN teams", "GROUP BY"]},
-        {"title": "チームごとの平均リバウンド", "prompt": "チームごとの平均リバウンドについて知りたいです。チームごとの平均総リバウンドを計算してください。チーム名と平均総リバウンドを取得し、平均総リバウンドの高い順に10チーム並べてください。", "referenceSql": "SELECT t.team_name_j, ROUND(AVG(s.total_rebounds), 2) AS average_rebounds FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.total_rebounds IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY average_rebounds DESC, t.team_id LIMIT 10;", "requiredSqlTerms": ["AVG(s.total_rebounds)", "GROUP BY", "ROUND"]},
+        {"title": "チームごとの平均リバウンド", "prompt": "チームごとの平均リバウンドについて知りたいです。チームごとの平均総リバウンドを計算してください。チーム名と平均総リバウンドを取得し、平均総リバウンドの高い順に10チーム並べてください。", "referenceSql": "SELECT t.team_name_j, AVG(s.total_rebounds) AS average_rebounds FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.total_rebounds IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY average_rebounds DESC, t.team_id LIMIT 10;", "requiredSqlTerms": ["AVG(s.total_rebounds)", "GROUP BY"]},
         {"title": "チームごとの最多アシスト", "prompt": "チームごとの最多アシストについて知りたいです。チームごとの1試合あたりの最多アシスト数を計算してください。チーム名と最多アシスト数を取得し、最多アシスト数の高い順に10チーム並べてください。", "referenceSql": "SELECT t.team_name_j, MAX(s.assists) AS max_assists FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.assists IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY max_assists DESC, t.team_id LIMIT 10;", "requiredSqlTerms": ["MAX(s.assists)", "GROUP BY"]},
-        {"title": "選手ごとの平均アシスト", "prompt": "選手ごとの平均アシストについて知りたいです。出場した選手ごとの平均アシスト数を計算してください。選手名と平均アシスト数を取得し、平均アシスト数の高い順に10人並べてください。", "referenceSql": "SELECT p.player_name_j, ROUND(AVG(s.assists), 2) AS average_assists FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 AND s.assists IS NOT NULL GROUP BY p.player_id, p.player_name_j ORDER BY average_assists DESC, p.player_id LIMIT 10;", "requiredSqlTerms": ["AVG(s.assists)", "JOIN players", "GROUP BY"]},
+        {"title": "選手ごとの平均アシスト", "prompt": "選手ごとの平均アシストについて知りたいです。出場した選手ごとの平均アシスト数を計算してください。選手名と平均アシスト数を取得し、平均アシスト数の高い順に10人並べてください。", "referenceSql": "SELECT p.player_name_j, AVG(s.assists) AS average_assists FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 AND s.assists IS NOT NULL GROUP BY p.player_id, p.player_name_j ORDER BY average_assists DESC, p.player_id LIMIT 10;", "requiredSqlTerms": ["AVG(s.assists)", "JOIN players", "GROUP BY"]},
         {"title": "選手ごとの最多得点", "prompt": "選手ごとの最多得点について知りたいです。選手ごとの1試合あたりの最多得点を計算してください。選手名と最多得点を取得し、最多得点の高い順に10人並べてください。", "referenceSql": "SELECT p.player_name_j, MAX(s.points) AS max_points FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.points IS NOT NULL GROUP BY p.player_id, p.player_name_j ORDER BY max_points DESC, p.player_id LIMIT 10;", "requiredSqlTerms": ["MAX(s.points)", "JOIN players", "GROUP BY"]},
         {"title": "シーズンごとの総チーム得点", "prompt": "シーズンごとの総チーム得点について知りたいです。シーズンごとのチーム総得点を計算してください。シーズンと総得点を取得し、シーズンの昇順に並べてください。", "referenceSql": "SELECT g.season, SUM(s.points) AS total_points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.points IS NOT NULL GROUP BY g.season ORDER BY g.season;", "requiredSqlTerms": ["JOIN games", "SUM(s.points)", "GROUP BY g.season"]},
-        {"title": "シーズンごとの平均チーム得点", "prompt": "シーズンごとの平均チーム得点について知りたいです。シーズンごとのチーム平均得点を計算してください。シーズンと平均得点を取得し、平均得点の高い順に並べてください。", "referenceSql": "SELECT g.season, ROUND(AVG(s.points), 2) AS average_points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.points IS NOT NULL GROUP BY g.season ORDER BY average_points DESC, g.season;", "requiredSqlTerms": ["JOIN games", "AVG(s.points)", "GROUP BY g.season"]}
+        {"title": "シーズンごとの平均チーム得点", "prompt": "シーズンごとの平均チーム得点について知りたいです。シーズンごとのチーム平均得点を計算してください。シーズンと平均得点を取得し、平均得点の高い順に並べてください。", "referenceSql": "SELECT g.season, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.points IS NOT NULL GROUP BY g.season ORDER BY average_points DESC, g.season;", "requiredSqlTerms": ["JOIN games", "AVG(s.points)", "GROUP BY g.season"]}
       ]
     },
     {
@@ -507,8 +507,8 @@
       "explanation": "CTE、サブクエリ、RANK、ROW_NUMBERを小さな問題で反復し、応用構文に慣れます。",
       "items": [
         {"title": "シーズン平均を上回る試合", "prompt": "シーズン平均を上回る試合について知りたいです。各シーズンの平均観客数を上回る試合を10件取得してください。シーズン、試合日、観客数を取得してください。", "sourceTables": ["games"], "referenceSql": "WITH season_average AS (SELECT season, AVG(attendance) AS average_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season) SELECT g.season, g.game_date, g.attendance FROM games AS g JOIN season_average AS a ON a.season = g.season WHERE g.attendance > a.average_attendance ORDER BY g.attendance DESC, g.schedule_key LIMIT 10;", "requiredSqlTerms": ["WITH season_average", "AVG(attendance)", "g.attendance > a.average_attendance"]},
-        {"title": "平均得点以上のチーム", "prompt": "平均得点以上のチームについて知りたいです。チーム平均得点がリーグ全体の平均得点以上のチームを抽出してください。チーム名と平均得点を取得してください。", "sourceTables": ["game_team_stats", "teams"], "referenceSql": "SELECT t.team_name_j, ROUND(AVG(s.points), 2) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j HAVING AVG(s.points) >= (SELECT AVG(points) FROM game_team_stats WHERE points IS NOT NULL) ORDER BY average_points DESC, t.team_id;", "requiredSqlTerms": ["HAVING AVG(s.points) >=", "SELECT AVG(points) FROM game_team_stats"]},
-        {"title": "チーム平均得点の上位10件", "prompt": "チーム平均得点の上位10件について知りたいです。チームごとの平均得点を計算し、RANK関数で順位を付けてください。順位が10位以内のチームについて、順位、チーム名、平均得点を取得してください。", "sourceTables": ["game_team_stats", "teams"], "referenceSql": "WITH averages AS (SELECT t.team_id, t.team_name_j, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j), ranked AS (SELECT team_name_j, average_points, RANK() OVER (ORDER BY average_points DESC) AS point_rank FROM averages) SELECT point_rank, team_name_j, ROUND(average_points, 2) AS average_points FROM ranked WHERE point_rank <= 10 ORDER BY point_rank, team_name_j;", "requiredSqlTerms": ["WITH averages", "RANK() OVER", "WHERE point_rank <= 10"]},
+        {"title": "平均得点以上のチーム", "prompt": "平均得点以上のチームについて知りたいです。チーム平均得点がリーグ全体の平均得点以上のチームを抽出してください。チーム名と平均得点を取得してください。", "sourceTables": ["game_team_stats", "teams"], "referenceSql": "SELECT t.team_name_j, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j HAVING AVG(s.points) >= (SELECT AVG(points) FROM game_team_stats WHERE points IS NOT NULL) ORDER BY average_points DESC, t.team_id;", "requiredSqlTerms": ["HAVING AVG(s.points) >=", "SELECT AVG(points) FROM game_team_stats"]},
+        {"title": "チーム平均得点の上位10件", "prompt": "チーム平均得点の上位10件について知りたいです。チームごとの平均得点を計算し、RANK関数で順位を付けてください。順位が10位以内のチームについて、順位、チーム名、平均得点を取得してください。", "sourceTables": ["game_team_stats", "teams"], "referenceSql": "WITH averages AS (SELECT t.team_id, t.team_name_j, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j), ranked AS (SELECT team_name_j, average_points, RANK() OVER (ORDER BY average_points DESC) AS point_rank FROM averages) SELECT point_rank, team_name_j, average_points FROM ranked WHERE point_rank <= 10 ORDER BY point_rank, team_name_j;", "requiredSqlTerms": ["WITH averages", "RANK() OVER", "WHERE point_rank <= 10"]},
         {"title": "チームごとの最高得点試合", "prompt": "チームごとの最高得点試合について知りたいです。チームごとに得点の高い順で順位を付け、各チームの1位の試合を取得してください。チームID、試合ID、得点を取得し、得点の高い順に10件並べてください。", "sourceTables": ["game_team_stats"], "referenceSql": "WITH ranked_games AS (SELECT team_id, schedule_key, points, ROW_NUMBER() OVER (PARTITION BY team_id ORDER BY points DESC, schedule_key) AS row_num FROM game_team_stats WHERE points IS NOT NULL) SELECT team_id, schedule_key, points FROM ranked_games WHERE row_num = 1 ORDER BY points DESC, team_id LIMIT 10;", "requiredSqlTerms": ["ROW_NUMBER() OVER", "PARTITION BY team_id", "WHERE row_num = 1"]},
         {"title": "選手の通算得点順位", "prompt": "選手の通算得点順位について知りたいです。選手ごとの通算得点を計算し、RANK関数で順位を付けてください。順位、選手名、通算得点を取得し、順位の昇順に10人並べてください。", "sourceTables": ["player_game_stats", "players"], "referenceSql": "WITH totals AS (SELECT p.player_id, p.player_name_j, SUM(s.points) AS total_points FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.points IS NOT NULL GROUP BY p.player_id, p.player_name_j) SELECT RANK() OVER (ORDER BY total_points DESC) AS point_rank, player_name_j, total_points FROM totals ORDER BY point_rank, player_id LIMIT 10;", "requiredSqlTerms": ["WITH totals", "RANK() OVER", "SUM(s.points)"]},
         {"title": "シーズン別観客数順位", "prompt": "シーズン別観客数順位について知りたいです。各シーズンで観客数の順位を付け、順位が2位以内の試合を各シーズンから取得してください。シーズン、試合日、観客数、順位を取得してください。", "sourceTables": ["games"], "referenceSql": "WITH ranked_games AS (SELECT season, game_date, schedule_key, attendance, RANK() OVER (PARTITION BY season ORDER BY attendance DESC) AS attendance_rank FROM games WHERE attendance IS NOT NULL) SELECT season, game_date, attendance, attendance_rank FROM ranked_games WHERE attendance_rank <= 2 ORDER BY season, attendance_rank, game_date;", "requiredSqlTerms": ["RANK() OVER", "PARTITION BY season", "attendance_rank <= 2"]},
