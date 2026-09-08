@@ -170,7 +170,7 @@ jobs:
           SOURCE_COMMIT_SHA: ${{ needs.prepare.outputs.source_commit_sha }}
           TARGET_BASENAMES_JSON: ${{ needs.prepare.outputs.target_basenames }}
         run: |
-+          if [[ -n "$APP_TOKEN" ]]; then export GH_TOKEN="$APP_TOKEN"; else export GH_TOKEN="$PAT_TOKEN"; fi
+          if [[ -n "$APP_TOKEN" ]]; then export GH_TOKEN="$APP_TOKEN"; else export GH_TOKEN="$PAT_TOKEN"; fi
           test -n "$GH_TOKEN"
           echo "Dispatch authentication: $AUTH_MODE"
           while IFS= read -r target_basename; do
