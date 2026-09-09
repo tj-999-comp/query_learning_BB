@@ -2708,10 +2708,11 @@
   {
     "id": "bball-066",
     "title": "20得点以上の選手とチーム名",
-    "prompt": "20得点以上の選手とチーム名について知りたいです。得点が20点以上の選手記録を10件取得してください。選手ID、チーム名、得点を取得してください。",
+    "prompt": "20得点以上の選手とチーム名について知りたいです。player_game_statsテーブルとteamsテーブルを結合し、得点が20点以上の選手記録を10件取得してください。選手ID、チーム名、得点を取得してください。",
     "difficulty": 2,
     "category": "テーブル結合",
     "sourceTables": [
+      "player_game_stats",
       "teams"
     ],
     "answerSql": "SELECT s.player_id, t.team_name_j, s.points FROM player_game_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points >= 20 LIMIT 10",
@@ -2727,7 +2728,8 @@
     "requiredColumns": [
       {
         "label": "player_id",
-        "type": "derived"
+        "type": "source",
+        "reference": "player_game_stats"
       },
       {
         "label": "team_name_j",
@@ -2736,10 +2738,12 @@
       },
       {
         "label": "points",
-        "type": "derived"
+        "type": "source",
+        "reference": "player_game_stats"
       }
     ],
     "learningObjectives": [
+      "JOIN player_game_stats",
       "JOIN teams",
       "s.points >= 20"
     ],
@@ -2748,10 +2752,11 @@
   {
     "id": "bball-067",
     "title": "選手の得点と試合日",
-    "prompt": "選手の得点と試合日について知りたいです。得点が20点以上の選手記録を10件取得してください。試合日、選手ID、得点を取得してください。",
+    "prompt": "選手の得点と試合日について知りたいです。player_game_statsテーブルとgamesテーブルを結合し、得点が20点以上の選手記録を10件取得してください。試合日、選手ID、得点を取得してください。",
     "difficulty": 2,
     "category": "テーブル結合",
     "sourceTables": [
+      "player_game_stats",
       "games"
     ],
     "answerSql": "SELECT g.game_date, s.player_id, s.points FROM player_game_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.points >= 20 LIMIT 10",
@@ -2772,14 +2777,17 @@
       },
       {
         "label": "player_id",
-        "type": "derived"
+        "type": "source",
+        "reference": "player_game_stats"
       },
       {
         "label": "points",
-        "type": "derived"
+        "type": "source",
+        "reference": "player_game_stats"
       }
     ],
     "learningObjectives": [
+      "JOIN player_game_stats",
       "JOIN games",
       "s.points >= 20"
     ],
@@ -2788,10 +2796,11 @@
   {
     "id": "bball-068",
     "title": "先発選手のチーム名と試合日",
-    "prompt": "先発選手のチーム名と試合日について知りたいです。先発フラグが1の選手記録を10件取得してください。試合日、選手ID、チーム名、得点を取得してください。",
+    "prompt": "先発選手のチーム名と試合日について知りたいです。player_game_statsテーブルを基準に、gamesテーブルとteamsテーブルを結合し、先発フラグが1の選手記録を10件取得してください。試合日、選手ID、チーム名、得点を取得してください。",
     "difficulty": 2,
     "category": "テーブル結合",
     "sourceTables": [
+      "player_game_stats",
       "games",
       "teams"
     ],
@@ -2814,7 +2823,8 @@
       },
       {
         "label": "player_id",
-        "type": "derived"
+        "type": "source",
+        "reference": "player_game_stats"
       },
       {
         "label": "team_name_j",
@@ -2823,10 +2833,12 @@
       },
       {
         "label": "points",
-        "type": "derived"
+        "type": "source",
+        "reference": "player_game_stats"
       }
     ],
     "learningObjectives": [
+      "JOIN player_game_stats",
       "JOIN games",
       "JOIN teams",
       "s.is_starter = 1"
