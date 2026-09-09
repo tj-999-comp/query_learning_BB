@@ -1,0 +1,6 @@
+schema_version: 1
+title: 'Issue #96 v2.0.3問題文とSQL基準の並び順整合'
+date: "2026-09-09"
+project_id: query_learning_BB
+tags: [codex, issue-96, v2.0.3, problem-spec, ordering, judgement, stg, production, work-record]
+publish: true
