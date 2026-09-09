@@ -9,7 +9,7 @@
     {
       "id": "mvp-001",
       "title": "チーム一覧を表示する",
-      "prompt": "チーム一覧について知りたいです。teamsテーブルから、チームIDと日本語のチーム名を取得してください。チーム名の昇順に並べてください。",
+      "prompt": "チーム一覧について知りたいです。必要な情報はチームIDと日本語のチーム名です。チーム名の昇順に並べてください。",
       "difficulty": 1,
       "category": "基本検索",
       "sourceTables": ["teams"],
@@ -21,7 +21,7 @@
     {
       "id": "mvp-002",
       "title": "シーズンごとの試合数を数える",
-      "prompt": "シーズンごとの試合数について知りたいです。gamesテーブルを使って、シーズンごとの試合数を集計してください。シーズンと試合数を取得し、シーズンの昇順に並べてください。",
+      "prompt": "シーズンごとの試合数について知りたいです。シーズンごとの試合数を集計してください。必要な情報はシーズンと試合数です。シーズンの昇順に並べてください。",
       "difficulty": 1,
       "category": "集計",
       "sourceTables": ["games"],
@@ -33,7 +33,7 @@
     {
       "id": "mvp-003",
       "title": "観客数の多い試合を探す",
-      "prompt": "観客数の多い試合について知りたいです。gamesテーブルから、観客数が記録されている試合を10件取得してください。試合日、会場名、観客数を取得し、観客数の多い順に並べてください。",
+      "prompt": "観客数の多い試合について知りたいです。観客数が記録されている試合を10件取得してください。必要な情報は試合日、会場名、観客数です。観客数の多い順に並べてください。",
       "difficulty": 1,
       "category": "基本検索",
       "sourceTables": ["games"],
@@ -45,7 +45,7 @@
     {
       "id": "mvp-004",
       "title": "100得点以上のチームスタッツ",
-      "prompt": "100得点以上のチームスタッツについて知りたいです。game_team_statsテーブルから、得点が100点以上のチーム記録を取得してください。試合ID、チームID、得点を取得し、得点の高い順に並べてください。",
+      "prompt": "100得点以上のチームスタッツについて知りたいです。得点が100点以上のチーム記録を取得してください。必要な情報は試合ID、チームID、得点です。得点の高い順に並べてください。",
       "difficulty": 1,
       "category": "基本検索",
       "sourceTables": ["game_team_stats"],
@@ -57,7 +57,7 @@
     {
       "id": "mvp-005",
       "title": "ホームゲームの得点を見る",
-      "prompt": "ホームゲームの得点について知りたいです。ホームゲームの記録を10件取得してください。試合日、チーム名、得点を取得してください。試合日の新しい順に並べ、同じ試合日の試合は得点の高い順、得点も同じ場合は試合IDの大きい順にしてください。",
+      "prompt": "ホームゲームの得点について知りたいです。ホームゲームの記録を10件取得してください。必要な情報は試合日、チーム名、得点です。試合日の新しい順に並べ、同じ試合日の試合は得点の高い順、得点も同じ場合は試合IDの大きい順にしてください。",
       "difficulty": 2,
       "category": "テーブル結合",
       "sourceTables": ["game_team_stats", "games", "teams"],
@@ -69,7 +69,7 @@
     {
       "id": "mvp-006",
       "title": "チームごとの平均得点",
-      "prompt": "チームごとの平均得点について知りたいです。チームごとの平均得点を計算してください。チーム名と平均得点を取得し、平均得点の高い順に並べてください。",
+      "prompt": "チームごとの平均得点について知りたいです。チームごとの平均得点を計算してください。必要な情報はチーム名と平均得点です。平均得点の高い順に並べてください。",
       "difficulty": 2,
       "category": "集計",
       "sourceTables": ["game_team_stats", "teams"],
@@ -81,7 +81,7 @@
     {
       "id": "mvp-007",
       "title": "選手ごとの通算得点",
-      "prompt": "選手ごとの通算得点について知りたいです。選手ごとの通算得点を計算してください。選手名と通算得点を取得し、通算得点の高い順に10人並べてください。",
+      "prompt": "選手ごとの通算得点について知りたいです。選手ごとの通算得点を計算してください。必要な情報は選手名と通算得点です。通算得点の高い順に10人並べてください。",
       "difficulty": 2,
       "category": "集計",
       "sourceTables": ["player_game_stats", "players"],
@@ -93,7 +93,7 @@
     {
       "id": "mvp-008",
       "title": "出場試合数の多い選手",
-      "prompt": "出場試合数の多い選手について知りたいです。選手ごとの出場試合数を集計してください。選手名と試合数を取得し、試合数の多い順に10人並べてください。",
+      "prompt": "出場試合数の多い選手について知りたいです。選手ごとの出場試合数を集計してください。必要な情報は選手名と試合数です。試合数の多い順に10人並べてください。",
       "difficulty": 2,
       "category": "集計",
       "sourceTables": ["player_game_stats", "players"],
@@ -105,7 +105,7 @@
     {
       "id": "mvp-009",
       "title": "ホームとアウェーの平均得点を比べる",
-      "prompt": "ホームとアウェーの平均得点の比較について知りたいです。ホームとアウェーそれぞれの平均得点を計算してください。ホーム／アウェーの区分と平均得点を取得してください。",
+      "prompt": "ホームとアウェーの平均得点の比較について知りたいです。ホームとアウェーそれぞれの平均得点を計算してください。必要な情報はホーム／アウェーの区分と平均得点です。",
       "difficulty": 2,
       "category": "条件分岐・サブクエリ",
       "sourceTables": ["game_team_stats"],
@@ -117,7 +117,7 @@
     {
       "id": "mvp-010",
       "title": "20得点以上を記録した先発選手",
-      "prompt": "20得点以上を記録した先発選手について知りたいです。先発出場し、得点が20点以上の選手記録を取得してください。選手名、得点、試合IDを取得し、得点の高い順に並べてください。",
+      "prompt": "20得点以上を記録した先発選手について知りたいです。先発出場し、得点が20点以上の選手記録を取得してください。必要な情報は選手名、得点、試合IDです。得点の高い順に並べてください。",
       "difficulty": 2,
       "category": "テーブル結合",
       "sourceTables": ["player_game_stats", "players"],
@@ -129,7 +129,7 @@
     {
       "id": "bball-011",
       "title": "試合種別を一覧にする",
-      "prompt": "試合種別について知りたいです。gamesテーブルに記録されている試合種別を、重複を除いて取得してください。試合種別の昇順に並べてください。",
+      "prompt": "試合種別について知りたいです。記録されている試合種別を、重複を除いて取得してください。試合種別の昇順に並べてください。",
       "difficulty": 1,
       "category": "基本検索",
       "sourceTables": ["games"],
@@ -141,7 +141,7 @@
     {
       "id": "bball-012",
       "title": "期間を指定して試合を探す",
-      "prompt": "指定した期間の試合について知りたいです。2024年10月1日から2025年3月31日までに行われた試合を10件取得してください。試合日、シーズン、試合IDを取得してください。試合日の古い順に並べ、同じ試合日の試合は試合IDの小さい順にしてください。",
+      "prompt": "指定した期間の試合について知りたいです。2024年10月1日から2025年3月31日までに行われた試合を10件取得してください。必要な情報は試合日、シーズン、試合IDです。試合日の古い順に並べ、同じ試合日の試合は試合IDの小さい順にしてください。",
       "difficulty": 1,
       "category": "基本検索",
       "sourceTables": ["games"],
@@ -153,7 +153,7 @@
     {
       "id": "bball-013",
       "title": "シーズンと試合種別ごとの件数",
-      "prompt": "シーズンと試合種別ごとの件数について知りたいです。シーズンと試合種別の組み合わせごとに試合数を集計してください。シーズン、試合種別、試合数を取得し、シーズン、試合種別の順に並べてください。",
+      "prompt": "シーズンと試合種別ごとの件数について知りたいです。シーズンと試合種別の組み合わせごとに試合数を集計してください。必要な情報はシーズン、試合種別、試合数です。シーズン、試合種別の順に並べてください。",
       "difficulty": 2,
       "category": "集計",
       "sourceTables": ["games"],
@@ -165,7 +165,7 @@
     {
       "id": "bball-014",
       "title": "試合のホームチームとアウェーチーム",
-      "prompt": "試合のホームチームとアウェーチームについて知りたいです。終了した試合を10件取得してください。試合日、ホームチーム名、アウェーチーム名、両チームの得点を取得してください。試合日の新しい順に並べ、同じ試合日の試合は試合IDの大きい順にしてください。",
+      "prompt": "試合のホームチームとアウェーチームについて知りたいです。終了した試合を10件取得してください。必要な情報は試合日、ホームチーム名、アウェーチーム名、両チームの得点です。試合日の新しい順に並べ、同じ試合日の試合は試合IDの大きい順にしてください。",
       "difficulty": 2,
       "category": "テーブル結合",
       "sourceTables": ["games", "teams"],
@@ -177,7 +177,7 @@
     {
       "id": "bball-015",
       "title": "スタッツがないチームも含めて試合数を数える",
-      "prompt": "スタッツがないチームも含めたチーム別件数について知りたいです。teamsに登録されているすべてのチームについて、チーム別スタッツの件数を集計してください。チーム名と件数を取得し、スタッツがないチームも0件として含めてください。件数の少ない順に並べてください。",
+      "prompt": "スタッツがないチームも含めたチーム別件数について知りたいです。すべてのチームについて、チーム別スタッツの件数を集計してください。必要な情報はチーム名と件数です。スタッツがないチームも0件として含めてください。件数の少ない順に並べてください。",
       "difficulty": 3,
       "category": "テーブル結合",
       "sourceTables": ["teams", "game_team_stats"],
@@ -189,7 +189,7 @@
     {
       "id": "bball-016",
       "title": "チームごとのホーム・アウェー試合数",
-      "prompt": "チームごとのホーム・アウェー試合数について知りたいです。チームごとにホーム試合数とアウェー試合数を集計してください。チーム名、ホーム試合数、アウェー試合数を取得してください。チームIDの昇順に並べてください。",
+      "prompt": "チームごとのホーム・アウェー試合数について知りたいです。チームごとにホーム試合数とアウェー試合数を集計してください。必要な情報はチーム名、ホーム試合数、アウェー試合数です。チームIDの昇順に並べてください。",
       "difficulty": 3,
       "category": "条件分岐・サブクエリ",
       "sourceTables": ["teams", "game_team_stats"],
@@ -201,7 +201,7 @@
     {
       "id": "bball-017",
       "title": "シーズン別・チーム別の平均得点",
-      "prompt": "シーズン別・チーム別の平均得点について知りたいです。シーズンとチームの組み合わせごとに平均得点を計算してください。シーズン、チーム名、平均得点を取得してください。シーズンの昇順に並べ、各シーズン内では平均得点の高い順にしてください。",
+      "prompt": "シーズン別・チーム別の平均得点について知りたいです。シーズンとチームの組み合わせごとに平均得点を計算してください。必要な情報はシーズン、チーム名、平均得点です。シーズンの昇順に並べ、各シーズン内では平均得点の高い順にしてください。",
       "difficulty": 3,
       "category": "集計",
       "sourceTables": ["games", "game_team_stats", "teams"],
@@ -213,7 +213,7 @@
     {
       "id": "bball-018",
       "title": "特定の国籍の選手を探す",
-      "prompt": "特定の国籍の選手について知りたいです。リーグ登録国籍が日本またはアメリカ合衆国の選手を20人取得してください。選手名と国籍を取得し、選手名の昇順に並べてください。",
+      "prompt": "特定の国籍の選手について知りたいです。リーグ登録国籍が日本またはアメリカ合衆国の選手を20人取得してください。必要な情報は選手名と国籍です。選手名の昇順に並べてください。",
       "difficulty": 1,
       "category": "基本検索",
       "sourceTables": ["players"],
@@ -235,7 +235,7 @@
     {
       "id": "bball-019",
       "title": "チームの1試合最多得点",
-      "prompt": "チームの1試合最多得点について知りたいです。チームごとの1試合あたりの最多得点を計算してください。チーム名と最多得点を取得し、最多得点の高い順に10チーム並べてください。",
+      "prompt": "チームの1試合最多得点について知りたいです。チームごとの1試合あたりの最多得点を計算してください。必要な情報はチーム名と最多得点です。最多得点の高い順に10チーム並べてください。",
       "difficulty": 2,
       "category": "集計",
       "sourceTables": ["game_team_stats", "teams"],
@@ -247,7 +247,7 @@
     {
       "id": "bball-020",
       "title": "平均得点の高い選手",
-      "prompt": "平均得点の高い選手について知りたいです。出場試合が20試合以上ある選手について、平均得点と出場試合数を計算してください。選手名、平均得点、出場試合数を取得し、平均得点の高い順に10人並べてください。",
+      "prompt": "平均得点の高い選手について知りたいです。出場試合が20試合以上ある選手について、平均得点と出場試合数を計算してください。必要な情報は選手名、平均得点、出場試合数です。平均得点の高い順に10人並べてください。",
       "difficulty": 3,
       "category": "集計",
       "sourceTables": ["player_game_stats", "players"],
@@ -259,7 +259,7 @@
     {
       "id": "bball-021",
       "title": "ダブルダブル相当の試合数",
-      "prompt": "ダブルダブル相当の試合数について知りたいです。得点と総リバウンドの両方が10点以上、または得点とアシストの両方が10点以上となる記録を、選手ごとに集計してください。選手名と該当試合数を取得し、試合数の多い順に10人並べてください。",
+      "prompt": "ダブルダブル相当の試合数について知りたいです。得点と総リバウンドの両方が10点以上、または得点とアシストの両方が10点以上となる記録を、選手ごとに集計してください。必要な情報は選手名と該当試合数です。試合数の多い順に10人並べてください。",
       "difficulty": 3,
       "category": "条件分岐・サブクエリ",
       "sourceTables": ["player_game_stats", "players"],
@@ -271,7 +271,7 @@
     {
       "id": "bball-022",
       "title": "チームごとのアシストとターンオーバー",
-      "prompt": "チームごとのアシストとターンオーバーについて知りたいです。チームごとの総アシスト数と総ターンオーバー数を計算してください。チーム名、総アシスト、総ターンオーバーを取得し、総アシスト数の多い順に10チーム並べてください。",
+      "prompt": "チームごとのアシストとターンオーバーについて知りたいです。チームごとの総アシスト数と総ターンオーバー数を計算してください。必要な情報はチーム名、総アシスト、総ターンオーバーです。総アシスト数の多い順に10チーム並べてください。",
       "difficulty": 2,
       "category": "集計",
       "sourceTables": ["game_team_stats", "teams"],
@@ -283,7 +283,7 @@
     {
       "id": "bball-023",
       "title": "両チーム合計得点の多い試合",
-      "prompt": "両チーム合計得点の多い試合について知りたいです。両チームの得点が記録されている試合を10件取得してください。試合日、試合ID、両チームの合計得点を取得し、合計得点の高い順に並べてください。",
+      "prompt": "両チーム合計得点の多い試合について知りたいです。両チームの得点が記録されている試合を10件取得してください。必要な情報は試合日、試合ID、両チームの合計得点です。合計得点の高い順に並べてください。",
       "difficulty": 2,
       "category": "条件分岐・サブクエリ",
       "sourceTables": ["games"],
@@ -295,7 +295,7 @@
     {
       "id": "bball-024",
       "title": "点差の大きい試合と勝敗",
-      "prompt": "点差の大きい試合と勝敗について知りたいです。両チームの得点が記録されている試合を10件取得してください。試合ID、勝った側（ホームまたはアウェー）、点差を取得し、点差の大きい順に並べてください。",
+      "prompt": "点差の大きい試合と勝敗について知りたいです。両チームの得点が記録されている試合を10件取得してください。必要な情報は試合ID、勝った側（ホームまたはアウェー）、点差です。点差の大きい順に並べてください。",
       "difficulty": 3,
       "category": "条件分岐・サブクエリ",
       "sourceTables": ["games"],
@@ -307,7 +307,7 @@
     {
       "id": "bball-025",
       "title": "チームの勝利数",
-      "prompt": "チームの勝利数について知りたいです。チームごとの勝利数と試合数を集計してください。チーム名、勝利数、試合数を取得し、勝利数の多い順に10チーム並べてください。",
+      "prompt": "チームの勝利数について知りたいです。チームごとの勝利数と試合数を集計してください。必要な情報はチーム名、勝利数、試合数です。勝利数の多い順に10チーム並べてください。",
       "difficulty": 3,
       "category": "テーブル結合",
       "sourceTables": ["game_team_stats", "teams"],
@@ -319,7 +319,7 @@
     {
       "id": "bball-026",
       "title": "平均得点でチームを順位付けする",
-      "prompt": "平均得点によるチームの順位について知りたいです。チームごとの平均得点を計算し、順位を付けてください。平均得点は小数点以下2桁に丸めてください。順位、チーム名、平均得点を取得し、順位の昇順に並べてください。",
+      "prompt": "平均得点によるチームの順位について知りたいです。チームごとの平均得点を計算し、順位を付けてください。平均得点は小数点以下2桁に丸めてください。必要な情報は順位、チーム名、平均得点です。順位の昇順に並べてください。",
       "difficulty": 4,
       "category": "応用集計",
       "sourceTables": ["game_team_stats", "teams"],
@@ -331,7 +331,7 @@
     {
       "id": "bball-027",
       "title": "選手ごとの最新出場試合",
-      "prompt": "選手ごとの最新出場試合について知りたいです。出場した選手ごとに、試合日の最も新しい記録を1件ずつ取得してください。試合日、選手名、得点を取得し、試合日の新しい順に20人並べてください。同じ試合日の試合は試合IDの大きい順にしてください。",
+      "prompt": "選手ごとの最新出場試合について知りたいです。出場した選手ごとに、試合日の最も新しい記録を1件ずつ取得してください。必要な情報は試合日、選手名、得点です。試合日の新しい順に20人並べてください。同じ試合日の試合は試合IDの大きい順にしてください。",
       "difficulty": 4,
       "category": "応用集計",
       "sourceTables": ["player_game_stats", "players", "games"],
@@ -343,7 +343,7 @@
     {
       "id": "bball-028",
       "title": "シーズン内の累積観客数",
-      "prompt": "シーズン内の累積観客数について知りたいです。観客数が記録されている試合について、シーズン内の累積観客数を計算し、20件取得してください。シーズン、試合日、観客数、累積観客数を取得してください。シーズンの昇順に並べ、各シーズン内では試合日の古い順、同じ試合日の試合は試合IDの小さい順にしてください。",
+      "prompt": "シーズン内の累積観客数について知りたいです。観客数が記録されている試合について、シーズン内の累積観客数を計算し、20件取得してください。必要な情報はシーズン、試合日、観客数、累積観客数です。シーズンの昇順に並べ、各シーズン内では試合日の古い順、同じ試合日の試合は試合IDの小さい順にしてください。",
       "difficulty": 4,
       "category": "応用集計",
       "sourceTables": ["games"],
@@ -355,7 +355,7 @@
     {
       "id": "bball-029",
       "title": "シーズン平均を上回る観客数の試合",
-      "prompt": "シーズン平均を上回る観客数の試合について知りたいです。各シーズンの平均観客数を上回った試合を10件取得してください。シーズン平均は小数点以下2桁に丸めてください。シーズン、試合日、会場名、観客数、シーズン平均を取得し、観客数の多い順に並べてください。",
+      "prompt": "シーズン平均を上回る観客数の試合について知りたいです。各シーズンの平均観客数を上回った試合を10件取得してください。シーズン平均は小数点以下2桁に丸めてください。必要な情報はシーズン、試合日、会場名、観客数、シーズン平均です。観客数の多い順に並べてください。",
       "difficulty": 4,
       "category": "条件分岐・サブクエリ",
       "sourceTables": ["games"],
@@ -367,7 +367,7 @@
     {
       "id": "bball-030",
       "title": "リーグ平均を上回るチーム",
-      "prompt": "リーグ平均を上回るチームについて知りたいです。リーグ全体の平均得点を上回るチームを抽出してください。チーム平均得点は小数点以下2桁に丸めてください。チーム名とチーム平均得点を取得し、平均得点の高い順に並べてください。",
+      "prompt": "リーグ平均を上回るチームについて知りたいです。リーグ全体の平均得点を上回るチームを抽出してください。チーム平均得点は小数点以下2桁に丸めてください。必要な情報はチーム名とチーム平均得点です。平均得点の高い順に並べてください。",
       "difficulty": 4,
       "category": "条件分岐・サブクエリ",
       "sourceTables": ["game_team_stats", "teams"],
@@ -386,16 +386,16 @@
       "comparison": {"rowOrder": "sensitive"},
       "explanation": "同じSELECT・WHERE・ORDER BYの型を、シーズンや試合条件を変えて反復します。",
       "items": [
-        {"title": "2025-26シーズンの試合", "prompt": "2025-26シーズンの試合について知りたいです。2025-26シーズンの試合を10件取得してください。試合日、試合ID、試合種別を取得してください。試合日の古い順に並べ、同じ試合日の試合は試合IDの小さい順にしてください。", "referenceSql": "SELECT game_date, schedule_key, game_type FROM games WHERE season = '2025-26' ORDER BY game_date, schedule_key LIMIT 10;", "requiredSqlTerms": ["WHERE season = '2025-26'", "ORDER BY game_date", "LIMIT 10"]},
+        {"title": "2025-26シーズンの試合", "prompt": "2025-26シーズンの試合について知りたいです。2025-26シーズンの試合を10件取得してください。必要な情報は試合日、試合ID、試合種別です。試合日の古い順に並べ、同じ試合日の試合は試合IDの小さい順にしてください。", "referenceSql": "SELECT game_date, schedule_key, game_type FROM games WHERE season = '2025-26' ORDER BY game_date, schedule_key LIMIT 10;", "requiredSqlTerms": ["WHERE season = '2025-26'", "ORDER BY game_date", "LIMIT 10"]},
         {"title": "2024-25シーズンの試合", "prompt": "2024-25シーズンの試合について知りたいです。試合日、試合ID、試合種別を10件取得してください。試合日の新しい順に並べ、同じ試合日の試合は試合IDの大きい順にしてください。", "referenceSql": "SELECT game_date, schedule_key, game_type FROM games WHERE season = '2024-25' ORDER BY game_date DESC, schedule_key DESC LIMIT 10;", "requiredSqlTerms": ["WHERE season = '2024-25'", "ORDER BY game_date DESC", "LIMIT 10"]},
-        {"title": "レギュラーシーズンの試合", "prompt": "レギュラーシーズンの試合について知りたいです。レギュラーシーズン（RS）の試合を10件取得してください。試合日と試合IDを取得してください。試合日の新しい順に並べ、同じ試合日の試合は試合IDの大きい順にしてください。", "referenceSql": "SELECT game_date, schedule_key FROM games WHERE game_type = 'RS' ORDER BY game_date DESC, schedule_key DESC LIMIT 10;", "requiredSqlTerms": ["WHERE game_type = 'RS'", "ORDER BY game_date DESC"]},
-        {"title": "チャンピオンシップの試合", "prompt": "チャンピオンシップの試合について知りたいです。チャンピオンシップ（CS）の試合を10件取得してください。試合日と試合IDを取得してください。試合日の古い順に並べ、同じ試合日の試合は試合IDの小さい順にしてください。", "referenceSql": "SELECT game_date, schedule_key FROM games WHERE game_type = 'CS' ORDER BY game_date, schedule_key LIMIT 10;", "requiredSqlTerms": ["WHERE game_type = 'CS'", "ORDER BY game_date"]},
-        {"title": "観客数5000人以上の試合", "prompt": "観客数5000人以上の試合について知りたいです。観客数が5000人以上の試合を10件取得してください。試合日、会場名、観客数を取得し、観客数の多い順に並べてください。", "referenceSql": "SELECT game_date, stadium_name_j, attendance FROM games WHERE attendance >= 5000 ORDER BY attendance DESC, game_date DESC LIMIT 10;", "requiredSqlTerms": ["attendance >= 5000", "ORDER BY attendance DESC"]},
-        {"title": "観客数が記録された試合", "prompt": "観客数が記録された試合について知りたいです。観客数が記録されている試合を10件取得してください。試合日と観客数を取得し、観客数の少ない順に並べてください。", "referenceSql": "SELECT game_date, attendance FROM games WHERE attendance IS NOT NULL ORDER BY attendance, game_date LIMIT 10;", "requiredSqlTerms": ["attendance IS NOT NULL", "ORDER BY attendance"]},
-        {"title": "2025年以降の試合", "prompt": "2025年以降の試合について知りたいです。2025年1月1日以降に行われた試合を10件取得してください。試合日の新しい順に並べ、同じ試合日の試合は試合IDの大きい順にしてください。試合日、シーズン、試合IDを取得してください。", "referenceSql": "SELECT game_date, season, schedule_key FROM games WHERE game_date >= '2025-01-01' ORDER BY game_date DESC, schedule_key DESC LIMIT 10;", "requiredSqlTerms": ["game_date >= '2025-01-01'", "ORDER BY game_date DESC"]},
-        {"title": "2016-17シーズン前半の試合", "prompt": "2016-17シーズン前半の試合について知りたいです。2017年4月1日より前の試合を10件取得してください。試合日の古い順に並べ、同じ試合日の試合は試合IDの小さい順にしてください。試合日、シーズン、試合IDを取得してください。", "referenceSql": "SELECT game_date, season, schedule_key FROM games WHERE game_date < '2017-04-01' ORDER BY game_date, schedule_key LIMIT 10;", "requiredSqlTerms": ["game_date < '2017-04-01'", "ORDER BY game_date"]},
-        {"title": "審判名が記録された試合", "prompt": "審判名が記録された試合について知りたいです。主審名が記録されている試合を10件取得してください。試合日の新しい順に並べ、同じ試合日の試合は試合IDの大きい順にしてください。試合日、会場名、主審名を取得してください。", "referenceSql": "SELECT game_date, stadium_name_j, referee_name_j FROM games WHERE referee_name_j IS NOT NULL ORDER BY game_date DESC, schedule_key DESC LIMIT 10;", "requiredSqlTerms": ["referee_name_j IS NOT NULL", "ORDER BY game_date DESC"]},
-        {"title": "試合会場が記録された試合", "prompt": "試合会場が記録された試合について知りたいです。会場名が記録されている試合を10件取得してください。試合日の新しい順に並べ、同じ試合日の試合は試合IDの大きい順にしてください。試合日、会場名、試合種別を取得してください。", "referenceSql": "SELECT game_date, stadium_name_j, game_type FROM games WHERE stadium_name_j IS NOT NULL ORDER BY game_date DESC, schedule_key DESC LIMIT 10;", "requiredSqlTerms": ["stadium_name_j IS NOT NULL", "ORDER BY game_date DESC"]}
+        {"title": "レギュラーシーズンの試合", "prompt": "レギュラーシーズンの試合について知りたいです。レギュラーシーズン（RS）の試合を10件取得してください。必要な情報は試合日と試合IDです。試合日の新しい順に並べ、同じ試合日の試合は試合IDの大きい順にしてください。", "referenceSql": "SELECT game_date, schedule_key FROM games WHERE game_type = 'RS' ORDER BY game_date DESC, schedule_key DESC LIMIT 10;", "requiredSqlTerms": ["WHERE game_type = 'RS'", "ORDER BY game_date DESC"]},
+        {"title": "チャンピオンシップの試合", "prompt": "チャンピオンシップの試合について知りたいです。チャンピオンシップ（CS）の試合を10件取得してください。必要な情報は試合日と試合IDです。試合日の古い順に並べ、同じ試合日の試合は試合IDの小さい順にしてください。", "referenceSql": "SELECT game_date, schedule_key FROM games WHERE game_type = 'CS' ORDER BY game_date, schedule_key LIMIT 10;", "requiredSqlTerms": ["WHERE game_type = 'CS'", "ORDER BY game_date"]},
+        {"title": "観客数5000人以上の試合", "prompt": "観客数5000人以上の試合について知りたいです。観客数が5000人以上の試合を10件取得してください。必要な情報は試合日、会場名、観客数です。観客数の多い順に並べてください。", "referenceSql": "SELECT game_date, stadium_name_j, attendance FROM games WHERE attendance >= 5000 ORDER BY attendance DESC, game_date DESC LIMIT 10;", "requiredSqlTerms": ["attendance >= 5000", "ORDER BY attendance DESC"]},
+        {"title": "観客数が記録された試合", "prompt": "観客数が記録された試合について知りたいです。観客数が記録されている試合を10件取得してください。必要な情報は試合日と観客数です。観客数の少ない順に並べてください。", "referenceSql": "SELECT game_date, attendance FROM games WHERE attendance IS NOT NULL ORDER BY attendance, game_date LIMIT 10;", "requiredSqlTerms": ["attendance IS NOT NULL", "ORDER BY attendance"]},
+        {"title": "2025年以降の試合", "prompt": "2025年以降の試合について知りたいです。2025年1月1日以降に行われた試合を10件取得してください。試合日の新しい順に並べ、同じ試合日の試合は試合IDの大きい順にしてください。必要な情報は試合日、シーズン、試合IDです。", "referenceSql": "SELECT game_date, season, schedule_key FROM games WHERE game_date >= '2025-01-01' ORDER BY game_date DESC, schedule_key DESC LIMIT 10;", "requiredSqlTerms": ["game_date >= '2025-01-01'", "ORDER BY game_date DESC"]},
+        {"title": "2016-17シーズン前半の試合", "prompt": "2016-17シーズン前半の試合について知りたいです。2017年4月1日より前の試合を10件取得してください。試合日の古い順に並べ、同じ試合日の試合は試合IDの小さい順にしてください。必要な情報は試合日、シーズン、試合IDです。", "referenceSql": "SELECT game_date, season, schedule_key FROM games WHERE game_date < '2017-04-01' ORDER BY game_date, schedule_key LIMIT 10;", "requiredSqlTerms": ["game_date < '2017-04-01'", "ORDER BY game_date"]},
+        {"title": "審判名が記録された試合", "prompt": "審判名が記録された試合について知りたいです。主審名が記録されている試合を10件取得してください。試合日の新しい順に並べ、同じ試合日の試合は試合IDの大きい順にしてください。必要な情報は試合日、会場名、主審名です。", "referenceSql": "SELECT game_date, stadium_name_j, referee_name_j FROM games WHERE referee_name_j IS NOT NULL ORDER BY game_date DESC, schedule_key DESC LIMIT 10;", "requiredSqlTerms": ["referee_name_j IS NOT NULL", "ORDER BY game_date DESC"]},
+        {"title": "試合会場が記録された試合", "prompt": "試合会場が記録された試合について知りたいです。会場名が記録されている試合を10件取得してください。試合日の新しい順に並べ、同じ試合日の試合は試合IDの大きい順にしてください。必要な情報は試合日、会場名、試合種別です。", "referenceSql": "SELECT game_date, stadium_name_j, game_type FROM games WHERE stadium_name_j IS NOT NULL ORDER BY game_date DESC, schedule_key DESC LIMIT 10;", "requiredSqlTerms": ["stadium_name_j IS NOT NULL", "ORDER BY game_date DESC"]}
       ]
     },
     {
@@ -406,16 +406,16 @@
       "comparison": {"rowOrder": "insensitive"},
       "explanation": "チーム別スタッツの数値条件を変えながら、WHEREで必要な行を絞り込む練習です。",
       "items": [
-        {"title": "90得点以上のチーム記録", "prompt": "90得点以上のチーム記録について知りたいです。得点が90点以上のチーム記録を取得してください。試合ID、チームID、得点を取得し、得点の高い順に並べてください。", "referenceSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE points >= 90 ORDER BY points DESC, schedule_key, team_id;", "requiredSqlTerms": ["points >= 90", "ORDER BY points DESC"]},
-        {"title": "60得点以下のチーム記録", "prompt": "60得点以下のチーム記録について知りたいです。得点が60点以下のチーム記録を10件取得してください。試合ID、チームID、得点を取得し、得点の低い順に並べてください。", "referenceSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE points <= 60 ORDER BY points, schedule_key, team_id LIMIT 10;", "requiredSqlTerms": ["points <= 60", "ORDER BY points"]},
-        {"title": "10アシスト以上のチーム記録", "prompt": "10アシスト以上のチーム記録について知りたいです。アシストが10以上のチーム記録を10件取得してください。試合ID、チームID、アシスト数を取得してください。", "referenceSql": "SELECT schedule_key, team_id, assists FROM game_team_stats WHERE assists >= 10 LIMIT 10;", "requiredSqlTerms": ["assists >= 10"]},
-        {"title": "20リバウンド以上のチーム記録", "prompt": "20リバウンド以上のチーム記録について知りたいです。総リバウンドが20以上のチーム記録を10件取得してください。試合ID、チームID、総リバウンドを取得してください。", "referenceSql": "SELECT schedule_key, team_id, total_rebounds FROM game_team_stats WHERE total_rebounds >= 20 LIMIT 10;", "requiredSqlTerms": ["total_rebounds >= 20"]},
-        {"title": "3ポイント成功5本以上の記録", "prompt": "3ポイント成功5本以上の記録について知りたいです。3ポイント成功数が5本以上のチーム記録を10件取得してください。試合ID、チームID、3ポイント成功数を取得してください。", "referenceSql": "SELECT schedule_key, team_id, fg3m FROM game_team_stats WHERE fg3m >= 5 LIMIT 10;", "requiredSqlTerms": ["fg3m >= 5"]},
-        {"title": "接戦を制したチーム", "prompt": "接戦を制したチームについて知りたいです。3点差以内で勝利したチームの記録を10件取得してください。試合ID、チームID、得点を取得してください。試合日の新しい順に並べ、同じ試合日の試合は試合IDの大きい順、同じ試合IDの記録はチームIDの昇順にしてください。", "sourceTables": ["game_team_stats", "games"], "referenceSql": "SELECT s.schedule_key, s.team_id, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.close_win_3pts_or_less = 1 ORDER BY g.game_date DESC, s.schedule_key DESC, s.team_id LIMIT 10;", "requiredSqlTerms": ["JOIN games", "close_win_3pts_or_less = 1", "ORDER BY g.game_date DESC"]},
-        {"title": "ホームで90得点以上の記録", "prompt": "ホームで90得点以上の記録について知りたいです。ホームで90点以上を記録したチームの試合ID、チームID、得点を取得してください。", "referenceSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE is_home = 1 AND points >= 90;", "requiredSqlTerms": ["is_home = 1", "points >= 90", "AND"]},
-        {"title": "アウェーで90得点以上の記録", "prompt": "アウェーで90得点以上の記録について知りたいです。アウェーで90点以上を記録したチームの試合ID、チームID、得点を取得してください。", "referenceSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE is_home = 0 AND points >= 90;", "requiredSqlTerms": ["is_home = 0", "points >= 90", "AND"]},
+        {"title": "90得点以上のチーム記録", "prompt": "90得点以上のチーム記録について知りたいです。得点が90点以上のチーム記録を取得してください。必要な情報は試合ID、チームID、得点です。得点の高い順に並べてください。", "referenceSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE points >= 90 ORDER BY points DESC, schedule_key, team_id;", "requiredSqlTerms": ["points >= 90", "ORDER BY points DESC"]},
+        {"title": "60得点以下のチーム記録", "prompt": "60得点以下のチーム記録について知りたいです。得点が60点以下のチーム記録を10件取得してください。必要な情報は試合ID、チームID、得点です。得点の低い順に並べてください。", "referenceSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE points <= 60 ORDER BY points, schedule_key, team_id LIMIT 10;", "requiredSqlTerms": ["points <= 60", "ORDER BY points"]},
+        {"title": "10アシスト以上のチーム記録", "prompt": "10アシスト以上のチーム記録について知りたいです。アシストが10以上のチーム記録を10件取得してください。必要な情報は試合ID、チームID、アシスト数です。", "referenceSql": "SELECT schedule_key, team_id, assists FROM game_team_stats WHERE assists >= 10 LIMIT 10;", "requiredSqlTerms": ["assists >= 10"]},
+        {"title": "20リバウンド以上のチーム記録", "prompt": "20リバウンド以上のチーム記録について知りたいです。総リバウンドが20以上のチーム記録を10件取得してください。必要な情報は試合ID、チームID、総リバウンドです。", "referenceSql": "SELECT schedule_key, team_id, total_rebounds FROM game_team_stats WHERE total_rebounds >= 20 LIMIT 10;", "requiredSqlTerms": ["total_rebounds >= 20"]},
+        {"title": "3ポイント成功5本以上の記録", "prompt": "3ポイント成功5本以上の記録について知りたいです。3ポイント成功数が5本以上のチーム記録を10件取得してください。必要な情報は試合ID、チームID、3ポイント成功数です。", "referenceSql": "SELECT schedule_key, team_id, fg3m FROM game_team_stats WHERE fg3m >= 5 LIMIT 10;", "requiredSqlTerms": ["fg3m >= 5"]},
+        {"title": "接戦を制したチーム", "prompt": "接戦を制したチームについて知りたいです。3点差以内で勝利したチームの記録を10件取得してください。必要な情報は試合ID、チームID、得点です。試合日の新しい順に並べ、同じ試合日の試合は試合IDの大きい順、同じ試合IDの記録はチームIDの昇順にしてください。", "sourceTables": ["game_team_stats", "games"], "referenceSql": "SELECT s.schedule_key, s.team_id, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.close_win_3pts_or_less = 1 ORDER BY g.game_date DESC, s.schedule_key DESC, s.team_id LIMIT 10;", "requiredSqlTerms": ["JOIN games", "close_win_3pts_or_less = 1", "ORDER BY g.game_date DESC"]},
+        {"title": "ホームで90得点以上の記録", "prompt": "ホームで90得点以上の記録について知りたいです。必要な情報はホームで90点以上を記録したチームの試合ID、チームID、得点です。", "referenceSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE is_home = 1 AND points >= 90;", "requiredSqlTerms": ["is_home = 1", "points >= 90", "AND"]},
+        {"title": "アウェーで90得点以上の記録", "prompt": "アウェーで90得点以上の記録について知りたいです。必要な情報はアウェーで90点以上を記録したチームの試合ID、チームID、得点です。", "referenceSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE is_home = 0 AND points >= 90;", "requiredSqlTerms": ["is_home = 0", "points >= 90", "AND"]},
         {"title": "フィールドゴール試投数の多い記録", "prompt": "フィールドゴール試投数の多い記録について知りたいです。フィールドゴール試投数が70本以上のチーム記録を10件取得してください。試投数の多い順に並べてください。", "referenceSql": "SELECT schedule_key, team_id, fga FROM game_team_stats WHERE fga >= 70 ORDER BY fga DESC, schedule_key, team_id LIMIT 10;", "requiredSqlTerms": ["fga >= 70", "ORDER BY fga DESC"]},
-        {"title": "20本以上のフィールドゴール成功", "prompt": "20本以上のフィールドゴール成功について知りたいです。フィールドゴール成功数が20本以上のチーム記録を10件取得してください。試合ID、チームID、成功数を取得してください。", "referenceSql": "SELECT schedule_key, team_id, fgm FROM game_team_stats WHERE fgm >= 20 LIMIT 10;", "requiredSqlTerms": ["fgm >= 20"]}
+        {"title": "20本以上のフィールドゴール成功", "prompt": "20本以上のフィールドゴール成功について知りたいです。フィールドゴール成功数が20本以上のチーム記録を10件取得してください。必要な情報は試合ID、チームID、成功数です。", "referenceSql": "SELECT schedule_key, team_id, fgm FROM game_team_stats WHERE fgm >= 20 LIMIT 10;", "requiredSqlTerms": ["fgm >= 20"]}
       ]
     },
     {
@@ -426,16 +426,16 @@
       "comparison": {"rowOrder": "insensitive"},
       "explanation": "選手別スタッツで比較演算子、AND、NULL条件を繰り返し練習します。",
       "items": [
-        {"title": "30得点以上の選手記録", "prompt": "30得点以上の選手記録について知りたいです。得点が30点以上の選手記録を10件取得してください。試合ID、選手ID、得点を取得してください。", "referenceSql": "SELECT schedule_key, player_id, points FROM player_game_stats WHERE points >= 30 LIMIT 10;", "requiredSqlTerms": ["points >= 30"]},
-        {"title": "15〜20得点の選手記録", "prompt": "15〜20得点の選手記録について知りたいです。得点が15点以上20点以下の選手記録を10件取得してください。試合ID、選手ID、得点を取得してください。", "referenceSql": "SELECT schedule_key, player_id, points FROM player_game_stats WHERE points BETWEEN 15 AND 20 LIMIT 10;", "requiredSqlTerms": ["points BETWEEN 15 AND 20"]},
-        {"title": "10アシスト以上の選手記録", "prompt": "10アシスト以上の選手記録について知りたいです。アシストが10以上の選手記録を10件取得してください。試合ID、選手ID、アシスト数を取得してください。", "referenceSql": "SELECT schedule_key, player_id, assists FROM player_game_stats WHERE assists >= 10 LIMIT 10;", "requiredSqlTerms": ["assists >= 10"]},
-        {"title": "15リバウンド以上の選手記録", "prompt": "15リバウンド以上の選手記録について知りたいです。総リバウンドが15以上の選手記録を10件取得してください。試合ID、選手ID、総リバウンドを取得してください。", "referenceSql": "SELECT schedule_key, player_id, total_rebounds FROM player_game_stats WHERE total_rebounds >= 15 LIMIT 10;", "requiredSqlTerms": ["total_rebounds >= 15"]},
-        {"title": "5スティール以上の選手記録", "prompt": "5スティール以上の選手記録について知りたいです。スティールが5以上の選手記録を10件取得してください。試合ID、選手ID、スティール数を取得してください。", "referenceSql": "SELECT schedule_key, player_id, steals FROM player_game_stats WHERE steals >= 5 LIMIT 10;", "requiredSqlTerms": ["steals >= 5"]},
-        {"title": "先発かつ出場した選手", "prompt": "先発かつ出場した選手について知りたいです。先発フラグと出場フラグがどちらも1の選手記録を10件取得してください。試合ID、選手ID、出場時間を取得してください。", "referenceSql": "SELECT schedule_key, player_id, play_time FROM player_game_stats WHERE is_starter = 1 AND is_playing = 1 LIMIT 10;", "requiredSqlTerms": ["is_starter = 1", "is_playing = 1", "AND"]},
-        {"title": "出場していない選手記録", "prompt": "出場していない選手記録について知りたいです。出場フラグが0の選手記録を10件取得してください。試合ID、選手ID、出場時間を取得してください。", "referenceSql": "SELECT schedule_key, player_id, play_time FROM player_game_stats WHERE is_playing = 0 LIMIT 10;", "requiredSqlTerms": ["is_playing = 0"]},
-        {"title": "10本以上シュートを打った選手", "prompt": "10本以上シュートを打った選手について知りたいです。フィールドゴール試投数が10本以上の選手記録を10件取得してください。試合ID、選手ID、試投数を取得してください。", "referenceSql": "SELECT schedule_key, player_id, fga FROM player_game_stats WHERE fga >= 10 LIMIT 10;", "requiredSqlTerms": ["fga >= 10"]},
-        {"title": "3ポイント成功5本以上の選手", "prompt": "3ポイント成功5本以上の選手について知りたいです。3ポイント成功数が5本以上の選手記録を10件取得してください。試合ID、選手ID、成功数を取得してください。", "referenceSql": "SELECT schedule_key, player_id, fg3m FROM player_game_stats WHERE fg3m >= 5 LIMIT 10;", "requiredSqlTerms": ["fg3m >= 5"]},
-        {"title": "効率値30以上の選手", "prompt": "効率値30以上の選手について知りたいです。効率値が30以上の選手記録を10件取得してください。試合ID、選手ID、効率値を取得してください。", "referenceSql": "SELECT schedule_key, player_id, efficiency FROM player_game_stats WHERE efficiency >= 30 LIMIT 10;", "requiredSqlTerms": ["efficiency >= 30"]}
+        {"title": "30得点以上の選手記録", "prompt": "30得点以上の選手記録について知りたいです。得点が30点以上の選手記録を10件取得してください。必要な情報は試合ID、選手ID、得点です。", "referenceSql": "SELECT schedule_key, player_id, points FROM player_game_stats WHERE points >= 30 LIMIT 10;", "requiredSqlTerms": ["points >= 30"]},
+        {"title": "15〜20得点の選手記録", "prompt": "15〜20得点の選手記録について知りたいです。得点が15点以上20点以下の選手記録を10件取得してください。必要な情報は試合ID、選手ID、得点です。", "referenceSql": "SELECT schedule_key, player_id, points FROM player_game_stats WHERE points BETWEEN 15 AND 20 LIMIT 10;", "requiredSqlTerms": ["points BETWEEN 15 AND 20"]},
+        {"title": "10アシスト以上の選手記録", "prompt": "10アシスト以上の選手記録について知りたいです。アシストが10以上の選手記録を10件取得してください。必要な情報は試合ID、選手ID、アシスト数です。", "referenceSql": "SELECT schedule_key, player_id, assists FROM player_game_stats WHERE assists >= 10 LIMIT 10;", "requiredSqlTerms": ["assists >= 10"]},
+        {"title": "15リバウンド以上の選手記録", "prompt": "15リバウンド以上の選手記録について知りたいです。総リバウンドが15以上の選手記録を10件取得してください。必要な情報は試合ID、選手ID、総リバウンドです。", "referenceSql": "SELECT schedule_key, player_id, total_rebounds FROM player_game_stats WHERE total_rebounds >= 15 LIMIT 10;", "requiredSqlTerms": ["total_rebounds >= 15"]},
+        {"title": "5スティール以上の選手記録", "prompt": "5スティール以上の選手記録について知りたいです。スティールが5以上の選手記録を10件取得してください。必要な情報は試合ID、選手ID、スティール数です。", "referenceSql": "SELECT schedule_key, player_id, steals FROM player_game_stats WHERE steals >= 5 LIMIT 10;", "requiredSqlTerms": ["steals >= 5"]},
+        {"title": "先発かつ出場した選手", "prompt": "先発かつ出場した選手について知りたいです。先発フラグと出場フラグがどちらも1の選手記録を10件取得してください。必要な情報は試合ID、選手ID、出場時間です。", "referenceSql": "SELECT schedule_key, player_id, play_time FROM player_game_stats WHERE is_starter = 1 AND is_playing = 1 LIMIT 10;", "requiredSqlTerms": ["is_starter = 1", "is_playing = 1", "AND"]},
+        {"title": "出場していない選手記録", "prompt": "出場していない選手記録について知りたいです。出場フラグが0の選手記録を10件取得してください。必要な情報は試合ID、選手ID、出場時間です。", "referenceSql": "SELECT schedule_key, player_id, play_time FROM player_game_stats WHERE is_playing = 0 LIMIT 10;", "requiredSqlTerms": ["is_playing = 0"]},
+        {"title": "10本以上シュートを打った選手", "prompt": "10本以上シュートを打った選手について知りたいです。フィールドゴール試投数が10本以上の選手記録を10件取得してください。必要な情報は試合ID、選手ID、試投数です。", "referenceSql": "SELECT schedule_key, player_id, fga FROM player_game_stats WHERE fga >= 10 LIMIT 10;", "requiredSqlTerms": ["fga >= 10"]},
+        {"title": "3ポイント成功5本以上の選手", "prompt": "3ポイント成功5本以上の選手について知りたいです。3ポイント成功数が5本以上の選手記録を10件取得してください。必要な情報は試合ID、選手ID、成功数です。", "referenceSql": "SELECT schedule_key, player_id, fg3m FROM player_game_stats WHERE fg3m >= 5 LIMIT 10;", "requiredSqlTerms": ["fg3m >= 5"]},
+        {"title": "効率値30以上の選手", "prompt": "効率値30以上の選手について知りたいです。効率値が30以上の選手記録を10件取得してください。必要な情報は試合ID、選手ID、効率値です。", "referenceSql": "SELECT schedule_key, player_id, efficiency FROM player_game_stats WHERE efficiency >= 30 LIMIT 10;", "requiredSqlTerms": ["efficiency >= 30"]}
       ]
     },
     {
@@ -446,16 +446,16 @@
       "comparison": {"rowOrder": "insensitive"},
       "explanation": "IDを使って試合・チーム・スタッツを結合し、表示したい日本語情報へ置き換えます。",
       "items": [
-        {"title": "ホームで90得点したチーム名", "prompt": "ホームで90得点したチーム名について知りたいです。ホームで得点が90点以上のチーム記録を10件取得してください。試合日、チーム名、得点を取得してください。", "referenceSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_home = 1 AND s.points >= 90 LIMIT 10;", "resultSpec": {"rowOrder": "insensitive"}, "requiredSqlTerms": ["JOIN games", "JOIN teams", "s.is_home = 1"]},
-        {"title": "アウェーで90得点したチーム名", "prompt": "アウェーで90得点したチーム名について知りたいです。アウェーで得点が90点以上のチーム記録を10件取得してください。試合日、チーム名、得点を取得してください。", "referenceSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_home = 0 AND s.points >= 90 LIMIT 10;", "requiredSqlTerms": ["JOIN games", "JOIN teams", "s.is_home = 0"]},
-        {"title": "2025-26シーズンのチーム得点", "prompt": "2025-26シーズンのチーム得点について知りたいです。2025-26シーズンのチーム別得点記録を10件取得してください。試合日、チーム名、得点を取得してください。", "referenceSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE g.season = '2025-26' LIMIT 10;", "resultSpec": {"rowOrder": "insensitive"}, "requiredSqlTerms": ["JOIN games", "JOIN teams", "g.season = '2025-26'"]},
-        {"title": "得点の高いチーム名一覧", "prompt": "得点の高いチーム名一覧について知りたいです。チーム別スタッツから、得点の高い記録を10件取得してください。チーム名と得点を取得し、得点の高い順に並べてください。", "referenceSql": "SELECT t.team_name_j, s.points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id ORDER BY s.points DESC, s.schedule_key, s.team_id LIMIT 10;", "requiredSqlTerms": ["JOIN teams", "ORDER BY s.points DESC"]},
-        {"title": "相手チーム名と得点の比較", "prompt": "相手チーム名と得点の比較について知りたいです。チーム別スタッツを10件取得してください。チーム名、相手チーム名、自チーム得点、相手チーム得点を取得してください。", "referenceSql": "SELECT t.team_name_j, o.team_name_j AS opponent_team, s.points, os.points AS opponent_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id JOIN teams AS o ON o.team_id = s.opponent_team_id JOIN game_team_stats AS os ON os.schedule_key = s.schedule_key AND os.team_id = s.opponent_team_id LIMIT 10;", "requiredSqlTerms": ["JOIN teams AS t", "JOIN teams AS o", "opponent_team_id"]},
-        {"title": "20得点以上の選手とチーム名", "prompt": "20得点以上の選手とチーム名について知りたいです。得点が20点以上の選手記録を10件取得してください。選手ID、チーム名、得点を取得してください。", "referenceSql": "SELECT s.player_id, t.team_name_j, s.points FROM player_game_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points >= 20 LIMIT 10;", "requiredSqlTerms": ["JOIN teams", "s.points >= 20"]},
-        {"title": "選手の得点と試合日", "prompt": "選手の得点と試合日について知りたいです。得点が20点以上の選手記録を10件取得してください。試合日、選手ID、得点を取得してください。", "referenceSql": "SELECT g.game_date, s.player_id, s.points FROM player_game_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.points >= 20 LIMIT 10;", "requiredSqlTerms": ["JOIN games", "s.points >= 20"]},
-        {"title": "先発選手のチーム名と試合日", "prompt": "先発選手のチーム名と試合日について知りたいです。先発フラグが1の選手記録を10件取得してください。試合日、選手ID、チーム名、得点を取得してください。", "referenceSql": "SELECT g.game_date, s.player_id, t.team_name_j, s.points FROM player_game_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_starter = 1 LIMIT 10;", "requiredSqlTerms": ["JOIN games", "JOIN teams", "s.is_starter = 1"]},
-        {"title": "観客数とホームチーム名", "prompt": "観客数とホームチーム名について知りたいです。観客数が記録されている試合を10件取得してください。試合日、ホームチーム名、観客数を取得してください。", "referenceSql": "SELECT g.game_date, t.team_name_j, g.attendance FROM games AS g JOIN teams AS t ON t.team_id = g.home_team_id WHERE g.attendance IS NOT NULL LIMIT 10;", "requiredSqlTerms": ["JOIN teams", "g.attendance IS NOT NULL"]},
-        {"title": "チーム別スタッツとシーズン", "prompt": "チーム別スタッツとシーズンについて知りたいです。得点が記録されたチーム別スタッツを10件取得してください。シーズン、チーム名、得点を取得してください。", "referenceSql": "SELECT g.season, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL LIMIT 10;", "requiredSqlTerms": ["JOIN games", "JOIN teams", "s.points IS NOT NULL"]}
+        {"title": "ホームで90得点したチーム名", "prompt": "ホームで90得点したチーム名について知りたいです。ホームで得点が90点以上のチーム記録を10件取得してください。必要な情報は試合日、チーム名、得点です。", "referenceSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_home = 1 AND s.points >= 90 LIMIT 10;", "resultSpec": {"rowOrder": "insensitive"}, "requiredSqlTerms": ["JOIN games", "JOIN teams", "s.is_home = 1"]},
+        {"title": "アウェーで90得点したチーム名", "prompt": "アウェーで90得点したチーム名について知りたいです。アウェーで得点が90点以上のチーム記録を10件取得してください。必要な情報は試合日、チーム名、得点です。", "referenceSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_home = 0 AND s.points >= 90 LIMIT 10;", "requiredSqlTerms": ["JOIN games", "JOIN teams", "s.is_home = 0"]},
+        {"title": "2025-26シーズンのチーム得点", "prompt": "2025-26シーズンのチーム得点について知りたいです。2025-26シーズンのチーム別得点記録を10件取得してください。必要な情報は試合日、チーム名、得点です。", "referenceSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE g.season = '2025-26' LIMIT 10;", "resultSpec": {"rowOrder": "insensitive"}, "requiredSqlTerms": ["JOIN games", "JOIN teams", "g.season = '2025-26'"]},
+        {"title": "得点の高いチーム名一覧", "prompt": "得点の高いチーム名一覧について知りたいです。チーム別スタッツから、得点の高い記録を10件取得してください。必要な情報はチーム名と得点です。得点の高い順に並べてください。", "referenceSql": "SELECT t.team_name_j, s.points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id ORDER BY s.points DESC, s.schedule_key, s.team_id LIMIT 10;", "requiredSqlTerms": ["JOIN teams", "ORDER BY s.points DESC"]},
+        {"title": "相手チーム名と得点の比較", "prompt": "相手チーム名と得点の比較について知りたいです。チーム別スタッツを10件取得してください。必要な情報はチーム名、相手チーム名、自チーム得点、相手チーム得点です。", "referenceSql": "SELECT t.team_name_j, o.team_name_j AS opponent_team, s.points, os.points AS opponent_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id JOIN teams AS o ON o.team_id = s.opponent_team_id JOIN game_team_stats AS os ON os.schedule_key = s.schedule_key AND os.team_id = s.opponent_team_id LIMIT 10;", "requiredSqlTerms": ["JOIN teams AS t", "JOIN teams AS o", "opponent_team_id"]},
+        {"title": "20得点以上の選手とチーム名", "prompt": "20得点以上の選手とチーム名について知りたいです。選手記録にチーム名を結合し、得点が20点以上の選手記録を10件取得してください。必要な情報は選手ID、チーム名、得点です。", "sourceTables": ["player_game_stats", "teams"], "referenceSql": "SELECT s.player_id, t.team_name_j, s.points FROM player_game_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points >= 20 LIMIT 10;", "requiredSqlTerms": ["JOIN player_game_stats", "JOIN teams", "s.points >= 20"]},
+        {"title": "選手の得点と試合日", "prompt": "選手の得点と試合日について知りたいです。選手記録に試合日を結合し、得点が20点以上の選手記録を10件取得してください。必要な情報は試合日、選手ID、得点です。", "sourceTables": ["player_game_stats", "games"], "referenceSql": "SELECT g.game_date, s.player_id, s.points FROM player_game_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.points >= 20 LIMIT 10;", "requiredSqlTerms": ["JOIN player_game_stats", "JOIN games", "s.points >= 20"]},
+        {"title": "2025-26シーズンの先発選手", "prompt": "2025-26シーズンの各チームの先発5人を確認したいです。各試合・チームについて、先発フラグが1の選手記録を取得してください。必要な情報は試合日、チーム名、選手ID、得点です。", "sourceTables": ["player_game_stats", "games", "teams"], "referenceSql": "SELECT g.game_date, t.team_name_j, s.player_id, s.points FROM player_game_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE g.season = '2025-26' AND s.is_starter = 1;", "resultSpec": {"rowOrder": "insensitive"}, "requiredSqlTerms": ["JOIN player_game_stats", "JOIN games", "JOIN teams", "g.season = '2025-26'", "s.is_starter = 1"]},
+        {"title": "観客数とホームチーム名", "prompt": "観客数とホームチーム名について知りたいです。観客数が記録されている試合を10件取得してください。必要な情報は試合日、ホームチーム名、観客数です。", "referenceSql": "SELECT g.game_date, t.team_name_j, g.attendance FROM games AS g JOIN teams AS t ON t.team_id = g.home_team_id WHERE g.attendance IS NOT NULL LIMIT 10;", "requiredSqlTerms": ["JOIN teams", "g.attendance IS NOT NULL"]},
+        {"title": "チーム別スタッツとシーズン", "prompt": "チーム別スタッツとシーズンについて知りたいです。得点が記録されたチーム別スタッツを10件取得してください。必要な情報はシーズン、チーム名、得点です。", "referenceSql": "SELECT g.season, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL LIMIT 10;", "requiredSqlTerms": ["JOIN games", "JOIN teams", "s.points IS NOT NULL"]}
       ]
     },
     {
@@ -466,16 +466,16 @@
       "comparison": {"rowOrder": "sensitive", "numericTolerance": 0.01},
       "explanation": "GROUP BYとCOUNT・SUM・AVG・MAXを、集計単位を変えながら反復します。",
       "items": [
-        {"title": "シーズンごとの平均観客数", "prompt": "シーズンごとの平均観客数について知りたいです。シーズンごとの平均観客数を計算してください。シーズンと平均観客数を取得し、シーズンの昇順に並べてください。", "referenceSql": "SELECT season, AVG(attendance) AS average_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season ORDER BY season;", "requiredSqlTerms": ["AVG(attendance)", "GROUP BY season"]},
-        {"title": "シーズンごとの総観客数", "prompt": "シーズンごとの総観客数について知りたいです。シーズンごとの総観客数を計算してください。シーズンと総観客数を取得し、総観客数の多い順に並べてください。", "referenceSql": "SELECT season, SUM(attendance) AS total_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season ORDER BY total_attendance DESC, season;", "requiredSqlTerms": ["SUM(attendance)", "GROUP BY season"]},
-        {"title": "試合種別ごとの件数", "prompt": "試合種別ごとの件数について知りたいです。試合種別ごとの試合数を集計してください。試合種別と試合数を取得し、試合数の多い順に並べてください。", "referenceSql": "SELECT game_type, COUNT(*) AS game_count FROM games GROUP BY game_type ORDER BY game_count DESC, game_type;", "requiredSqlTerms": ["COUNT(*)", "GROUP BY game_type"]},
-        {"title": "チームごとの総得点", "prompt": "チームごとの総得点について知りたいです。チームごとの総得点を計算してください。チーム名と総得点を取得し、総得点の多い順に10チーム並べてください。", "referenceSql": "SELECT t.team_name_j, SUM(s.points) AS total_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY total_points DESC, t.team_id LIMIT 10;", "requiredSqlTerms": ["SUM(s.points)", "JOIN teams", "GROUP BY"]},
-        {"title": "チームごとの平均リバウンド", "prompt": "チームごとの平均リバウンドについて知りたいです。チームごとの平均総リバウンドを計算してください。チーム名と平均総リバウンドを取得し、平均総リバウンドの高い順に10チーム並べてください。", "referenceSql": "SELECT t.team_name_j, AVG(s.total_rebounds) AS average_rebounds FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.total_rebounds IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY average_rebounds DESC, t.team_id LIMIT 10;", "requiredSqlTerms": ["AVG(s.total_rebounds)", "GROUP BY"]},
-        {"title": "チームごとの最多アシスト", "prompt": "チームごとの最多アシストについて知りたいです。チームごとの1試合あたりの最多アシスト数を計算してください。チーム名と最多アシスト数を取得し、最多アシスト数の高い順に10チーム並べてください。", "referenceSql": "SELECT t.team_name_j, MAX(s.assists) AS max_assists FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.assists IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY max_assists DESC, t.team_id LIMIT 10;", "requiredSqlTerms": ["MAX(s.assists)", "GROUP BY"]},
-        {"title": "選手ごとの平均アシスト", "prompt": "選手ごとの平均アシストについて知りたいです。出場した選手ごとの平均アシスト数を計算してください。選手名と平均アシスト数を取得し、平均アシスト数の高い順に10人並べてください。", "referenceSql": "SELECT p.player_name_j, AVG(s.assists) AS average_assists FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 AND s.assists IS NOT NULL GROUP BY p.player_id, p.player_name_j ORDER BY average_assists DESC, p.player_id LIMIT 10;", "requiredSqlTerms": ["AVG(s.assists)", "JOIN players", "GROUP BY"]},
-        {"title": "選手ごとの最多得点", "prompt": "選手ごとの最多得点について知りたいです。選手ごとの1試合あたりの最多得点を計算してください。選手名と最多得点を取得し、最多得点の高い順に10人並べてください。", "referenceSql": "SELECT p.player_name_j, MAX(s.points) AS max_points FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.points IS NOT NULL GROUP BY p.player_id, p.player_name_j ORDER BY max_points DESC, p.player_id LIMIT 10;", "requiredSqlTerms": ["MAX(s.points)", "JOIN players", "GROUP BY"]},
-        {"title": "シーズンごとの総チーム得点", "prompt": "シーズンごとの総チーム得点について知りたいです。シーズンごとのチーム総得点を計算してください。シーズンと総得点を取得し、シーズンの昇順に並べてください。", "referenceSql": "SELECT g.season, SUM(s.points) AS total_points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.points IS NOT NULL GROUP BY g.season ORDER BY g.season;", "requiredSqlTerms": ["JOIN games", "SUM(s.points)", "GROUP BY g.season"]},
-        {"title": "シーズンごとの平均チーム得点", "prompt": "シーズンごとの平均チーム得点について知りたいです。シーズンごとのチーム平均得点を計算してください。シーズンと平均得点を取得し、平均得点の高い順に並べてください。", "referenceSql": "SELECT g.season, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.points IS NOT NULL GROUP BY g.season ORDER BY average_points DESC, g.season;", "requiredSqlTerms": ["JOIN games", "AVG(s.points)", "GROUP BY g.season"]}
+        {"title": "シーズンごとの平均観客数", "prompt": "シーズンごとの平均観客数について知りたいです。シーズンごとの平均観客数を計算してください。必要な情報はシーズンと平均観客数です。シーズンの昇順に並べてください。", "referenceSql": "SELECT season, AVG(attendance) AS average_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season ORDER BY season;", "requiredSqlTerms": ["AVG(attendance)", "GROUP BY season"]},
+        {"title": "シーズンごとの総観客数", "prompt": "シーズンごとの総観客数について知りたいです。シーズンごとの総観客数を計算してください。必要な情報はシーズンと総観客数です。総観客数の多い順に並べてください。", "referenceSql": "SELECT season, SUM(attendance) AS total_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season ORDER BY total_attendance DESC, season;", "requiredSqlTerms": ["SUM(attendance)", "GROUP BY season"]},
+        {"title": "試合種別ごとの件数", "prompt": "試合種別ごとの件数について知りたいです。試合種別ごとの試合数を集計してください。必要な情報は試合種別と試合数です。試合数の多い順に並べてください。", "referenceSql": "SELECT game_type, COUNT(*) AS game_count FROM games GROUP BY game_type ORDER BY game_count DESC, game_type;", "requiredSqlTerms": ["COUNT(*)", "GROUP BY game_type"]},
+        {"title": "チームごとの総得点", "prompt": "チームごとの総得点について知りたいです。チームごとの総得点を計算してください。必要な情報はチーム名と総得点です。総得点の多い順に10チーム並べてください。", "referenceSql": "SELECT t.team_name_j, SUM(s.points) AS total_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY total_points DESC, t.team_id LIMIT 10;", "requiredSqlTerms": ["SUM(s.points)", "JOIN teams", "GROUP BY"]},
+        {"title": "チームごとの平均リバウンド", "prompt": "チームごとの平均リバウンドについて知りたいです。チームごとの平均総リバウンドを計算してください。必要な情報はチーム名と平均総リバウンドです。平均総リバウンドの高い順に10チーム並べてください。", "referenceSql": "SELECT t.team_name_j, AVG(s.total_rebounds) AS average_rebounds FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.total_rebounds IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY average_rebounds DESC, t.team_id LIMIT 10;", "requiredSqlTerms": ["AVG(s.total_rebounds)", "GROUP BY"]},
+        {"title": "チームごとの最多アシスト", "prompt": "チームごとの最多アシストについて知りたいです。チームごとの1試合あたりの最多アシスト数を計算してください。必要な情報はチーム名と最多アシスト数です。最多アシスト数の高い順に10チーム並べてください。", "referenceSql": "SELECT t.team_name_j, MAX(s.assists) AS max_assists FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.assists IS NOT NULL GROUP BY t.team_id, t.team_name_j ORDER BY max_assists DESC, t.team_id LIMIT 10;", "requiredSqlTerms": ["MAX(s.assists)", "GROUP BY"]},
+        {"title": "選手ごとの平均アシスト", "prompt": "選手ごとの平均アシストについて知りたいです。出場した選手ごとの平均アシスト数を計算してください。必要な情報は選手名と平均アシスト数です。平均アシスト数の高い順に10人並べてください。", "referenceSql": "SELECT p.player_name_j, AVG(s.assists) AS average_assists FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.is_playing = 1 AND s.assists IS NOT NULL GROUP BY p.player_id, p.player_name_j ORDER BY average_assists DESC, p.player_id LIMIT 10;", "requiredSqlTerms": ["AVG(s.assists)", "JOIN players", "GROUP BY"]},
+        {"title": "選手ごとの最多得点", "prompt": "選手ごとの最多得点について知りたいです。選手ごとの1試合あたりの最多得点を計算してください。必要な情報は選手名と最多得点です。最多得点の高い順に10人並べてください。", "referenceSql": "SELECT p.player_name_j, MAX(s.points) AS max_points FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.points IS NOT NULL GROUP BY p.player_id, p.player_name_j ORDER BY max_points DESC, p.player_id LIMIT 10;", "requiredSqlTerms": ["MAX(s.points)", "JOIN players", "GROUP BY"]},
+        {"title": "シーズンごとの総チーム得点", "prompt": "シーズンごとの総チーム得点について知りたいです。シーズンごとのチーム総得点を計算してください。必要な情報はシーズンと総得点です。シーズンの昇順に並べてください。", "referenceSql": "SELECT g.season, SUM(s.points) AS total_points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.points IS NOT NULL GROUP BY g.season ORDER BY g.season;", "requiredSqlTerms": ["JOIN games", "SUM(s.points)", "GROUP BY g.season"]},
+        {"title": "シーズンごとの平均チーム得点", "prompt": "シーズンごとの平均チーム得点について知りたいです。シーズンごとのチーム平均得点を計算してください。必要な情報はシーズンと平均得点です。平均得点の高い順に並べてください。", "referenceSql": "SELECT g.season, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.points IS NOT NULL GROUP BY g.season ORDER BY average_points DESC, g.season;", "requiredSqlTerms": ["JOIN games", "AVG(s.points)", "GROUP BY g.season"]}
       ]
     },
     {
@@ -486,16 +486,16 @@
       "comparison": {"rowOrder": "sensitive", "numericTolerance": 0.01},
       "explanation": "CASE、LEFT JOIN、HAVINGを組み合わせ、条件ごとの集計結果を読み取る練習です。",
       "items": [
-        {"title": "チームごとのホーム・アウェー件数", "prompt": "チームごとのホーム・アウェー件数について知りたいです。チームごとにホーム試合数とアウェー試合数を集計してください。チーム名、ホーム試合数、アウェー試合数を取得し、チームIDの昇順に並べてください。", "sourceTables": ["teams", "game_team_stats"], "referenceSql": "SELECT t.team_name_j, SUM(CASE WHEN s.is_home = 1 THEN 1 ELSE 0 END) AS home_games, SUM(CASE WHEN s.is_home = 0 THEN 1 ELSE 0 END) AS away_games FROM teams AS t LEFT JOIN game_team_stats AS s ON s.team_id = t.team_id GROUP BY t.team_id, t.team_name_j ORDER BY t.team_id;", "requiredSqlTerms": ["LEFT JOIN", "SUM(CASE WHEN", "GROUP BY"]},
-        {"title": "試合を得点差で分類する", "prompt": "得点差による試合の分類について知りたいです。両チームの得点が記録されている試合を10件取得してください。点差が10点未満なら「接戦」、10点以上なら「通常」として分類し、試合ID、分類、点差を取得してください。点差の小さい順に並べてください。", "sourceTables": ["games"], "referenceSql": "SELECT schedule_key, CASE WHEN ABS(home_team_score_total - away_team_score_total) < 10 THEN '接戦' ELSE '通常' END AS game_class, ABS(home_team_score_total - away_team_score_total) AS point_diff FROM games WHERE home_team_score_total IS NOT NULL AND away_team_score_total IS NOT NULL ORDER BY point_diff, schedule_key LIMIT 10;", "requiredSqlTerms": ["CASE WHEN", "ABS", "game_class"]},
-        {"title": "試合を観客数で分類する", "prompt": "観客数による試合の分類について知りたいです。観客数が記録されている試合を10件取得してください。観客数が5000人以上なら「大規模」、5000人未満なら「通常」として分類し、試合日、分類、観客数を取得してください。観客数の多い順に並べてください。", "sourceTables": ["games"], "referenceSql": "SELECT game_date, CASE WHEN attendance >= 5000 THEN '大規模' ELSE '通常' END AS attendance_class, attendance FROM games WHERE attendance IS NOT NULL ORDER BY attendance DESC, game_date DESC LIMIT 10;", "requiredSqlTerms": ["CASE WHEN", "attendance >= 5000", "attendance_class"]},
-        {"title": "試合ごとの勝敗ラベル", "prompt": "試合ごとの勝敗ラベルについて知りたいです。終了した試合を10件取得してください。ホームチームとアウェーチームのどちらが勝ったかを分類し、試合ID、勝敗ラベル、点差を取得してください。試合IDの大きい順に並べてください。", "sourceTables": ["games"], "referenceSql": "SELECT schedule_key, CASE WHEN home_team_score_total > away_team_score_total THEN 'ホーム勝利' ELSE 'アウェー勝利' END AS result, ABS(home_team_score_total - away_team_score_total) AS point_diff FROM games WHERE home_team_score_total IS NOT NULL AND away_team_score_total IS NOT NULL ORDER BY schedule_key DESC LIMIT 10;", "requiredSqlTerms": ["CASE WHEN", "home_team_score_total", "point_diff"]},
-        {"title": "選手の得点帯を分類する", "prompt": "選手の得点帯の分類について知りたいです。出場フラグが1で、得点が記録されている選手記録を10件取得してください。得点が20点以上なら「高得点」、20点未満なら「通常」として分類し、選手ID、分類、得点を取得してください。得点の高い順に並べ、同じ得点は試合IDの小さい順にしてください。", "sourceTables": ["player_game_stats"], "referenceSql": "SELECT player_id, CASE WHEN points >= 20 THEN '高得点' ELSE '通常' END AS scoring_class, points FROM player_game_stats WHERE is_playing = 1 AND points IS NOT NULL ORDER BY points DESC, schedule_key LIMIT 10;", "requiredSqlTerms": ["CASE WHEN", "points >= 20", "is_playing = 1"]},
-        {"title": "チーム別スタッツ件数を比較する", "prompt": "チーム別スタッツ件数の比較について知りたいです。すべてのチームについて、チーム別スタッツの件数を集計してください。チーム名と件数を取得し、件数の多い順に10チーム並べてください。", "sourceTables": ["teams", "game_team_stats"], "referenceSql": "SELECT t.team_name_j, COUNT(s.schedule_key) AS stats_count FROM teams AS t LEFT JOIN game_team_stats AS s ON s.team_id = t.team_id GROUP BY t.team_id, t.team_name_j ORDER BY stats_count DESC, t.team_id LIMIT 10;", "requiredSqlTerms": ["LEFT JOIN", "COUNT(s.schedule_key)", "GROUP BY"]},
-        {"title": "スタッツがないチームだけを探す", "prompt": "チーム別スタッツがないチームについて知りたいです。チーム別スタッツが1件もないチームを抽出してください。チームIDとチーム名を取得し、チームIDの昇順に並べてください。", "sourceTables": ["teams", "game_team_stats"], "referenceSql": "SELECT t.team_id, t.team_name_j FROM teams AS t LEFT JOIN game_team_stats AS s ON s.team_id = t.team_id GROUP BY t.team_id, t.team_name_j HAVING COUNT(s.schedule_key) = 0 ORDER BY t.team_id;", "requiredSqlTerms": ["LEFT JOIN", "HAVING COUNT(s.schedule_key) = 0"]},
-        {"title": "試合記録がない選手を探す", "prompt": "試合記録がない選手について知りたいです。player_game_statsに記録がない選手を抽出してください。選手IDと選手名を取得し、選手IDの昇順に並べてください。", "sourceTables": ["players", "player_game_stats"], "referenceSql": "SELECT p.player_id, p.player_name_j FROM players AS p LEFT JOIN player_game_stats AS s ON s.player_id = p.player_id GROUP BY p.player_id, p.player_name_j HAVING COUNT(s.schedule_key) = 0 ORDER BY p.player_id;", "requiredSqlTerms": ["LEFT JOIN", "HAVING COUNT(s.schedule_key) = 0"]},
-        {"title": "ホーム勝率をチーム別に見る", "prompt": "チーム別のホーム勝率について知りたいです。チームごとのホーム試合数とホーム勝利数を集計してください。チーム名、ホーム試合数、ホーム勝利数を取得し、ホーム勝利数の多い順に10チーム並べてください。", "sourceTables": ["teams", "game_team_stats"], "referenceSql": "SELECT t.team_name_j, COUNT(*) AS home_games, SUM(CASE WHEN s.points > o.points THEN 1 ELSE 0 END) AS home_wins FROM teams AS t JOIN game_team_stats AS s ON s.team_id = t.team_id AND s.is_home = 1 JOIN game_team_stats AS o ON o.schedule_key = s.schedule_key AND o.team_id = s.opponent_team_id GROUP BY t.team_id, t.team_name_j ORDER BY home_wins DESC, t.team_id LIMIT 10;", "requiredSqlTerms": ["JOIN game_team_stats AS o", "s.is_home = 1", "SUM(CASE WHEN"]},
-        {"title": "得点とアシストの合計が高い記録", "prompt": "得点とアシストの合計が高い記録について知りたいです。出場フラグが1の選手記録のうち、得点とアシストの合計が25以上のものを10件取得してください。選手ID、得点、アシスト、合計を取得し、合計の高い順に並べ、同じ合計は試合IDの小さい順にしてください。", "sourceTables": ["player_game_stats"], "referenceSql": "SELECT player_id, points, assists, points + assists AS offense_total FROM player_game_stats WHERE is_playing = 1 AND points IS NOT NULL AND assists IS NOT NULL AND points + assists >= 25 ORDER BY offense_total DESC, schedule_key LIMIT 10;", "requiredSqlTerms": ["points + assists", "offense_total", "AND"]}
+        {"title": "チームごとのホーム・アウェー件数", "prompt": "チームごとのホーム・アウェー件数について知りたいです。チームごとにホーム試合数とアウェー試合数を集計してください。必要な情報はチーム名、ホーム試合数、アウェー試合数です。チームIDの昇順に並べてください。", "sourceTables": ["teams", "game_team_stats"], "referenceSql": "SELECT t.team_name_j, SUM(CASE WHEN s.is_home = 1 THEN 1 ELSE 0 END) AS home_games, SUM(CASE WHEN s.is_home = 0 THEN 1 ELSE 0 END) AS away_games FROM teams AS t LEFT JOIN game_team_stats AS s ON s.team_id = t.team_id GROUP BY t.team_id, t.team_name_j ORDER BY t.team_id;", "requiredSqlTerms": ["LEFT JOIN", "SUM(CASE WHEN", "GROUP BY"]},
+        {"title": "試合を得点差で分類する", "prompt": "得点差による試合の分類について知りたいです。両チームの得点が記録されている試合を10件取得してください。点差が10点未満なら「接戦」、10点以上なら「通常」として分類し、必要な情報は試合ID、分類、点差です。点差の小さい順に並べてください。", "sourceTables": ["games"], "referenceSql": "SELECT schedule_key, CASE WHEN ABS(home_team_score_total - away_team_score_total) < 10 THEN '接戦' ELSE '通常' END AS game_class, ABS(home_team_score_total - away_team_score_total) AS point_diff FROM games WHERE home_team_score_total IS NOT NULL AND away_team_score_total IS NOT NULL ORDER BY point_diff, schedule_key LIMIT 10;", "requiredSqlTerms": ["CASE WHEN", "ABS", "game_class"]},
+        {"title": "試合を観客数で分類する", "prompt": "観客数による試合の分類について知りたいです。観客数が記録されている試合を10件取得してください。観客数が5000人以上なら「大規模」、5000人未満なら「通常」として分類し、必要な情報は試合日、分類、観客数です。観客数の多い順に並べてください。", "sourceTables": ["games"], "referenceSql": "SELECT game_date, CASE WHEN attendance >= 5000 THEN '大規模' ELSE '通常' END AS attendance_class, attendance FROM games WHERE attendance IS NOT NULL ORDER BY attendance DESC, game_date DESC LIMIT 10;", "requiredSqlTerms": ["CASE WHEN", "attendance >= 5000", "attendance_class"]},
+        {"title": "試合ごとの勝敗ラベル", "prompt": "試合ごとの勝敗ラベルについて知りたいです。終了した試合を10件取得してください。ホームチームとアウェーチームのどちらが勝ったかを分類し、必要な情報は試合ID、勝敗ラベル、点差です。試合IDの大きい順に並べてください。", "sourceTables": ["games"], "referenceSql": "SELECT schedule_key, CASE WHEN home_team_score_total > away_team_score_total THEN 'ホーム勝利' ELSE 'アウェー勝利' END AS result, ABS(home_team_score_total - away_team_score_total) AS point_diff FROM games WHERE home_team_score_total IS NOT NULL AND away_team_score_total IS NOT NULL ORDER BY schedule_key DESC LIMIT 10;", "requiredSqlTerms": ["CASE WHEN", "home_team_score_total", "point_diff"]},
+        {"title": "選手の得点帯を分類する", "prompt": "選手の得点帯の分類について知りたいです。出場フラグが1で、得点が記録されている選手記録を10件取得してください。得点が20点以上なら「高得点」、20点未満なら「通常」として分類し、必要な情報は選手ID、分類、得点です。得点の高い順に並べ、同じ得点は試合IDの小さい順にしてください。", "sourceTables": ["player_game_stats"], "referenceSql": "SELECT player_id, CASE WHEN points >= 20 THEN '高得点' ELSE '通常' END AS scoring_class, points FROM player_game_stats WHERE is_playing = 1 AND points IS NOT NULL ORDER BY points DESC, schedule_key LIMIT 10;", "requiredSqlTerms": ["CASE WHEN", "points >= 20", "is_playing = 1"]},
+        {"title": "チーム別スタッツ件数を比較する", "prompt": "チーム別スタッツ件数の比較について知りたいです。すべてのチームについて、チーム別スタッツの件数を集計してください。必要な情報はチーム名と件数です。件数の多い順に10チーム並べてください。", "sourceTables": ["teams", "game_team_stats"], "referenceSql": "SELECT t.team_name_j, COUNT(s.schedule_key) AS stats_count FROM teams AS t LEFT JOIN game_team_stats AS s ON s.team_id = t.team_id GROUP BY t.team_id, t.team_name_j ORDER BY stats_count DESC, t.team_id LIMIT 10;", "requiredSqlTerms": ["LEFT JOIN", "COUNT(s.schedule_key)", "GROUP BY"]},
+        {"title": "スタッツがないチームだけを探す", "prompt": "チーム別スタッツがないチームについて知りたいです。チーム別スタッツが1件もないチームを抽出してください。必要な情報はチームIDとチーム名です。チームIDの昇順に並べてください。", "sourceTables": ["teams", "game_team_stats"], "referenceSql": "SELECT t.team_id, t.team_name_j FROM teams AS t LEFT JOIN game_team_stats AS s ON s.team_id = t.team_id GROUP BY t.team_id, t.team_name_j HAVING COUNT(s.schedule_key) = 0 ORDER BY t.team_id;", "requiredSqlTerms": ["LEFT JOIN", "HAVING COUNT(s.schedule_key) = 0"]},
+        {"title": "試合記録がない選手を探す", "prompt": "試合記録がない選手について知りたいです。試合記録がない選手を抽出してください。必要な情報は選手IDと選手名です。選手IDの昇順に並べてください。", "sourceTables": ["players", "player_game_stats"], "referenceSql": "SELECT p.player_id, p.player_name_j FROM players AS p LEFT JOIN player_game_stats AS s ON s.player_id = p.player_id GROUP BY p.player_id, p.player_name_j HAVING COUNT(s.schedule_key) = 0 ORDER BY p.player_id;", "requiredSqlTerms": ["LEFT JOIN", "HAVING COUNT(s.schedule_key) = 0"]},
+        {"title": "ホーム勝率をチーム別に見る", "prompt": "チーム別のホーム勝率について知りたいです。チームごとのホーム試合数とホーム勝利数を集計してください。必要な情報はチーム名、ホーム試合数、ホーム勝利数です。ホーム勝利数の多い順に10チーム並べてください。", "sourceTables": ["teams", "game_team_stats"], "referenceSql": "SELECT t.team_name_j, COUNT(*) AS home_games, SUM(CASE WHEN s.points > o.points THEN 1 ELSE 0 END) AS home_wins FROM teams AS t JOIN game_team_stats AS s ON s.team_id = t.team_id AND s.is_home = 1 JOIN game_team_stats AS o ON o.schedule_key = s.schedule_key AND o.team_id = s.opponent_team_id GROUP BY t.team_id, t.team_name_j ORDER BY home_wins DESC, t.team_id LIMIT 10;", "requiredSqlTerms": ["JOIN game_team_stats AS o", "s.is_home = 1", "SUM(CASE WHEN"]},
+        {"title": "得点とアシストの合計が高い記録", "prompt": "得点とアシストの合計が高い記録について知りたいです。出場フラグが1の選手記録のうち、得点とアシストの合計が25以上のものを10件取得してください。必要な情報は選手ID、得点、アシスト、合計です。合計の高い順に並べ、同じ合計は試合IDの小さい順にしてください。", "sourceTables": ["player_game_stats"], "referenceSql": "SELECT player_id, points, assists, points + assists AS offense_total FROM player_game_stats WHERE is_playing = 1 AND points IS NOT NULL AND assists IS NOT NULL AND points + assists >= 25 ORDER BY offense_total DESC, schedule_key LIMIT 10;", "requiredSqlTerms": ["points + assists", "offense_total", "AND"]}
       ]
     },
     {
@@ -506,16 +506,16 @@
       "comparison": {"rowOrder": "sensitive", "numericTolerance": 0.01},
       "explanation": "CTE、サブクエリ、RANK、ROW_NUMBERを小さな問題で反復し、応用構文に慣れます。",
       "items": [
-        {"title": "シーズン平均を上回る試合", "prompt": "シーズン平均を上回る試合について知りたいです。各シーズンの平均観客数を上回る試合を10件取得してください。シーズン、試合日、観客数を取得し、観客数の多い順に並べ、同じ観客数は試合IDの小さい順にしてください。", "sourceTables": ["games"], "referenceSql": "WITH season_average AS (SELECT season, AVG(attendance) AS average_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season) SELECT g.season, g.game_date, g.attendance FROM games AS g JOIN season_average AS a ON a.season = g.season WHERE g.attendance > a.average_attendance ORDER BY g.attendance DESC, g.schedule_key LIMIT 10;", "requiredSqlTerms": ["WITH season_average", "AVG(attendance)", "g.attendance > a.average_attendance"]},
-        {"title": "平均得点以上のチーム", "prompt": "平均得点以上のチームについて知りたいです。チーム平均得点がリーグ全体の平均得点以上のチームを抽出してください。チーム名と平均得点を取得し、平均得点の高い順に並べ、同じ平均得点はチームIDの昇順にしてください。", "sourceTables": ["game_team_stats", "teams"], "referenceSql": "SELECT t.team_name_j, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j HAVING AVG(s.points) >= (SELECT AVG(points) FROM game_team_stats WHERE points IS NOT NULL) ORDER BY average_points DESC, t.team_id;", "requiredSqlTerms": ["HAVING AVG(s.points) >=", "SELECT AVG(points) FROM game_team_stats"]},
-        {"title": "チーム平均得点の上位10件", "prompt": "チーム平均得点の上位10件について知りたいです。チームごとの平均得点を計算し、RANK関数で順位を付けてください。順位が10位以内のチームについて、順位、チーム名、平均得点を取得してください。順位の昇順に並べ、同じ順位はチーム名の昇順にしてください。", "sourceTables": ["game_team_stats", "teams"], "referenceSql": "WITH averages AS (SELECT t.team_id, t.team_name_j, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j), ranked AS (SELECT team_name_j, average_points, RANK() OVER (ORDER BY average_points DESC) AS point_rank FROM averages) SELECT point_rank, team_name_j, average_points FROM ranked WHERE point_rank <= 10 ORDER BY point_rank, team_name_j;", "requiredSqlTerms": ["WITH averages", "RANK() OVER", "WHERE point_rank <= 10"]},
-        {"title": "チームごとの最高得点試合", "prompt": "チームごとの最高得点試合について知りたいです。チームごとに得点の高い順で順位を付け、各チームの1位の試合を取得してください。チームID、試合ID、得点を取得し、得点の高い順に10件並べてください。", "sourceTables": ["game_team_stats"], "referenceSql": "WITH ranked_games AS (SELECT team_id, schedule_key, points, ROW_NUMBER() OVER (PARTITION BY team_id ORDER BY points DESC, schedule_key) AS row_num FROM game_team_stats WHERE points IS NOT NULL) SELECT team_id, schedule_key, points FROM ranked_games WHERE row_num = 1 ORDER BY points DESC, team_id LIMIT 10;", "requiredSqlTerms": ["ROW_NUMBER() OVER", "PARTITION BY team_id", "WHERE row_num = 1"]},
-        {"title": "選手の通算得点順位", "prompt": "選手の通算得点順位について知りたいです。選手ごとの通算得点を計算し、RANK関数で順位を付けてください。順位、選手名、通算得点を取得し、順位の昇順に10人並べてください。", "sourceTables": ["player_game_stats", "players"], "referenceSql": "WITH totals AS (SELECT p.player_id, p.player_name_j, SUM(s.points) AS total_points FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.points IS NOT NULL GROUP BY p.player_id, p.player_name_j) SELECT RANK() OVER (ORDER BY total_points DESC) AS point_rank, player_name_j, total_points FROM totals ORDER BY point_rank, player_id LIMIT 10;", "requiredSqlTerms": ["WITH totals", "RANK() OVER", "SUM(s.points)"]},
-        {"title": "シーズン別観客数順位", "prompt": "シーズン別観客数順位について知りたいです。各シーズンで観客数の順位を付け、順位が2位以内の試合を各シーズンから取得してください。シーズン、試合日、観客数、順位を取得してください。シーズンの昇順、各シーズン内では順位の昇順、同じ順位は試合日の古い順に並べてください。", "sourceTables": ["games"], "referenceSql": "WITH ranked_games AS (SELECT season, game_date, schedule_key, attendance, RANK() OVER (PARTITION BY season ORDER BY attendance DESC) AS attendance_rank FROM games WHERE attendance IS NOT NULL) SELECT season, game_date, attendance, attendance_rank FROM ranked_games WHERE attendance_rank <= 2 ORDER BY season, attendance_rank, game_date;", "requiredSqlTerms": ["RANK() OVER", "PARTITION BY season", "attendance_rank <= 2"]},
-        {"title": "シーズン別の累積試合数", "prompt": "シーズン別の累積試合数について知りたいです。各シーズンについて、試合日の古い順に累積試合数を計算してください。シーズン、試合日、累積試合数を取得し、シーズンの昇順、試合日の昇順に20件並べてください。", "sourceTables": ["games"], "referenceSql": "SELECT season, game_date, COUNT(*) OVER (PARTITION BY season ORDER BY game_date, schedule_key ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS cumulative_games FROM games ORDER BY season, game_date, schedule_key LIMIT 20;", "requiredSqlTerms": ["COUNT(*) OVER", "PARTITION BY season", "ROWS BETWEEN"]},
-        {"title": "20得点以上の選手記録数をシーズン別に数える", "prompt": "20得点以上の選手記録数をシーズン別に数えるについて知りたいです。シーズンごとに、得点が20点以上の選手記録の件数を集計してください。シーズンと件数を取得し、件数の多い順に並べてください。", "sourceTables": ["games", "player_game_stats"], "referenceSql": "SELECT g.season, COUNT(*) AS high_scoring_records FROM games AS g JOIN player_game_stats AS s ON s.schedule_key = g.schedule_key WHERE s.points >= 20 GROUP BY g.season ORDER BY high_scoring_records DESC, g.season;", "requiredSqlTerms": ["JOIN player_game_stats", "s.points >= 20", "GROUP BY g.season"]},
-        {"title": "平均観客数が高いシーズン", "prompt": "平均観客数が高いシーズンについて知りたいです。シーズンごとの平均観客数を計算してください。全試合を対象にした平均観客数以上のシーズンを抽出し、シーズンと平均観客数を取得してください。平均観客数の高い順に並べ、同じ平均観客数はシーズンの昇順にしてください。", "sourceTables": ["games"], "referenceSql": "SELECT season, ROUND(AVG(attendance), 2) AS average_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season HAVING AVG(attendance) >= (SELECT AVG(attendance) FROM games WHERE attendance IS NOT NULL) ORDER BY average_attendance DESC, season;", "requiredSqlTerms": ["HAVING AVG(attendance) >=", "SELECT AVG(attendance) FROM games", "GROUP BY season"]},
-        {"title": "各チームの最新スタッツ", "prompt": "各チームの最新スタッツについて知りたいです。チームごとに試合日の最も新しい試合のスタッツを1件取得し、チームID、試合ID、得点を取得してください。同じ試合日の記録が複数ある場合は、試合IDが大きい記録を選んでください。選んだ記録を試合IDの大きい順に並べ、10件に制限してください。", "sourceTables": ["game_team_stats", "games"], "referenceSql": "WITH latest AS (SELECT s.team_id, s.schedule_key, s.points, ROW_NUMBER() OVER (PARTITION BY s.team_id ORDER BY g.game_date DESC, s.schedule_key DESC) AS row_num FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key) SELECT team_id, schedule_key, points FROM latest WHERE row_num = 1 ORDER BY schedule_key DESC, team_id LIMIT 10;", "requiredSqlTerms": ["JOIN games", "WITH latest", "ROW_NUMBER() OVER", "PARTITION BY team_id"]}
+        {"title": "シーズン平均を上回る試合", "prompt": "シーズン平均を上回る試合について知りたいです。各シーズンの平均観客数を上回る試合を10件取得してください。必要な情報はシーズン、試合日、観客数です。観客数の多い順に並べ、同じ観客数は試合IDの小さい順にしてください。", "sourceTables": ["games"], "referenceSql": "WITH season_average AS (SELECT season, AVG(attendance) AS average_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season) SELECT g.season, g.game_date, g.attendance FROM games AS g JOIN season_average AS a ON a.season = g.season WHERE g.attendance > a.average_attendance ORDER BY g.attendance DESC, g.schedule_key LIMIT 10;", "requiredSqlTerms": ["WITH season_average", "AVG(attendance)", "g.attendance > a.average_attendance"]},
+        {"title": "平均得点以上のチーム", "prompt": "平均得点以上のチームについて知りたいです。チーム平均得点がリーグ全体の平均得点以上のチームを抽出してください。必要な情報はチーム名と平均得点です。平均得点の高い順に並べ、同じ平均得点はチームIDの昇順にしてください。", "sourceTables": ["game_team_stats", "teams"], "referenceSql": "SELECT t.team_name_j, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j HAVING AVG(s.points) >= (SELECT AVG(points) FROM game_team_stats WHERE points IS NOT NULL) ORDER BY average_points DESC, t.team_id;", "requiredSqlTerms": ["HAVING AVG(s.points) >=", "SELECT AVG(points) FROM game_team_stats"]},
+        {"title": "チーム平均得点の上位10件", "prompt": "チーム平均得点の上位10件について知りたいです。チームごとの平均得点を計算し、RANK関数で順位を付けてください。順位が10位以内のチームについて、必要な情報は順位、チーム名、平均得点です。順位の昇順に並べ、同じ順位はチーム名の昇順にしてください。", "sourceTables": ["game_team_stats", "teams"], "referenceSql": "WITH averages AS (SELECT t.team_id, t.team_name_j, AVG(s.points) AS average_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL GROUP BY t.team_id, t.team_name_j), ranked AS (SELECT team_name_j, average_points, RANK() OVER (ORDER BY average_points DESC) AS point_rank FROM averages) SELECT point_rank, team_name_j, average_points FROM ranked WHERE point_rank <= 10 ORDER BY point_rank, team_name_j;", "requiredSqlTerms": ["WITH averages", "RANK() OVER", "WHERE point_rank <= 10"]},
+        {"title": "チームごとの最高得点試合", "prompt": "チームごとの最高得点試合について知りたいです。チームごとに得点の高い順で順位を付け、各チームの1位の試合を取得してください。必要な情報はチームID、試合ID、得点です。得点の高い順に10件並べてください。", "sourceTables": ["game_team_stats"], "referenceSql": "WITH ranked_games AS (SELECT team_id, schedule_key, points, ROW_NUMBER() OVER (PARTITION BY team_id ORDER BY points DESC, schedule_key) AS row_num FROM game_team_stats WHERE points IS NOT NULL) SELECT team_id, schedule_key, points FROM ranked_games WHERE row_num = 1 ORDER BY points DESC, team_id LIMIT 10;", "requiredSqlTerms": ["ROW_NUMBER() OVER", "PARTITION BY team_id", "WHERE row_num = 1"]},
+        {"title": "選手の通算得点順位", "prompt": "選手の通算得点順位について知りたいです。選手ごとの通算得点を計算し、RANK関数で順位を付けてください。必要な情報は順位、選手名、通算得点です。順位の昇順に10人並べてください。", "sourceTables": ["player_game_stats", "players"], "referenceSql": "WITH totals AS (SELECT p.player_id, p.player_name_j, SUM(s.points) AS total_points FROM player_game_stats AS s JOIN players AS p ON p.player_id = s.player_id WHERE s.points IS NOT NULL GROUP BY p.player_id, p.player_name_j) SELECT RANK() OVER (ORDER BY total_points DESC) AS point_rank, player_name_j, total_points FROM totals ORDER BY point_rank, player_id LIMIT 10;", "requiredSqlTerms": ["WITH totals", "RANK() OVER", "SUM(s.points)"]},
+        {"title": "シーズン別観客数順位", "prompt": "シーズン別観客数順位について知りたいです。各シーズンで観客数の順位を付け、順位が2位以内の試合を各シーズンから取得してください。必要な情報はシーズン、試合日、観客数、順位です。シーズンの昇順、各シーズン内では順位の昇順、同じ順位は試合日の古い順に並べてください。", "sourceTables": ["games"], "referenceSql": "WITH ranked_games AS (SELECT season, game_date, schedule_key, attendance, RANK() OVER (PARTITION BY season ORDER BY attendance DESC) AS attendance_rank FROM games WHERE attendance IS NOT NULL) SELECT season, game_date, attendance, attendance_rank FROM ranked_games WHERE attendance_rank <= 2 ORDER BY season, attendance_rank, game_date;", "requiredSqlTerms": ["RANK() OVER", "PARTITION BY season", "attendance_rank <= 2"]},
+        {"title": "シーズン別の累積試合数", "prompt": "シーズン別の累積試合数について知りたいです。各シーズンについて、試合日の古い順に累積試合数を計算してください。必要な情報はシーズン、試合日、累積試合数です。シーズンの昇順、試合日の昇順に20件並べてください。", "sourceTables": ["games"], "referenceSql": "SELECT season, game_date, COUNT(*) OVER (PARTITION BY season ORDER BY game_date, schedule_key ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS cumulative_games FROM games ORDER BY season, game_date, schedule_key LIMIT 20;", "requiredSqlTerms": ["COUNT(*) OVER", "PARTITION BY season", "ROWS BETWEEN"]},
+        {"title": "20得点以上の選手記録数をシーズン別に数える", "prompt": "20得点以上の選手記録数をシーズン別に数えるについて知りたいです。シーズンごとに、得点が20点以上の選手記録の件数を集計してください。必要な情報はシーズンと件数です。件数の多い順に並べてください。", "sourceTables": ["games", "player_game_stats"], "referenceSql": "SELECT g.season, COUNT(*) AS high_scoring_records FROM games AS g JOIN player_game_stats AS s ON s.schedule_key = g.schedule_key WHERE s.points >= 20 GROUP BY g.season ORDER BY high_scoring_records DESC, g.season;", "requiredSqlTerms": ["JOIN player_game_stats", "s.points >= 20", "GROUP BY g.season"]},
+        {"title": "平均観客数が高いシーズン", "prompt": "平均観客数が高いシーズンについて知りたいです。シーズンごとの平均観客数を計算してください。全試合を対象にした平均観客数以上のシーズンを抽出し、必要な情報はシーズンと平均観客数です。平均観客数の高い順に並べ、同じ平均観客数はシーズンの昇順にしてください。", "sourceTables": ["games"], "referenceSql": "SELECT season, ROUND(AVG(attendance), 2) AS average_attendance FROM games WHERE attendance IS NOT NULL GROUP BY season HAVING AVG(attendance) >= (SELECT AVG(attendance) FROM games WHERE attendance IS NOT NULL) ORDER BY average_attendance DESC, season;", "requiredSqlTerms": ["HAVING AVG(attendance) >=", "SELECT AVG(attendance) FROM games", "GROUP BY season"]},
+        {"title": "各チームの最新スタッツ", "prompt": "各チームの最新スタッツについて知りたいです。チームごとに試合日の最も新しい試合のスタッツを1件取得し、必要な情報はチームID、試合ID、得点です。同じ試合日の記録が複数ある場合は、試合IDが大きい記録を選んでください。選んだ記録を試合IDの大きい順に並べ、10件に制限してください。", "sourceTables": ["game_team_stats", "games"], "referenceSql": "WITH latest AS (SELECT s.team_id, s.schedule_key, s.points, ROW_NUMBER() OVER (PARTITION BY s.team_id ORDER BY g.game_date DESC, s.schedule_key DESC) AS row_num FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key) SELECT team_id, schedule_key, points FROM latest WHERE row_num = 1 ORDER BY schedule_key DESC, team_id LIMIT 10;", "requiredSqlTerms": ["JOIN games", "WITH latest", "ROW_NUMBER() OVER", "PARTITION BY team_id"]}
       ]
     }
   ]
