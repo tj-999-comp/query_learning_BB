@@ -324,8 +324,8 @@
       "game_team_stats"
     ],
     "explanation": "CASE式でフラグを表示用のラベルに変換し、条件ごとに平均を集計します。",
-    "answerSql": "SELECT CASE WHEN is_home = 1 THEN 'ホーム' ELSE 'アウェー' END AS venue, AVG(points) AS average_points FROM game_team_stats WHERE points IS NOT NULL GROUP BY is_home ORDER BY is_home DESC",
-    "judgeSql": "SELECT CASE WHEN is_home = 1 THEN 'ホーム' ELSE 'アウェー' END AS venue, AVG(points) AS average_points FROM game_team_stats WHERE points IS NOT NULL GROUP BY is_home ORDER BY is_home DESC",
+    "answerSql": "SELECT CASE WHEN is_home = 1 THEN 'ホーム' ELSE 'アウェー' END AS venue, AVG(points) AS average_points FROM game_team_stats WHERE points IS NOT NULL GROUP BY is_home",
+    "judgeSql": "SELECT CASE WHEN is_home = 1 THEN 'ホーム' ELSE 'アウェー' END AS venue, AVG(points) AS average_points FROM game_team_stats WHERE points IS NOT NULL GROUP BY is_home",
     "resultSpec": {
       "rowOrder": "insensitive",
       "numericTolerance": 0.01,
@@ -1746,8 +1746,8 @@
     "sourceTables": [
       "game_team_stats"
     ],
-    "answerSql": "SELECT schedule_key, team_id, assists FROM game_team_stats WHERE assists >= 10 ORDER BY assists DESC, schedule_key, team_id LIMIT 10",
-    "judgeSql": "SELECT schedule_key, team_id, assists FROM game_team_stats WHERE assists >= 10 ORDER BY assists DESC, schedule_key, team_id LIMIT 10",
+    "answerSql": "SELECT schedule_key, team_id, assists FROM game_team_stats WHERE assists >= 10 LIMIT 10",
+    "judgeSql": "SELECT schedule_key, team_id, assists FROM game_team_stats WHERE assists >= 10 LIMIT 10",
     "resultSpec": {
       "rowOrder": "insensitive",
       "columns": [
@@ -1774,8 +1774,7 @@
       }
     ],
     "learningObjectives": [
-      "assists >= 10",
-      "ORDER BY assists DESC"
+      "assists >= 10"
     ],
     "explanation": "チーム別スタッツの数値条件を変えながら、WHEREで必要な行を絞り込む練習です。"
   },
@@ -1788,8 +1787,8 @@
     "sourceTables": [
       "game_team_stats"
     ],
-    "answerSql": "SELECT schedule_key, team_id, total_rebounds FROM game_team_stats WHERE total_rebounds >= 20 ORDER BY total_rebounds DESC, schedule_key, team_id LIMIT 10",
-    "judgeSql": "SELECT schedule_key, team_id, total_rebounds FROM game_team_stats WHERE total_rebounds >= 20 ORDER BY total_rebounds DESC, schedule_key, team_id LIMIT 10",
+    "answerSql": "SELECT schedule_key, team_id, total_rebounds FROM game_team_stats WHERE total_rebounds >= 20 LIMIT 10",
+    "judgeSql": "SELECT schedule_key, team_id, total_rebounds FROM game_team_stats WHERE total_rebounds >= 20 LIMIT 10",
     "resultSpec": {
       "rowOrder": "insensitive",
       "columns": [
@@ -1816,8 +1815,7 @@
       }
     ],
     "learningObjectives": [
-      "total_rebounds >= 20",
-      "ORDER BY total_rebounds DESC"
+      "total_rebounds >= 20"
     ],
     "explanation": "チーム別スタッツの数値条件を変えながら、WHEREで必要な行を絞り込む練習です。"
   },
@@ -1830,8 +1828,8 @@
     "sourceTables": [
       "game_team_stats"
     ],
-    "answerSql": "SELECT schedule_key, team_id, fg3m FROM game_team_stats WHERE fg3m >= 5 ORDER BY fg3m DESC, schedule_key, team_id LIMIT 10",
-    "judgeSql": "SELECT schedule_key, team_id, fg3m FROM game_team_stats WHERE fg3m >= 5 ORDER BY fg3m DESC, schedule_key, team_id LIMIT 10",
+    "answerSql": "SELECT schedule_key, team_id, fg3m FROM game_team_stats WHERE fg3m >= 5 LIMIT 10",
+    "judgeSql": "SELECT schedule_key, team_id, fg3m FROM game_team_stats WHERE fg3m >= 5 LIMIT 10",
     "resultSpec": {
       "rowOrder": "insensitive",
       "columns": [
@@ -1858,8 +1856,7 @@
       }
     ],
     "learningObjectives": [
-      "fg3m >= 5",
-      "ORDER BY fg3m DESC"
+      "fg3m >= 5"
     ],
     "explanation": "チーム別スタッツの数値条件を変えながら、WHEREで必要な行を絞り込む練習です。"
   },
@@ -1916,8 +1913,8 @@
     "sourceTables": [
       "game_team_stats"
     ],
-    "answerSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE is_home = 1 AND points >= 90 ORDER BY points DESC, schedule_key, team_id",
-    "judgeSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE is_home = 1 AND points >= 90 ORDER BY points DESC, schedule_key, team_id",
+    "answerSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE is_home = 1 AND points >= 90",
+    "judgeSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE is_home = 1 AND points >= 90",
     "resultSpec": {
       "rowOrder": "insensitive",
       "columns": [
@@ -1959,8 +1956,8 @@
     "sourceTables": [
       "game_team_stats"
     ],
-    "answerSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE is_home = 0 AND points >= 90 ORDER BY points DESC, schedule_key, team_id",
-    "judgeSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE is_home = 0 AND points >= 90 ORDER BY points DESC, schedule_key, team_id",
+    "answerSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE is_home = 0 AND points >= 90",
+    "judgeSql": "SELECT schedule_key, team_id, points FROM game_team_stats WHERE is_home = 0 AND points >= 90",
     "resultSpec": {
       "rowOrder": "insensitive",
       "columns": [
@@ -2044,8 +2041,8 @@
     "sourceTables": [
       "game_team_stats"
     ],
-    "answerSql": "SELECT schedule_key, team_id, fgm FROM game_team_stats WHERE fgm >= 20 ORDER BY fgm DESC, schedule_key, team_id LIMIT 10",
-    "judgeSql": "SELECT schedule_key, team_id, fgm FROM game_team_stats WHERE fgm >= 20 ORDER BY fgm DESC, schedule_key, team_id LIMIT 10",
+    "answerSql": "SELECT schedule_key, team_id, fgm FROM game_team_stats WHERE fgm >= 20 LIMIT 10",
+    "judgeSql": "SELECT schedule_key, team_id, fgm FROM game_team_stats WHERE fgm >= 20 LIMIT 10",
     "resultSpec": {
       "rowOrder": "insensitive",
       "columns": [
@@ -2072,8 +2069,7 @@
       }
     ],
     "learningObjectives": [
-      "fgm >= 20",
-      "ORDER BY fgm DESC"
+      "fgm >= 20"
     ],
     "explanation": "チーム別スタッツの数値条件を変えながら、WHEREで必要な行を絞り込む練習です。"
   },
@@ -2086,8 +2082,8 @@
     "sourceTables": [
       "player_game_stats"
     ],
-    "answerSql": "SELECT schedule_key, player_id, points FROM player_game_stats WHERE points >= 30 ORDER BY points DESC, schedule_key, player_id LIMIT 10",
-    "judgeSql": "SELECT schedule_key, player_id, points FROM player_game_stats WHERE points >= 30 ORDER BY points DESC, schedule_key, player_id LIMIT 10",
+    "answerSql": "SELECT schedule_key, player_id, points FROM player_game_stats WHERE points >= 30 LIMIT 10",
+    "judgeSql": "SELECT schedule_key, player_id, points FROM player_game_stats WHERE points >= 30 LIMIT 10",
     "resultSpec": {
       "rowOrder": "insensitive",
       "columns": [
@@ -2114,8 +2110,7 @@
       }
     ],
     "learningObjectives": [
-      "points >= 30",
-      "ORDER BY points DESC"
+      "points >= 30"
     ],
     "explanation": "選手別スタッツで比較演算子、AND、NULL条件を繰り返し練習します。"
   },
@@ -2128,8 +2123,8 @@
     "sourceTables": [
       "player_game_stats"
     ],
-    "answerSql": "SELECT schedule_key, player_id, points FROM player_game_stats WHERE points BETWEEN 15 AND 20 ORDER BY points DESC, schedule_key, player_id LIMIT 10",
-    "judgeSql": "SELECT schedule_key, player_id, points FROM player_game_stats WHERE points BETWEEN 15 AND 20 ORDER BY points DESC, schedule_key, player_id LIMIT 10",
+    "answerSql": "SELECT schedule_key, player_id, points FROM player_game_stats WHERE points BETWEEN 15 AND 20 LIMIT 10",
+    "judgeSql": "SELECT schedule_key, player_id, points FROM player_game_stats WHERE points BETWEEN 15 AND 20 LIMIT 10",
     "resultSpec": {
       "rowOrder": "insensitive",
       "columns": [
@@ -2156,8 +2151,7 @@
       }
     ],
     "learningObjectives": [
-      "points BETWEEN 15 AND 20",
-      "ORDER BY points DESC"
+      "points BETWEEN 15 AND 20"
     ],
     "explanation": "選手別スタッツで比較演算子、AND、NULL条件を繰り返し練習します。"
   },
@@ -2170,8 +2164,8 @@
     "sourceTables": [
       "player_game_stats"
     ],
-    "answerSql": "SELECT schedule_key, player_id, assists FROM player_game_stats WHERE assists >= 10 ORDER BY assists DESC, schedule_key, player_id LIMIT 10",
-    "judgeSql": "SELECT schedule_key, player_id, assists FROM player_game_stats WHERE assists >= 10 ORDER BY assists DESC, schedule_key, player_id LIMIT 10",
+    "answerSql": "SELECT schedule_key, player_id, assists FROM player_game_stats WHERE assists >= 10 LIMIT 10",
+    "judgeSql": "SELECT schedule_key, player_id, assists FROM player_game_stats WHERE assists >= 10 LIMIT 10",
     "resultSpec": {
       "rowOrder": "insensitive",
       "columns": [
@@ -2198,8 +2192,7 @@
       }
     ],
     "learningObjectives": [
-      "assists >= 10",
-      "ORDER BY assists DESC"
+      "assists >= 10"
     ],
     "explanation": "選手別スタッツで比較演算子、AND、NULL条件を繰り返し練習します。"
   },
@@ -2212,8 +2205,8 @@
     "sourceTables": [
       "player_game_stats"
     ],
-    "answerSql": "SELECT schedule_key, player_id, total_rebounds FROM player_game_stats WHERE total_rebounds >= 15 ORDER BY total_rebounds DESC, schedule_key, player_id LIMIT 10",
-    "judgeSql": "SELECT schedule_key, player_id, total_rebounds FROM player_game_stats WHERE total_rebounds >= 15 ORDER BY total_rebounds DESC, schedule_key, player_id LIMIT 10",
+    "answerSql": "SELECT schedule_key, player_id, total_rebounds FROM player_game_stats WHERE total_rebounds >= 15 LIMIT 10",
+    "judgeSql": "SELECT schedule_key, player_id, total_rebounds FROM player_game_stats WHERE total_rebounds >= 15 LIMIT 10",
     "resultSpec": {
       "rowOrder": "insensitive",
       "columns": [
@@ -2240,8 +2233,7 @@
       }
     ],
     "learningObjectives": [
-      "total_rebounds >= 15",
-      "ORDER BY total_rebounds DESC"
+      "total_rebounds >= 15"
     ],
     "explanation": "選手別スタッツで比較演算子、AND、NULL条件を繰り返し練習します。"
   },
@@ -2254,8 +2246,8 @@
     "sourceTables": [
       "player_game_stats"
     ],
-    "answerSql": "SELECT schedule_key, player_id, steals FROM player_game_stats WHERE steals >= 5 ORDER BY steals DESC, schedule_key, player_id LIMIT 10",
-    "judgeSql": "SELECT schedule_key, player_id, steals FROM player_game_stats WHERE steals >= 5 ORDER BY steals DESC, schedule_key, player_id LIMIT 10",
+    "answerSql": "SELECT schedule_key, player_id, steals FROM player_game_stats WHERE steals >= 5 LIMIT 10",
+    "judgeSql": "SELECT schedule_key, player_id, steals FROM player_game_stats WHERE steals >= 5 LIMIT 10",
     "resultSpec": {
       "rowOrder": "insensitive",
       "columns": [
@@ -2282,8 +2274,7 @@
       }
     ],
     "learningObjectives": [
-      "steals >= 5",
-      "ORDER BY steals DESC"
+      "steals >= 5"
     ],
     "explanation": "選手別スタッツで比較演算子、AND、NULL条件を繰り返し練習します。"
   },
@@ -2296,8 +2287,8 @@
     "sourceTables": [
       "player_game_stats"
     ],
-    "answerSql": "SELECT schedule_key, player_id, play_time FROM player_game_stats WHERE is_starter = 1 AND is_playing = 1 ORDER BY schedule_key DESC, player_id LIMIT 10",
-    "judgeSql": "SELECT schedule_key, player_id, play_time FROM player_game_stats WHERE is_starter = 1 AND is_playing = 1 ORDER BY schedule_key DESC, player_id LIMIT 10",
+    "answerSql": "SELECT schedule_key, player_id, play_time FROM player_game_stats WHERE is_starter = 1 AND is_playing = 1 LIMIT 10",
+    "judgeSql": "SELECT schedule_key, player_id, play_time FROM player_game_stats WHERE is_starter = 1 AND is_playing = 1 LIMIT 10",
     "resultSpec": {
       "rowOrder": "insensitive",
       "columns": [
@@ -2339,8 +2330,8 @@
     "sourceTables": [
       "player_game_stats"
     ],
-    "answerSql": "SELECT schedule_key, player_id, play_time FROM player_game_stats WHERE is_playing = 0 ORDER BY schedule_key DESC, player_id LIMIT 10",
-    "judgeSql": "SELECT schedule_key, player_id, play_time FROM player_game_stats WHERE is_playing = 0 ORDER BY schedule_key DESC, player_id LIMIT 10",
+    "answerSql": "SELECT schedule_key, player_id, play_time FROM player_game_stats WHERE is_playing = 0 LIMIT 10",
+    "judgeSql": "SELECT schedule_key, player_id, play_time FROM player_game_stats WHERE is_playing = 0 LIMIT 10",
     "resultSpec": {
       "rowOrder": "insensitive",
       "columns": [
@@ -2367,8 +2358,7 @@
       }
     ],
     "learningObjectives": [
-      "is_playing = 0",
-      "ORDER BY schedule_key DESC"
+      "is_playing = 0"
     ],
     "explanation": "選手別スタッツで比較演算子、AND、NULL条件を繰り返し練習します。"
   },
@@ -2381,8 +2371,8 @@
     "sourceTables": [
       "player_game_stats"
     ],
-    "answerSql": "SELECT schedule_key, player_id, fga FROM player_game_stats WHERE fga >= 10 ORDER BY fga DESC, schedule_key, player_id LIMIT 10",
-    "judgeSql": "SELECT schedule_key, player_id, fga FROM player_game_stats WHERE fga >= 10 ORDER BY fga DESC, schedule_key, player_id LIMIT 10",
+    "answerSql": "SELECT schedule_key, player_id, fga FROM player_game_stats WHERE fga >= 10 LIMIT 10",
+    "judgeSql": "SELECT schedule_key, player_id, fga FROM player_game_stats WHERE fga >= 10 LIMIT 10",
     "resultSpec": {
       "rowOrder": "insensitive",
       "columns": [
@@ -2409,8 +2399,7 @@
       }
     ],
     "learningObjectives": [
-      "fga >= 10",
-      "ORDER BY fga DESC"
+      "fga >= 10"
     ],
     "explanation": "選手別スタッツで比較演算子、AND、NULL条件を繰り返し練習します。"
   },
@@ -2423,8 +2412,8 @@
     "sourceTables": [
       "player_game_stats"
     ],
-    "answerSql": "SELECT schedule_key, player_id, fg3m FROM player_game_stats WHERE fg3m >= 5 ORDER BY fg3m DESC, schedule_key, player_id LIMIT 10",
-    "judgeSql": "SELECT schedule_key, player_id, fg3m FROM player_game_stats WHERE fg3m >= 5 ORDER BY fg3m DESC, schedule_key, player_id LIMIT 10",
+    "answerSql": "SELECT schedule_key, player_id, fg3m FROM player_game_stats WHERE fg3m >= 5 LIMIT 10",
+    "judgeSql": "SELECT schedule_key, player_id, fg3m FROM player_game_stats WHERE fg3m >= 5 LIMIT 10",
     "resultSpec": {
       "rowOrder": "insensitive",
       "columns": [
@@ -2451,8 +2440,7 @@
       }
     ],
     "learningObjectives": [
-      "fg3m >= 5",
-      "ORDER BY fg3m DESC"
+      "fg3m >= 5"
     ],
     "explanation": "選手別スタッツで比較演算子、AND、NULL条件を繰り返し練習します。"
   },
@@ -2465,8 +2453,8 @@
     "sourceTables": [
       "player_game_stats"
     ],
-    "answerSql": "SELECT schedule_key, player_id, efficiency FROM player_game_stats WHERE efficiency >= 30 ORDER BY efficiency DESC, schedule_key, player_id LIMIT 10",
-    "judgeSql": "SELECT schedule_key, player_id, efficiency FROM player_game_stats WHERE efficiency >= 30 ORDER BY efficiency DESC, schedule_key, player_id LIMIT 10",
+    "answerSql": "SELECT schedule_key, player_id, efficiency FROM player_game_stats WHERE efficiency >= 30 LIMIT 10",
+    "judgeSql": "SELECT schedule_key, player_id, efficiency FROM player_game_stats WHERE efficiency >= 30 LIMIT 10",
     "resultSpec": {
       "rowOrder": "insensitive",
       "columns": [
@@ -2493,8 +2481,7 @@
       }
     ],
     "learningObjectives": [
-      "efficiency >= 30",
-      "ORDER BY efficiency DESC"
+      "efficiency >= 30"
     ],
     "explanation": "選手別スタッツで比較演算子、AND、NULL条件を繰り返し練習します。"
   },
@@ -2554,8 +2541,8 @@
       "game_team_stats",
       "teams"
     ],
-    "answerSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_home = 0 AND s.points >= 90 ORDER BY g.game_date DESC, s.points DESC LIMIT 10",
-    "judgeSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_home = 0 AND s.points >= 90 ORDER BY g.game_date DESC, s.points DESC LIMIT 10",
+    "answerSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_home = 0 AND s.points >= 90 LIMIT 10",
+    "judgeSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_home = 0 AND s.points >= 90 LIMIT 10",
     "resultSpec": {
       "rowOrder": "insensitive",
       "columns": [
@@ -2599,8 +2586,8 @@
       "game_team_stats",
       "teams"
     ],
-    "answerSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE g.season = '2025-26' ORDER BY g.game_date DESC, s.team_id LIMIT 10",
-    "judgeSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE g.season = '2025-26' ORDER BY g.game_date DESC, s.team_id LIMIT 10",
+    "answerSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE g.season = '2025-26' LIMIT 10",
+    "judgeSql": "SELECT g.game_date, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE g.season = '2025-26' LIMIT 10",
     "resultSpec": {
       "rowOrder": "insensitive",
       "columns": [
@@ -2680,8 +2667,8 @@
       "game_team_stats",
       "teams"
     ],
-    "answerSql": "SELECT t.team_name_j, o.team_name_j AS opponent_team, s.points, os.points AS opponent_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id JOIN teams AS o ON o.team_id = s.opponent_team_id JOIN game_team_stats AS os ON os.schedule_key = s.schedule_key AND os.team_id = s.opponent_team_id ORDER BY s.schedule_key DESC, s.team_id LIMIT 10",
-    "judgeSql": "SELECT t.team_name_j, o.team_name_j AS opponent_team, s.points, os.points AS opponent_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id JOIN teams AS o ON o.team_id = s.opponent_team_id JOIN game_team_stats AS os ON os.schedule_key = s.schedule_key AND os.team_id = s.opponent_team_id ORDER BY s.schedule_key DESC, s.team_id LIMIT 10",
+    "answerSql": "SELECT t.team_name_j, o.team_name_j AS opponent_team, s.points, os.points AS opponent_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id JOIN teams AS o ON o.team_id = s.opponent_team_id JOIN game_team_stats AS os ON os.schedule_key = s.schedule_key AND os.team_id = s.opponent_team_id LIMIT 10",
+    "judgeSql": "SELECT t.team_name_j, o.team_name_j AS opponent_team, s.points, os.points AS opponent_points FROM game_team_stats AS s JOIN teams AS t ON t.team_id = s.team_id JOIN teams AS o ON o.team_id = s.opponent_team_id JOIN game_team_stats AS os ON os.schedule_key = s.schedule_key AND os.team_id = s.opponent_team_id LIMIT 10",
     "resultSpec": {
       "rowOrder": "insensitive",
       "columns": [
@@ -2727,8 +2714,8 @@
     "sourceTables": [
       "teams"
     ],
-    "answerSql": "SELECT s.player_id, t.team_name_j, s.points FROM player_game_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points >= 20 ORDER BY s.points DESC, s.schedule_key, s.player_id LIMIT 10",
-    "judgeSql": "SELECT s.player_id, t.team_name_j, s.points FROM player_game_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points >= 20 ORDER BY s.points DESC, s.schedule_key, s.player_id LIMIT 10",
+    "answerSql": "SELECT s.player_id, t.team_name_j, s.points FROM player_game_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points >= 20 LIMIT 10",
+    "judgeSql": "SELECT s.player_id, t.team_name_j, s.points FROM player_game_stats AS s JOIN teams AS t ON t.team_id = s.team_id WHERE s.points >= 20 LIMIT 10",
     "resultSpec": {
       "rowOrder": "insensitive",
       "columns": [
@@ -2767,8 +2754,8 @@
     "sourceTables": [
       "games"
     ],
-    "answerSql": "SELECT g.game_date, s.player_id, s.points FROM player_game_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.points >= 20 ORDER BY g.game_date DESC, s.points DESC LIMIT 10",
-    "judgeSql": "SELECT g.game_date, s.player_id, s.points FROM player_game_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.points >= 20 ORDER BY g.game_date DESC, s.points DESC LIMIT 10",
+    "answerSql": "SELECT g.game_date, s.player_id, s.points FROM player_game_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.points >= 20 LIMIT 10",
+    "judgeSql": "SELECT g.game_date, s.player_id, s.points FROM player_game_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key WHERE s.points >= 20 LIMIT 10",
     "resultSpec": {
       "rowOrder": "insensitive",
       "columns": [
@@ -2808,8 +2795,8 @@
       "games",
       "teams"
     ],
-    "answerSql": "SELECT g.game_date, s.player_id, t.team_name_j, s.points FROM player_game_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_starter = 1 ORDER BY g.game_date DESC, s.points DESC LIMIT 10",
-    "judgeSql": "SELECT g.game_date, s.player_id, t.team_name_j, s.points FROM player_game_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_starter = 1 ORDER BY g.game_date DESC, s.points DESC LIMIT 10",
+    "answerSql": "SELECT g.game_date, s.player_id, t.team_name_j, s.points FROM player_game_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_starter = 1 LIMIT 10",
+    "judgeSql": "SELECT g.game_date, s.player_id, t.team_name_j, s.points FROM player_game_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_starter = 1 LIMIT 10",
     "resultSpec": {
       "rowOrder": "insensitive",
       "columns": [
@@ -2856,8 +2843,8 @@
       "games",
       "teams"
     ],
-    "answerSql": "SELECT g.game_date, t.team_name_j, g.attendance FROM games AS g JOIN teams AS t ON t.team_id = g.home_team_id WHERE g.attendance IS NOT NULL ORDER BY g.attendance DESC, g.game_date DESC LIMIT 10",
-    "judgeSql": "SELECT g.game_date, t.team_name_j, g.attendance FROM games AS g JOIN teams AS t ON t.team_id = g.home_team_id WHERE g.attendance IS NOT NULL ORDER BY g.attendance DESC, g.game_date DESC LIMIT 10",
+    "answerSql": "SELECT g.game_date, t.team_name_j, g.attendance FROM games AS g JOIN teams AS t ON t.team_id = g.home_team_id WHERE g.attendance IS NOT NULL LIMIT 10",
+    "judgeSql": "SELECT g.game_date, t.team_name_j, g.attendance FROM games AS g JOIN teams AS t ON t.team_id = g.home_team_id WHERE g.attendance IS NOT NULL LIMIT 10",
     "resultSpec": {
       "rowOrder": "insensitive",
       "columns": [
@@ -2900,8 +2887,8 @@
       "game_team_stats",
       "teams"
     ],
-    "answerSql": "SELECT g.season, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL ORDER BY g.season DESC, s.points DESC LIMIT 10",
-    "judgeSql": "SELECT g.season, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL ORDER BY g.season DESC, s.points DESC LIMIT 10",
+    "answerSql": "SELECT g.season, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL LIMIT 10",
+    "judgeSql": "SELECT g.season, t.team_name_j, s.points FROM game_team_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.points IS NOT NULL LIMIT 10",
     "resultSpec": {
       "rowOrder": "insensitive",
       "columns": [
