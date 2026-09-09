@@ -1,0 +1,6 @@
+schema_version: 1
+title: 'Issue #97 v2.0.4問題文・判定基準の実務要件整合と本番反映'
+date: "2026-09-09"
+project_id: query_learning_BB
+tags: [codex, issue-97, pr-98, v2.0.4, problem-spec, source-tables, starter-players, stg, production, work-record]
+publish: true
