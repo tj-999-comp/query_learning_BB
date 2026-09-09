@@ -58,7 +58,7 @@ publish: true
 
 Pull Requestまたはpush時に、`validate.yml` が命名、Markdown、metadataの対応を確認します。
 
-`work-records/md/` または `work-records/metadata/` の作業記録をmainへpushすると、Actionsの `Request publish` workflowが変更された全recordを検出し、固定commit SHAとともに公開リポジトリの受入workflowを自動起動します。手動実行では対象recordのbasenameを指定できます。
+`work-records/md/` または `work-records/metadata/` の作業記録をmainへpushすると、Actionsの `Request work-record publish` workflowが変更された全recordを検出し、recordごとに固定commit SHAとともに公開リポジトリの受入workflowを自動起動します。再公開・復旧時の手動実行では、固定 `source_commit_sha` と対象recordの `target_basename` を指定します。公開側のPages反映成功後にSlack通知が行われます。
 
 公開前に、公開リポジトリ側でsource registry登録、disabled dry-run、固定commitによる手動E2Eを完了させてください。Actions Variableに `PUBLISH_APP_ID`、Actions Secretに `PUBLISH_APP_PRIVATE_KEY` を登録します。秘密鍵をファイルやmetadataへ保存しないでください。
 
