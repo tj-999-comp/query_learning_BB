@@ -1,0 +1,6 @@
+schema_version: 1
+title: 'Issue #95 v2.0.2問題文と正解判定基準の並び順整合'
+date: "2026-09-09"
+project_id: query_learning_BB
+tags: [codex, issue-95, v2.0.2, problem-spec, ordering, judgement, stg, production, work-record]
+publish: true
