@@ -2795,8 +2795,8 @@
   },
   {
     "id": "bball-068",
-    "title": "先発選手のチーム名と試合日",
-    "prompt": "先発選手のチーム名と試合日について知りたいです。選手記録に試合日とチーム名を結合し、先発フラグが1の選手記録を10件取得してください。必要な情報は試合日、選手ID、チーム名、得点です。",
+    "title": "2025-26シーズンの先発選手",
+    "prompt": "2025-26シーズンの各チームの先発5人を確認したいです。各試合・チームについて、先発フラグが1の選手記録を取得してください。必要な情報は試合日、チーム名、選手ID、得点です。",
     "difficulty": 2,
     "category": "テーブル結合",
     "sourceTables": [
@@ -2804,14 +2804,14 @@
       "games",
       "teams"
     ],
-    "answerSql": "SELECT g.game_date, s.player_id, t.team_name_j, s.points FROM player_game_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_starter = 1 LIMIT 10",
-    "judgeSql": "SELECT g.game_date, s.player_id, t.team_name_j, s.points FROM player_game_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE s.is_starter = 1 LIMIT 10",
+    "answerSql": "SELECT g.game_date, t.team_name_j, s.player_id, s.points FROM player_game_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE g.season = '2025-26' AND s.is_starter = 1",
+    "judgeSql": "SELECT g.game_date, t.team_name_j, s.player_id, s.points FROM player_game_stats AS s JOIN games AS g ON g.schedule_key = s.schedule_key JOIN teams AS t ON t.team_id = s.team_id WHERE g.season = '2025-26' AND s.is_starter = 1",
     "resultSpec": {
       "rowOrder": "insensitive",
       "columns": [
         "game_date",
-        "player_id",
         "team_name_j",
+        "player_id",
         "points"
       ]
     },
@@ -2822,14 +2822,14 @@
         "reference": "games"
       },
       {
-        "label": "player_id",
-        "type": "source",
-        "reference": "player_game_stats"
-      },
-      {
         "label": "team_name_j",
         "type": "source",
         "reference": "teams"
+      },
+      {
+        "label": "player_id",
+        "type": "source",
+        "reference": "player_game_stats"
       },
       {
         "label": "points",
@@ -2841,6 +2841,7 @@
       "JOIN player_game_stats",
       "JOIN games",
       "JOIN teams",
+      "g.season = '2025-26'",
       "s.is_starter = 1"
     ],
     "explanation": "IDを使って試合・チーム・スタッツを結合し、表示したい日本語情報へ置き換えます。"
