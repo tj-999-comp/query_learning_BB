@@ -1,0 +1,6 @@
+schema_version: 1
+title: 'Issue #100 v2.0.5 SQL補完のテーブル修飾子保持'
+date: "2026-09-10"
+project_id: query_learning_BB
+tags: [codex, issue-100, v2.0.5, sql-completion, alias, codemirror, work-record]
+publish: true
