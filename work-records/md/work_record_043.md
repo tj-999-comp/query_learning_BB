@@ -24,6 +24,9 @@ SQLエディターでテーブル名のエイリアスとカラム名をピリ�
   - `teams.team_` → Tab → `teams.team_id`
   - `team_` → Tab → `team_id`
   - Escによる候補終了、候補終了後のTabインデント、v2.0.5表示
+- STG再現検証（追加修正後）
+  - `SELECT t.team` → 未修飾候補 `team_id` → Tab → `SELECT t.team_id`
+  - 別名をまだ解析できない位置でも、入力済みの `t.` が保持されることを確認
 - レスポンシブスモーク（`/private/tmp/playwright-browser-verify/2026-09-10T01-21-35-083Z/report.json`）
   - 1280 / 900 / 640 / 320pxでHTTP 200
   - 横方向のoverflowなし、page errorなし
@@ -33,5 +36,6 @@ SQLエディターでテーブル名のエイリアスとカラム名をピリ�
 
 - Issue: [#100](https://github.com/tj-999-comp/query_learning_BB/issues/100)
 - 実装コミット: `6a1868c` (`fix: preserve table qualifiers in SQL completion`)
+- 追加修正コミット: `2281a42` (`fix: preserve qualifiers for unresolved completions`)
 - 作業ブランチ: `codex/issue-100-alias-completion`
 - Issue #100へ実装内容と検証結果をコメント済み
