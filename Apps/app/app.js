@@ -676,8 +676,8 @@ function schemaTable(schema, name) {
   return schema.tables.find((table) => table.name.toLowerCase() === String(name).toLowerCase()) || null;
 }
 
-function completionItem(text, kind) {
-  return { text, displayText: `${text} · ${kind}`, className: `sql-hint-${kind}` };
+function completionItem(text, kind, displayText = text) {
+  return { text, displayText: `${displayText} · ${kind}`, className: `sql-hint-${kind}` };
 }
 
 function uniqueCompletionItems(items) {
@@ -710,8 +710,9 @@ function sqlHint(editor) {
   } else if (relatedTable) {
     const columns = state.schema.columnsByTable[relatedTable.name] || [];
     items = columns.map((column) => completionItem(
-      context.qualifier ? `${context.qualifier}.${column}` : column,
+      column,
       "column",
+      context.qualifier ? `${context.qualifier}.${column}` : column,
     ));
   } else {
     const scopedTables = [...tableNames]
@@ -739,7 +740,10 @@ function sqlHint(editor) {
     const rightExact = right.text.toLowerCase() === context.fragment.toLowerCase() ? 0 : 1;
     return leftExact - rightExact || left.text.localeCompare(right.text);
   });
-  return { list: items, from: context.from, to: context.to };
+  const from = context.qualifier
+    ? { line: cursor.line, ch: cursor.ch - context.prefix.length }
+    : context.from;
+  return { list: items, from, to: context.to };
 }
 
 function showSqlHints(editor) {
