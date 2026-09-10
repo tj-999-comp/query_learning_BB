@@ -740,7 +740,7 @@ function sqlHint(editor) {
     const rightExact = right.text.toLowerCase() === context.fragment.toLowerCase() ? 0 : 1;
     return leftExact - rightExact || left.text.localeCompare(right.text);
   });
-  const from = relatedTable && context.qualifier
+  const from = context.qualifier
     ? { line: cursor.line, ch: cursor.ch - context.prefix.length }
     : context.from;
   return { list: items, from, to: context.to };
