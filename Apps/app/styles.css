@@ -52,7 +52,7 @@ a { color: inherit; }
 .menu-button .menu-glyph i:nth-child(2) { width: 100%; background: var(--cyan); }
 .menu-button:hover, .menu-button:focus-visible { background: var(--cyan); color: var(--white); outline: 0; }
 .menu-button:hover .menu-glyph i, .menu-button:focus-visible .menu-glyph i { background: var(--white); }
-.status-chip { border: 1px solid #d93025; border-radius: var(--radius-pill); background: #d93025; padding: 7px 13px; color: var(--white); font-size: 12px; font-weight: 700; letter-spacing: .02em; white-space: nowrap; }
+.status-chip { border: 1px solid #d93025; border-radius: var(--radius-pill); background: #d93025; padding: 3px 13px; color: var(--white); font-size: 17px; font-weight: 700; letter-spacing: .02em; white-space: nowrap; }
 .status-chip.ready { border-color: #188038; background: #188038; color: var(--white); }
 .status-chip.error { border-color: #d93025; background: #d93025; color: var(--white); }
 
