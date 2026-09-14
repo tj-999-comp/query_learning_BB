@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="SQL練習帳 v1.1.2 デザイン比較用モックアップ">
-    <title>デザイン比較 | SQL練習帳 v1.1.2</title>
+    <meta name="description" content="SQL練習帳 v1.1.3 デザイン比較用モックアップ">
+    <title>デザイン比較 | SQL練習帳 v1.1.3</title>
     <link rel="stylesheet" href="./design-review.css">
   </head>
   <body>
@@ -13,6 +13,26 @@
       <span>STG</span>
     </header>
     <main class="review-page">
+      <section class="latest-proposal status-size-proposal" aria-labelledby="latest-proposal-title-status-size">
+        <div class="latest-proposal-heading">
+          <p class="proposal-number">v1.1.3 / 提案10</p>
+          <h2 id="latest-proposal-title-status-size">SQLiteステータスの文字サイズ候補10案</h2>
+          <p>枠は大きく変えず、文字を少しずつ大きくしながら縦パディングを詰めた案です。すべて原寸表示で比較します。</p>
+        </div>
+        <div class="status-size-grid" aria-label="SQLiteステータスの文字サイズ候補10案">
+          <article class="status-size-option status-candidate-01"><div class="status-size-option-head"><span>01</span><h3>現在案</h3></div><div class="status-size-stage"><span class="status-chip-candidate">データベースを読み込み中…</span><span class="status-chip-candidate ready">SQLite準備完了</span></div><p>12px ／ 縦7px</p></article>
+          <article class="status-size-option status-candidate-02"><div class="status-size-option-head"><span>02</span><h3>控えめに圧縮</h3></div><div class="status-size-stage"><span class="status-chip-candidate">データベースを読み込み中…</span><span class="status-chip-candidate ready">SQLite準備完了</span></div><p>12px ／ 縦6px</p></article>
+          <article class="status-size-option status-candidate-03"><div class="status-size-option-head"><span>03</span><h3>標準＋1</h3></div><div class="status-size-stage"><span class="status-chip-candidate">データベースを読み込み中…</span><span class="status-chip-candidate ready">SQLite準備完了</span></div><p>13px ／ 縦6px</p></article>
+          <article class="status-size-option status-candidate-04"><div class="status-size-option-head"><span>04</span><h3>密度重視</h3></div><div class="status-size-stage"><span class="status-chip-candidate">データベースを読み込み中…</span><span class="status-chip-candidate ready">SQLite準備完了</span></div><p>13px ／ 縦5px</p></article>
+          <article class="status-size-option status-candidate-05"><div class="status-size-option-head"><span>05</span><h3>読みやすさ優先</h3></div><div class="status-size-stage"><span class="status-chip-candidate">データベースを読み込み中…</span><span class="status-chip-candidate ready">SQLite準備完了</span></div><p>14px ／ 縦5px</p></article>
+          <article class="status-size-option status-candidate-06"><div class="status-size-option-head"><span>06</span><h3>縦圧縮</h3></div><div class="status-size-stage"><span class="status-chip-candidate">データベースを読み込み中…</span><span class="status-chip-candidate ready">SQLite準備完了</span></div><p>14px ／ 縦4px</p></article>
+          <article class="status-size-option status-candidate-07"><div class="status-size-option-head"><span>07</span><h3>強調</h3></div><div class="status-size-stage"><span class="status-chip-candidate">データベースを読み込み中…</span><span class="status-chip-candidate ready">SQLite準備完了</span></div><p>15px ／ 縦4px</p></article>
+          <article class="status-size-option status-candidate-08"><div class="status-size-option-head"><span>08</span><h3>タイト強調</h3></div><div class="status-size-stage"><span class="status-chip-candidate">データベースを読み込み中…</span><span class="status-chip-candidate ready">SQLite準備完了</span></div><p>15px ／ 縦3px</p></article>
+          <article class="status-size-option status-candidate-09"><div class="status-size-option-head"><span>09</span><h3>大きめ</h3></div><div class="status-size-stage"><span class="status-chip-candidate">データベースを読み込み中…</span><span class="status-chip-candidate ready">SQLite準備完了</span></div><p>16px ／ 縦3px</p></article>
+          <article class="status-size-option status-candidate-10"><div class="status-size-option-head"><span>10</span><h3>最大候補</h3></div><div class="status-size-stage"><span class="status-chip-candidate">データベースを読み込み中…</span><span class="status-chip-candidate ready">SQLite準備完了</span></div><p>17px ／ 縦3px</p></article>
+        </div>
+        <aside class="policy-note"><strong>比較ポイント</strong><p>文字の存在感と、ヘッダー内での枠の高さ・圧迫感を確認してください。</p></aside>
+      </section>
       <section class="latest-proposal proposal-v112 proposal-v112-candidates" aria-labelledby="latest-proposal-title-v112-candidates">
         <div class="latest-proposal-heading">
           <p class="proposal-number">v1.1.2 / 提案09</p>
