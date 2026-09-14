@@ -52,9 +52,9 @@ a { color: inherit; }
 .menu-button .menu-glyph i:nth-child(2) { width: 100%; background: var(--cyan); }
 .menu-button:hover, .menu-button:focus-visible { background: var(--cyan); color: var(--white); outline: 0; }
 .menu-button:hover .menu-glyph i, .menu-button:focus-visible .menu-glyph i { background: var(--white); }
-.status-chip { border: 1px solid rgba(0, 204, 255, .8); border-radius: var(--radius-pill); background: rgba(0, 204, 255, .08); padding: 8px 13px; color: var(--ink); font-family: var(--font-mono); font-size: 11px; letter-spacing: .02em; white-space: nowrap; }
-.status-chip.ready { border-color: var(--cyan); color: var(--ink); }
-.status-chip.error { border-color: var(--gold); color: var(--gold); }
+.status-chip { border: 1px solid #d93025; border-radius: var(--radius-pill); background: #d93025; padding: 3px 13px; color: var(--white); font-size: 17px; font-weight: 700; letter-spacing: .02em; white-space: nowrap; }
+.status-chip.ready { border-color: #188038; background: #188038; color: var(--white); }
+.status-chip.error { border-color: #d93025; background: #d93025; color: var(--white); }
 
 /* Layout and common surfaces */
 .page-shell { padding: 48px 0 80px; }
