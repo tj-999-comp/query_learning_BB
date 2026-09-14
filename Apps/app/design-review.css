@@ -802,6 +802,28 @@ body { background: var(--white); color: var(--navy); }
  .context-menu-10 > svg { width: 18px; height: 18px; }
 .completion-context-section:last-child .completion-context-svg { border-radius: 5px; }
 
+/* Proposal No.10: compare the SQLite status text at its actual display size. */
+.status-size-proposal { padding-bottom: 28px; }
+.status-size-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 28px; }
+.status-size-option { min-width: 0; padding: 14px; border: 1px solid rgba(0, 45, 98, .16); border-radius: 14px; background: #f7fbfd; color: var(--navy); }
+.status-size-option-head { display: flex; align-items: center; gap: 9px; }
+.status-size-option-head > span { display: grid; width: 28px; height: 28px; flex: 0 0 28px; place-items: center; border-radius: 8px; background: var(--cyan); color: var(--navy); font: 600 11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.status-size-option-head h3 { margin: 0; color: var(--navy); font-size: 14px; line-height: 1.2; }
+.status-size-stage { display: flex; min-height: 82px; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; padding: 12px; border-radius: 10px; background: var(--white); }
+.status-chip-candidate { display: inline-flex; align-items: center; border: 1px solid #d93025; border-radius: 9999px; background: #d93025; padding: var(--status-pad-y, 7px) 13px; color: var(--white); font-size: var(--status-font-size, 12px); font-weight: 700; letter-spacing: .02em; line-height: 1.44; white-space: nowrap; }
+.status-chip-candidate.ready { border-color: #188038; background: #188038; }
+.status-size-option > p { margin: 8px 0 0; color: #405978; font-size: 11px; line-height: 1.3; }
+.status-candidate-01 { --status-font-size: 12px; --status-pad-y: 7px; }
+.status-candidate-02 { --status-font-size: 12px; --status-pad-y: 6px; }
+.status-candidate-03 { --status-font-size: 13px; --status-pad-y: 6px; }
+.status-candidate-04 { --status-font-size: 13px; --status-pad-y: 5px; }
+.status-candidate-05 { --status-font-size: 14px; --status-pad-y: 5px; }
+.status-candidate-06 { --status-font-size: 14px; --status-pad-y: 4px; }
+.status-candidate-07 { --status-font-size: 15px; --status-pad-y: 4px; }
+.status-candidate-08 { --status-font-size: 15px; --status-pad-y: 3px; }
+.status-candidate-09 { --status-font-size: 16px; --status-pad-y: 3px; }
+.status-candidate-10 { --status-font-size: 17px; --status-pad-y: 3px; }
+
 /* Keep the review page compact and Japanese-first. */
 .kicker { display: none; }
 .latest-proposal-heading h2,
@@ -813,6 +835,7 @@ body { background: var(--white); color: var(--navy); }
 .completion-mark-spec { margin: 22px 0 0; color: var(--navy); font-size: 15px; font-weight: 600; line-height: 1.7; }
 
 @media (max-width: 700px) {
+  .status-size-grid { grid-template-columns: 1fr; }
   .completion-mark-review-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .completion-candidate-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .completion-context-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
