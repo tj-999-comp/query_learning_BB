@@ -120,18 +120,50 @@
       </div>
     </main>
     <div id="page-transition" class="page-transition hidden" role="status" aria-live="polite" aria-hidden="true">
-      <div class="page-transition-header">
-        <span class="page-transition-brand">SQL練習帳</span>
-        <span class="page-transition-status"><span class="page-transition-spinner" aria-hidden="true"></span>問題を準備中</span>
-      </div>
-      <div class="page-transition-main">
-        <div class="page-transition-kicker">PROBLEM PAGE / LOADING</div>
-        <h2 id="page-transition-title">問題ページを読み込み中</h2>
-        <div class="page-transition-meta" aria-hidden="true"><i></i><i></i><i></i></div>
-        <div class="page-transition-prompt" aria-hidden="true"><i></i><i></i><i></i></div>
-        <div class="page-transition-panes" aria-hidden="true"><div><i></i><i></i><i></i><i></i></div><div><i></i><i></i><i></i></div></div>
-        <p class="page-transition-caption">問題を準備しています…</p>
-      </div>
+      <header class="site-header page-transition-site-header">
+        <div class="header-inner">
+          <div class="header-brand">
+            <span class="menu-button page-transition-menu" aria-hidden="true"><span class="menu-glyph"><i></i><i></i><i></i></span></span>
+            <h1><span class="brand-link">SQL練習帳</span></h1>
+          </div>
+          <div class="status-chip page-transition-status-chip"><span class="page-transition-spinner" aria-hidden="true"></span>問題を準備中</div>
+        </div>
+      </header>
+      <main class="page-shell page-transition-shell">
+        <div class="content-grid">
+          <section class="workspace">
+            <article class="question-view page-transition-question">
+              <div class="question-topline">
+                <div class="question-heading">
+                  <div class="page-transition-kicker">PROBLEM PAGE / LOADING</div>
+                  <h2 id="page-transition-title">問題ページを読み込み中</h2>
+                </div>
+                <div class="question-header-info">
+                  <div class="question-meta page-transition-meta" aria-hidden="true"><i></i><i></i><i></i></div>
+                  <span class="page-transition-favorite" aria-hidden="true">☆</span>
+                </div>
+              </div>
+              <div class="prompt-box page-transition-prompt-box" aria-hidden="true">
+                <div class="page-transition-prompt"><i></i><i></i><i></i></div>
+                <div class="page-transition-columns"><i></i><i></i><i></i></div>
+              </div>
+              <div class="problem-navigation page-transition-navigation" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+              <div class="workspace-panes page-transition-panes" aria-hidden="true">
+                <section class="query-pane page-transition-pane">
+                  <div class="page-transition-pane-label">SQL</div>
+                  <div class="page-transition-editor"><i></i><i></i><i></i></div>
+                  <div class="page-transition-actions"><i></i><i></i></div>
+                </section>
+                <section class="result-pane page-transition-pane">
+                  <div class="page-transition-result-heading"><i></i><i></i></div>
+                  <div class="page-transition-result-body"><i></i><i></i><i></i></div>
+                </section>
+              </div>
+              <p class="page-transition-caption">問題を準備しています…</p>
+            </article>
+          </section>
+        </div>
+      </main>
     </div>
     <footer class="site-footer">個人学習用のMVP · Bリーグスタッツ · v2.1.0</footer>
     <div id="scroll-stabilizer" class="scroll-stabilizer" aria-hidden="true"></div>

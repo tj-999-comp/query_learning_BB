@@ -545,6 +545,9 @@ function populateCategoryFilter() {
 function selectProblem(problemId) {
   const problem = state.problems.find((item) => item.id === problemId);
   if (!problem) return;
+  if (INITIAL_PROBLEM_ID && elements.pageTransitionTitle) {
+    elements.pageTransitionTitle.textContent = `${problemNumber(problem)} ${problem.title}`;
+  }
   state.selectedId = problemId;
   updateQuestionCompletion();
   elements.emptyState.classList.add("hidden");
