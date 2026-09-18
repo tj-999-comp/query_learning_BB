@@ -34,6 +34,11 @@ def page_html(template: str, *, page: str, app_root: str, data_root: str, proble
             'class="page-transition" role="status" aria-live="polite" aria-hidden="false"',
             1,
         )
+        rendered = rendered.replace(
+            'id="empty-state" class="empty-state"',
+            'id="empty-state" class="empty-state hidden"',
+            1,
+        )
     return rendered
 
 
