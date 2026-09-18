@@ -11,6 +11,7 @@ const SYNC_STATE_KEY = "bleague-sql-learning-progress-sync-v1";
 const SYNC_PENDING_KEY = "bleague-sql-learning-progress-sync-pending-v1";
 const PROGRESS_API_PATH = "/api/progress";
 const CDN_BASE = "https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/";
+const PROBLEM_TRANSITION_DELAY_MS = 500;
 const COMPLETION_MARKUP = '<svg class="completion-mark-svg" viewBox="0 0 64 64" aria-hidden="true"><path class="completion-mark-outline" d="M16 31 L28 43 L49 19"></path><path class="completion-mark-core" d="M16 31 L28 43 L49 19"></path></svg>';
 const SQL_KEYWORDS = [
   "SELECT", "FROM", "WHERE", "GROUP BY", "HAVING", "ORDER BY", "LIMIT", "OFFSET",
@@ -26,6 +27,7 @@ let syncReady = false;
 let syncInitialized = false;
 let syncPending = false;
 let syncQueue = Promise.resolve();
+let problemTransitionActive = false;
 
 const state = {
   db: null,
@@ -82,7 +84,21 @@ const elements = {
   answerSection: document.querySelector("#answer-section"),
   referenceSql: document.querySelector("#reference-sql"),
   questionExplanation: document.querySelector("#question-explanation"),
+  pageTransition: document.querySelector("#page-transition"),
+  pageTransitionTitle: document.querySelector("#page-transition-title"),
 };
+
+if (INITIAL_PROBLEM_ID && elements.pageTransition) {
+  elements.pageTransition.setAttribute("aria-hidden", "false");
+  document.body.classList.add("page-transition-open");
+}
+
+function hideInitialProblemTransition() {
+  if (!INITIAL_PROBLEM_ID || !elements.pageTransition) return;
+  elements.pageTransition.classList.add("hidden");
+  elements.pageTransition.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("page-transition-open");
+}
 
 function loadProgress() {
   try {
@@ -424,7 +440,12 @@ function createHomeProblemCard(problem, className, label) {
     <h4>${escapeHtml(problem.title)}</h4>
     <p>${escapeHtml(problem.prompt)}</p>`;
   button.addEventListener("click", (event) => {
-    if (href) return;
+    if (href) {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      navigateToProblem(problem);
+      return;
+    }
     event.preventDefault();
     selectProblem(problem.id);
   });
@@ -436,10 +457,20 @@ function problemPageHref(problem) {
   return `${APP_ROOT}problems/${encodeURIComponent(problem.id)}/`;
 }
 
+function showProblemTransition(problem, href) {
+  if (problemTransitionActive || !elements.pageTransition || !elements.pageTransitionTitle) return;
+  problemTransitionActive = true;
+  elements.pageTransitionTitle.textContent = `${problemNumber(problem)} ${problem.title}`;
+  elements.pageTransition.classList.remove("hidden");
+  elements.pageTransition.setAttribute("aria-hidden", "false");
+  document.body.classList.add("page-transition-open");
+  requestAnimationFrame(() => setTimeout(() => window.location.assign(href), PROBLEM_TRANSITION_DELAY_MS));
+}
+
 function navigateToProblem(problem) {
   const href = problemPageHref(problem);
   if (href) {
-    window.location.assign(href);
+    showProblemTransition(problem, href);
     return;
   }
   selectProblem(problem.id);
@@ -514,6 +545,9 @@ function populateCategoryFilter() {
 function selectProblem(problemId) {
   const problem = state.problems.find((item) => item.id === problemId);
   if (!problem) return;
+  if (INITIAL_PROBLEM_ID && elements.pageTransitionTitle) {
+    elements.pageTransitionTitle.textContent = `${problemNumber(problem)} ${problem.title}`;
+  }
   state.selectedId = problemId;
   updateQuestionCompletion();
   elements.emptyState.classList.add("hidden");
@@ -1132,11 +1166,13 @@ async function loadData() {
     elements.dataStatus.classList.add("ready");
     elements.runButton.disabled = false;
     elements.submitButton.disabled = false;
+    hideInitialProblemTransition();
   } catch (error) {
     elements.dataStatus.textContent = "CSV取り込み後にSQLiteを生成してください";
     elements.dataStatus.classList.add("error");
     elements.runButton.disabled = true;
     elements.submitButton.disabled = true;
+    hideInitialProblemTransition();
     console.info("Database is not available yet:", error);
   }
 }
