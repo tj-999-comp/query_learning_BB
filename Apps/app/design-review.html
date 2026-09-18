@@ -15,60 +15,56 @@
     <main class="review-page">
       <section class="latest-proposal loading-proposal" aria-labelledby="latest-proposal-title-loading">
         <div class="latest-proposal-heading">
-          <p class="proposal-number">v2.1.0 / 提案01</p>
-          <h2 id="latest-proposal-title-loading">ローディング表示の5案</h2>
-          <p>SQLの実行や結果の準備中に、画面が止まったように見えないための表示候補です。操作の邪魔をせず、待機状態と処理対象を伝える設計を比較します。</p>
+          <p class="proposal-number">v2.1.0 / 提案02</p>
+          <h2 id="latest-proposal-title-loading">問題ページ遷移中のローディング表示5案</h2>
+          <p>トップページの問題カードを押してから問題ページが開くまでの間、トップページが一瞬見える状態に重ねる表示候補です。遷移対象と待機状態を伝えながら、画面のちらつきを整えます。</p>
         </div>
-        <div class="loading-review-grid" aria-label="ローディング表示の5案">
+        <div class="loading-review-grid" aria-label="問題ページ遷移中のローディング表示5案">
           <article class="loading-option loading-option-01">
-            <div class="loading-option-head"><span>01</span><div><h3>ボタン内スピナー</h3><p>操作した場所で完了を待つ</p></div></div>
-            <div class="loading-preview">
-              <div class="loading-preview-bar"><span>SQL EDITOR</span><span>Q.01</span></div>
-              <div class="loading-preview-code">SELECT * FROM games;</div>
-              <div class="loading-preview-actions"><button class="loading-demo-button is-busy" type="button" disabled><span class="loading-spinner" aria-hidden="true"></span>実行中…</button><button class="loading-demo-button secondary" type="button" disabled>正誤判定</button></div>
-              <div class="loading-preview-result"><span>実行結果</span><small>処理中</small></div>
+            <div class="loading-option-head"><span>01</span><div><h3>全面オーバーレイ</h3><p>トップ画面を静かに覆う</p></div></div>
+            <div class="transition-preview transition-preview-01">
+              <div class="transition-preview-header"><strong>SQL練習帳</strong><span>STG</span></div>
+              <div class="transition-preview-home"><b>続きから解こう</b><i></i><i></i></div>
+              <div class="transition-overlay"><span class="loading-spinner" aria-hidden="true"></span><strong>問題を読み込み中</strong><small>Q.01</small></div>
             </div>
-            <p class="loading-spec">小さな円形スピナー＋ボタン文言の切り替え</p>
+            <p class="loading-spec">背景を固定し、中央のスピナーと問題番号だけを表示</p>
           </article>
           <article class="loading-option loading-option-02">
-            <div class="loading-option-head"><span>02</span><div><h3>インライン進捗ライン</h3><p>待ち時間を細い線で示す</p></div></div>
-            <div class="loading-preview">
-              <div class="loading-preview-bar"><span>SQL EDITOR</span><span>Q.01</span></div>
-              <div class="loading-preview-code">SELECT * FROM games;</div>
-              <div class="loading-progress-label"><span>結果を準備中</span><span class="loading-pulse-dots" aria-hidden="true">•••</span></div>
-              <div class="loading-progress-track" aria-hidden="true"><i></i></div>
-              <div class="loading-preview-result"><span>実行結果</span><small>まもなく表示</small></div>
+            <div class="loading-option-head"><span>02</span><div><h3>トップライン</h3><p>画面上端で遷移を示す</p></div></div>
+            <div class="transition-preview transition-preview-02">
+              <div class="transition-progress" aria-hidden="true"><i></i></div>
+              <div class="transition-preview-header"><strong>SQL練習帳</strong><span>STG</span></div>
+              <div class="transition-preview-home"><b>続きから解こう</b><i></i><i></i><small>問題ページへ移動しています…</small></div>
             </div>
-            <p class="loading-spec">アクション領域の下に1pxのシアンラインを表示</p>
+            <p class="loading-spec">レイアウトを変えず、上端の進捗ラインだけを走らせる</p>
           </article>
           <article class="loading-option loading-option-03">
-            <div class="loading-option-head"><span>03</span><div><h3>結果ペイン・オーバーレイ</h3><p>結果領域だけを待機状態にする</p></div></div>
-            <div class="loading-preview">
-              <div class="loading-preview-bar"><span>実行結果</span><span>RESULT</span></div>
-              <div class="loading-result-surface"><div class="loading-result-lines" aria-hidden="true"><i></i><i></i><i></i></div><div class="loading-overlay"><span class="loading-spinner" aria-hidden="true"></span><strong>結果を読み込み中</strong><small>SQLを処理しています</small></div></div>
+            <div class="loading-option-head"><span>03</span><div><h3>遷移カード</h3><p>次に開く問題を明示する</p></div></div>
+            <div class="transition-preview transition-preview-03">
+              <div class="transition-preview-header"><strong>SQL練習帳</strong><span>STG</span></div>
+              <div class="transition-preview-home is-muted"><b>続きから解こう</b><i></i><i></i></div>
+              <div class="transition-card"><span class="loading-spinner" aria-hidden="true"></span><strong>Q.01を開いています</strong><small>問題ページへ移動中…</small></div>
             </div>
-            <p class="loading-spec">操作エリアを残し、結果ペインのみを半透明で覆う</p>
+            <p class="loading-spec">中央カードで「どの問題へ移動するか」をはっきり伝える</p>
           </article>
           <article class="loading-option loading-option-04">
-            <div class="loading-option-head"><span>04</span><div><h3>ステータスバナー</h3><p>画面中央の帯で状態を共有する</p></div></div>
-            <div class="loading-preview">
-              <div class="loading-preview-bar"><span>SQL EDITOR</span><span>Q.01</span></div>
-              <div class="loading-preview-code">SELECT * FROM games;</div>
-              <div class="loading-status-banner"><span class="loading-spinner" aria-hidden="true"></span><span>SQLを実行しています</span><span class="loading-pulse-dots" aria-hidden="true">•••</span></div>
-              <div class="loading-preview-result"><span>実行結果</span><small>待機中</small></div>
+            <div class="loading-option-head"><span>04</span><div><h3>問題画面スケルトン</h3><p>到着先の形を先に見せる</p></div></div>
+            <div class="transition-preview transition-preview-04">
+              <div class="transition-preview-header"><strong>SQL練習帳</strong><span>Q.01</span></div>
+              <div class="transition-problem-skeleton"><i class="wide"></i><i></i><i></i><div><i></i><i></i></div><small><span class="loading-spinner" aria-hidden="true"></span>問題を準備中</small></div>
             </div>
-            <p class="loading-spec">エディタと結果の間に状態を明示する横長バナー</p>
+            <p class="loading-spec">トップページを問題画面の骨格へ切り替え、到着を予告する</p>
           </article>
           <article class="loading-option loading-option-05">
-            <div class="loading-option-head"><span>05</span><div><h3>結果スケルトン</h3><p>これから出る形を先に見せる</p></div></div>
-            <div class="loading-preview">
-              <div class="loading-preview-bar"><span>実行結果</span><span>RESULT</span></div>
-              <div class="loading-skeleton-result"><div class="loading-skeleton-heading"><i></i><i></i></div><i></i><i></i><i></i><small><span class="loading-spinner" aria-hidden="true"></span>結果を準備中</small></div>
+            <div class="loading-option-head"><span>05</span><div><h3>ヘッダーステータス</h3><p>ブランド横で軽く知らせる</p></div></div>
+            <div class="transition-preview transition-preview-05">
+              <div class="transition-preview-header"><strong>SQL練習帳</strong><span class="transition-status"><span class="loading-spinner" aria-hidden="true"></span>移動中…</span></div>
+              <div class="transition-preview-home"><b>続きから解こう</b><i></i><i></i><small>Q.01の問題ページを準備しています</small></div>
             </div>
-            <p class="loading-spec">結果表の骨格を残し、内容だけが入れ替わる印象にする</p>
+            <p class="loading-spec">ヘッダー内の小さなステータスに抑え、トップをそのまま見せる</p>
           </article>
         </div>
-        <aside class="policy-note"><strong>比較ポイント</strong><p>処理中であることの分かりやすさ、操作の邪魔をしない範囲、結果表示までの不安感の少なさを確認してください。採用案と表示対象（DB読込・SQL実行・正誤判定）はレビュー後に確定します。</p></aside>
+        <aside class="policy-note"><strong>比較ポイント</strong><p>トップページのちらつきの抑え方、遷移先の分かりやすさ、表示が短時間でも認識できるかを確認してください。採用案は、問題カードから問題ページへ移動する時の表示として決定します。</p></aside>
       </section>
       <section class="latest-proposal status-size-proposal" aria-labelledby="latest-proposal-title-status-size">
         <div class="latest-proposal-heading">
