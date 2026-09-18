@@ -29,6 +29,11 @@ def page_html(template: str, *, page: str, app_root: str, data_root: str, proble
         rendered = rendered.replace('href="./styles.css"', f'href="{app_root}styles.css"', 1)
         rendered = rendered.replace('src="./app.js"', f'src="{app_root}app.js"', 1)
         rendered = rendered.replace('href="./"', f'href="{app_root}"', 1)
+        rendered = rendered.replace(
+            'class="page-transition hidden" role="status" aria-live="polite" aria-hidden="true"',
+            'class="page-transition" role="status" aria-live="polite" aria-hidden="false"',
+            1,
+        )
     return rendered
 
 
