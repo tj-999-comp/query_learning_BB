@@ -88,6 +88,18 @@ const elements = {
   pageTransitionTitle: document.querySelector("#page-transition-title"),
 };
 
+if (INITIAL_PROBLEM_ID && elements.pageTransition) {
+  elements.pageTransition.setAttribute("aria-hidden", "false");
+  document.body.classList.add("page-transition-open");
+}
+
+function hideInitialProblemTransition() {
+  if (!INITIAL_PROBLEM_ID || !elements.pageTransition) return;
+  elements.pageTransition.classList.add("hidden");
+  elements.pageTransition.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("page-transition-open");
+}
+
 function loadProgress() {
   try {
     const currentRaw = localStorage.getItem(STORAGE_KEY);
@@ -1151,11 +1163,13 @@ async function loadData() {
     elements.dataStatus.classList.add("ready");
     elements.runButton.disabled = false;
     elements.submitButton.disabled = false;
+    hideInitialProblemTransition();
   } catch (error) {
     elements.dataStatus.textContent = "CSV取り込み後にSQLiteを生成してください";
     elements.dataStatus.classList.add("error");
     elements.runButton.disabled = true;
     elements.submitButton.disabled = true;
+    hideInitialProblemTransition();
     console.info("Database is not available yet:", error);
   }
 }
