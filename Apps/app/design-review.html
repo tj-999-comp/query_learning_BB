@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="SQL練習帳 v1.1.3 デザイン比較用モックアップ">
-    <title>デザイン比較 | SQL練習帳 v1.1.3</title>
+    <meta name="description" content="SQL練習帳 v2.1.0 デザイン比較用モックアップ">
+    <title>デザイン比較 | SQL練習帳 v2.1.0</title>
     <link rel="stylesheet" href="./design-review.css">
   </head>
   <body>
@@ -13,6 +13,63 @@
       <span>STG</span>
     </header>
     <main class="review-page">
+      <section class="latest-proposal loading-proposal" aria-labelledby="latest-proposal-title-loading">
+        <div class="latest-proposal-heading">
+          <p class="proposal-number">v2.1.0 / 提案01</p>
+          <h2 id="latest-proposal-title-loading">ローディング表示の5案</h2>
+          <p>SQLの実行や結果の準備中に、画面が止まったように見えないための表示候補です。操作の邪魔をせず、待機状態と処理対象を伝える設計を比較します。</p>
+        </div>
+        <div class="loading-review-grid" aria-label="ローディング表示の5案">
+          <article class="loading-option loading-option-01">
+            <div class="loading-option-head"><span>01</span><div><h3>ボタン内スピナー</h3><p>操作した場所で完了を待つ</p></div></div>
+            <div class="loading-preview">
+              <div class="loading-preview-bar"><span>SQL EDITOR</span><span>Q.01</span></div>
+              <div class="loading-preview-code">SELECT * FROM games;</div>
+              <div class="loading-preview-actions"><button class="loading-demo-button is-busy" type="button" disabled><span class="loading-spinner" aria-hidden="true"></span>実行中…</button><button class="loading-demo-button secondary" type="button" disabled>正誤判定</button></div>
+              <div class="loading-preview-result"><span>実行結果</span><small>処理中</small></div>
+            </div>
+            <p class="loading-spec">小さな円形スピナー＋ボタン文言の切り替え</p>
+          </article>
+          <article class="loading-option loading-option-02">
+            <div class="loading-option-head"><span>02</span><div><h3>インライン進捗ライン</h3><p>待ち時間を細い線で示す</p></div></div>
+            <div class="loading-preview">
+              <div class="loading-preview-bar"><span>SQL EDITOR</span><span>Q.01</span></div>
+              <div class="loading-preview-code">SELECT * FROM games;</div>
+              <div class="loading-progress-label"><span>結果を準備中</span><span class="loading-pulse-dots" aria-hidden="true">•••</span></div>
+              <div class="loading-progress-track" aria-hidden="true"><i></i></div>
+              <div class="loading-preview-result"><span>実行結果</span><small>まもなく表示</small></div>
+            </div>
+            <p class="loading-spec">アクション領域の下に1pxのシアンラインを表示</p>
+          </article>
+          <article class="loading-option loading-option-03">
+            <div class="loading-option-head"><span>03</span><div><h3>結果ペイン・オーバーレイ</h3><p>結果領域だけを待機状態にする</p></div></div>
+            <div class="loading-preview">
+              <div class="loading-preview-bar"><span>実行結果</span><span>RESULT</span></div>
+              <div class="loading-result-surface"><div class="loading-result-lines" aria-hidden="true"><i></i><i></i><i></i></div><div class="loading-overlay"><span class="loading-spinner" aria-hidden="true"></span><strong>結果を読み込み中</strong><small>SQLを処理しています</small></div></div>
+            </div>
+            <p class="loading-spec">操作エリアを残し、結果ペインのみを半透明で覆う</p>
+          </article>
+          <article class="loading-option loading-option-04">
+            <div class="loading-option-head"><span>04</span><div><h3>ステータスバナー</h3><p>画面中央の帯で状態を共有する</p></div></div>
+            <div class="loading-preview">
+              <div class="loading-preview-bar"><span>SQL EDITOR</span><span>Q.01</span></div>
+              <div class="loading-preview-code">SELECT * FROM games;</div>
+              <div class="loading-status-banner"><span class="loading-spinner" aria-hidden="true"></span><span>SQLを実行しています</span><span class="loading-pulse-dots" aria-hidden="true">•••</span></div>
+              <div class="loading-preview-result"><span>実行結果</span><small>待機中</small></div>
+            </div>
+            <p class="loading-spec">エディタと結果の間に状態を明示する横長バナー</p>
+          </article>
+          <article class="loading-option loading-option-05">
+            <div class="loading-option-head"><span>05</span><div><h3>結果スケルトン</h3><p>これから出る形を先に見せる</p></div></div>
+            <div class="loading-preview">
+              <div class="loading-preview-bar"><span>実行結果</span><span>RESULT</span></div>
+              <div class="loading-skeleton-result"><div class="loading-skeleton-heading"><i></i><i></i></div><i></i><i></i><i></i><small><span class="loading-spinner" aria-hidden="true"></span>結果を準備中</small></div>
+            </div>
+            <p class="loading-spec">結果表の骨格を残し、内容だけが入れ替わる印象にする</p>
+          </article>
+        </div>
+        <aside class="policy-note"><strong>比較ポイント</strong><p>処理中であることの分かりやすさ、操作の邪魔をしない範囲、結果表示までの不安感の少なさを確認してください。採用案と表示対象（DB読込・SQL実行・正誤判定）はレビュー後に確定します。</p></aside>
+      </section>
       <section class="latest-proposal status-size-proposal" aria-labelledby="latest-proposal-title-status-size">
         <div class="latest-proposal-heading">
           <p class="proposal-number">v1.1.3 / 提案10</p>
