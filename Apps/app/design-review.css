@@ -824,6 +824,28 @@ body { background: var(--white); color: var(--navy); }
 .status-candidate-09 { --status-font-size: 16px; --status-pad-y: 3px; }
 .status-candidate-10 { --status-font-size: 17px; --status-pad-y: 3px; }
 
+/* v2.1.1: compare spinner colors while keeping the option 03 badge red. */
+.transition-color-proposal { border-color: rgba(0, 45, 98, .35); padding-bottom: 28px; }
+.transition-color-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 28px; }
+.transition-color-option { min-width: 0; padding: 16px; border: 1px solid rgba(0, 45, 98, .16); border-radius: 14px; background: #f7fbfd; color: var(--navy); }
+.transition-color-option-head { display: flex; align-items: flex-start; gap: 10px; min-height: 46px; }
+.transition-color-option-head > span { display: grid; width: 30px; height: 30px; flex: 0 0 30px; place-items: center; border-radius: 8px; background: var(--cyan); color: var(--navy); font: 600 11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.transition-color-option-head h3 { margin: 1px 0 3px; color: var(--navy); font-size: 14px; line-height: 1.2; }
+.transition-color-option-head p { margin: 0; color: var(--text-muted); font-size: 11px; line-height: 1.3; }
+.transition-color-stage { display: grid; min-height: 92px; align-content: center; justify-items: center; margin-top: 14px; border-radius: 10px; background: var(--white); }
+.transition-color-preview { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid #d93025; border-radius: 9999px; background: #d93025; padding: 7px 13px; color: var(--white); font-size: 11px; line-height: 1.44; white-space: nowrap; }
+.transition-color-icon { display: inline-block; width: 14px; height: 14px; flex: 0 0 14px; border: 2px solid var(--indicator-track, rgba(255, 255, 255, .3)); border-top-color: var(--indicator-color, var(--white)); border-right-color: var(--indicator-color, var(--white)); border-radius: 50%; animation: transition-color-spin .8s linear infinite; }
+.transition-color-option-01 { --indicator-color: #ffffff; --indicator-track: rgba(255, 255, 255, .28); }
+.transition-color-option-02 { --indicator-color: #fff4e6; --indicator-track: rgba(255, 244, 230, .3); }
+.transition-color-option-03 { --indicator-color: #fdbb30; --indicator-track: rgba(253, 187, 48, .3); }
+.transition-color-option-04 { --indicator-color: #ffd1cc; --indicator-track: rgba(255, 209, 204, .3); }
+.transition-color-option-05 { --indicator-color: #e9ebed; --indicator-track: rgba(233, 235, 237, .3); }
+.transition-color-spec { margin: 10px 0 0; color: #405978; font-size: 11px; line-height: 1.35; }
+@keyframes transition-color-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .transition-color-icon { animation: none; }
+}
+
 /* v2.1.1: compare indicators using the problem-page transition CSS, not the red SQLite status chip. */
 .transition-indicator-proposal { border-color: rgba(0, 204, 255, .6); padding-bottom: 28px; }
 .transition-indicator-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 28px; }
@@ -945,6 +967,7 @@ body { background: var(--white); color: var(--navy); }
 @media (max-width: 700px) {
   .loading-review-grid { grid-template-columns: 1fr; }
   .status-size-grid { grid-template-columns: 1fr; }
+  .transition-color-grid { grid-template-columns: 1fr; }
   .transition-indicator-grid { grid-template-columns: 1fr; }
   .completion-mark-review-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .completion-candidate-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
