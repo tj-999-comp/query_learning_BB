@@ -13,55 +13,40 @@
       <span>STG</span>
     </header>
     <main class="review-page">
-      <section class="latest-proposal sqlite-loading-proposal" aria-labelledby="sqlite-loading-proposal-title">
+      <section class="latest-proposal transition-indicator-proposal" aria-labelledby="transition-indicator-proposal-title">
         <div class="latest-proposal-heading">
-          <p class="proposal-number">v2.1.1 / SQLite読み込み表示 / 2026-09-23</p>
-          <h2 id="sqlite-loading-proposal-title">右上のSQLite読み込み表示5案</h2>
-          <p>右上のステータスチップに添える読み込み表示を、実際のヘッダー内で比較します。読み込み中と準備完了の状態を並べ、円の存在感とステータス全体の軽さを確認できます。</p>
+          <p class="proposal-number">v2.1.1 / 問題ページ遷移ローディング / 2026-09-23</p>
+          <h2 id="transition-indicator-proposal-title">ローディング画面の読み込み表示5案</h2>
+          <p>赤色の「データベースを読み込み中…」は変更対象ではありません。問題ページへ遷移するローディング画面で使われる、実際の <code>.page-transition-spinner</code> 相当の表示だけを比較します。</p>
         </div>
-        <div class="sqlite-loading-grid" aria-label="右上のSQLite読み込み表示5案">
-          <article class="sqlite-loading-option sqlite-loading-option-01">
-            <div class="sqlite-loading-option-head"><span>01</span><div><h3>細線リング</h3><p>最小限の円で読み込みを示す</p></div></div>
-            <div class="sqlite-status-stage">
-              <div class="sqlite-status-preview is-loading"><span class="sqlite-status-icon" aria-hidden="true"></span><span>データベースを読み込み中…</span></div>
-              <div class="sqlite-status-preview is-ready"><span class="sqlite-status-icon" aria-hidden="true"></span><span>SQLite準備完了</span></div>
-            </div>
-            <p class="sqlite-loading-spec">12pxリング／線幅2px／既存の赤・緑を維持</p>
+        <div class="transition-indicator-grid" aria-label="ローディング画面の読み込み表示5案">
+          <article class="transition-indicator-option transition-indicator-option-01">
+            <div class="transition-indicator-option-head"><span>01</span><div><h3>現行CSS</h3><p>現在の14pxリングを再掲</p></div></div>
+            <div class="transition-indicator-stage"><div class="transition-indicator-preview"><span class="transition-indicator transition-indicator-01" aria-hidden="true"></span><span>問題を準備中</span></div></div>
+            <p class="transition-indicator-spec">14px／線幅2px／上辺シアン／0.8秒回転</p>
           </article>
-          <article class="sqlite-loading-option sqlite-loading-option-02">
-            <div class="sqlite-loading-option-head"><span>02</span><div><h3>二重リング</h3><p>内側の点で動きを抑えて見せる</p></div></div>
-            <div class="sqlite-status-stage">
-              <div class="sqlite-status-preview is-loading"><span class="sqlite-status-icon" aria-hidden="true"></span><span>データベースを読み込み中…</span></div>
-              <div class="sqlite-status-preview is-ready"><span class="sqlite-status-icon" aria-hidden="true"></span><span>SQLite準備完了</span></div>
-            </div>
-            <p class="sqlite-loading-spec">10px二重リング／低速回転／静かな印象</p>
+          <article class="transition-indicator-option transition-indicator-option-02">
+            <div class="transition-indicator-option-head"><span>02</span><div><h3>細線リング</h3><p>円の圧を抑えて軽くする</p></div></div>
+            <div class="transition-indicator-stage"><div class="transition-indicator-preview"><span class="transition-indicator transition-indicator-02" aria-hidden="true"></span><span>問題を準備中</span></div></div>
+            <p class="transition-indicator-spec">14px／線幅1px／上辺シアン／1秒回転</p>
           </article>
-          <article class="sqlite-loading-option sqlite-loading-option-03">
-            <div class="sqlite-loading-option-head"><span>03</span><div><h3>ドット回転</h3><p>円ではなく3点のリズムに置き換える</p></div></div>
-            <div class="sqlite-status-stage">
-              <div class="sqlite-status-preview is-loading"><span class="sqlite-status-icon" aria-hidden="true"></span><span>データベースを読み込み中…</span></div>
-              <div class="sqlite-status-preview is-ready"><span class="sqlite-status-icon" aria-hidden="true"></span><span>SQLite準備完了</span></div>
-            </div>
-            <p class="sqlite-loading-spec">3点ドット／順番に点滅／円形スピナーなし</p>
+          <article class="transition-indicator-option transition-indicator-option-03">
+            <div class="transition-indicator-option-head"><span>03</span><div><h3>切れ目リング</h3><p>回転方向を一目で伝える</p></div></div>
+            <div class="transition-indicator-stage"><div class="transition-indicator-preview"><span class="transition-indicator transition-indicator-03" aria-hidden="true"></span><span>問題を準備中</span></div></div>
+            <p class="transition-indicator-spec">14px／シアンの切れ目／線幅2px</p>
           </article>
-          <article class="sqlite-loading-option sqlite-loading-option-04">
-            <div class="sqlite-loading-option-head"><span>04</span><div><h3>進捗ピル</h3><p>横長の光だけで読み込みを伝える</p></div></div>
-            <div class="sqlite-status-stage">
-              <div class="sqlite-status-preview is-loading"><span class="sqlite-status-icon" aria-hidden="true"></span><span>データベースを読み込み中…</span></div>
-              <div class="sqlite-status-preview is-ready"><span class="sqlite-status-icon" aria-hidden="true"></span><span>SQLite準備完了</span></div>
-            </div>
-            <p class="sqlite-loading-spec">24×4pxバー／左右に移動／最も控えめ</p>
+          <article class="transition-indicator-option transition-indicator-option-04">
+            <div class="transition-indicator-option-head"><span>04</span><div><h3>パルスドット</h3><p>円をやめて待機感だけ残す</p></div></div>
+            <div class="transition-indicator-stage"><div class="transition-indicator-preview"><span class="transition-indicator transition-indicator-04" aria-hidden="true"></span><span>問題を準備中</span></div></div>
+            <p class="transition-indicator-spec">8pxドット／明滅／円形スピナーなし</p>
           </article>
-          <article class="sqlite-loading-option sqlite-loading-option-05">
-            <div class="sqlite-loading-option-head"><span>05</span><div><h3>信号バー</h3><p>データ接続の状態を小さな波形で示す</p></div></div>
-            <div class="sqlite-status-stage">
-              <div class="sqlite-status-preview is-loading"><span class="sqlite-status-icon" aria-hidden="true"></span><span>データベースを読み込み中…</span></div>
-              <div class="sqlite-status-preview is-ready"><span class="sqlite-status-icon" aria-hidden="true"></span><span>SQLite準備完了</span></div>
-            </div>
-            <p class="sqlite-loading-spec">3本バー／高さを変えて点滅／技術感</p>
+          <article class="transition-indicator-option transition-indicator-option-05">
+            <div class="transition-indicator-option-head"><span>05</span><div><h3>短いスキャン線</h3><p>円の代わりに進行方向を示す</p></div></div>
+            <div class="transition-indicator-stage"><div class="transition-indicator-preview"><span class="transition-indicator transition-indicator-05" aria-hidden="true"></span><span>問題を準備中</span></div></div>
+            <p class="transition-indicator-spec">18×3pxライン／左右移動／最も控えめ</p>
           </article>
         </div>
-        <aside class="policy-note"><strong>比較ポイント</strong><p>現在の円形スピナーに対して、右上での圧迫感・読み込み中の認識しやすさ・準備完了時との統一感を確認してください。</p></aside>
+        <aside class="policy-note"><strong>比較ポイント</strong><p>実際のローディング画面と同じ「問題を準備中」のチップ内で、円の存在感・読み込みの認識しやすさ・ページ全体との調和を確認してください。</p></aside>
       </section>
       <details class="proposal-history">
         <summary>過去の提案（提案日時の降順）</summary>
