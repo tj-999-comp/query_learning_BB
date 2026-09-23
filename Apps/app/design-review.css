@@ -828,6 +828,7 @@ body { background: var(--white); color: var(--navy); }
 .transition-color-proposal { border-color: rgba(0, 45, 98, .35); padding-bottom: 28px; }
 .transition-color-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 28px; }
 .transition-color-option { min-width: 0; padding: 16px; border: 1px solid rgba(0, 45, 98, .16); border-radius: 14px; background: #f7fbfd; color: var(--navy); }
+.transition-color-option.is-selected { border-color: #d93025; box-shadow: inset 0 0 0 2px rgba(217, 48, 37, .16); }
 .transition-color-option-head { display: flex; align-items: flex-start; gap: 10px; min-height: 46px; }
 .transition-color-option-head > span { display: grid; width: 30px; height: 30px; flex: 0 0 30px; place-items: center; border-radius: 8px; background: var(--cyan); color: var(--navy); font: 600 11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 .transition-color-option-head h3 { margin: 1px 0 3px; color: var(--navy); font-size: 14px; line-height: 1.2; }

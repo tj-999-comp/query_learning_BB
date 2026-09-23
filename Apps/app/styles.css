@@ -43,7 +43,7 @@ a { color: inherit; }
 .page-transition-site-header { pointer-events: none; }
 .page-transition-menu { cursor: default; }
 .page-transition .page-transition-status-chip { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-color: var(--silver); background: var(--navy-soft); color: var(--muted); }
-.page-transition-spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(0, 204, 255, .25); border-top-color: var(--cyan); border-radius: 50%; animation: page-transition-spin .8s linear infinite; }
+.page-transition-spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255, 209, 204, .3); border-top-color: #ffd1cc; border-right-color: #ffd1cc; border-radius: 50%; animation: page-transition-spin .8s linear infinite; }
 @keyframes page-transition-spin { to { transform: rotate(360deg); } }
 .page-transition-question { padding: 0; }
 .page-transition-question h2 { margin-bottom: 0; }
