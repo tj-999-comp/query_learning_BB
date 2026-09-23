@@ -834,6 +834,7 @@ body { background: var(--white); color: var(--navy); }
 .transition-indicator-option-head p { margin: 0; color: var(--text-muted); font-size: 11px; line-height: 1.3; }
 .transition-indicator-stage { display: grid; min-height: 92px; align-content: center; justify-items: center; margin-top: 14px; border-radius: 10px; background: var(--white); }
 .transition-indicator-preview { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid #bec0c2; border-radius: 9999px; background: #f4f8fb; padding: 7px 13px; color: #5f7185; font-size: 11px; line-height: 1.44; white-space: nowrap; }
+.transition-indicator-preview-red { border-color: #d93025; background: #d93025; color: var(--white); }
 .transition-indicator { display: inline-block; position: relative; width: 14px; height: 14px; flex: 0 0 14px; border: 2px solid rgba(0, 204, 255, .25); border-top-color: var(--cyan); border-radius: 50%; animation: transition-indicator-spin .8s linear infinite; }
 .transition-indicator-02 { border-width: 1px; animation-duration: 1s; }
 .transition-indicator-03 { border-color: transparent; border-top-color: var(--cyan); border-right-color: var(--cyan); }
