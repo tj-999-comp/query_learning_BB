@@ -554,7 +554,7 @@ function selectProblem(problemId) {
   const problem = state.problems.find((item) => item.id === problemId);
   if (!problem) return;
   if (INITIAL_PROBLEM_ID && elements.pageTransitionTitle) {
-    elements.pageTransitionTitle.textContent = `${problemNumber(problem)} ${problem.title}`;
+    elements.pageTransitionTitle.innerHTML = problemTitleMarkup(problem);
   }
   state.selectedId = problemId;
   updateQuestionCompletion();
