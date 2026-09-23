@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="SQL練習帳 v2.1.0 デザイン比較用モックアップ">
-    <title>デザイン比較 | SQL練習帳 v2.1.0</title>
+    <meta name="description" content="SQL練習帳 v2.1.1 デザイン比較用モックアップ">
+    <title>デザイン比較 | SQL練習帳 v2.1.1</title>
     <link rel="stylesheet" href="./design-review.css">
   </head>
   <body>
@@ -13,9 +13,62 @@
       <span>STG</span>
     </header>
     <main class="review-page">
+      <section class="latest-proposal sqlite-loading-proposal" aria-labelledby="sqlite-loading-proposal-title">
+        <div class="latest-proposal-heading">
+          <p class="proposal-number">v2.1.1 / SQLite読み込み表示 / 2026-09-23</p>
+          <h2 id="sqlite-loading-proposal-title">右上のSQLite読み込み表示5案</h2>
+          <p>右上のステータスチップに添える読み込み表示を、実際のヘッダー内で比較します。読み込み中と準備完了の状態を並べ、円の存在感とステータス全体の軽さを確認できます。</p>
+        </div>
+        <div class="sqlite-loading-grid" aria-label="右上のSQLite読み込み表示5案">
+          <article class="sqlite-loading-option sqlite-loading-option-01">
+            <div class="sqlite-loading-option-head"><span>01</span><div><h3>細線リング</h3><p>最小限の円で読み込みを示す</p></div></div>
+            <div class="sqlite-status-stage">
+              <div class="sqlite-status-preview is-loading"><span class="sqlite-status-icon" aria-hidden="true"></span><span>データベースを読み込み中…</span></div>
+              <div class="sqlite-status-preview is-ready"><span class="sqlite-status-icon" aria-hidden="true"></span><span>SQLite準備完了</span></div>
+            </div>
+            <p class="sqlite-loading-spec">12pxリング／線幅2px／既存の赤・緑を維持</p>
+          </article>
+          <article class="sqlite-loading-option sqlite-loading-option-02">
+            <div class="sqlite-loading-option-head"><span>02</span><div><h3>二重リング</h3><p>内側の点で動きを抑えて見せる</p></div></div>
+            <div class="sqlite-status-stage">
+              <div class="sqlite-status-preview is-loading"><span class="sqlite-status-icon" aria-hidden="true"></span><span>データベースを読み込み中…</span></div>
+              <div class="sqlite-status-preview is-ready"><span class="sqlite-status-icon" aria-hidden="true"></span><span>SQLite準備完了</span></div>
+            </div>
+            <p class="sqlite-loading-spec">10px二重リング／低速回転／静かな印象</p>
+          </article>
+          <article class="sqlite-loading-option sqlite-loading-option-03">
+            <div class="sqlite-loading-option-head"><span>03</span><div><h3>ドット回転</h3><p>円ではなく3点のリズムに置き換える</p></div></div>
+            <div class="sqlite-status-stage">
+              <div class="sqlite-status-preview is-loading"><span class="sqlite-status-icon" aria-hidden="true"></span><span>データベースを読み込み中…</span></div>
+              <div class="sqlite-status-preview is-ready"><span class="sqlite-status-icon" aria-hidden="true"></span><span>SQLite準備完了</span></div>
+            </div>
+            <p class="sqlite-loading-spec">3点ドット／順番に点滅／円形スピナーなし</p>
+          </article>
+          <article class="sqlite-loading-option sqlite-loading-option-04">
+            <div class="sqlite-loading-option-head"><span>04</span><div><h3>進捗ピル</h3><p>横長の光だけで読み込みを伝える</p></div></div>
+            <div class="sqlite-status-stage">
+              <div class="sqlite-status-preview is-loading"><span class="sqlite-status-icon" aria-hidden="true"></span><span>データベースを読み込み中…</span></div>
+              <div class="sqlite-status-preview is-ready"><span class="sqlite-status-icon" aria-hidden="true"></span><span>SQLite準備完了</span></div>
+            </div>
+            <p class="sqlite-loading-spec">24×4pxバー／左右に移動／最も控えめ</p>
+          </article>
+          <article class="sqlite-loading-option sqlite-loading-option-05">
+            <div class="sqlite-loading-option-head"><span>05</span><div><h3>信号バー</h3><p>データ接続の状態を小さな波形で示す</p></div></div>
+            <div class="sqlite-status-stage">
+              <div class="sqlite-status-preview is-loading"><span class="sqlite-status-icon" aria-hidden="true"></span><span>データベースを読み込み中…</span></div>
+              <div class="sqlite-status-preview is-ready"><span class="sqlite-status-icon" aria-hidden="true"></span><span>SQLite準備完了</span></div>
+            </div>
+            <p class="sqlite-loading-spec">3本バー／高さを変えて点滅／技術感</p>
+          </article>
+        </div>
+        <aside class="policy-note"><strong>比較ポイント</strong><p>現在の円形スピナーに対して、右上での圧迫感・読み込み中の認識しやすさ・準備完了時との統一感を確認してください。</p></aside>
+      </section>
+      <details class="proposal-history">
+        <summary>過去の提案（提案日時の降順）</summary>
+        <div class="history-content">
       <section class="latest-proposal loading-proposal" aria-labelledby="latest-proposal-title-loading">
         <div class="latest-proposal-heading">
-          <p class="proposal-number">v2.1.0 / 提案02</p>
+          <p class="proposal-number"><time datetime="2026-09-18">2026-09-18</time> · v2.1.0 / 提案02</p>
           <h2 id="latest-proposal-title-loading">問題ページ遷移中のローディング表示5案</h2>
           <p>トップページの問題カードを押してから問題ページが開くまでの間、トップページが一瞬見える状態に重ねる表示候補です。遷移対象と待機状態を伝えながら、画面のちらつきを整えます。</p>
         </div>
@@ -68,7 +121,7 @@
       </section>
       <section class="latest-proposal status-size-proposal" aria-labelledby="latest-proposal-title-status-size">
         <div class="latest-proposal-heading">
-          <p class="proposal-number">v1.1.3 / 提案10</p>
+          <p class="proposal-number"><time datetime="2026-09-14">2026-09-14</time> · v1.1.3 / 提案10</p>
           <h2 id="latest-proposal-title-status-size">SQLiteステータスの文字サイズ候補10案</h2>
           <p>枠は大きく変えず、文字を少しずつ大きくしながら縦パディングを詰めた案です。すべて原寸表示で比較します。</p>
         </div>
@@ -88,7 +141,7 @@
       </section>
       <section class="latest-proposal proposal-v112 proposal-v112-candidates" aria-labelledby="latest-proposal-title-v112-candidates">
         <div class="latest-proposal-heading">
-          <p class="proposal-number">v1.1.2 / 提案09</p>
+          <p class="proposal-number"><time datetime="2026-09-07">2026-09-07</time> · v1.1.2 / 提案09</p>
           <h2 id="latest-proposal-title-v112-candidates">シアンのはみ出し修正候補20案</h2>
           <p>黄色のチェックを内側、シアンを外周に固定し、終端だけが単独で飛び出して見えない形を比較します。</p>
         </div>
@@ -131,12 +184,9 @@
         </div>
         <aside class="policy-note"><strong>採用</strong><p>問題画面は候補06、メニュー内はシアン枠なし・黄色のみ・ストローク13で反映します。</p></aside>
       </section>
-      <details class="proposal-history">
-        <summary>過去の提案（No.01〜08）</summary>
-        <div class="history-content">
       <section class="latest-proposal proposal-v112 proposal-v112-followup" aria-labelledby="latest-proposal-title-v112-followup">
         <div class="latest-proposal-heading">
-          <p class="proposal-number">v1.1.2 / 提案08</p>
+          <p class="proposal-number"><time datetime="2026-09-07">2026-09-07</time> · v1.1.2 / 提案08</p>
           <h2 id="latest-proposal-title-v112-followup">本Appの形に揃える</h2>
           <p>提案07の角丸形状に合わせ、本App側と同じ形でシアン枠をさらに太くします。</p>
         </div>
@@ -148,7 +198,7 @@
       </section>
       <section class="latest-proposal proposal-v112" aria-labelledby="latest-proposal-title-v112">
         <div class="latest-proposal-heading">
-          <p class="proposal-number">v1.1.2 / 提案07</p>
+          <p class="proposal-number"><time datetime="2026-09-07">2026-09-07</time> · v1.1.2 / 提案07</p>
           <h2 id="latest-proposal-title-v112">達成済みマーク</h2>
           <p>黄色のチェックを太くし、その外側に太いシアン枠を付けます。</p>
         </div>
@@ -160,7 +210,7 @@
       </section>
       <section class="latest-proposal" aria-labelledby="latest-proposal-title-menu-fix">
         <div class="latest-proposal-heading">
-          <p class="proposal-number">提案No.06</p>
+          <p class="proposal-number"><time datetime="2026-09-06">2026-09-06</time> · 提案No.06</p>
           <p class="kicker">LATEST PROPOSAL / IMPLEMENTED</p>
           <h2 id="latest-proposal-title-menu-fix">メニューを、行とDividerで整える</h2>
           <p>ハンバーガーメニュー内の問題一覧をカード表示からDivider区切りへ変更しました。ホバー時はレイアウトを動かさず、左側のシアン太線だけを表示します。問題画面のお気に入りも同じ行内アイコンの見た目へ揃えています。</p>
@@ -173,10 +223,10 @@
         </div>
         <aside class="policy-note"><strong>今後の運用ルール</strong><p>UI改善のたびに最新提案をこのページの先頭へ追加し、これまでの提案は下のトグルへ移します。トグルは初期状態で閉じたままにします。</p></aside>
       </section>
-          <p class="history-label">提案No.05：採用案の視認性調整</p>
+          <p class="history-label"><time datetime="2026-09-06">2026-09-06</time> · 提案No.05：採用案の視認性調整</p>
       <section class="latest-proposal" aria-labelledby="latest-proposal-title-fix">
         <div class="latest-proposal-heading">
-          <p class="proposal-number">提案No.05</p>
+          <p class="proposal-number"><time datetime="2026-09-06">2026-09-06</time> · 提案No.05</p>
           <p class="kicker">LATEST PROPOSAL / IMPLEMENTED</p>
           <h2 id="latest-proposal-title-fix">採用案を、さらに見やすく調整</h2>
           <p>採用したチェック17とボタン16をベースに、正誤判定ボタンの色を実行ボタンへ統一しました。達成済みマークは外枠をなくしてチェックを拡大し、不正解表示とメニューのホバーも同じ視認性ルールへ揃えています。</p>
@@ -189,10 +239,10 @@
         </div>
         <aside class="policy-note"><strong>今後の運用ルール</strong><p>UI改善のたびに最新提案をこのページの先頭へ追加し、これまでの提案は下のトグル内へ移します。トグルは初期状態で閉じたままにします。</p></aside>
       </section>
-          <p class="history-label">提案No.04：18-O塗りつぶし影20色／ボタン11-05配色20案</p>
+          <p class="history-label"><time datetime="2026-09-06">2026-09-06</time> · 提案No.04：18-O塗りつぶし影20色／ボタン11-05配色20案</p>
       <section class="latest-proposal" aria-labelledby="latest-proposal-title-current">
         <div class="latest-proposal-heading">
-          <p class="proposal-number">提案No.04</p>
+          <p class="proposal-number"><time datetime="2026-09-06">2026-09-06</time> · 提案No.04</p>
           <p class="kicker">LATEST PROPOSAL / IMPLEMENTED</p>
           <h2 id="latest-proposal-title-current">18-O 17番とボタン16番を採用</h2>
           <p>達成済みチェックマークは18-Oの17番、ボタンは「ボタン11のホバーアクション05：下線が反転する」の16番を採用しました。採用案を画面へ反映し、過去案は履歴として保存しています。</p>
@@ -255,7 +305,7 @@
           <article class="component-option"><div class="component-option-head"><span class="option-number">20</span><h3>ダークスレート×イエロー</h3></div><div class="hover-sample color-action-sample"><span>通常</span><div><button class="button-color button-color-20 run" type="button">実行する</button><button class="button-color button-color-20 submit" type="button">正誤判定</button></div><span>ホバー時</span><div><button class="button-color button-color-20 hover-state run" type="button">実行する</button><button class="button-color button-color-20 hover-state submit" type="button">正誤判定</button></div></div></article>
         </div>
       </section>
-          <p class="history-label">提案No.03：18オフセット影＋15色／ボタン05配色10案</p>
+        <p class="history-label"><time datetime="2026-09-06">2026-09-06</time> · 提案No.03：18オフセット影＋15色／ボタン05配色10案</p>
       <section class="latest-proposal" aria-labelledby="latest-proposal-title">
         <div class="latest-proposal-heading">
           <p class="kicker">LATEST PROPOSAL / IMPLEMENTED</p>
@@ -307,7 +357,7 @@
         </div>
       </section>
       <div class="history-entry">
-        <p class="history-label">提案No.02：チェック18・6・9の3系統＋ボタン11のホバー10案</p>
+        <p class="history-label"><time datetime="2026-09-06">2026-09-06</time> · 提案No.02：チェック18・6・9の3系統＋ボタン11のホバー10案</p>
         <section class="component-review history-component" aria-labelledby="history-checkmark-title-v11">
           <div class="component-review-heading"><p class="kicker">HISTORY / COMPLETION MARK / 21 OPTIONS</p><h2 id="history-checkmark-title-v11">チェックマーク18・6・9＋カラバリ</h2><p>18・6・9の3系統を残し、それぞれ原案と6色を比較した前々回の提案です。</p></div>
           <div class="component-grid latest-checkmark-grid">
@@ -351,7 +401,7 @@
         </section>
       </div>
       <div class="history-entry">
-        <p class="history-label">提案No.01：達成済みチェックマーク20案＋クエリ実行・正誤判定ボタン20案</p>
+        <p class="history-label"><time datetime="2026-09-05">2026-09-05</time> · 提案No.01：達成済みチェックマーク20案＋クエリ実行・正誤判定ボタン20案</p>
         <section class="component-review history-component" aria-labelledby="history-checkmark-title-v1">
           <div class="component-review-heading"><p class="kicker">HISTORY / COMPLETION MARK / 20 OPTIONS</p><h2 id="history-checkmark-title-v1">達成済みチェックマーク20案</h2><p>このセッションで最初に比較した、形状と視認性の20案です。</p></div>
           <div class="component-grid latest-checkmark-grid">
@@ -404,7 +454,7 @@
         </section>
       </div>
       <div class="history-archive">
-        <p class="history-label">参考資料：提案No.01以前の改善提案</p>
+        <p class="history-label"><time datetime="2026-09-05">2026-09-05</time> · 参考資料：提案No.01以前の改善提案</p>
         <div class="history-content">
           <p class="history-label">最初期の画面5案・正解表示5案・チェックマーク20案・ボタン20案・メニュー20案</p>
       <section class="review-list" aria-label="前回のデザイン案">
