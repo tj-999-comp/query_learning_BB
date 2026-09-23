@@ -46,8 +46,8 @@ a { color: inherit; }
 .page-transition-spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(0, 204, 255, .25); border-top-color: var(--cyan); border-radius: 50%; animation: page-transition-spin .8s linear infinite; }
 @keyframes page-transition-spin { to { transform: rotate(360deg); } }
 .page-transition-question { padding: 0; }
-.page-transition-kicker { margin-bottom: 8px; color: var(--cyan); font: 11px var(--font-mono); letter-spacing: .14em; }
 .page-transition-question h2 { margin-bottom: 0; }
+.page-transition-placeholder { color: var(--white); }
 .page-transition-meta { gap: 8px; }
 .page-transition-meta i { display: block; width: 62px; height: 30px; border: 1px solid var(--silver-light); border-radius: var(--radius-pill); background: #f5f8fa; animation: page-transition-shimmer 1.5s linear infinite; }
 .page-transition-meta i:nth-child(2) { width: 104px; }

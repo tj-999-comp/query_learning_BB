@@ -271,6 +271,14 @@ function problemNumber(problem) {
   return `Q${String(index + 1).padStart(2, "0")}`;
 }
 
+function problemNumberLabel(problem) {
+  return problemNumber(problem).replace("Q", "Q.");
+}
+
+function problemTitleMarkup(problem) {
+  return `<span class="question-number-prefix">${problemNumberLabel(problem)}</span> ${escapeHtml(problem.title)}`;
+}
+
 function splitSqlList(value) {
   const items = [];
   let start = 0;
@@ -460,7 +468,7 @@ function problemPageHref(problem) {
 function showProblemTransition(problem, href) {
   if (problemTransitionActive || !elements.pageTransition || !elements.pageTransitionTitle) return;
   problemTransitionActive = true;
-  elements.pageTransitionTitle.textContent = `${problemNumber(problem)} ${problem.title}`;
+  elements.pageTransitionTitle.innerHTML = problemTitleMarkup(problem);
   elements.pageTransition.classList.remove("hidden");
   elements.pageTransition.setAttribute("aria-hidden", "false");
   document.body.classList.add("page-transition-open");
@@ -546,7 +554,7 @@ function selectProblem(problemId) {
   const problem = state.problems.find((item) => item.id === problemId);
   if (!problem) return;
   if (INITIAL_PROBLEM_ID && elements.pageTransitionTitle) {
-    elements.pageTransitionTitle.textContent = `${problemNumber(problem)} ${problem.title}`;
+    elements.pageTransitionTitle.innerHTML = problemTitleMarkup(problem);
   }
   state.selectedId = problemId;
   updateQuestionCompletion();
@@ -555,7 +563,7 @@ function selectProblem(problemId) {
   initializeSqlEditor();
   if (state.editor) state.editor.refresh();
   elements.questionCategory.textContent = problem.category;
-  elements.questionTitleText.innerHTML = `<span class="question-number-prefix">${problemNumber(problem).replace("Q", "Q.")}</span> ${escapeHtml(problem.title)}`;
+  elements.questionTitleText.innerHTML = problemTitleMarkup(problem);
   elements.questionDifficulty.textContent = `難易度 ${difficultyStars(problem.difficulty)}`;
   elements.questionTables.textContent = `使用テーブル: ${problem.sourceTables.join(", ")}`;
   elements.questionPrompt.textContent = problem.prompt;
